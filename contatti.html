@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Contatti · Villa Martius</title>
+<meta name="description" content="Contatta Villa Martius: telefono, email, indirizzo. Richiedi un sopralluogo o un preventivo per il tuo matrimonio o evento.">
+<meta property="og:title" content="Contatti · Villa Martius">
+<meta property="og:description" content="Contatta Villa Martius: telefono, email, indirizzo. Richiedi un sopralluogo o un preventivo per il tuo matrimonio o evento.">
+<meta property="og:image" content="assets/img/hero-garden.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F2ECE0">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+  <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
+  <a href="index.html"       class="menu-link">Home</a>
+  <a href="la-villa.html"    class="menu-link">La Villa</a>
+  <a href="matrimoni.html"   class="menu-link">Matrimoni</a>
+  <a href="rito-civile.html" class="menu-link">Rito Civile</a>
+  <a href="eventi.html"      class="menu-link">Eventi</a>
+  <a href="galleria.html"    class="menu-link">Galleria</a>
+  <a href="contatti.html"    class="mobile-menu-cta active">Contattaci</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav" aria-label="Navigazione principale">
+  <ul class="nav-links left" role="list">
+    <li><a href="la-villa.html">La Villa</a></li>
+    <li><a href="matrimoni.html">Matrimoni</a></li>
+    <li><a href="rito-civile.html">Rito Civile</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html" aria-label="Villa Martius — home">
+      <img src="assets/img/logo.png" alt="Villa Martius">
+    </a>
+  </div>
+  <ul class="nav-links right" role="list">
+    <li><a href="eventi.html">Eventi</a></li>
+    <li><a href="galleria.html">Galleria</a></li>
+    <li><a href="contatti.html" class="active">Contatti</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<header class="page-hero" aria-labelledby="page-title">
+  <div class="hero-bg" style="background-image:url('assets/img/hall.jpg');" role="img" aria-label="Contattaci"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="breadcrumb"><a href="index.html">Home</a> — Contatti</p>
+    <h1 class="page-hero-title" id="page-title">Contatti</h1>
+    <p class="page-hero-sub">Il primo passo verso il vostro giorno</p>
+  </div>
+</header>
+
+<section class="section section-dark">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <span class="label label-dark">Scriveteci</span>
+      <h2 class="display">Iniziamo<br>a sognare<br>insieme</h2>
+      <p class="body-copy">Raccontateci quello che avete in mente. Vi rispondiamo entro 48 ore lavorative con una proposta iniziale e con l'invito a un sopralluogo in villa.</p>
+      <ul class="contact-details" aria-label="Informazioni di contatto">
+        <li>
+          <span class="c-label">Indirizzo</span>
+          <span class="c-val">Contrada Pirrera<br>98045 San Pier Niceto (ME)<br>Sicilia · Italia</span>
+        </li>
+        <li>
+          <span class="c-label">Come raggiungerci</span>
+          <span class="c-val">A20 Messina-Palermo · Uscita Milazzo<br>8 km dall'uscita autostradale</span>
+        </li>
+        <li>
+          <span class="c-label">Telefono</span>
+          <span class="c-val">
+            <a href="tel:+393315309082">331 530 9082</a><br>
+            <a href="tel:+393472650647">347 265 0647</a>
+          </span>
+        </li>
+        <li>
+          <span class="c-label">Email</span>
+          <span class="c-val"><a href="mailto:vacanze@villamartius.it">vacanze@villamartius.it</a></span>
+        </li>
+        <li>
+          <span class="c-label">Instagram</span>
+          <span class="c-val"><a href="https://instagram.com/villa_martius_messina" target="_blank" rel="noopener">@villa_martius_messina</a></span>
+        </li>
+      </ul>
+    </div>
+
+    <form class="contact-form" id="contactForm" novalidate aria-label="Modulo di richiesta informazioni">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="nome">Nome e Cognome *</label>
+          <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Maria Rossi">
+        </div>
+        <div class="form-field">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="maria@email.it">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="telefono">Telefono</label>
+          <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+39 333 000 0000">
+        </div>
+        <div class="form-field">
+          <label for="data">Data Prevista</label>
+          <input type="date" id="data" name="data">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="ospiti">Numero di Ospiti</label>
+          <select id="ospiti" name="ospiti">
+            <option value="">Seleziona</option>
+            <option value="fino-50">Fino a 50</option>
+            <option value="50-100">50 – 100</option>
+            <option value="100-150">100 – 150</option>
+            <option value="150-180">150 – 180</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="evento">Tipo di Evento *</label>
+          <select id="evento" name="evento" required>
+            <option value="">Seleziona</option>
+            <option value="matrimonio">Matrimonio</option>
+            <option value="matrimonio-civile">Matrimonio con Rito Civile</option>
+            <option value="anniversario">Anniversario</option>
+            <option value="compleanno">Compleanno</option>
+            <option value="battesimo-comunione">Battesimo / Comunione</option>
+            <option value="corporate">Evento Aziendale</option>
+            <option value="altro">Altro</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="messaggio">Il vostro messaggio</label>
+        <textarea id="messaggio" name="messaggio" rows="3" placeholder="Raccontateci come lo immaginate..."></textarea>
+      </div>
+      <p class="form-privacy">Inviando questo modulo acconsenti al trattamento dei dati secondo la nostra <a href="#">privacy policy</a>. Non condividiamo i vostri dati con terzi.</p>
+      <button type="submit" class="btn btn-solid-dark" style="width:100%;">Invia Richiesta</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="label">Dove Siamo</span>
+    <h2 class="display">Nel cuore della<br>Sicilia tirrenica</h2>
+    <p class="body-copy">Villa Martius si trova in Contrada Pirrera, a San Pier Niceto (ME). L'uscita autostradale di Milazzo è a soli 8 km. L'aeroporto di Catania a 90 minuti, quello di Palermo a 2 ore.</p>
+  </div>
+  <div class="map-wrap" role="img" aria-label="Mappa di Villa Martius">
+    <iframe
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=15.2%2C38.1%2C15.4%2C38.25&amp;layer=mapnik&amp;marker=38.175%2C15.3"
+      title="Mappa di Villa Martius, San Pier Niceto (Messina)"></iframe>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="assets/img/logo.png" alt="Villa Martius">
+      </div>
+      <p>Una residenza dedicata ai matrimoni e agli eventi tra le colline di San Pier Niceto, a pochi passi dallo stretto di Messina.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Naviga</h4>
+      <ul>
+        <li><a href="la-villa.html">La Villa</a></li>
+        <li><a href="matrimoni.html">Matrimoni</a></li>
+        <li><a href="rito-civile.html">Rito Civile</a></li>
+        <li><a href="eventi.html">Eventi Privati</a></li>
+        <li><a href="galleria.html">Galleria</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Dove Siamo</h4>
+      <ul>
+        <li>Contrada Pirrera</li>
+        <li>98045 San Pier Niceto (ME)</li>
+        <li>Sicilia · Italia</li>
+        <li>Uscita autostradale Milazzo, 8 km</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contatti</h4>
+      <ul>
+        <li><a href="tel:+393315309082">331 530 9082</a></li>
+        <li><a href="tel:+393472650647">347 265 0647</a></li>
+        <li><a href="mailto:vacanze@villamartius.it">vacanze@villamartius.it</a></li>
+        <li><a href="https://instagram.com/villa_martius_messina" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Villa Martius — Tutti i diritti riservati</span>
+    <span>P.IVA — Sede equiparata a Casa Comunale</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

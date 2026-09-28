@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Galleria · Villa Martius</title>
+<meta name="description" content="Galleria fotografica di Villa Martius: giardino all'ora d'oro, sala dei banchetti, area piscina di notte, dettagli.">
+<meta property="og:title" content="Galleria · Villa Martius">
+<meta property="og:description" content="Galleria fotografica di Villa Martius: giardino all'ora d'oro, sala dei banchetti, area piscina di notte, dettagli.">
+<meta property="og:image" content="assets/img/hero-garden.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F2ECE0">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+  <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
+  <a href="index.html"       class="menu-link">Home</a>
+  <a href="la-villa.html"    class="menu-link">La Villa</a>
+  <a href="matrimoni.html"   class="menu-link">Matrimoni</a>
+  <a href="rito-civile.html" class="menu-link">Rito Civile</a>
+  <a href="eventi.html"      class="menu-link">Eventi</a>
+  <a href="galleria.html"    class="menu-link active">Galleria</a>
+  <a href="contatti.html"    class="mobile-menu-cta">Contattaci</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav" aria-label="Navigazione principale">
+  <ul class="nav-links left" role="list">
+    <li><a href="la-villa.html">La Villa</a></li>
+    <li><a href="matrimoni.html">Matrimoni</a></li>
+    <li><a href="rito-civile.html">Rito Civile</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html" aria-label="Villa Martius — home">
+      <img src="assets/img/logo.png" alt="Villa Martius">
+    </a>
+  </div>
+  <ul class="nav-links right" role="list">
+    <li><a href="eventi.html">Eventi</a></li>
+    <li><a href="galleria.html" class="active">Galleria</a></li>
+    <li><a href="contatti.html">Contatti</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<header class="page-hero" aria-labelledby="page-title">
+  <div class="hero-bg" style="background-image:url('assets/img/hero-garden.jpg');" role="img" aria-label="Villa Martius"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="breadcrumb"><a href="index.html">Home</a> — Galleria</p>
+    <h1 class="page-hero-title" id="page-title">Galleria</h1>
+    <p class="page-hero-sub">La villa in ogni sua luce</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="section-header">
+    <span class="label">I Giardini</span>
+    <h2 class="display">Ora dorata</h2>
+    <p class="body-copy">Il giardino di Villa Martius al calare della sera. Gazebo, palme e luce siciliana.</p>
+  </div>
+  <div class="gallery-grid">
+    <figure class="g-col-8 g-h-xl">
+      <img src="assets/img/hero-garden.jpg" alt="Il gazebo bianco nel giardino all'ora d'oro" loading="lazy">
+      <figcaption>Il gazebo · Ora dorata</figcaption>
+    </figure>
+    <figure class="g-col-4 g-h-xl">
+      <img src="assets/img/couple.jpg" alt="Sposi nel giardino di notte" loading="lazy">
+      <figcaption>Sposi · Notte</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section section-warm">
+  <div class="section-header">
+    <span class="label">Gli Interni</span>
+    <h2 class="display">La sala dei banchetti</h2>
+    <p class="body-copy">Soffitti alti, luci calde, tavoli imperiali. La sala interna al momento del ricevimento.</p>
+  </div>
+  <div class="gallery-grid">
+    <figure class="g-col-12 g-h-xl">
+      <img src="assets/img/hall.jpg" alt="La sala interna allestita per un matrimonio" loading="lazy">
+      <figcaption>La sala · Ricevimento</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="label">L'Ora del Cocktail</span>
+    <h2 class="display">L'area piscina</h2>
+    <p class="body-copy">Il cocktail hour a bordo piscina, con fiori bianchi e luci notturne. Uno dei momenti più fotografati della giornata.</p>
+  </div>
+  <div class="gallery-grid">
+    <figure class="g-col-7 g-h-lg">
+      <img src="assets/img/pool.jpg" alt="La piscina allestita per il cocktail" loading="lazy">
+      <figcaption>Piscina · Aperitivo</figcaption>
+    </figure>
+    <figure class="g-col-5 g-h-lg">
+      <img src="assets/img/couple.jpg" alt="Sposi al cocktail hour" loading="lazy">
+      <figcaption>Sposi · Cocktail</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section section-warm">
+  <div class="section-header">
+    <span class="label">Il Nostro Sguardo</span>
+    <h2 class="display">Momenti scelti</h2>
+    <p class="body-copy">Frammenti che raccontano la villa più delle parole. Ogni foto è un giorno diverso, ogni giorno è una storia unica.</p>
+  </div>
+  <div class="gallery-grid">
+    <figure class="g-col-4 g-h-lg">
+      <img src="assets/img/hero-garden.jpg" alt="Il giardino" loading="lazy">
+    </figure>
+    <figure class="g-col-4 g-h-lg">
+      <img src="assets/img/hall.jpg" alt="La sala" loading="lazy">
+    </figure>
+    <figure class="g-col-4 g-h-lg">
+      <img src="assets/img/pool.jpg" alt="La piscina" loading="lazy">
+    </figure>
+    <figure class="g-col-6 g-h-md">
+      <img src="assets/img/couple.jpg" alt="Sposi al tramonto" loading="lazy">
+    </figure>
+    <figure class="g-col-6 g-h-md">
+      <img src="assets/img/hero-garden.jpg" alt="Il giardino di sera" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="label">Seguiteci</span>
+    <h2 class="display">Ogni evento<br>è un racconto</h2>
+    <p class="body-copy">Le nuove immagini le pubblichiamo su Instagram, mano a mano che i nostri fotografi ci consegnano gli scatti.</p>
+    <a href="https://instagram.com/villa_martius_messina" target="_blank" rel="noopener" class="btn btn-ghost-dark" style="margin-top:2rem;">Seguici su Instagram</a>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="assets/img/logo.png" alt="Villa Martius">
+      </div>
+      <p>Una residenza dedicata ai matrimoni e agli eventi tra le colline di San Pier Niceto, a pochi passi dallo stretto di Messina.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Naviga</h4>
+      <ul>
+        <li><a href="la-villa.html">La Villa</a></li>
+        <li><a href="matrimoni.html">Matrimoni</a></li>
+        <li><a href="rito-civile.html">Rito Civile</a></li>
+        <li><a href="eventi.html">Eventi Privati</a></li>
+        <li><a href="galleria.html">Galleria</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Dove Siamo</h4>
+      <ul>
+        <li>Contrada Pirrera</li>
+        <li>98045 San Pier Niceto (ME)</li>
+        <li>Sicilia · Italia</li>
+        <li>Uscita autostradale Milazzo, 8 km</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contatti</h4>
+      <ul>
+        <li><a href="tel:+393315309082">331 530 9082</a></li>
+        <li><a href="tel:+393472650647">347 265 0647</a></li>
+        <li><a href="mailto:vacanze@villamartius.it">vacanze@villamartius.it</a></li>
+        <li><a href="https://instagram.com/villa_martius_messina" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Villa Martius — Tutti i diritti riservati</span>
+    <span>P.IVA — Sede equiparata a Casa Comunale</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
