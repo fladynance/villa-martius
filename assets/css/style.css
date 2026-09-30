@@ -5,16 +5,16 @@
 
 :root {
   /* Palette */
-  --bg:         #F2ECE0;
-  --bg-warm:    #E8DFD0;
+  --bg:         #D5C4A4;   /* beige uguale alla barra hamburger */
+  --bg-warm:    #C6B48A;   /* leggermente più warm per alternare le sezioni */
   --bg-dark:    #1F1611;
   --dark:       #1F1611;
-  --body-txt:   #3A2E24;
-  --muted:      #7D6E5E;
+  --body-txt:   #2A1F14;   /* marrone più scuro per contrasto sul beige */
+  --muted:      #6E5D48;
   --gold:       #A88A4E;
   --gold-lt:    #C9A66B;
   --terracotta: #B25B3E;
-  --rule:       rgba(125,110,94,0.22);
+  --rule:       rgba(90,70,45,0.28);
   --rule-dark:  rgba(255,255,255,0.14);
 
   /* Type */
