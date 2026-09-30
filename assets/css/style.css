@@ -207,8 +207,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .hamburger:hover { color: var(--gold-lt); }
 .hamb-icon {
   position: relative;
-  width: 22px;
-  height: 14px;
+  width: 26px;
+  height: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -216,7 +216,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 }
 .hamb-icon span {
   display: block;
-  height: 1px;
+  height: 1.5px;                        /* linee più marcate */
   background: currentColor;
   width: 100%;
   transition: width 0.4s ease;
@@ -295,22 +295,23 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   letter-spacing: 0.03em;
 }
 .mobile-menu-cta {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   font-family: var(--sans);
-  font-weight: 500;
-  font-style: normal;
+  font-weight: 400;
+  font-style: normal;              /* override italic ereditato */
   font-size: 0.72rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--dark);
-  background: #fff;
-  border: none;
+  color: var(--gold-lt);           /* testo oro chiaro */
+  background: transparent;         /* ghost, non più bianco pieno */
+  border: 1px solid var(--gold-lt);
   padding: 1.1rem 2.6rem;
-  transition: background 0.35s, color 0.35s, letter-spacing 0.35s;
+  transition: background 0.35s, color 0.35s, letter-spacing 0.35s, border-color 0.35s;
 }
 .mobile-menu-cta:hover {
-  background: var(--gold);
-  color: #fff;
+  background: var(--gold-lt);
+  color: var(--dark);
+  border-color: var(--gold-lt);
   letter-spacing: 0.36em;
 }
 
@@ -1168,9 +1169,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .nav.v2 {
   grid-template-columns: auto 1fr auto;
   padding: 1rem 2rem;
-  background: rgba(242,236,224,0.94);
+  background: rgba(224,210,186,0.97);   /* beige caldo, più marcato */
   backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 var(--rule);
+  box-shadow: 0 1px 0 rgba(90,68,44,0.15);
 }
 .nav.v2 .nav-logo img {
   filter: none;
@@ -1178,10 +1179,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 }
 .nav.v2 .hamburger {
   display: inline-flex;
-  color: var(--dark);
+  color: #3A2417;                       /* marrone scuro caldo */
   margin: 0;
+  padding: 0.5rem;
 }
 .nav.v2 .hamburger:hover { color: var(--gold); }
+.nav.v2 .hamb-label { display: none; } /* la parola Menu non compare in nav v2 */
 .nav.v2 .nav-logo { justify-content: flex-start; padding-left: 0.5rem; }
 .nav-actions {
   display: flex;
