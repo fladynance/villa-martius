@@ -981,10 +981,10 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   background:
     linear-gradient(180deg,
       rgba(0,0,0,0.55) 0%,
-      rgba(0,0,0,0.10) 22%,
-      rgba(0,0,0,0) 40%,
-      rgba(0,0,0,0.30) 62%,
-      rgba(0,0,0,0.85) 100%);
+      rgba(0,0,0,0.12) 22%,
+      rgba(0,0,0,0.05) 38%,
+      rgba(0,0,0,0.45) 60%,
+      rgba(0,0,0,0.92) 100%);
 }
 
 /* Top-left brand mark (Borgo Egnazia style) */
