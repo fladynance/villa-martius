@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Contatti · Villa Martius</title>
 <meta name="description" content="Contatta Villa Martius: telefono, email, indirizzo. Richiedi un sopralluogo o un preventivo per il tuo matrimonio o evento.">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="Contatti · Villa Martius">
 <meta property="og:description" content="Contatta Villa Martius: telefono, email, indirizzo. Richiedi un sopralluogo o un preventivo per il tuo matrimonio o evento.">
 <meta property="og:image" content="assets/img/hero-garden.jpg">
@@ -16,46 +19,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="">
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
   <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
-  <a href="index.html"       class="menu-link">Home</a>
+  <a href="esplora.html"     class="menu-link">Esplora</a>
   <a href="la-villa.html"    class="menu-link">La Villa</a>
-  <a href="matrimoni.html"   class="menu-link">Matrimoni</a>
   <a href="rito-civile.html" class="menu-link">Rito Civile</a>
-  <a href="eventi.html"      class="menu-link">Eventi</a>
   <a href="galleria.html"    class="menu-link">Galleria</a>
   <a href="contatti.html"    class="mobile-menu-cta active">Contattaci</a>
 </div>
 
 <!-- Nav -->
-<nav class="nav" aria-label="Navigazione principale">
-  <ul class="nav-links left" role="list">
-    <li><a href="la-villa.html">La Villa</a></li>
-    <li><a href="matrimoni.html">Matrimoni</a></li>
-    <li><a href="rito-civile.html">Rito Civile</a></li>
-  </ul>
-  <div class="nav-logo">
-    <a href="index.html" aria-label="Villa Martius — home">
-      <img src="assets/img/logo.png" alt="Villa Martius">
-    </a>
-  </div>
-  <ul class="nav-links right" role="list">
-    <li><a href="eventi.html">Eventi</a></li>
-    <li><a href="galleria.html">Galleria</a></li>
-    <li><a href="contatti.html" class="active">Contatti</a></li>
-  </ul>
+<nav class="nav v2" aria-label="Navigazione principale">
   <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
+  <div class="nav-logo">
+    <a href="esplora.html" aria-label="Villa Martius — esplora">
+      <img src="assets/img/logo.png" alt="Villa Martius">
+    </a>
+  </div>
+  <a href="contatti.html" class="nav-cta" aria-label="Contattaci">
+    <svg class="nav-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z M4 6l8 6 8-6"/></svg>
+    Contattaci
+  </a>
 </nav>
 
 <header class="page-hero" aria-labelledby="page-title">
   <div class="hero-bg" style="background-image:url('assets/img/hall.jpg');" role="img" aria-label="Contattaci"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-content">
-    <p class="breadcrumb"><a href="index.html">Home</a> — Contatti</p>
+    <p class="breadcrumb"><a href="esplora.html">Esplora</a> — Contatti</p>
     <h1 class="page-hero-title" id="page-title">Contatti</h1>
     <p class="page-hero-sub">Il primo passo verso il vostro giorno</p>
   </div>
@@ -176,11 +171,11 @@
     <div class="footer-col">
       <h4>Naviga</h4>
       <ul>
+        <li><a href="esplora.html">Esplora</a></li>
         <li><a href="la-villa.html">La Villa</a></li>
-        <li><a href="matrimoni.html">Matrimoni</a></li>
         <li><a href="rito-civile.html">Rito Civile</a></li>
-        <li><a href="eventi.html">Eventi Privati</a></li>
         <li><a href="galleria.html">Galleria</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -204,7 +199,7 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 Villa Martius — Tutti i diritti riservati</span>
-    <span>P.IVA — Sede equiparata a Casa Comunale</span>
+    <span>Sede equiparata a Casa Comunale</span>
   </div>
 </footer>
 

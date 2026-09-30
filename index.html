@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Home · Villa Martius</title>
-<meta name="description" content="Villa Martius, location per matrimoni ed eventi a San Pier Niceto (Messina). Sede equiparata a Casa Comunale per il rito civile in loco.">
-<meta property="og:title" content="Home · Villa Martius">
-<meta property="og:description" content="Villa Martius, location per matrimoni ed eventi a San Pier Niceto (Messina). Sede equiparata a Casa Comunale per il rito civile in loco.">
-<meta property="og:image" content="assets/img/hero-garden.jpg">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#F2ECE0">
+<title>Villa Martius · Matrimoni ed Eventi a Messina</title>
+<meta name="description" content="Villa Martius — location esclusiva per matrimoni ed eventi a San Pier Niceto (Messina). Sede equiparata a Casa Comunale.">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#1F1611">
 <link rel="icon" type="image/png" href="assets/img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,174 +14,18 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
-  <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
-  <a href="index.html"       class="menu-link active">Home</a>
-  <a href="la-villa.html"    class="menu-link">La Villa</a>
-  <a href="matrimoni.html"   class="menu-link">Matrimoni</a>
-  <a href="rito-civile.html" class="menu-link">Rito Civile</a>
-  <a href="eventi.html"      class="menu-link">Eventi</a>
-  <a href="galleria.html"    class="menu-link">Galleria</a>
-  <a href="contatti.html"    class="mobile-menu-cta">Contattaci</a>
-</div>
 
-<!-- Nav -->
-<nav class="nav" aria-label="Navigazione principale">
-  <ul class="nav-links left" role="list">
-    <li><a href="la-villa.html">La Villa</a></li>
-    <li><a href="matrimoni.html">Matrimoni</a></li>
-    <li><a href="rito-civile.html">Rito Civile</a></li>
-  </ul>
-  <div class="nav-logo">
-    <a href="index.html" aria-label="Villa Martius — home">
-      <img src="assets/img/logo.png" alt="Villa Martius">
-    </a>
+<a href="esplora.html" class="splash" aria-label="Entra — Villa Martius">
+  <div class="splash-bg" style="background-image:url('assets/img/hero-garden.jpg');"></div>
+  <div class="splash-overlay" aria-hidden="true"></div>
+  <div class="splash-inner">
+    <img src="assets/img/logo.png" alt="" class="splash-logo" aria-hidden="true">
+    <h1 class="splash-title">Villa Martius</h1>
+    <p class="splash-sub">Matrimoni ed eventi — Messina, Sicilia</p>
+    <span class="splash-enter">Entra</span>
   </div>
-  <ul class="nav-links right" role="list">
-    <li><a href="eventi.html">Eventi</a></li>
-    <li><a href="galleria.html">Galleria</a></li>
-    <li><a href="contatti.html">Contatti</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <span class="splash-hint" aria-hidden="true">Clicca ovunque</span>
+</a>
 
-<!-- HERO -->
-<header class="hero" aria-labelledby="hero-title">
-  <div class="hero-bg" style="background-image:url('assets/img/hero-garden.jpg');" role="img" aria-label="Giardino di Villa Martius all'ora d'oro"></div>
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">San Pier Niceto — Messina</p>
-    <h1 class="hero-title" id="hero-title">Villa Martius</h1>
-    <p class="hero-sub">Dove il tempo rallenta, e ogni promessa diventa eterno</p>
-    <a href="contatti.html" class="btn btn-ghost-light">Richiedi il vostro sopralluogo</a>
-  </div>
-  <div class="hero-scroll" aria-hidden="true">
-    <div class="scroll-line"></div>
-    <span>Scopri</span>
-  </div>
-</header>
-
-<!-- STATEMENT -->
-<section class="statement">
-  <blockquote>
-    <p class="statement-text">C'è un angolo di Sicilia dove il mare e le colline si guardano da lontano. Là, tra ulivi centenari e giardini fioriti, comincia la vostra storia.</p>
-    <footer class="statement-attr">Villa Martius</footer>
-  </blockquote>
-</section>
-
-<!-- LA VILLA teaser -->
-<section class="split" aria-labelledby="villa-teaser">
-  <div class="split-image">
-    <img src="assets/img/hall.jpg" alt="La sala banchetti di Villa Martius illuminata al calare della sera" loading="lazy">
-  </div>
-  <div class="split-text">
-    <span class="label">La Location</span>
-    <span class="rule-gold" aria-hidden="true"></span>
-    <h2 class="display" id="villa-teaser">Una residenza<br>fuori dal tempo</h2>
-    <p class="body-copy">Villa Martius sorge nell'entroterra messinese, tra le colline di San Pier Niceto e la costa tirrenica. Gli spazi interni ed esterni si prestano a ogni momento del giorno: dalla cerimonia all'ora dorata al ricevimento sotto le stelle.</p>
-    <p class="body-copy">Un luogo pensato per accogliere pochi eventi all'anno, ognuno curato come una storia unica.</p>
-    <a href="la-villa.html" class="link-underline">Scopri la villa</a>
-  </div>
-</section>
-
-<!-- RITO CIVILE teaser -->
-<section class="split reverse section-dark" aria-labelledby="rito-teaser">
-  <div class="split-image">
-    <img src="assets/img/couple.jpg" alt="Sposi nel giardino notturno con le luci della città sullo sfondo" loading="lazy">
-  </div>
-  <div class="split-text">
-    <span class="label">Rito Civile</span>
-    <span class="rule-gold" aria-hidden="true"></span>
-    <h2 class="display" id="rito-teaser">Sposatevi qui.<br>Con valore legale.</h2>
-    <p class="body-copy">Villa Martius è ufficialmente riconosciuta come sede equiparata alla Casa Comunale del Comune di San Pier Niceto. Il rito civile — con pieno valore giuridico — si celebra direttamente qui, senza spostamenti in Municipio.</p>
-    <p class="body-copy">Una giornata unica, senza interruzioni, nella cornice che avete scelto per la vostra promessa.</p>
-    <a href="rito-civile.html" class="link-underline link-underline-light">Come funziona</a>
-  </div>
-</section>
-
-<!-- MATRIMONI teaser -->
-<section class="split" aria-labelledby="matri-teaser">
-  <div class="split-image">
-    <img src="assets/img/pool.jpg" alt="Area piscina allestita per il cocktail hour di un matrimonio" loading="lazy">
-  </div>
-  <div class="split-text">
-    <span class="label">Matrimoni</span>
-    <span class="rule-gold" aria-hidden="true"></span>
-    <h2 class="display" id="matri-teaser">Il vostro giorno,<br>ogni dettaglio</h2>
-    <p class="body-copy">Dalla scelta degli allestimenti al ritmo della giornata: coordiniamo ogni elemento affinché il vostro matrimonio scorra naturalmente, senza pensieri.</p>
-    <p class="body-copy">Fino a 180 ospiti tra spazi interni ed esterni, con un numero limitato di eventi ogni stagione.</p>
-    <a href="matrimoni.html" class="link-underline">Il nostro servizio matrimoni</a>
-  </div>
-</section>
-
-<!-- MOMENT -->
-<section class="moment" aria-label="Un momento a Villa Martius">
-  <img class="moment-bg" src="assets/img/pool.jpg" alt="" loading="lazy">
-  <div class="moment-overlay">
-    <p class="moment-eyebrow">Un'ora d'oro</p>
-    <p class="moment-caption">L'aperitivo più bello che abbiate mai immaginato</p>
-  </div>
-</section>
-
-<!-- CTA finale -->
-<section class="section section-warm" aria-labelledby="cta-final">
-  <div class="section-header">
-    <span class="label">Iniziamo</span>
-    <h2 class="display" id="cta-final">Raccontateci<br>il vostro sogno</h2>
-    <p class="body-copy">Ogni matrimonio è diverso. Ci piace conoscere le vostre idee, mostrarvi la villa di persona e costruire insieme la vostra giornata.</p>
-    <div style="margin-top:2.5rem;display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;">
-      <a href="contatti.html" class="btn btn-ghost-dark">Richiedi informazioni</a>
-      <a href="galleria.html" class="btn btn-ghost-dark">Vedi la galleria</a>
-    </div>
-  </div>
-</section>
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <img src="assets/img/logo.png" alt="Villa Martius">
-      </div>
-      <p>Una residenza dedicata ai matrimoni e agli eventi tra le colline di San Pier Niceto, a pochi passi dallo stretto di Messina.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Naviga</h4>
-      <ul>
-        <li><a href="la-villa.html">La Villa</a></li>
-        <li><a href="matrimoni.html">Matrimoni</a></li>
-        <li><a href="rito-civile.html">Rito Civile</a></li>
-        <li><a href="eventi.html">Eventi Privati</a></li>
-        <li><a href="galleria.html">Galleria</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Dove Siamo</h4>
-      <ul>
-        <li>Contrada Pirrera</li>
-        <li>98045 San Pier Niceto (ME)</li>
-        <li>Sicilia · Italia</li>
-        <li>Uscita autostradale Milazzo, 8 km</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contatti</h4>
-      <ul>
-        <li><a href="tel:+393315309082">331 530 9082</a></li>
-        <li><a href="tel:+393472650647">347 265 0647</a></li>
-        <li><a href="mailto:vacanze@villamartius.it">vacanze@villamartius.it</a></li>
-        <li><a href="https://instagram.com/villa_martius_messina" target="_blank" rel="noopener">Instagram</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Villa Martius — Tutti i diritti riservati</span>
-    <span>P.IVA — Sede equiparata a Casa Comunale</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js" defer></script>
 </body>
 </html>
