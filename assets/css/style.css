@@ -413,11 +413,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   50%     { opacity: 0.85; transform: scaleY(0.4); transform-origin: top; }
 }
 
-/* ─── PAGE HERO (subpages) ─────────────────────────────────── */
+/* ─── PAGE HERO (subpages) — compatto, ~4x altezza nav ───── */
 .page-hero {
   position: relative;
-  height: 68vh;
-  min-height: 480px;
+  height: auto;
+  min-height: 300px;
+  padding: 7rem 2rem 3.5rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -425,7 +426,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   justify-content: center;
 }
 .page-hero .hero-bg { transform: scale(1); animation: none; }
-.page-hero .hero-overlay { background: linear-gradient(180deg, rgba(31,22,17,0.5), rgba(31,22,17,0.35)); }
+.page-hero .hero-overlay {
+  background: linear-gradient(180deg, rgba(31,22,17,0.78), rgba(31,22,17,0.58));
+}
 .page-hero .hero-content { animation: heroFade 1s ease-out 0.2s both; }
 .page-hero-title {
   font-family: var(--serif);
@@ -503,7 +506,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 }
 .split-image:hover img { transform: scale(1.04); }
 .split-text {
-  padding: 5.5rem 4.5rem;
+  padding: 3.5rem 4.5rem;              /* era 5.5rem — meno respiro inutile */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1308,9 +1311,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 }
 /* The split that holds the service list is taller than usual */
 .split.split-tall { min-height: auto; }
-.split.split-tall .split-text { padding: 5rem 4rem; }
+.split.split-tall .split-text { padding: 3.5rem 4rem; }
 @media (max-width: 900px) {
-  .split.split-tall .split-text { padding: 3.5rem 2rem; }
+  .split.split-tall .split-text { padding: 2.8rem 2rem; }
   .service-list li { grid-template-columns: 42px 1fr; gap: 1rem; }
 }
 
