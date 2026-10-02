@@ -12,17 +12,18 @@
     onScroll();
   }
 
-  // Freccia nella nav — torna alla pagina precedente in TUTTE le pagine.
-  // Fallback: splash (index.html) se non c'è storia.
+  // Freccia nella nav — torna SEMPRE al hub (esplora.html),
+  // non all'ultima pagina. Nascosta su esplora stessa.
   var navBack = document.getElementById('navBack');
   if (navBack) {
-    navBack.addEventListener('click', function () {
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = 'index.html';
-      }
-    });
+    var path = (window.location.pathname.split('/').pop() || '').toLowerCase();
+    if (path === 'esplora.html') {
+      navBack.style.display = 'none';
+    } else {
+      navBack.addEventListener('click', function () {
+        window.location.href = 'esplora.html';
+      });
+    }
   }
 
   // Mobile menu
