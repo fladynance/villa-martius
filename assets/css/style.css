@@ -413,12 +413,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   50%     { opacity: 0.85; transform: scaleY(0.4); transform-origin: top; }
 }
 
-/* ─── PAGE HERO (subpages) — compatto, ~4x altezza nav ───── */
+/* ─── PAGE HERO (subpages) — fascia stretta che finisce sotto la sub ─ */
 .page-hero {
   position: relative;
   height: auto;
-  min-height: 300px;
-  padding: 7rem 2rem 3.5rem;
+  min-height: 0;
+  padding: 5.5rem 2rem 1.8rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1455,10 +1455,10 @@ input, select, textarea { font-size: 16px; }
   .hero-scroll { bottom: 1.6rem; font-size: 0.55rem; }
   .scroll-line { height: 32px; }
 
-  .page-hero { height: auto; min-height: 380px; padding: 7rem 0 3.5rem; }
+  .page-hero { min-height: 0; padding: 4.5rem 1.4rem 1.4rem; }
   .page-hero-title { font-size: 2.3rem; }
   .page-hero-sub { font-size: 1rem; }
-  .breadcrumb { font-size: 0.58rem; letter-spacing: 0.24em; margin-bottom: 1rem; }
+  .breadcrumb { font-size: 0.58rem; letter-spacing: 0.24em; margin-bottom: 0.8rem; }
 
   .split-text { padding: 2.8rem 1.4rem 3rem; }
   .split-text .display { font-size: 2rem; }
