@@ -12,6 +12,25 @@
     onScroll();
   }
 
+  // Freccia "Indietro" nella nav — torna alla pagina precedente,
+  // fallback: hub esplora se non c'è storia nel sito.
+  var navBack = document.getElementById('navBack');
+  if (navBack) {
+    // Sulla pagina hub (esplora) non ha senso avere Indietro, la nascondo.
+    var path = (window.location.pathname.split('/').pop() || '').toLowerCase();
+    if (path === 'esplora.html' || path === '' || path === 'index.html') {
+      navBack.style.display = 'none';
+    }
+    navBack.addEventListener('click', function () {
+      var sameSite = document.referrer && document.referrer.indexOf(window.location.host) !== -1;
+      if (window.history.length > 1 && sameSite) {
+        window.history.back();
+      } else {
+        window.location.href = 'esplora.html';
+      }
+    });
+  }
+
   // Mobile menu
   var hamburger  = document.getElementById('hamburger');
   var mobileMenu = document.getElementById('mobileMenu');
