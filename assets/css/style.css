@@ -1221,22 +1221,18 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .nav.v2 .hamburger:hover { color: var(--gold); }
 .nav.v2 .hamb-label { display: none; } /* la parola Menu non compare in nav v2 */
 
-/* ─── NAV BACK (freccia + testo INDIETRO) ────────────────── */
+/* ─── NAV BACK (solo icona freccia, in ogni pagina) ──────── */
 .nav-back {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.5rem 0.9rem 0.5rem 0.5rem;
+  justify-content: center;
+  padding: 0.5rem;
   background: transparent;
   border: none;
   cursor: pointer;
   color: #3A2417;
+  min-width: 44px;
   min-height: 44px;
-  font-family: var(--sans);
-  font-weight: 400;
-  font-size: 0.7rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 .nav-back:hover {
