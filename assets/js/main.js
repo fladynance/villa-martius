@@ -12,12 +12,13 @@
     onScroll();
   }
 
-  // Freccia nella nav — torna SEMPRE al hub (esplora.html),
-  // non all'ultima pagina. Nascosta su esplora stessa.
+  // Freccia nella nav — torna SEMPRE al hub (esplora.html).
+  // Nascosta sulle pagine hub stesse: esplora e matrimoni-eventi.
   var navBack = document.getElementById('navBack');
   if (navBack) {
     var path = (window.location.pathname.split('/').pop() || '').toLowerCase();
-    if (path === 'esplora.html') {
+    var hubPages = ['esplora.html', 'matrimoni-eventi.html'];
+    if (hubPages.indexOf(path) !== -1) {
       navBack.style.display = 'none';
     } else {
       navBack.addEventListener('click', function () {
