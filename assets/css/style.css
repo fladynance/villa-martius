@@ -1217,18 +1217,22 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .nav.v2 .hamburger:hover { color: var(--gold); }
 .nav.v2 .hamb-label { display: none; } /* la parola Menu non compare in nav v2 */
 
-/* ─── NAV BACK (freccia a sinistra, solo icona in tutte le pagine) ─ */
+/* ─── NAV BACK (freccia + testo INDIETRO) ────────────────── */
 .nav-back {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
+  gap: 0.7rem;
+  padding: 0.5rem 0.9rem 0.5rem 0.5rem;
   background: transparent;
   border: none;
   cursor: pointer;
   color: #3A2417;
-  min-width: 44px;
   min-height: 44px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 .nav-back:hover {
@@ -1236,8 +1240,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   transform: translateX(-3px);
 }
 .nav-back svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   stroke: currentColor;
   fill: none;
   stroke-width: 1.5;
@@ -1245,7 +1249,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   stroke-linejoin: round;
   display: block;
 }
-.nav-back-label { display: none; }     /* mai mostrato, solo icona */
 .nav.v2.on-dark .nav-back { color: #fff; }
 .nav.v2.on-dark .nav-back:hover { color: var(--gold-lt); }
 .nav.v2 .nav-logo { justify-content: flex-start; padding-left: 0.5rem; }
@@ -1581,7 +1584,8 @@ input, select, textarea { font-size: 16px; }
   .nav.v2 { padding: 0.7rem 1rem; }
   .nav.v2 .nav-logo img { height: 38px; }
   .nav-actions { gap: 0.35rem; }
-  .nav-back { min-width: 40px; min-height: 40px; padding: 0.4rem; }
+  .nav-back { min-width: 40px; min-height: 40px; padding: 0.4rem; gap: 0; }
+  .nav-back-label { display: none; }   /* solo icona sotto 640 */
   .nav-back svg { width: 20px; height: 20px; }
   .nav.v2 .nav-cta {
     font-size: 0.6rem;

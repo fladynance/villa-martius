@@ -13,12 +13,11 @@
   }
 
   // Freccia nella nav — torna SEMPRE al hub (esplora.html).
-  // Nascosta sulle pagine hub stesse: esplora e matrimoni-eventi.
+  // Nascosta solo sull'hub principale esplora.
   var navBack = document.getElementById('navBack');
   if (navBack) {
     var path = (window.location.pathname.split('/').pop() || '').toLowerCase();
-    var hubPages = ['esplora.html', 'matrimoni-eventi.html'];
-    if (hubPages.indexOf(path) !== -1) {
+    if (path === 'esplora.html') {
       navBack.style.display = 'none';
     } else {
       navBack.addEventListener('click', function () {
