@@ -413,12 +413,13 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   50%     { opacity: 0.85; transform: scaleY(0.4); transform-origin: top; }
 }
 
-/* ─── PAGE HERO (subpages) — fascia stretta che finisce sotto la sub ─ */
+/* ─── PAGE HERO (subpages) — fascia stretta, altezza fissa ───── */
 .page-hero {
   position: relative;
-  height: auto;
+  height: 300px;                       /* fissa — la foto si taglia qui */
   min-height: 0;
-  padding: 5.5rem 2rem 1.8rem;
+  max-height: 300px;
+  padding: 5.5rem 2rem 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -433,7 +434,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .page-hero-title {
   font-family: var(--serif);
   font-weight: 300;
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);  /* ridotto per fascia stretta */
   line-height: 1.05;
   color: #fff;
   letter-spacing: 0.02em;
@@ -1455,10 +1456,10 @@ input, select, textarea { font-size: 16px; }
   .hero-scroll { bottom: 1.6rem; font-size: 0.55rem; }
   .scroll-line { height: 32px; }
 
-  .page-hero { min-height: 0; padding: 4.5rem 1.4rem 1.4rem; }
-  .page-hero-title { font-size: 2.3rem; }
-  .page-hero-sub { font-size: 1rem; }
-  .breadcrumb { font-size: 0.58rem; letter-spacing: 0.24em; margin-bottom: 0.8rem; }
+  .page-hero { height: 240px; max-height: 240px; min-height: 0; padding: 4.5rem 1.4rem 1rem; }
+  .page-hero-title { font-size: 2rem; }
+  .page-hero-sub { font-size: 0.95rem; }
+  .breadcrumb { font-size: 0.58rem; letter-spacing: 0.24em; margin-bottom: 0.6rem; }
 
   .split-text { padding: 2.8rem 1.4rem 3rem; }
   .split-text .display { font-size: 2rem; }
