@@ -1251,6 +1251,69 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   border-color: var(--gold-lt);
 }
 
+/* ─── HUB 2-TILE (intermediate hub Matrimoni/Eventi) ────── */
+.hub-grid.hub-grid-2 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+.hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
+@media (max-width: 720px) {
+  .hub-grid.hub-grid-2 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .hub-grid.hub-grid-2 .hub-tile { min-height: 44vh; }
+}
+
+/* ─── SERVICE LIST (numbered services in text column) ───── */
+.service-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.service-list li {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 1.4rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.service-list li:last-child { border-bottom: 1px solid var(--rule); }
+.service-list .num {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.service-list h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--dark);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.005em;
+}
+.service-list p {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+/* The split that holds the service list is taller than usual */
+.split.split-tall { min-height: auto; }
+.split.split-tall .split-text { padding: 5rem 4rem; }
+@media (max-width: 900px) {
+  .split.split-tall .split-text { padding: 3.5rem 2rem; }
+  .service-list li { grid-template-columns: 42px 1fr; gap: 1rem; }
+}
+
 /* Virtual Tour placeholder */
 .vt-placeholder {
   min-height: calc(100svh - 76px);
