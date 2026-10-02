@@ -12,18 +12,13 @@
     onScroll();
   }
 
-  // Freccia nella nav — torna SEMPRE al hub (esplora.html).
-  // Nascosta solo sull'hub principale esplora.
+  // Freccia nella nav — se presente nel DOM, al click torna a esplora.
+  // Su esplora.html il bottone non è nemmeno nell'HTML (nav.v2.no-back).
   var navBack = document.getElementById('navBack');
   if (navBack) {
-    var path = (window.location.pathname.split('/').pop() || '').toLowerCase();
-    if (path === 'esplora.html') {
-      navBack.style.display = 'none';
-    } else {
-      navBack.addEventListener('click', function () {
-        window.location.href = 'esplora.html';
-      });
-    }
+    navBack.addEventListener('click', function () {
+      window.location.href = 'esplora.html';
+    });
   }
 
   // Mobile menu
