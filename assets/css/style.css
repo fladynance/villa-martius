@@ -289,16 +289,31 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   font-family: var(--serif);
   font-weight: 400;
   font-style: italic;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: #fff;
-  transition: color 0.3s, letter-spacing 0.3s;
+  transition: color 0.3s, letter-spacing 0.3s, transform 0.3s;
   letter-spacing: 0.005em;
   line-height: 1.2;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.mobile-menu a::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 1px;
+  background: var(--gold-lt);
+  transition: width 0.35s ease;
 }
 .mobile-menu a:hover,
 .mobile-menu a.active {
   color: var(--gold-lt);
-  letter-spacing: 0.03em;
+}
+.mobile-menu a:hover::before,
+.mobile-menu a.active::before {
+  width: 24px;
 }
 .mobile-menu-cta {
   margin-top: 2rem;
@@ -422,10 +437,10 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 /* ─── PAGE HERO (subpages) — fascia stretta, altezza fissa ───── */
 .page-hero {
   position: relative;
-  height: 300px;                       /* fissa — la foto si taglia qui */
+  height: 280px;
   min-height: 0;
-  max-height: 300px;
-  padding: 5.5rem 2rem 1rem;
+  max-height: 280px;
+  padding: 5rem 2rem 1.4rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1319,10 +1334,14 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   display: grid;
   grid-template-columns: 46px 1fr;
   gap: 0.9rem;
-  padding: 0.75rem 0;                   /* era 1.5rem */
+  padding: 0.75rem 0;
   border-top: 1px solid var(--rule);
   align-items: baseline;
+  transition: padding-left 0.3s ease;
 }
+.service-list li:hover { padding-left: 0.4rem; }
+.service-list li:hover .num { color: var(--gold-lt); }
+.service-list .num { transition: color 0.3s ease; }
 .service-list li:last-child { border-bottom: 1px solid var(--rule); }
 .service-list .num {
   font-family: var(--serif);
@@ -1498,7 +1517,7 @@ input, select, textarea { font-size: 16px; }
   .hero-scroll { bottom: 1.6rem; font-size: 0.55rem; }
   .scroll-line { height: 32px; }
 
-  .page-hero { height: 240px; max-height: 240px; min-height: 0; padding: 4.5rem 1.4rem 1rem; }
+  .page-hero { height: 220px; max-height: 220px; min-height: 0; padding: 4.2rem 1.4rem 1.1rem; }
   .page-hero-title { font-size: 2rem; }
   .page-hero-sub { font-size: 0.95rem; }
   .breadcrumb { font-size: 0.58rem; letter-spacing: 0.24em; margin-bottom: 0.6rem; }
