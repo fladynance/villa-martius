@@ -16,7 +16,7 @@
   --terracotta: #B25B3E;
   --rule:       rgba(90,70,45,0.28);
   --rule-dark:  rgba(255,255,255,0.14);
-  --title:      #2A6B5A;   /* verde smeraldo medio — colore unificato dei titoli grandi */
+  --title:      #1F1611;   /* default = come dark (oro antico) */
 
   /* Type */
   --serif:      'Cormorant Garamond', 'Times New Roman', Georgia, serif;
@@ -25,6 +25,28 @@
   /* Scale */
   --pad-page:   3rem;
   --pad-section:8rem;
+}
+
+/* ─── Palette MATRIMONI · Prugna & Oro Rosa ─────────────── */
+body.theme-plum {
+  --dark:      #3F1F35;    /* prugna scuro */
+  --bg-dark:   #3F1F35;
+  --gold:      #8E4B6F;    /* rosa antica (accent principale) */
+  --gold-lt:   #C19A6B;    /* oro rosa (variante chiara) */
+  --title:     #3F1F35;    /* titoli prugna scuro */
+  --rule:      rgba(63,31,53,0.3);
+  --rule-dark: rgba(193,154,107,0.22);
+}
+
+/* ─── Palette EVENTI · Smeraldo & Champagne ─────────────── */
+body.theme-emerald {
+  --dark:      #0F3B30;    /* smeraldo scuro */
+  --bg-dark:   #0F3B30;
+  --gold:      #2A6B5A;    /* verde chiaro (accent principale) */
+  --gold-lt:   #D4C195;    /* champagne (variante chiara) */
+  --title:     #2A6B5A;    /* titoli verde chiaro */
+  --rule:      rgba(42,107,90,0.3);
+  --rule-dark: rgba(212,193,149,0.22);
 }
 
 /* Reset */
