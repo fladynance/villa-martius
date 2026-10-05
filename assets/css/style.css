@@ -16,19 +16,7 @@
   --terracotta: #B25B3E;
   --rule:       rgba(90,70,45,0.28);
   --rule-dark:  rgba(255,255,255,0.14);
-}
-
-/* Palette ESCLUSIVA pagina Eventi — Smeraldo & Champagne */
-body.theme-emerald {
-  --bg-dark:   #0F3B30;
-  --dark:      #0F3B30;
-  --body-txt:  #1E2A24;
-  --muted:     #5A6D5F;
-  --gold:      #2A6B5A;
-  --gold-lt:   #D4C195;
-  --rule:      rgba(42,107,90,0.3);
-  --rule-dark: rgba(212,193,149,0.20);
-  /* --bg e --bg-warm beige invariati */
+  --title:      #2A6B5A;   /* verde smeraldo medio — colore unificato dei titoli grandi */
 
   /* Type */
   --serif:      'Cormorant Garamond', 'Times New Roman', Georgia, serif;
@@ -79,7 +67,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   font-weight: 300;
   line-height: 1.05;
   letter-spacing: -0.005em;
-  color: var(--dark);
+  color: var(--title);                 /* smeraldo medio, unificato */
 }
 .display-italic { font-style: italic; }
 .body-copy {
