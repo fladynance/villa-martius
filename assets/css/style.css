@@ -1298,8 +1298,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 }
 .nav-cta { color: var(--dark); border-color: var(--dark); }
 .nav-cta:hover { background: var(--dark); color: var(--bg); }
-/* Virtual Tour: fill oro pieno + testo bianco = max contrasto sul beige */
-.nav-vt { color: #fff; background: var(--gold); border-color: var(--gold); }
+/* Virtual Tour: oro antico FISSO in tutte le pagine (indipendente dal theme) */
+.nav-vt { color: #fff; background: #A88A4E; border-color: #A88A4E; }
 .nav-vt:hover { background: var(--dark); border-color: var(--dark); color: #fff; }
 .nav-cta-icon,
 .nav-vt-icon {
