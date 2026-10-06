@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Esplora · Villa Martius</title>
-<meta name="description" content="Le quattro sezioni di Villa Martius: la location, il rito civile in loco, la galleria fotografica e gli eventi.">
+<title>Casa Vacanza · Villa Martius</title>
+<meta name="description" content="L'ospitalità delle ville antiche. Soggiorno a Villa Martius, San Pier Niceto (Messina): camere di charme, Sicilia tirrenica.">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta property="og:title" content="Esplora · Villa Martius">
-<meta property="og:description" content="Le quattro sezioni di Villa Martius: la location, il rito civile in loco, la galleria fotografica e gli eventi.">
+<meta property="og:title" content="Casa Vacanza · Villa Martius">
+<meta property="og:description" content="L'ospitalità delle ville antiche. Soggiorno a Villa Martius, San Pier Niceto (Messina): camere di charme, Sicilia tirrenica.">
 <meta property="og:image" content="assets/img/hero-garden.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#D5C4A4">
@@ -23,8 +23,8 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
   <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
-  <a href="esplora.html"          class="menu-link active">Esplora</a>
-  <a href="casa-vacanza.html"     class="menu-link">Casa Vacanza</a>
+  <a href="esplora.html"          class="menu-link">Esplora</a>
+  <a href="casa-vacanza.html"     class="menu-link active">Casa Vacanza</a>
   <a href="rito-civile.html"      class="menu-link">Rito Civile</a>
   <a href="galleria.html"         class="menu-link">Galleria</a>
   <a href="matrimoni-eventi.html" class="menu-link">Matrimoni &amp; Eventi</a>
@@ -33,7 +33,10 @@
 </div>
 
 <!-- Nav -->
-<nav class="nav v2 no-back" aria-label="Navigazione principale">
+<nav class="nav v2" aria-label="Navigazione principale">
+  <button class="nav-back" id="navBack" aria-label="Torna alla pagina precedente">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  </button>
   <div class="nav-logo">
     <a href="esplora.html" aria-label="Villa Martius — esplora">
       <img src="assets/img/logo.png" alt="Villa Martius">
@@ -54,49 +57,60 @@
   </div>
 </nav>
 
-<main class="hub">
-  <div class="hub-grid" role="navigation" aria-label="Le sezioni di Villa Martius">
-    <a class="hub-tile" href="matrimoni-eventi.html" aria-label="Matrimoni ed Eventi">
-      <div class="hub-tile-bg" style="background-image:url('assets/img/pool.jpg');"></div>
-      <div class="hub-tile-overlay" aria-hidden="true"></div>
-      <div class="hub-tile-content">
-        <span class="hub-tile-label">01 — La vostra giornata</span>
-        <h2 class="hub-tile-title">Matrimoni &amp; Eventi</h2>
-        <p class="hub-tile-sub">Come si vive un giorno unico</p>
-      </div>
-    </a>
-
-    <a class="hub-tile" href="rito-civile.html" aria-label="Rito Civile — sposatevi qui">
-      <div class="hub-tile-bg" style="background-image:url('assets/img/couple.jpg');"></div>
-      <div class="hub-tile-overlay" aria-hidden="true"></div>
-      <div class="hub-tile-content">
-        <span class="hub-tile-label">02 — Il vostro sì</span>
-        <h2 class="hub-tile-title">Rito Civile</h2>
-        <p class="hub-tile-sub">Sede equiparata a Casa Comunale</p>
-      </div>
-    </a>
-
-    <a class="hub-tile" href="casa-vacanza.html" aria-label="Casa Vacanza — soggiorno a Villa Martius">
-      <div class="hub-tile-bg" style="background-image:url('assets/img/casa-vacanza.jpg');"></div>
-      <div class="hub-tile-overlay" aria-hidden="true"></div>
-      <div class="hub-tile-content">
-        <span class="hub-tile-label">03 — Soggiorno</span>
-        <h2 class="hub-tile-title">Casa Vacanza</h2>
-        <p class="hub-tile-sub">Dormire dentro una storia siciliana</p>
-      </div>
-    </a>
-
-    <a class="hub-tile" href="galleria.html" aria-label="Galleria — la villa in ogni sua luce">
-      <div class="hub-tile-bg" style="background-image:url('assets/img/hall.jpg');"></div>
-      <div class="hub-tile-overlay" aria-hidden="true"></div>
-      <div class="hub-tile-content">
-        <span class="hub-tile-label">04 — Immagini</span>
-        <h2 class="hub-tile-title">Galleria</h2>
-        <p class="hub-tile-sub">La villa in ogni sua luce</p>
-      </div>
-    </a>
+<header class="page-hero" aria-labelledby="page-title">
+  <div class="hero-bg" style="background-image:url('assets/img/casa-vacanza.jpg');" role="img" aria-label="Interno di una camera di Villa Martius"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <h1 class="page-hero-title" id="page-title">Casa Vacanza</h1>
+    <p class="page-hero-sub">L&apos;ospitalit&agrave; delle ville antiche</p>
   </div>
-</main>
+</header>
+
+<!-- Statement -->
+<section class="statement">
+  <blockquote>
+    <p class="statement-text">Esistono case che si visitano. E case in cui si resta. Villa Martius custodisce queste seconde.</p>
+  </blockquote>
+</section>
+
+<!-- Sezione 1: TESTO + IMMAGINE -->
+<section class="split">
+  <div class="split-text">
+    <span class="label">Soggiorno</span>
+    <span class="rule-gold" aria-hidden="true"></span>
+    <h2 class="display">Una dimora<br>da vivere.</h2>
+    <p class="body-copy">Dormire a Villa Martius significa entrare in una storia che ha radici antiche. Camere arredate con cura, pareti che respirano, dettagli che si notano senza chiedere attenzione.</p>
+    <p class="body-copy">Un soggiorno pensato per chi cerca eleganza senza ostentazione, discrezione senza distanza, autenticit&agrave; senza compromessi. Non un hotel: una casa che si apre ai suoi ospiti.</p>
+    <a href="contatti.html" class="link-underline" style="margin-top:2.2rem">Verifica la disponibilit&agrave;</a>
+  </div>
+  <div class="split-image">
+    <img src="assets/img/casa-vacanza.jpg" alt="Camera da letto in stile rustico-elegante" loading="lazy">
+  </div>
+</section>
+
+<!-- Sezione 2: IMMAGINE + TESTO -->
+<section class="split reverse section-warm">
+  <div class="split-image">
+    <img src="assets/img/hero-garden.jpg" alt="Il giardino di Villa Martius" loading="lazy">
+  </div>
+  <div class="split-text">
+    <span class="label">Fuori dalla casa</span>
+    <span class="rule-gold" aria-hidden="true"></span>
+    <h2 class="display">La Sicilia,<br>appena dietro la finestra.</h2>
+    <p class="body-copy">Dalle camere di Villa Martius lo sguardo si apre: il verde delle colline di San Pier Niceto, il mare in lontananza, le Isole Eolie quando il cielo si schiarisce. Vicino tutto quello che vale la pena vedere &mdash; Milazzo e le spiagge a quindici minuti, Taormina a un&apos;ora &mdash; e lontano da ogni rumore.</p>
+    <p class="body-copy">&Egrave; il base ideale per esplorare la Sicilia tirrenica senza fretta, con una casa che vi aspetta la sera.</p>
+  </div>
+</section>
+
+<!-- CTA finale -->
+<section class="section">
+  <div class="section-header">
+    <span class="label">Il primo passo</span>
+    <h2 class="display">Riservate<br>il vostro soggiorno.</h2>
+    <p class="body-copy">Una manciata di camere, un calendario volutamente limitato. Scriveteci per verificare la disponibilit&agrave; e per ricevere le condizioni.</p>
+    <a href="contatti.html" class="btn btn-ghost-dark" style="margin-top:2rem;">Richiedi informazioni</a>
+  </div>
+</section>
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-grid">
