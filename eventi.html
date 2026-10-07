@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="theme-emerald">
+<body class="theme-emerald ev-page">
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
   <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
@@ -66,58 +66,75 @@
   </div>
 </header>
 
-<!-- Sezione 1: TESTO + IMMAGINE -->
-<section class="split">
-  <div class="split-text">
-    <span class="label">Non per tutti</span>
-    <span class="rule-gold" aria-hidden="true"></span>
-    <h2 class="display">Il cielo che la Sicilia<br>riserva solo ad alcuni.</h2>
-    <p class="body-copy">A Villa Martius esiste un momento preciso, ogni sera, in cui lo scenario si trasforma. Il sole scivola dietro le colline, il mare si specchia nel tramonto, e all'orizzonte le Isole Eolie si tingono di viola.</p>
-    <p class="body-copy">&Egrave; il passaggio tra il giorno e la notte, l'ora in cui gli ospiti smettono di parlare e cominciano a guardare. Il momento in cui una serata diventa un ricordo prima ancora di finire. Dove la Sicilia smette di essere un luogo e diventa un'emozione.</p>
-    <p class="body-copy">Dove la vista non &egrave; un dettaglio. &Egrave; il regalo.</p>
-    <a href="contatti.html" class="link-underline" style="margin-top:2.2rem">Parliamone insieme</a>
-  </div>
-  <div class="split-image">
-    <img src="assets/img/pool.jpg" alt="Area piscina allestita al calar della sera" loading="lazy">
-  </div>
-</section>
+<!-- Cielo che cambia: dal colore del sito al tramonto, fino alla notte -->
+<div class="ev-sky" id="evSky">
+  <div class="ev-cel" aria-hidden="true"><div class="ev-sun"></div><div class="ev-moon"></div></div>
+  <canvas class="ev-stars" id="evStars" aria-hidden="true"></canvas>
 
-<!-- Sezione 2: IMMAGINE + TIPOLOGIE -->
-<section class="split split-tall">
-  <div class="split-image">
-    <img src="assets/img/hall.jpg" alt="Sala allestita per una serata esclusiva" loading="lazy">
-  </div>
-  <div class="split-text">
-    <span class="label">Le Nostre Serate</span>
-    <span class="rule-gold" aria-hidden="true"></span>
-    <h2 class="display">Occasioni rare,<br>su misura.</h2>
-    <p class="body-copy">Serate pensate per chi cerca un contesto fuori dall'ordinario. Nessun pacchetto, nessuno standard: ogni evento viene costruito con voi, nei suoi tempi, nelle sue sfumature, nel suo pubblico.</p>
-    <ol class="service-list">
-      <li>
-        <span class="num">01</span>
-        <div>
-          <h4>Aperitivi al Tramonto · Live Music</h4>
-          <p>Serate esclusive a bordo piscina, nell'ora in cui il cielo cambia colore. Musica live d'autore, selezione enologica, cucina da autore. Per un pubblico selezionato, per una sera che vuole restare.</p>
-        </div>
-      </li>
-      <li>
-        <span class="num">02</span>
-        <div>
-          <h4>Serate Aziendali di Prestigio</h4>
-          <p>Cene di gala, kick-off strategici, celebrazioni di risultati, lancio di collezioni. Villa Martius diventa la cornice del messaggio che la vostra azienda vuole dare al suo pubblico pi&ugrave; importante.</p>
-        </div>
-      </li>
-      <li>
-        <span class="num">03</span>
-        <div>
-          <h4>Eventi su Misura</h4>
-          <p>Per chi ha un'idea diversa, un progetto fuori dagli schemi, una visione che richiede un palcoscenico &mdash; non uno scenario di routine. Ascoltiamo, progettiamo, realizziamo.</p>
-        </div>
-      </li>
-    </ol>
-    <a href="contatti.html" class="btn btn-ghost-dark" style="margin-top:2.4rem">Raccontaci il tuo evento</a>
-  </div>
-</section>
+  <!-- Apertura -->
+  <section class="ev-story ev-light">
+    <div class="ev-wrap ev-center rv">
+      <span class="label">Non per tutti</span>
+      <span class="rule-gold" aria-hidden="true"></span>
+      <h2 class="ev-h">Il cielo che la Sicilia<br>riserva solo ad alcuni.</h2>
+      <p class="ev-copy">A Villa Martius esiste un momento preciso, ogni sera, in cui lo scenario si trasforma. Il sole scivola dietro le colline, il mare si specchia nel tramonto, e all'orizzonte le Isole Eolie si tingono di viola.</p>
+      <p class="ev-copy">&Egrave; il passaggio tra il giorno e la notte, l'ora in cui gli ospiti smettono di parlare e cominciano a guardare. Il momento in cui una serata diventa un ricordo prima ancora di finire. Dove la Sicilia smette di essere un luogo e diventa un'emozione.</p>
+      <p class="ev-copy ev-copy-strong">Dove la vista non &egrave; un dettaglio. &Egrave; il regalo.</p>
+      <a href="contatti.html" class="link-underline" style="margin-top:2rem">Parliamone insieme</a>
+    </div>
+  </section>
+
+  <!-- Le serate -->
+  <section class="ev-intro ev-light">
+    <div class="ev-wrap ev-center rv">
+      <span class="label">Le Nostre Serate</span>
+      <span class="rule-gold" aria-hidden="true"></span>
+      <h2 class="ev-h">Occasioni rare,<br>su misura.</h2>
+      <p class="ev-copy">Serate pensate per chi cerca un contesto fuori dall'ordinario. Nessun pacchetto, nessuno standard: ogni evento viene costruito con voi, nei suoi tempi, nelle sue sfumature, nel suo pubblico.</p>
+    </div>
+  </section>
+
+  <section class="ev-ch c1 ev-dark">
+    <div class="ev-wrap ev-grid rv">
+      <div class="ev-ph" role="img" aria-label="Area piscina allestita al calar della sera" style="background-image:url('assets/img/pool.jpg')"></div>
+      <div class="ev-tx">
+        <span class="ev-tag">Al tramonto</span>
+        <h3>Aperitivi al Tramonto &middot; Live Music</h3>
+        <p>Serate esclusive a bordo piscina, nell'ora in cui il cielo cambia colore. Musica live d'autore, selezione enologica, cucina da autore. Per un pubblico selezionato, per una sera che vuole restare.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ev-ch c2 ev-dark ev-rev">
+    <div class="ev-wrap ev-grid rv">
+      <div class="ev-ph" role="img" aria-label="Sala allestita per una serata esclusiva" style="background-image:url('assets/img/hall.jpg')"></div>
+      <div class="ev-tx">
+        <span class="ev-tag">Quando scende la sera</span>
+        <h3>Serate Aziendali di Prestigio</h3>
+        <p>Cene di gala, kick-off strategici, celebrazioni di risultati, lancio di collezioni. Villa Martius diventa la cornice del messaggio che la vostra azienda vuole dare al suo pubblico pi&ugrave; importante.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ev-ch c3 ev-dark">
+    <div class="ev-wrap ev-grid rv">
+      <div class="ev-ph" role="img" aria-label="Il giardino di Villa Martius" style="background-image:url('assets/img/hero-garden.jpg')"></div>
+      <div class="ev-tx">
+        <span class="ev-tag">A notte fonda</span>
+        <h3>Eventi su Misura</h3>
+        <p>Per chi ha un'idea diversa, un progetto fuori dagli schemi, una visione che richiede un palcoscenico &mdash; non uno scenario di routine. Ascoltiamo, progettiamo, realizziamo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ev-end ev-dark">
+    <div class="ev-wrap ev-center rv">
+      <p class="ev-quote">Dove la vista non &egrave; un dettaglio.<br>&Egrave; il regalo.</p>
+      <a href="contatti.html" class="ev-btn">Raccontaci il tuo evento</a>
+    </div>
+  </section>
+</div>
+
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-grid">
@@ -164,6 +181,65 @@
   </div>
 </footer>
 
+<script>
+/* Eventi: il cielo cambia mentre scorri. Sole che tramonta, luna che sorge, stelle. */
+(function(){
+  var sky=document.getElementById('evSky'); if(!sky) return;
+  var sun=sky.querySelector('.ev-sun'), moon=sky.querySelector('.ev-moon'), cv=document.getElementById('evStars');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero=document.querySelector('.page-hero'), foot=document.querySelector('.footer');
+  function cl(x){return x<0?0:x>1?1:x;}
+  function update(){
+    var vh=window.innerHeight, sy=window.pageYOffset;
+    var skyTop=sky.offsetTop, skyH=sky.offsetHeight;
+    /* avanzamento dentro la sezione cielo: 0 in alto, 1 in fondo */
+    var v=cl((sy+vh*.5-skyTop)/skyH);
+    var inView=cl((vh*.2-(skyTop-sy))/(vh*.25));           /* compare solo dopo l'hero */
+    var outView=cl((skyTop+skyH-(sy+vh*.5))/(vh*.6));      /* sfuma verso il footer */
+    var vis=Math.min(inView,outView);
+    var k=window.innerWidth<=900?.6:1;                      /* su mobile più discreti dietro il testo */
+    var s=cl(v/.44);                                       /* fase sole 0..1 */
+    var m=cl((v-.46)/.54);                                 /* fase luna 0..1 */
+    sun.style.top=(14+s*62)+'%';
+    sun.style.opacity=(k*vis*(1-cl((v-.34)/.1))).toFixed(3);
+    sun.style.setProperty('--s',s.toFixed(3));
+    moon.style.top=(82-m*60)+'%';
+    moon.style.opacity=(k*vis*cl((v-.5)/.12)).toFixed(3);
+    cv.style.opacity=(vis*cl((v-.52)/.25)).toFixed(3);
+  }
+  var tick=false;
+  function onScroll(){ if(tick) return; tick=true; requestAnimationFrame(function(){tick=false;update();}); }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',function(){update();stars();});
+  /* stelle */
+  var st=[],raf=0;
+  function stars(){
+    var w=window.innerWidth,h=window.innerHeight,d=window.devicePixelRatio||1;
+    cv.width=w*d; cv.height=h*d; var x=cv.getContext('2d'); x.setTransform(d,0,0,d,0,0);
+    var n=Math.round(w*h/5500); st=[];
+    for(var i=0;i<n;i++) st.push({x:Math.random()*w,y:Math.random()*h*.85,r:Math.random()*1.2+.3,p:Math.random()*6.28,k:Math.random()*.02+.006});
+    draw(x,w,h);
+  }
+  function draw(x,w,h){
+    x.clearRect(0,0,w,h);
+    st.forEach(function(a){ a.p+=a.k; x.globalAlpha=.35+.65*Math.abs(Math.sin(a.p)); x.fillStyle='#F6EBCB'; x.beginPath(); x.arc(a.x,a.y,a.r,0,6.283); x.fill(); });
+    x.globalAlpha=1;
+  }
+  function loop(){
+    if(parseFloat(cv.style.opacity)>.02){ var x=cv.getContext('2d'); draw(x,cv.clientWidth,cv.clientHeight); }
+    raf=requestAnimationFrame(loop);
+  }
+  stars(); update();
+  if(!reduce) loop();
+  /* comparsa dolce dei blocchi */
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window && !reduce){
+    document.documentElement.classList.add('js-rv');
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    rv.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>
