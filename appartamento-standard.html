@@ -59,12 +59,16 @@
 </nav>
 
 <section class="room-detail">
+  <div class="rd-crumbbar">
+    <a class="rd-crumb" href="casa-vacanza.html">&larr; Tutte le sistemazioni</a>
+  </div>
+
   <div class="rd-top">
     <div class="rd-mosaic rd-n3"><button type="button" class="rd-tile" data-i="0" aria-label="Apri foto 1"><img src="assets/img/hero-garden.jpg" alt="Appartamento Standard — foto 1" loading="eager"></button><button type="button" class="rd-tile" data-i="1" aria-label="Apri foto 2"><img src="assets/img/pool.jpg" alt="Appartamento Standard — foto 2" loading="lazy"></button><button type="button" class="rd-tile" data-i="2" aria-label="Apri foto 3"><img src="assets/img/casa-vacanza.jpg" alt="Appartamento Standard — foto 3" loading="lazy"></button></div>
+    <button type="button" class="rd-swap" aria-label="Cambia foto principale" title="Cambia foto principale"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
   </div>
 
   <header class="rd-head">
-    <a class="rd-crumb" href="casa-vacanza.html">&larr; Tutte le sistemazioni</a>
     <span class="label">Casa Vacanza &middot; Appartamento 03</span>
     <h1 class="rd-title">Appartamento <em>Standard</em></h1>
   </header>
@@ -98,7 +102,7 @@
 
 <script>
 (function(){
-  var tiles=[].slice.call(document.querySelectorAll('.rd-tile'));
+  var mosaic=document.querySelector('.rd-mosaic'),tiles=[].slice.call(document.querySelectorAll('.rd-tile')),swap=document.querySelector('.rd-swap');
   /* barra fissa mobile: compare quando il modulo disponibilita esce dallo schermo */
   var form=document.querySelector('.rd-book'), bar=document.querySelector('.rd-sticky');
   if(form&&bar&&'IntersectionObserver' in window){
@@ -121,7 +125,13 @@
     box.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(idx+(dx<0?1:-1));x0=null;});
     document.addEventListener('keydown',key);box.querySelector('.lb-x').focus();
   }
-  tiles.forEach(function(t,i){t.addEventListener('click',function(){open(i);});});
+  tiles.forEach(function(t){t.addEventListener('click',function(){open(tiles.indexOf(t));});});
+  if(swap&&tiles.length>1){
+    swap.addEventListener('click',function(){
+      mosaic.classList.add('is-swapping');
+      setTimeout(function(){mosaic.appendChild(mosaic.firstElementChild);tiles=[].slice.call(mosaic.querySelectorAll('.rd-tile'));mosaic.classList.remove('is-swapping');},200);
+    });
+  }else if(swap){swap.hidden=true;}
 })();
 </script>
 <!-- Footer -->
