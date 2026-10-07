@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="theme-plum">
+<body class="mt-body">
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
   <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
@@ -57,88 +57,84 @@
   </div>
 </nav>
 
-<header class="page-hero" aria-labelledby="page-title">
-  <div class="hero-bg" style="background-image:url('assets/img/couple.jpg');" role="img" aria-label="Sposi a Villa Martius"></div>
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-content">
-    <h1 class="page-hero-title" id="page-title">Matrimoni</h1>
-    <p class="page-hero-sub">Il giorno pi&ugrave; importante, nelle mani giuste</p>
-  </div>
-</header>
+<!-- La lettera: anelli che si uniscono, lettera su carta -->
+<div class="mt-rings" id="mtRings" aria-hidden="true">
+  <div class="mt-glow" id="mtGlow"></div>
+  <svg viewBox="0 0 420 210">
+    <defs>
+      <linearGradient id="mtg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3DD9B"/><stop offset=".5" stop-color="#C9A257"/><stop offset="1" stop-color="#8E6A2E"/></linearGradient>
+      <clipPath id="mtc"><rect x="150" y="0" width="120" height="105"/></clipPath>
+    </defs>
+    <g id="mtA"><circle cx="150" cy="105" r="78" fill="none" stroke="url(#mtg)" stroke-width="14"/></g>
+    <g id="mtB"><circle cx="270" cy="105" r="78" fill="none" stroke="url(#mtg)" stroke-width="14"/></g>
+    <g id="mtC" clip-path="url(#mtc)"><circle cx="150" cy="105" r="78" fill="none" stroke="url(#mtg)" stroke-width="14"/></g>
+  </svg>
+</div>
 
-<!-- Sezione 1: TESTO + IMMAGINE (sicurezza, gestione professionale) -->
-<section class="split">
-  <div class="split-text">
-    <span class="label">Il Nostro Approccio</span>
-    <span class="rule-gold" aria-hidden="true"></span>
-    <h2 class="display">Il vostro sogno,<br>scritto nel dettaglio.</h2>
-    <p class="body-copy">C'&egrave; un giorno che avete sognato per anni, forse per sempre. La promessa sotto il gazebo bianco, il brindisi quando il sole scende dietro gli ulivi, il primo ballo nella sala illuminata di candele. A Villa Martius quel giorno non lo immaginiamo con voi: lo costruiamo con voi.</p>
-    <p class="body-copy">Ascoltiamo i vostri &ldquo;mi piacerebbe&rdquo; e li traduciamo in realt&agrave;. Dalla prima lettera che ci inviate fino alle ultime luci che resteranno accese per voi, c'&egrave; sempre qualcuno di noi al vostro fianco &mdash; con la discrezione di chi conosce il valore di questo giorno.</p>
-    <p class="body-copy">Il giorno della favola merita una regia che non si vede. La nostra.</p>
-    <a href="contatti.html" class="link-underline" style="margin-top:2.2rem">Parliamone insieme</a>
-  </div>
-  <div class="split-image">
-    <img src="assets/img/couple.jpg" alt="Sposi a Villa Martius al tramonto" loading="lazy">
-  </div>
-</section>
+<main class="mt-page">
+  <header class="mt-intro" aria-labelledby="page-title">
+    <div class="mt-intro-in rv">
+      <h1 class="mt-title" id="page-title">Matrimoni</h1>
+      <p class="mt-sub">Il giorno pi&ugrave; importante, nelle mani giuste</p>
+      <div class="mt-slot" id="mtSlotA"></div>
+      <span class="mt-hint" aria-hidden="true">Scorri</span>
+    </div>
+  </header>
 
-<!-- Sezione 2: IMMAGINE + SERVIZI -->
-<section class="split split-tall">
-  <div class="split-image">
-    <img src="assets/img/hall.jpg" alt="Sala banchetti allestita per il ricevimento" loading="lazy">
-  </div>
-  <div class="split-text">
-    <span class="label">Cosa Includiamo</span>
-    <span class="rule-gold" aria-hidden="true"></span>
-    <h2 class="display">I nostri<br>servizi</h2>
-    <p class="body-copy">Villa Martius vi mette a disposizione la struttura, gli spazi e il coordinamento. La ristorazione &egrave; curata da fornitori esterni di vostra fiducia o del nostro network selezionato.</p>
-    <ol class="service-list">
-      <li>
-        <span class="num">01</span>
-        <div>
-          <h4>Esclusiva della villa</h4>
-          <p>Interni, esterni, giardino e piscina sono vostri per tutta la giornata. Nessun altro evento in contemporanea.</p>
-        </div>
-      </li>
-      <li>
-        <span class="num">02</span>
-        <div>
-          <h4>Spazi per la cerimonia</h4>
-          <p>Gazebo bianco nel giardino per la cerimonia all'aperto, sala interna in caso di pioggia. Allestimento base incluso.</p>
-        </div>
-      </li>
-      <li>
-        <span class="num">03</span>
-        <div>
-          <h4>Sala per ricevimento</h4>
-          <p>Sala interna con tavoli, sedie e mise en place base per il ricevimento fino a 180 ospiti.</p>
-        </div>
-      </li>
-      <li>
-        <span class="num">04</span>
-        <div>
-          <h4>Area piscina</h4>
-          <p>Area piscina attrezzata per il cocktail hour: bancone bar, sedute lounge, illuminazione notturna.</p>
-        </div>
-      </li>
-      <li>
-        <span class="num">05</span>
-        <div>
-          <h4>Coordinamento del giorno</h4>
-          <p>Un referente dedicato per gestire tempi, fornitori e assistere gli sposi in ogni momento della giornata.</p>
-        </div>
-      </li>
-      <li>
-        <span class="num">06</span>
-        <div>
-          <h4>Parcheggio ospiti</h4>
-          <p>Parcheggio interno privato con ampia capienza, accessi separati per fornitori e catering.</p>
-        </div>
-      </li>
-    </ol>
-    <a href="contatti.html" class="btn btn-ghost-dark" style="margin-top:2.4rem">Richiedi un preventivo</a>
-  </div>
-</section>
+  <article class="mt-paper">
+    <div class="mt-block mt-center rv">
+      <span class="label">Il Nostro Approccio</span>
+      <span class="rule-gold" aria-hidden="true"></span>
+      <h2 class="mt-h">Il vostro sogno,<br>scritto nel dettaglio.</h2>
+    </div>
+
+    <div class="mt-photo mt-photo-lead rv" role="img" aria-label="Sposi a Villa Martius al tramonto" style="background-image:url('assets/img/couple.jpg')"></div>
+
+    <div class="mt-block mt-letter rv">
+      <p>C'&egrave; un giorno che avete sognato per anni, forse per sempre. La promessa sotto il gazebo bianco, il brindisi quando il sole scende dietro gli ulivi, il primo ballo nella sala illuminata di candele. A Villa Martius quel giorno non lo immaginiamo con voi: lo costruiamo con voi.</p>
+      <p>Ascoltiamo i vostri &ldquo;mi piacerebbe&rdquo; e li traduciamo in realt&agrave;. Dalla prima lettera che ci inviate fino alle ultime luci che resteranno accese per voi, c'&egrave; sempre qualcuno di noi al vostro fianco &mdash; con la discrezione di chi conosce il valore di questo giorno.</p>
+      <p class="mt-strong">Il giorno della favola merita una regia che non si vede. La nostra.</p>
+      <a href="contatti.html" class="link-underline mt-link">Parliamone insieme</a>
+    </div>
+
+    <div class="mt-orn" aria-hidden="true"><i></i><i></i></div>
+
+    <div class="mt-block mt-center rv">
+      <span class="label">Cosa Includiamo</span>
+      <span class="rule-gold" aria-hidden="true"></span>
+      <h2 class="mt-h">I nostri<br>servizi</h2>
+      <p class="mt-copy">Villa Martius vi mette a disposizione la struttura, gli spazi e il coordinamento. La ristorazione &egrave; curata da fornitori esterni di vostra fiducia o del nostro network selezionato.</p>
+    </div>
+
+    <section class="mt-svc rv">
+      <div class="mt-photo" role="img" aria-label="Giardino di Villa Martius di sera" style="background-image:url('assets/img/hero-garden.jpg')"></div>
+      <div class="mt-tx"><h3>Esclusiva della villa</h3><p>Interni, esterni, giardino e piscina sono vostri per tutta la giornata. Nessun altro evento in contemporanea.</p></div>
+    </section>
+    <section class="mt-svc mt-flip rv">
+      <div class="mt-photo" role="img" aria-label="Gazebo bianco nel giardino" style="background-image:url('assets/img/hall.jpg')"></div>
+      <div class="mt-tx"><h3>Spazi per la cerimonia</h3><p>Gazebo bianco nel giardino per la cerimonia all'aperto, sala interna in caso di pioggia. Allestimento base incluso.</p></div>
+    </section>
+    <section class="mt-svc rv">
+      <div class="mt-photo" role="img" aria-label="Sala banchetti allestita per il ricevimento" style="background-image:url('assets/img/couple.jpg')"></div>
+      <div class="mt-tx"><h3>Sala per ricevimento</h3><p>Sala interna con tavoli, sedie e mise en place base per il ricevimento fino a 180 ospiti.</p></div>
+    </section>
+    <section class="mt-svc mt-flip rv">
+      <div class="mt-photo" role="img" aria-label="Area piscina attrezzata" style="background-image:url('assets/img/pool.jpg')"></div>
+      <div class="mt-tx"><h3>Area piscina</h3><p>Area piscina attrezzata per il cocktail hour: bancone bar, sedute lounge, illuminazione notturna.</p></div>
+    </section>
+    <div class="mt-duo rv">
+      <div><h3>Coordinamento del giorno</h3><p>Un referente dedicato per gestire tempi, fornitori e assistere gli sposi in ogni momento della giornata.</p></div>
+      <div><h3>Parcheggio ospiti</h3><p>Parcheggio interno privato con ampia capienza, accessi separati per fornitori e catering.</p></div>
+    </div>
+
+    <div class="mt-end rv">
+      <div class="mt-sig">Villa Martius</div>
+      <div class="mt-slot" id="mtSlotB"></div>
+      <a href="contatti.html" class="mt-btn">Richiedi un preventivo</a>
+    </div>
+  </article>
+</main>
+
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-grid">
@@ -185,6 +181,44 @@
   </div>
 </footer>
 
+<script>
+/* Matrimoni: le fedi si uniscono mentre scorri (inizio, angolo, fine) */
+(function(){
+  var rg=document.getElementById('mtRings'); if(!rg) return;
+  var A=document.getElementById('mtA'),B=document.getElementById('mtB'),C=document.getElementById('mtC'),G=document.getElementById('mtGlow');
+  var sa=document.getElementById('mtSlotA'),sb=document.getElementById('mtSlotB');
+  var tick=false;
+  function cl(x){return x<0?0:x>1?1:x}
+  function lerp(a,b,t){return a+(b-a)*t}
+  function ez(t){return t*t*(3-2*t)}
+  function upd(){
+    tick=false;
+    var vw=window.innerWidth,vh=window.innerHeight,sy=window.pageYOffset,mob=vw<=720;
+    var w=mob?190:300,h=w/2; rg.style.width=w+'px'; rg.style.height=h+'px';
+    var ra=sa.getBoundingClientRect(),rb=sb.getBoundingClientRect();
+    var ps={x:ra.left+ra.width/2,y:ra.top+ra.height/2},pe={x:rb.left+rb.width/2,y:rb.top+rb.height/2};
+    var cw=mob?54:84,corner={x:vw-(mob?36:70),y:(mob?96:118)};
+    var a=cl(sy/(vh*.55)),b=cl((vh*.92-pe.y)/(vh*.5));
+    var x=lerp(ps.x,corner.x,ez(a)),y=lerp(ps.y,corner.y,ez(a)),s=lerp(1,cw/w,ez(a));
+    x=lerp(x,pe.x,ez(b)); y=lerp(y,pe.y,ez(b)); s=lerp(s,1,ez(b));
+    var gap=lerp(0,70,cl(1-a/.7)); gap=lerp(gap,0,ez(b));
+    A.setAttribute('transform','translate('+(-gap)+',0)'); C.setAttribute('transform','translate('+(-gap)+',0)'); B.setAttribute('transform','translate('+gap+',0)');
+    rg.style.transform='translate('+(x-w/2)+'px,'+(y-h/2)+'px) scale('+s.toFixed(3)+')';
+    G.style.opacity=ez(b).toFixed(2);
+    rg.style.opacity=mob?Math.max(1-ez(a),ez(cl((b-.35)/.65))).toFixed(2):1;
+    rg.style.visibility=(mob&&a>.98&&b<.02)?'hidden':'visible';
+  }
+  function req(){ if(!tick){tick=true;requestAnimationFrame(upd);} }
+  window.addEventListener('scroll',req,{passive:true}); window.addEventListener('resize',req); upd();
+  /* comparsa dolce dei blocchi (visibili senza JS) */
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduce){
+    document.documentElement.classList.add('js-rv');
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    [].slice.call(document.querySelectorAll('.rv')).forEach(function(e){io.observe(e)});
+  }
+})();
+</script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>
