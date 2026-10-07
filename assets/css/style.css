@@ -2239,7 +2239,7 @@ input, select, textarea { font-size: 16px; }
 .mt-block { position: relative; max-width: 560px; margin: 0 auto; }
 .mt-center { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .mt-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.2rem, 4.8vw, 3.4rem); line-height: 1.06; margin: 1rem 0 0; color: var(--title); text-wrap: balance; }
-.mt-photo { aspect-ratio: 1 / 1; border-radius: 22px; background-size: cover; background-position: center; box-shadow: 0 24px 50px -26px rgba(40,20,10,.55); }
+.mt-photo { display: block; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 22px; box-shadow: 0 24px 50px -26px rgba(40,20,10,.55); }
 .mt-photo-lead { width: min(100%, 400px); margin: 3.4rem auto; }
 .mt-letter p { font-family: var(--serif); font-size: 1.3rem; line-height: 1.8; margin: 0 0 1.4rem; color: var(--body-txt); }
 .mt-letter .mt-strong { font-style: italic; font-weight: 500; font-size: 1.45rem; }
@@ -2249,15 +2249,15 @@ input, select, textarea { font-size: 16px; }
 .mt-orn i + i { margin-left: -12px; }
 .mt-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.75; margin: 1.6rem 0 0; color: var(--body-txt); }
 
-.mt-svc { display: grid; grid-template-columns: 300px 1fr; gap: 3.2rem; align-items: center; margin: 5.5rem 0 0; }
-.mt-svc.mt-flip { grid-template-columns: 1fr 300px; }
-.mt-svc.mt-flip .mt-photo { order: 2; }
-.mt-tx h3, .mt-duo h3 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 2rem; line-height: 1.1; margin: 0 0 .8rem; color: var(--title); }
-.mt-tx p, .mt-duo p { font-family: var(--serif); font-size: 1.22rem; line-height: 1.7; margin: 0; color: var(--body-txt); max-width: 36ch; }
-.mt-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 6rem 0 0; padding-top: 3.5rem; border-top: 1px solid rgba(168,138,78,.5); }
+.mt-list { margin-top: 4.5rem; }
+.mt-row { display: grid; grid-template-columns: 1fr 1.45fr; gap: 2.6rem; align-items: baseline; padding: 2.1rem 0; border-top: 1px solid rgba(168,138,78,.5); }
+.mt-row:last-of-type { border-bottom: 1px solid rgba(168,138,78,.5); }
+.mt-row h3 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.9rem; line-height: 1.1; margin: 0; color: var(--title); }
+.mt-row p { font-family: var(--serif); font-size: 1.22rem; line-height: 1.7; margin: 0; color: var(--body-txt); }
+.mt-photo-mid { width: min(100%, 320px); margin: 2.6rem auto; }
 
 .mt-end { margin-top: 6rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.mt-sig { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.9rem; align-self: flex-end; color: var(--title); margin-bottom: 1rem; }
+.mt-sig { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.9rem; align-self: flex-end; color: var(--title); margin-bottom: 2.2rem; }
 .mt-end .mt-slot { height: 190px; }
 .mt-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 2.6rem; border-radius: 999px; border: 1.5px solid var(--dark); color: var(--dark); text-decoration: none; background: transparent; font-family: var(--sans); font-weight: 300; font-size: .76rem; letter-spacing: .24em; text-transform: uppercase; transition: background .3s, color .3s; }
 .mt-btn:hover { background: var(--dark); color: #fff; }
@@ -2269,11 +2269,10 @@ input, select, textarea { font-size: 16px; }
 @media (max-width: 900px) {
   .mt-paper { margin: 0 .8rem 4rem; padding: 3.6rem 1.5rem 3.4rem; }
   .mt-paper::before { inset: 8px; }
-  .mt-svc, .mt-svc.mt-flip { grid-template-columns: 1fr; gap: 1.4rem; margin-top: 3.6rem; }
-  .mt-svc.mt-flip .mt-photo { order: 0; }
-  .mt-photo { max-width: 360px; width: 100%; margin: 0 auto; }
-  .mt-tx p, .mt-duo p { max-width: none; }
-  .mt-duo { grid-template-columns: 1fr; gap: 2rem; margin-top: 4rem; padding-top: 2.4rem; }
+  .mt-list { margin-top: 3rem; }
+  .mt-row { grid-template-columns: 1fr; gap: .7rem; padding: 1.6rem 0; }
+  .mt-row h3 { font-size: 1.7rem; }
+  .mt-photo { max-width: 360px; }
   .mt-letter p { font-size: 1.2rem; }
   .mt-orn { margin: 3.4rem 0 3rem; }
   .mt-end { margin-top: 4rem; }
