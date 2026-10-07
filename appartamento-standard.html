@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="">
@@ -58,60 +59,65 @@
 </nav>
 
 <section class="room-detail">
-  <div class="rd-wrap">
-
-    <!-- Gallery -->
-    <div class="rd-gallery">
-      <div class="rd-stage">
-        <div class="rd-slide is-active" data-slide="0"><img src="assets/img/hero-garden.jpg" alt="Appartamento Standard — foto 1" loading="eager"></div><div class="rd-slide" data-slide="1"><img src="assets/img/pool.jpg" alt="Appartamento Standard — foto 2" loading="lazy"></div><div class="rd-slide" data-slide="2"><img src="assets/img/casa-vacanza.jpg" alt="Appartamento Standard — foto 3" loading="lazy"></div>
-      </div>
-      <button class="rd-nav rd-prev" aria-label="Foto precedente">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      </button>
-      <button class="rd-nav rd-next" aria-label="Foto successiva">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-      <div class="rd-dots" role="tablist"><button class="rd-dot is-active" data-dot="0" aria-label="Vai alla foto 1"></button><button class="rd-dot" data-dot="1" aria-label="Vai alla foto 2"></button><button class="rd-dot" data-dot="2" aria-label="Vai alla foto 3"></button></div>
-    </div>
-
-    <!-- Content -->
-    <div class="rd-content">
+  <header class="rd-hero">
+    <img src="assets/img/hero-garden.jpg" alt="Appartamento Standard" loading="eager">
+    <div class="rd-hero-in">
+      <a class="rd-crumb" href="casa-vacanza.html">&larr; Tutte le sistemazioni</a>
       <span class="label">Casa Vacanza &middot; Appartamento 03</span>
-      <h1 class="rd-title">Appartamento Standard</h1>
-      <p class="rd-intro">Zona giorno, camere separate e balcone privato affacciato sul paesaggio tirrenico. La soluzione ideale per famiglie e gruppi che cercano autonomia senza rinunciare al servizio.</p>
-
-      <h2 class="rd-section-title">Caratteristiche</h2>
-      <div class="feat-icos"><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="11" r="4"/><path d="M7 25c0-4.5 4-8 9-8s9 3.5 9 8"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="6" width="20" height="20"/><path d="M10 6v3M6 10h3M26 22h-3M22 26v-3"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 13h24M8 7l-4 6M24 7l4 6M8 13v15M16 13v15M24 13v15M4 20h24M4 27h24"/></svg></span></div><ul class="feat-list"><li>Max 4 ospiti</li><li>50 m&sup2;</li><li>Balcone privato</li></ul>
-
-      <h2 class="rd-section-title">Il soggiorno include</h2>
-      <div class="feat-icos"><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="22" cy="9" r="2.5"/><path d="M4 17c2.5 0 2.5-1.6 5-1.6s2.5 1.6 5 1.6 2.5-1.6 5-1.6 2.5 1.6 5 1.6 2.5-1.6 5-1.6M4 22c2.5 0 2.5-1.6 5-1.6s2.5 1.6 5 1.6 2.5-1.6 5-1.6 2.5 1.6 5 1.6 2.5-1.6 5-1.6"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="7" r="2.5"/><path d="M10 12h12l-1 3H11z M11 17l-2 5M16 17l-2 5M21 17l-2 5"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v24M4 16h24M8 8l16 16M24 8L8 24M13 5l3 3 3-3M13 27l3-3 3 3M5 13l3 3-3 3M27 13l-3 3 3 3"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M13 5c-1 4-2 7 0 10l-2 14h10l-2-14c2-3 1-6 0-10z M12 10h8M16 18v6"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 11a6 6 0 0 1 6-6h8a5 5 0 0 1 0 10h-8l-3 4v5h4v-4"/><circle cx="10" cy="10" r="1.1"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 12a18 18 0 0 1 24 0M8 16.5a12 12 0 0 1 16 0M12 21a6 6 0 0 1 8 0"/><circle cx="16" cy="26" r="1.5"/></svg></span><span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="7" width="24" height="16"/><path d="M11 27h10M14 23v4M18 23v4"/></svg></span></div><ul class="feat-list"><li>Vista Mare</li><li>Bagno in camera</li><li>Aria condizionata</li><li>Frigobar</li><li>Phon</li><li>WiFi</li><li>TV</li></ul>
+      <h1 class="rd-title">Appartamento <em>Standard</em></h1>
     </div>
+  </header>
 
+  <form class="rd-book" onsubmit="return false" aria-label="Controlla la disponibilit&agrave;">
+    <div class="rd-field"><label for="appartamento-standard-in">Arrivo</label><input id="appartamento-standard-in" type="date"></div>
+    <div class="rd-field"><label for="appartamento-standard-out">Partenza</label><input id="appartamento-standard-out" type="date"></div>
+    <div class="rd-field"><label for="appartamento-standard-g">Ospiti</label><select id="appartamento-standard-g"><option value="1">1 ospite</option><option value="2">2 ospiti</option><option value="3">3 ospiti</option><option value="4" selected>4 ospiti</option></select></div>
+    <button type="submit" class="rd-cta">Controlla la disponibilit&agrave;</button>
+  </form>
+
+  <div class="rd-body">
+    <div class="rd-col">
+      <h2 class="rd-h">La camera</h2>
+      <p class="rd-intro">Zona giorno, camere separate e balcone privato affacciato sul paesaggio tirrenico. La soluzione ideale per famiglie e gruppi che cercano autonomia senza rinunciare al servizio.</p>
+      <div class="rd-facts"><span class="rd-fact"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="11" r="4"/><path d="M7 25c0-4.5 4-8 9-8s9 3.5 9 8"/></svg></span>Max 4 ospiti</span><span class="rd-fact"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="6" width="20" height="20"/><path d="M10 6v3M6 10h3M26 22h-3M22 26v-3"/></svg></span>50 m&sup2;</span><span class="rd-fact"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 13h24M8 7l-4 6M24 7l4 6M8 13v15M16 13v15M24 13v15M4 20h24M4 27h24"/></svg></span>Balcone privato</span></div>
+    </div>
+    <div class="rd-col">
+      <h2 class="rd-h">Il soggiorno include</h2>
+      <div class="rd-chips"><span class="rd-chip"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="22" cy="9" r="2.5"/><path d="M4 17c2.5 0 2.5-1.6 5-1.6s2.5 1.6 5 1.6 2.5-1.6 5-1.6 2.5 1.6 5 1.6 2.5-1.6 5-1.6M4 22c2.5 0 2.5-1.6 5-1.6s2.5 1.6 5 1.6 2.5-1.6 5-1.6 2.5 1.6 5 1.6 2.5-1.6 5-1.6"/></svg></span>Vista Mare</span><span class="rd-chip"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="7" r="2.5"/><path d="M10 12h12l-1 3H11z M11 17l-2 5M16 17l-2 5M21 17l-2 5"/></svg></span>Bagno in camera</span><span class="rd-chip"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v24M4 16h24M8 8l16 16M24 8L8 24M13 5l3 3 3-3M13 27l3-3 3 3M5 13l3 3-3 3M27 13l-3 3 3 3"/></svg></span>Aria condizionata</span><span class="rd-chip"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M13 5c-1 4-2 7 0 10l-2 14h10l-2-14c2-3 1-6 0-10z M12 10h8M16 18v6"/></svg></span>Frigobar</span><span class="rd-chip"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 11a6 6 0 0 1 6-6h8a5 5 0 0 1 0 10h-8l-3 4v5h4v-4"/><circle cx="10" cy="10" r="1.1"/></svg></span>Phon</span><span class="rd-chip"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 12a18 18 0 0 1 24 0M8 16.5a12 12 0 0 1 16 0M12 21a6 6 0 0 1 8 0"/><circle cx="16" cy="26" r="1.5"/></svg></span>WiFi</span><span class="rd-chip"><span class="rd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="7" width="24" height="16"/><path d="M11 27h10M14 23v4M18 23v4"/></svg></span>TV</span></div>
+    </div>
   </div>
 
-  <!-- CTA -->
-  <div class="rd-cta-row">
-    <button type="button" class="rd-cta">Controlla la disponibilit&agrave;</button>
+  <div class="rd-gal">
+    <h2 class="rd-h">Le foto</h2>
+    <div class="rd-mosaic rd-n3"><button type="button" class="rd-tile" data-i="0" aria-label="Apri foto 1"><img src="assets/img/hero-garden.jpg" alt="Appartamento Standard — foto 1" loading="eager"></button><button type="button" class="rd-tile" data-i="1" aria-label="Apri foto 2"><img src="assets/img/pool.jpg" alt="Appartamento Standard — foto 2" loading="lazy"></button><button type="button" class="rd-tile" data-i="2" aria-label="Apri foto 3"><img src="assets/img/casa-vacanza.jpg" alt="Appartamento Standard — foto 3" loading="lazy"></button></div>
+  </div>
+
+  <div class="rd-more">
+    <h2 class="rd-h">Scopri anche</h2>
+    <div class="rd-cards"><a class="rd-card" href="appartamento-deluxe.html"><span class="rd-card-im"><img src="assets/img/couple.jpg" alt="" loading="lazy"></span><b>Appartamento Deluxe</b><span>Appartamento 05</span></a><a class="rd-card" href="appartamento-superior.html"><span class="rd-card-im"><img src="assets/img/pool.jpg" alt="" loading="lazy"></span><b>Appartamento Superior</b><span>Appartamento 04</span></a><a class="rd-card" href="camera-deluxe.html"><span class="rd-card-im"><img src="assets/img/hall.jpg" alt="" loading="lazy"></span><b>Camera Matrimoniale Deluxe</b><span>Camera 02</span></a><a class="rd-card" href="camera-standard.html"><span class="rd-card-im"><img src="assets/img/casa-vacanza.jpg" alt="" loading="lazy"></span><b>Camera Matrimoniale Standard</b><span>Camera 01</span></a></div>
   </div>
 </section>
 
 <script>
 (function(){
-  var stage = document.querySelector('.rd-stage');
-  if (!stage) return;
-  var slides = stage.querySelectorAll('.rd-slide');
-  var dots = document.querySelectorAll('.rd-dot');
-  var idx = 0;
-  function go(n){
-    idx = (n + slides.length) % slides.length;
-    slides.forEach(function(s,i){ s.classList.toggle('is-active', i===idx); });
-    dots.forEach(function(d,i){ d.classList.toggle('is-active', i===idx); });
+  var tiles=[].slice.call(document.querySelectorAll('.rd-tile'));
+  if(!tiles.length) return;
+  var box=null,idx=0,last=null;
+  function paint(){var t=tiles[idx].querySelector('img');box.querySelector('img').src=t.src;box.querySelector('img').alt=t.alt;box.querySelector('.lb-n').textContent=(idx+1)+' / '+tiles.length;}
+  function go(n){idx=(n+tiles.length)%tiles.length;paint();}
+  function close(){if(!box)return;document.removeEventListener('keydown',key);box.remove();box=null;document.body.style.overflow='';if(last)last.focus();}
+  function key(e){if(e.key==='Escape')close();else if(e.key==='ArrowLeft')go(idx-1);else if(e.key==='ArrowRight')go(idx+1);}
+  function open(i){
+    last=document.activeElement;idx=i;box=document.createElement('div');box.className='lb';box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');box.setAttribute('aria-label','Galleria foto');
+    box.innerHTML='<button class="lb-x" aria-label="Chiudi">&times;</button><button class="lb-p" aria-label="Foto precedente">&lsaquo;</button><img alt=""><button class="lb-nx" aria-label="Foto successiva">&rsaquo;</button><div class="lb-n"></div>';
+    document.body.appendChild(box);document.body.style.overflow='hidden';paint();
+    box.querySelector('.lb-x').onclick=close;box.querySelector('.lb-p').onclick=function(){go(idx-1)};box.querySelector('.lb-nx').onclick=function(){go(idx+1)};
+    box.addEventListener('click',function(e){if(e.target===box)close();});
+    var x0=null;box.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+    box.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(idx+(dx<0?1:-1));x0=null;});
+    document.addEventListener('keydown',key);box.querySelector('.lb-x').focus();
   }
-  var prev = document.querySelector('.rd-prev');
-  var next = document.querySelector('.rd-next');
-  if (prev) prev.addEventListener('click', function(){ go(idx-1); });
-  if (next) next.addEventListener('click', function(){ go(idx+1); });
-  dots.forEach(function(d,i){ d.addEventListener('click', function(){ go(i); }); });
+  tiles.forEach(function(t,i){t.addEventListener('click',function(){open(i);});});
 })();
 </script>
 <!-- Footer -->
