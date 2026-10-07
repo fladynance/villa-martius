@@ -1726,6 +1726,10 @@ a.room-cta { text-decoration: none; }
   stroke-width: 1.4;
 }
 /* icona 360° del Virtual Tour: bianca, tratto sottile arrotondato */
+/* PC: Contattaci mostra solo la scritta (su mobile resta l'icona) */
+@media (min-width: 721px) {
+  .nav-cta-icon { display: none; }
+}
 .nav-vt-icon {
   width: 36px;
   height: 20px;
