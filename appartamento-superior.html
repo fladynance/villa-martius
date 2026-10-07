@@ -60,9 +60,8 @@
 
 <section class="room-detail">
   <div class="rd-top">
-    <a class="rd-crumb" href="casa-vacanza.html">&larr; Tutte le sistemazioni</a>
-    <div class="rd-mosaic rd-n3"><button type="button" class="rd-tile" data-i="0" aria-label="Apri foto 1"><img src="assets/img/pool.jpg" alt="Appartamento Superior — foto 1" loading="eager"></button><button type="button" class="rd-tile" data-i="1" aria-label="Apri foto 2"><img src="assets/img/hero-garden.jpg" alt="Appartamento Superior — foto 2" loading="lazy"></button><button type="button" class="rd-tile" data-i="2" aria-label="Apri foto 3"><img src="assets/img/hall.jpg" alt="Appartamento Superior — foto 3" loading="lazy"></button></div>
-    <button type="button" class="rd-swap" aria-label="Cambia foto principale" title="Cambia foto principale"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
+    <a class="rd-crumb" href="casa-vacanza.html">Tutte le sistemazioni</a>
+    <div class="rd-mosaic rd-n3"><button type="button" class="rd-tile" data-i="0" aria-label="Apri foto 1"><img src="assets/img/pool.jpg" alt="Appartamento Superior — foto 1" loading="eager"></button><button type="button" class="rd-tile" data-i="1" aria-label="Apri foto 2"><img src="assets/img/hero-garden.jpg" alt="Appartamento Superior — foto 2" loading="lazy"></button><button type="button" class="rd-tile" data-i="2" aria-label="Apri foto 3"><img src="assets/img/hall.jpg" alt="Appartamento Superior — foto 3" loading="lazy"></button><button type="button" class="rd-swap" aria-label="Foto successiva" title="Foto successiva"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="M5 4l15 20L5 44"/></svg></button></div>
   </div>
 
   <header class="rd-head">
@@ -126,7 +125,7 @@
   if(swap&&tiles.length>1){
     swap.addEventListener('click',function(){
       mosaic.classList.add('is-swapping');
-      setTimeout(function(){mosaic.appendChild(mosaic.firstElementChild);tiles=[].slice.call(mosaic.querySelectorAll('.rd-tile'));mosaic.classList.remove('is-swapping');},200);
+      setTimeout(function(){mosaic.insertBefore(mosaic.firstElementChild,swap);tiles=[].slice.call(mosaic.querySelectorAll('.rd-tile'));mosaic.classList.remove('is-swapping');},200);
     });
   }else if(swap){swap.hidden=true;}
 })();
