@@ -1348,22 +1348,40 @@ a.room-cta { text-decoration: none; }
 .lb-n { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: #fff; font-size: .8rem; letter-spacing: .18em; }
 
 @media (max-width: 900px) {
-  .rd-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 260px 140px; }
+  .room-detail { padding-bottom: 5.5rem; }
+  .rd-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 210px 104px; gap: 4px; }
   .rd-tile:first-child { grid-column: 1 / -1; grid-row: 1; }
-  .rd-mosaic.rd-n1 { grid-template-columns: 1fr; grid-template-rows: 300px; }
-  .rd-mosaic.rd-n2 { grid-template-rows: 260px 140px; }
-  .rd-head { padding: 1rem 1.2rem 0; }
-  .rd-book { width: calc(100% - 2.4rem); margin-top: 1.4rem; grid-template-columns: 1fr 1fr; }
-  .rd-field { border-bottom: 1px solid rgba(90,70,45,.16); padding: .85rem 1rem; }
+  .rd-mosaic.rd-n1 { grid-template-columns: 1fr; grid-template-rows: 260px; }
+  .rd-mosaic.rd-n2 { grid-template-rows: 210px 104px; }
+  .rd-head { padding: .4rem 1.2rem 0; }
+  .rd-crumb { font-size: .7rem; padding: .4rem 0; }
+  .rd-head .label { font-size: .7rem; margin: 0 0 .4rem; }
+  .rd-title { font-size: clamp(2.1rem, 9.5vw, 2.8rem); }
+  .rd-book { width: calc(100% - 2.4rem); margin-top: 1.1rem; grid-template-columns: 1fr 1fr; }
+  .rd-field { border-bottom: 1px solid rgba(90,70,45,.16); padding: .7rem 1rem; }
+  .rd-field input, .rd-field select { min-height: 44px; padding: 0; font-size: 1rem; }
   .rd-field:nth-child(2) { border-right: 0; }
   .rd-field:nth-child(3) { grid-column: 1 / -1; border-right: 0; }
   .rd-cta { grid-column: 1 / -1; border-radius: 0 0 14px 14px; min-height: 56px; }
-  .rd-body { grid-template-columns: 1fr; gap: 2rem; padding: 2.4rem 1.2rem 0; }
-  .rd-more { padding: 2.4rem 1.2rem 0; }
-  .rd-cards { grid-template-columns: 1fr 1fr; }
-  .lb { padding: 3.5rem .6rem; }
+  .rd-body { grid-template-columns: 1fr; gap: 1.8rem; padding: 2rem 1.2rem 0; }
+  .rd-h { font-size: 1.7rem; }
+  .rd-more { padding: 2.2rem 1.2rem 0; }
+  .rd-cards { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .rd-card b { font-size: .92rem; }
+  .lb { padding: 3.5rem .5rem; }
+  .lb-p, .lb-nx { top: auto; bottom: 10px; transform: none; }
+  .lb-p { left: 12px; } .lb-nx { right: 12px; }
 }
-@media (prefers-reduced-motion: reduce) { .rd-tile img, .rd-card, .rd-cta { transition: none; } }
+/* Barra fissa disponibilità (solo mobile) */
+.rd-sticky { display: none; }
+@media (max-width: 900px) {
+  .rd-sticky { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; padding: .7rem 1.2rem calc(.7rem + env(safe-area-inset-bottom, 0px)); background: rgba(213,196,164,.97); border-top: 1px solid var(--rule); backdrop-filter: blur(8px); transform: translateY(110%); transition: transform .3s; }
+  .rd-sticky.on { transform: none; }
+  .rd-sticky .rd-cta { width: 100%; border-radius: 999px; min-height: 52px; }
+}
+.rd-tile, .rd-cta { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+@media (hover: none) { .rd-tile:hover img { transform: none; } .rd-card:hover { transform: none; box-shadow: none; } }
+@media (prefers-reduced-motion: reduce) { .rd-tile img, .rd-card, .rd-cta, .rd-sticky { transition: none; } }
 
 /* Map embed */
 .map-wrap {
@@ -2063,4 +2081,10 @@ input, select, textarea { font-size: 16px; }
   .split-image img, .gallery-grid img { transition: none; }
   .scroll-line { animation: none; }
   html { scroll-behavior: auto; }
+}
+
+/* Aree di tocco minime 44px nella nav (mobile) */
+@media (max-width: 900px) {
+  .nav.v2 .nav-back, .nav.v2 .nav-vt, .nav.v2 .nav-cta, .nav.v2 .hamburger { min-width: 44px; min-height: 44px; }
+  .nav.v2 .nav-back, .nav.v2 .nav-vt, .nav.v2 .nav-cta { display: inline-flex; align-items: center; justify-content: center; }
 }

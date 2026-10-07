@@ -92,11 +92,19 @@
     <h2 class="rd-h">Scopri anche</h2>
     <div class="rd-cards"><a class="rd-card" href="appartamento-deluxe.html"><span class="rd-card-im"><img src="assets/img/couple.jpg" alt="" loading="lazy"></span><b>Appartamento Deluxe</b><span>Appartamento 05</span></a><a class="rd-card" href="appartamento-standard.html"><span class="rd-card-im"><img src="assets/img/hero-garden.jpg" alt="" loading="lazy"></span><b>Appartamento Standard</b><span>Appartamento 03</span></a><a class="rd-card" href="camera-deluxe.html"><span class="rd-card-im"><img src="assets/img/hall.jpg" alt="" loading="lazy"></span><b>Camera Matrimoniale Deluxe</b><span>Camera 02</span></a><a class="rd-card" href="camera-standard.html"><span class="rd-card-im"><img src="assets/img/casa-vacanza.jpg" alt="" loading="lazy"></span><b>Camera Matrimoniale Standard</b><span>Camera 01</span></a></div>
   </div>
+
+  <div class="rd-sticky" aria-hidden="false"><button type="button" class="rd-cta">Controlla la disponibilit&agrave;</button></div>
 </section>
 
 <script>
 (function(){
   var tiles=[].slice.call(document.querySelectorAll('.rd-tile'));
+  /* barra fissa mobile: compare quando il modulo disponibilita esce dallo schermo */
+  var form=document.querySelector('.rd-book'), bar=document.querySelector('.rd-sticky');
+  if(form&&bar&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(en){bar.classList.toggle('on',!en[0].isIntersecting&&en[0].boundingClientRect.top<0);},{threshold:0}).observe(form);
+    bar.querySelector('button').addEventListener('click',function(){form.scrollIntoView({behavior:'smooth',block:'center'});var i=form.querySelector('input');if(i)setTimeout(function(){i.focus({preventScroll:true});},450);});
+  }
   if(!tiles.length) return;
   var box=null,idx=0,last=null;
   function paint(){var t=tiles[idx].querySelector('img');box.querySelector('img').src=t.src;box.querySelector('img').alt=t.alt;box.querySelector('.lb-n').textContent=(idx+1)+' / '+tiles.length;}
