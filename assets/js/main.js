@@ -12,12 +12,22 @@
     onScroll();
   }
 
-  // Freccia nella nav — se presente nel DOM, al click torna a esplora.
+  // Freccia nella nav — torna alla pagina precedente del sito.
+  // Se la pagina è stata aperta da fuori (link diretto, nuova scheda) non c'è
+  // una pagina precedente del sito: in quel caso porta a esplora.
   // Su esplora.html il bottone non è nemmeno nell'HTML (nav.v2.no-back).
   var navBack = document.getElementById('navBack');
   if (navBack) {
     navBack.addEventListener('click', function () {
-      window.location.href = 'esplora.html';
+      var fromSite = false;
+      try {
+        fromSite = !!document.referrer && new URL(document.referrer).origin === window.location.origin;
+      } catch (e) {}
+      if (fromSite && window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'esplora.html';
+      }
     });
   }
 
