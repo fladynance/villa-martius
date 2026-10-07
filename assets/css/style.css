@@ -1073,7 +1073,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   .rooms-amenities-strip li:not(:last-child)::after { right: -1rem; }
 }
 
-.rooms-section { padding: 4rem 2.2rem 5rem; }
+.rooms-section { padding: 2.5rem 2.2rem 4rem; }
 .rooms-intro {
   max-width: 760px;
   margin: 0 auto 3.5rem;
