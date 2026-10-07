@@ -1717,13 +1717,22 @@ a.room-cta { text-decoration: none; }
 /* Virtual Tour: oro antico FISSO in tutte le pagine (indipendente dal theme) */
 .nav-vt { color: #fff; background: #A88A4E; border-color: #A88A4E; }
 .nav-vt:hover { background: var(--dark); border-color: var(--dark); color: #fff; }
-.nav-cta-icon,
-.nav-vt-icon {
+.nav-cta-icon {
   width: 14px;
   height: 14px;
   stroke: currentColor;
   fill: none;
   stroke-width: 1.4;
+}
+/* icona 360° del Virtual Tour: bianca, tratto sottile arrotondato */
+.nav-vt-icon {
+  width: 34px;
+  height: 19px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .nav.v2.on-dark {
   background: rgba(31,22,17,0.72);
@@ -1943,7 +1952,7 @@ input, select, textarea { font-size: 16px; }
     justify-content: center;
   }
   .nav.v2 .nav-vt-text { display: none; }
-  .nav.v2 .nav-vt-icon { width: 16px; height: 16px; }
+  .nav.v2 .nav-vt-icon { width: 31px; height: 17px; }
   .nav-actions { gap: 0.5rem; }
 }
 
@@ -2065,7 +2074,7 @@ input, select, textarea { font-size: 16px; }
   }
   .nav.v2 .nav-cta-icon { width: 15px; height: 15px; }
   .nav.v2 .nav-vt { min-width: 38px; min-height: 38px; padding: 0.5rem; }
-  .nav.v2 .nav-vt-icon { width: 15px; height: 15px; }
+  .nav.v2 .nav-vt-icon { width: 30px; height: 17px; }
   .nav-back { min-width: 38px; min-height: 38px; }
   .nav-back svg { width: 18px; height: 18px; }
   .hamburger { padding: 0.4rem; }
