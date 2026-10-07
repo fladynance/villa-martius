@@ -1122,6 +1122,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .room-card {
   background: #FAF4EA;
   border: 1px solid rgba(90,70,45,0.12);
+  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1239,6 +1240,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   color: var(--dark);
   background: transparent;
   border: 1px solid var(--dark);
+  border-radius: 6px;
   padding: 0.85rem 1.3rem;
   margin-top: 0.6rem;
   width: fit-content;
@@ -1260,12 +1262,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .room-cta:hover::after { transform: translateX(3px); }
 
 @media (max-width: 720px) {
-  .rooms-section { padding: 3rem 1.2rem; }
-  .rooms-grid { grid-template-columns: 1fr; gap: 1.4rem; }
-  .room-content { padding: 1.3rem 1.3rem 1.5rem; }
-  .room-title { font-size: 1.4rem; }
-  .room-number { font-size: 2rem; top: 0.8rem; left: 1rem; }
-  .room-category { font-size: 0.58rem; padding: 0.35rem 0.75rem; top: 0.9rem; right: 1rem; }
+  .rooms-section { padding: 2rem 1.2rem 3rem; }
+  .rooms-grid { grid-template-columns: 1fr; gap: 1.6rem; }
 }
 
 /* Map embed */
