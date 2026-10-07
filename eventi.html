@@ -57,14 +57,6 @@
   </div>
 </nav>
 
-<header class="page-hero" aria-labelledby="page-title">
-  <div class="hero-bg" style="background-image:url('assets/img/pool.jpg');" role="img" aria-label="Villa Martius di sera, un evento esclusivo"></div>
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-content">
-    <h1 class="page-hero-title" id="page-title">Eventi</h1>
-    <p class="page-hero-sub">Serate esclusive, pensate per pochi</p>
-  </div>
-</header>
 
 <!-- Cielo che cambia: dal colore del sito al tramonto, fino alla notte -->
 <div class="ev-sky" id="evSky">
@@ -74,23 +66,12 @@
   <!-- Apertura -->
   <section class="ev-story ev-light">
     <div class="ev-wrap ev-center rv">
-      <span class="label">Non per tutti</span>
+      <span class="label">Eventi</span>
       <span class="rule-gold" aria-hidden="true"></span>
-      <h2 class="ev-h">Il cielo che la Sicilia<br>riserva solo ad alcuni.</h2>
-      <p class="ev-copy">A Villa Martius esiste un momento preciso, ogni sera, in cui lo scenario si trasforma. Il sole scivola dietro le colline, il mare si specchia nel tramonto, e all'orizzonte le Isole Eolie si tingono di viola.</p>
-      <p class="ev-copy">&Egrave; il passaggio tra il giorno e la notte, l'ora in cui gli ospiti smettono di parlare e cominciano a guardare. Il momento in cui una serata diventa un ricordo prima ancora di finire. Dove la Sicilia smette di essere un luogo e diventa un'emozione.</p>
+      <h1 class="ev-h">Il cielo che la Sicilia<br>riserva solo ad alcuni.</h1>
+      <p class="ev-copy">Ogni sera, a Villa Martius, il sole scivola dietro le colline, il mare si specchia nel tramonto e le Isole Eolie si tingono di viola. &Egrave; l'ora in cui gli ospiti smettono di parlare e cominciano a guardare: il momento in cui una serata diventa un ricordo prima ancora di finire.</p>
+      <p class="ev-copy">Serate pensate per chi cerca un contesto fuori dall'ordinario. Nessun pacchetto, nessuno standard: ogni evento viene costruito con voi, nei suoi tempi e per il suo pubblico.</p>
       <p class="ev-copy ev-copy-strong">Dove la vista non &egrave; un dettaglio. &Egrave; il regalo.</p>
-      <a href="contatti.html" class="link-underline" style="margin-top:2rem">Parliamone insieme</a>
-    </div>
-  </section>
-
-  <!-- Le serate -->
-  <section class="ev-intro ev-light">
-    <div class="ev-wrap ev-center rv">
-      <span class="label">Le Nostre Serate</span>
-      <span class="rule-gold" aria-hidden="true"></span>
-      <h2 class="ev-h">Occasioni rare,<br>su misura.</h2>
-      <p class="ev-copy">Serate pensate per chi cerca un contesto fuori dall'ordinario. Nessun pacchetto, nessuno standard: ogni evento viene costruito con voi, nei suoi tempi, nelle sue sfumature, nel suo pubblico.</p>
     </div>
   </section>
 
@@ -187,7 +168,6 @@
   var sky=document.getElementById('evSky'); if(!sky) return;
   var sun=sky.querySelector('.ev-sun'), moon=sky.querySelector('.ev-moon'), cv=document.getElementById('evStars');
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var hero=document.querySelector('.page-hero'), foot=document.querySelector('.footer');
   function cl(x){return x<0?0:x>1?1:x;}
   function update(){
     var vh=window.innerHeight, sy=window.pageYOffset;
