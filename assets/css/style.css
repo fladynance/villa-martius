@@ -2138,8 +2138,7 @@ input, select, textarea { font-size: 16px; }
    passa per tramonto, viola e notte, e si chiude sul colore del footer */
 .ev-sky > section { background: linear-gradient(180deg, var(--a), var(--b)); }
 .ev-story { --a: #D5C4A4; --b: #E3B07A; }
-.ev-intro { --a: #E3B07A; --b: #CF7A5E; }
-.ev-ch.c1 { --a: #CF7A5E; --b: #6A4466; background: linear-gradient(180deg, #CF7A5E 0%, #985A69 22%, #6A4466 100%); }
+.ev-ch.c1 { --a: #E3B07A; --b: #6A4466; background: linear-gradient(180deg, #E3B07A 0%, #CF7A5E 7%, #8F5468 24%, #6A4466 100%); }
 .ev-ch.c2 { --a: #6A4466; --b: #2E315A; }
 .ev-ch.c3 { --a: #2E315A; --b: #14263A; }
 .ev-end { --a: #14263A; --b: #17110D; }
@@ -2175,8 +2174,7 @@ input, select, textarea { font-size: 16px; }
 .ev-center { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .ev-light { color: #2A1410; }
 .ev-dark { color: #fff; }
-.ev-story { padding: 6.5rem 0 3rem; }
-.ev-intro { padding: 2.5rem 0 4rem; }
+.ev-story { padding: 9rem 0 3.5rem; }
 .ev-light .label { color: #0F3B30; }
 .ev-light .rule-gold { background: #0F3B30; }
 .ev-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.3rem, 5.4vw, 4rem); line-height: 1.04; margin: 1rem 0 1.6rem; color: #0F3B30; text-wrap: balance; }
@@ -2210,8 +2208,7 @@ input, select, textarea { font-size: 16px; }
   .ev-sun { width: 64px; height: 64px; margin-top: -32px; }
   .ev-moon { width: 56px; height: 56px; margin-top: -28px; }
   .ev-wrap { padding: 0 1.2rem; }
-  .ev-story { padding: 4rem 0 2rem; }
-  .ev-intro { padding: 1.5rem 0 2.5rem; }
+  .ev-story { padding: 6.5rem 0 2rem; }
   .ev-copy { font-size: 1.18rem; }
   .ev-ch { padding: 1.8rem 0; }
   .ev-grid { grid-template-columns: 1fr; gap: 1.6rem; }
