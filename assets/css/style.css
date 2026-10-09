@@ -2398,18 +2398,18 @@ body.mt-lock { overflow: hidden; }
 .rc-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.08; margin: .8rem 0 1.3rem; color: var(--mt-ink); text-wrap: balance; }
 .rc-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.65; margin: 0 0 1rem; color: #2E1D12; }
 .rc-copy em { font-style: italic; font-weight: 500; color: var(--mt-ink); }
-.rc-quiet { font-size: 1.12rem; color: #4A3322; padding-left: 1.1rem; border-left: 2px solid rgba(168,138,78,.7); margin: 1.3rem 0 0; }
+.rc-quiet { font-size: 1.12rem; color: #4A3322; margin: 1.3rem 0 0; }
 /* prima sezione: due frasi + riconoscimento a schema */
 .rc-first { text-align: center; padding: .5rem 0 0; }
 .rc-punch { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.1; margin: 0; color: var(--mt-ink); text-wrap: balance; }
 .rc-punch2 { color: #8A4A2A; }
 .rc-dia { display: block; width: 9px; height: 9px; margin: 1.4rem auto; transform: rotate(45deg); background: #A88A4E; box-shadow: -34px 0 0 -4px rgba(168,138,78,.6), 34px 0 0 -4px rgba(168,138,78,.6); }
-.rc-recbox { margin-top: 2.6rem; padding-top: 2rem; border-top: 1px solid rgba(168,138,78,.55); text-align: left; }
+.rc-recbox { margin-top: 2.6rem; text-align: center; }
 .rc-recbox .label { display: block; margin: 0; color: var(--mt-lab); }
 .rc-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
 .rc-cols p { font-family: var(--serif); font-size: 1.08rem; line-height: 1.55; margin: 0; color: #2E1D12; }
 .rc-cols em { font-style: italic; font-weight: 500; color: var(--mt-ink); }
-.rc-cols p + p { padding-left: 1.3rem; border-left: 2px solid rgba(168,138,78,.7); color: #4A3322; }
+.rc-cols p + p { color: #4A3322; }
 /* polaroid */
 .rc-photo { margin: 0; padding: 12px 12px 4.1rem; background: #FBF4E4; border-radius: 6px; box-shadow: 0 26px 44px -26px rgba(60,25,10,.7); transform: rotate(-1.4deg); position: relative; }
 .rc-photo::before { content: ""; position: absolute; left: 50%; top: -13px; width: 86px; height: 26px; margin-left: -43px; background: rgba(255,246,222,.72); box-shadow: 0 1px 3px rgba(60,25,10,.25); transform: rotate(-3deg); }
