@@ -2399,6 +2399,17 @@ body.mt-lock { overflow: hidden; }
 .rc-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.65; margin: 0 0 1rem; color: #2E1D12; }
 .rc-copy em { font-style: italic; font-weight: 500; color: var(--mt-ink); }
 .rc-quiet { font-size: 1.12rem; color: #4A3322; padding-left: 1.1rem; border-left: 2px solid rgba(168,138,78,.7); margin: 1.3rem 0 0; }
+/* prima sezione: due frasi + riconoscimento a schema */
+.rc-first { text-align: center; padding: .5rem 0 0; }
+.rc-punch { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.1; margin: 0; color: var(--mt-ink); text-wrap: balance; }
+.rc-punch2 { color: #8A4A2A; }
+.rc-dia { display: block; width: 9px; height: 9px; margin: 1.4rem auto; transform: rotate(45deg); background: #A88A4E; box-shadow: -34px 0 0 -4px rgba(168,138,78,.6), 34px 0 0 -4px rgba(168,138,78,.6); }
+.rc-recbox { margin-top: 2.6rem; padding-top: 2rem; border-top: 1px solid rgba(168,138,78,.55); text-align: left; }
+.rc-recbox .label { display: block; margin: 0; color: var(--mt-lab); }
+.rc-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+.rc-cols p { font-family: var(--serif); font-size: 1.08rem; line-height: 1.55; margin: 0; color: #2E1D12; }
+.rc-cols em { font-style: italic; font-weight: 500; color: var(--mt-ink); }
+.rc-cols p + p { padding-left: 1.3rem; border-left: 2px solid rgba(168,138,78,.7); color: #4A3322; }
 /* polaroid */
 .rc-photo { margin: 0; padding: 12px 12px 4.1rem; background: #FBF4E4; border-radius: 6px; box-shadow: 0 26px 44px -26px rgba(60,25,10,.7); transform: rotate(-1.4deg); position: relative; }
 .rc-photo::before { content: ""; position: absolute; left: 50%; top: -13px; width: 86px; height: 26px; margin-left: -43px; background: rgba(255,246,222,.72); box-shadow: 0 1px 3px rgba(60,25,10,.25); transform: rotate(-3deg); }
@@ -2425,13 +2436,21 @@ body.mt-lock { overflow: hidden; }
 .rc-step h3 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.55rem; line-height: 1.12; margin: 0 0 .45rem; color: var(--mt-ink); }
 .rc-step p { font-family: var(--serif); font-size: 1.1rem; line-height: 1.55; margin: 0; color: #3A2818; }
 @media (max-width: 900px) {
-  .rc-split { display: flex; flex-direction: column; }
+  .rc-split { display: flex; flex-direction: column; align-items: stretch; text-align: center; }
+  .rc-stick { display: contents; }
+  .rc-stick .label { order: 0; padding: 6.8rem 1.3rem 0; text-align: center; }
   .rc-main { order: 1; }
-  .rc-stick { order: 2; position: relative; height: auto; min-height: 0; padding: 3.4rem 1.3rem 1rem; align-items: center; text-align: center; }
-  .rc-stick .rule-gold { margin: 1.1rem auto 0; }
-    .rc-title { font-size: clamp(2.2rem, 9vw, 3rem); margin: 1.3rem 0 1.1rem; }
+  .rc-stick .rule-gold, .rc-title, .rc-lead, .rc-cta { order: 2; }
+  .rc-stick .rule-gold { margin: 3.6rem auto 0; }
+  .rc-title, .rc-lead { padding: 0 1.3rem; margin-left: auto; margin-right: auto; }
+  .rc-cta { align-self: center; margin-bottom: 1rem; }
+  .rc-title { font-size: clamp(2.2rem, 9vw, 3rem); margin: 1.3rem 0 1.1rem; }
   .rc-lead { margin-bottom: 1.5rem; max-width: 30ch; }
-  .rc-main { padding: 6.8rem 1.3rem 1rem; max-width: none; gap: 3rem; }
+  .rc-main { padding: 2.4rem 1.3rem 1rem; max-width: none; gap: 3rem; }
+  .rc-main { text-align: left; }
+  .rc-first { text-align: center; }
+  .rc-cols { grid-template-columns: 1fr; }
+  .rc-punch { font-size: clamp(1.9rem, 8vw, 2.4rem); }
   .rc-copy { font-size: 1.2rem; }
   .rc-advs { gap: .7rem; }
   .rc-note { padding: .95rem .9rem 1.05rem; }
