@@ -2324,11 +2324,9 @@ body.mt-lock { overflow: hidden; }
 .ev-ch.c3 .mt-card.mt-big { --rot: -1.4deg; }
 @media (max-width: 900px) {
   .ev-grid .mt-card.mt-big { width: min(100%, 420px); margin: .6rem 0 0; }
-  /* su mobile il testo sta sotto la foto, nella parte già viola: torna chiaro */
-  .ev-ch.c1 { background: linear-gradient(180deg, #D5C4A4 0%, #E3B07A 18%, #CF7A5E 38%, #8F5468 60%, #6A4466 100%); color: #fff; }
-  .ev-ch.c1 .ev-tag { color: #F2ECE0; }
-  .ev-ch.c1 .ev-tx h3 { color: #fff; }
-  .ev-ch.c1 .ev-tx p { color: rgba(255,255,255,.95); }
+  /* su mobile ogni momento si legge nell'ordine: etichetta e testo, poi la foto */
+  .ev-grid .ev-tx { order: 1; }
+  .ev-grid .mt-card.mt-big { order: 2; }
 }
 
 /* EVENTI · sfumatura continua del cielo (costruita dallo script; senza JS restano le sfumature per sezione) */
