@@ -2383,3 +2383,4 @@ body.mt-lock { overflow: hidden; }
 .mt-split { position: relative; z-index: 1; }
 @media (max-width: 900px) { .mt-olive { --o: .22; } }
 @media (prefers-reduced-motion: reduce) { .mt-lt { animation: none; opacity: .6; } .mt-olive { transform: rotate(var(--r, 0deg)); } }
+.mt-rings svg, .mt-fx svg { filter: drop-shadow(0 5px 6px rgba(80,50,10,.28)); }
