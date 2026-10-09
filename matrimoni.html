@@ -179,6 +179,18 @@
   if(!A) return;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var tick=false,auto=0;
+  /* PC: a fine pagina il centro delle fedi e quello del pulsante stanno sulla stessa linea */
+  function align(){
+    var main=document.querySelector('.mt-main'),ring=document.getElementById('mtRings'),seal=document.querySelector('.mt-seal');
+    if(!main||!ring||!seal) return;
+    if(window.innerWidth<=900){ main.style.removeProperty('--mt-pb'); return; }
+    main.style.removeProperty('--mt-pb');
+    var stick=ring.offsetParent,vh=stick.offsetHeight;
+    var pad=vh-ring.offsetTop-ring.offsetHeight/2-seal.offsetHeight/2;
+    main.style.setProperty('--mt-pb',Math.max(80,Math.round(pad))+'px');
+  }
+  align(); window.addEventListener('resize',align); window.addEventListener('load',align);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(align);
   function cl(x){return x<0?0:x>1?1:x}
   function ez(t){return t*t*(3-2*t)}
   function draw(p){

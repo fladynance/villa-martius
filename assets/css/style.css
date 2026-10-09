@@ -2230,7 +2230,7 @@ input, select, textarea { font-size: 16px; }
 .mt-rings { position: relative; width: min(100%, 290px); }
 .mt-rings svg { width: 100%; height: auto; display: block; overflow: visible; }
 .mt-glow { position: absolute; inset: -30% -10%; background: radial-gradient(closest-side, rgba(255,235,170,.5), transparent); opacity: 0; pointer-events: none; }
-.mt-main { padding: 8.4rem 3.4rem 5rem 1.6rem; max-width: 700px; }
+.mt-main { padding: 8.4rem 3.4rem var(--mt-pb, 5rem) 1.6rem; max-width: 700px; }
 .mt-sec { position: relative; text-align: left; }
 .mt-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.1rem, 3.6vw, 3rem); line-height: 1.08; margin: 1rem 0 1.6rem; color: var(--mt-ink); text-wrap: balance; }
 .mt-letter p, .mt-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.75; margin: 0 0 1.25rem; color: #2E1D12; }
@@ -2263,8 +2263,8 @@ input, select, textarea { font-size: 16px; }
 
 .mt-end { margin-top: 3.4rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .mt-sig { align-self: flex-start; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.45rem; color: var(--mt-ink); margin-bottom: 2.2rem; }
-.mt-seal { display: inline-flex; align-items: center; justify-content: center; width: 128px; height: 128px; border-radius: 50%; text-align: center; text-decoration: none; background: radial-gradient(circle at 35% 30%, #B25B3E, #8F4128); color: #FFF6EA; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .2em; line-height: 1.6; text-transform: uppercase; box-shadow: 0 12px 28px -10px rgba(143,65,40,.7), inset 0 0 0 6px rgba(255,255,255,.14); transition: transform .3s; }
-.mt-seal:hover { transform: rotate(-4deg) scale(1.05); }
+.mt-seal { display: inline-flex; align-items: center; justify-content: center; width: 128px; height: 128px; border-radius: 50%; text-align: center; text-decoration: none; background: #A88A4E; color: #fff; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .2em; line-height: 1.6; text-transform: uppercase; box-shadow: 0 12px 28px -12px rgba(60,40,15,.6), inset 0 0 0 6px rgba(255,255,255,.14); transition: transform .3s, background .3s; }
+.mt-seal:hover { transform: rotate(-4deg) scale(1.05); background: var(--dark); }
 .mt-seal:focus-visible { outline: 2px solid var(--mt-ink); outline-offset: 5px; }
 
 .js-rv .mt-page .rv { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s ease; }
