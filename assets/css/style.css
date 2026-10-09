@@ -2401,10 +2401,7 @@ body.mt-lock { overflow: hidden; }
 .rc-quiet { font-size: 1.12rem; color: #4A3322; margin: 1.3rem 0 0; }
 /* prima sezione: due frasi + riconoscimento a schema */
 .rc-first { text-align: center; padding: .5rem 0 0; }
-.rc-punch { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.1; margin: 0; color: var(--mt-ink); text-wrap: balance; }
-.rc-punch2 { color: #8A4A2A; }
-.rc-dia { display: block; width: 9px; height: 9px; margin: 1.4rem auto; transform: rotate(45deg); background: #A88A4E; box-shadow: -34px 0 0 -4px rgba(168,138,78,.6), 34px 0 0 -4px rgba(168,138,78,.6); }
-.rc-recbox { margin-top: 2.6rem; text-align: center; }
+.rc-recbox { text-align: center; }
 .rc-recbox .label { display: block; margin: 0; color: var(--mt-lab); }
 .rc-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
 .rc-cols p { font-family: var(--serif); font-size: 1.08rem; line-height: 1.55; margin: 0; color: #2E1D12; }
@@ -2450,8 +2447,7 @@ body.mt-lock { overflow: hidden; }
   .rc-main { text-align: left; }
   .rc-first { text-align: center; }
   .rc-cols { grid-template-columns: 1fr; }
-  .rc-punch { font-size: clamp(1.9rem, 8vw, 2.4rem); }
-  .rc-copy { font-size: 1.2rem; }
+    .rc-copy { font-size: 1.2rem; }
   .rc-advs { gap: .7rem; }
   .rc-note { padding: .95rem .9rem 1.05rem; }
   .rc-note h3 { font-size: 1.15rem; }
