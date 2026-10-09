@@ -2390,7 +2390,9 @@ body.mt-lock { overflow: hidden; }
 .rc-stick .label, .rc-sec .label, .rc-photo .label { display: block; color: var(--mt-lab); margin: 0; }
 .rc-stick .rule-gold { display: none; }
 .rc-title { position: relative; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2.3rem, 3.9vw, 3.6rem); line-height: 1.06; margin: 1.6rem 0 1.4rem; color: var(--mt-ink); text-wrap: balance; }
-.rc-lead { position: relative; font-family: var(--serif); font-size: 1.25rem; line-height: 1.6; margin: 0 0 2rem; max-width: 26ch; color: #2E1D12; }
+.rc-title { margin-bottom: 0; }
+.rc-title2 { color: #8A4A2A; margin: 0 0 2.2rem; }
+.rc-dia { display: block; width: 9px; height: 9px; margin: 1.3rem 0 1.3rem 4px; transform: rotate(45deg); background: #A88A4E; box-shadow: -34px 0 0 -4px rgba(168,138,78,.6), 34px 0 0 -4px rgba(168,138,78,.6); }
 .rc-cta { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 2rem; border-radius: 999px; background: #A88A4E; border: 1.5px solid #A88A4E; color: #fff; text-decoration: none; font-family: var(--sans); font-weight: 300; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; transition: background .3s, border-color .3s, transform .3s; }
 .rc-cta:hover { background: var(--dark); border-color: var(--dark); transform: translateY(-2px); }
 .rc-cta:focus-visible { outline: 2px solid var(--mt-ink); outline-offset: 4px; }
@@ -2438,12 +2440,15 @@ body.mt-lock { overflow: hidden; }
   .rc-split { display: flex; flex-direction: column; align-items: stretch; text-align: center; }
   .rc-stick { display: contents; }
   .rc-main { order: 1; }
-  .rc-stick .rule-gold, .rc-title, .rc-lead, .rc-cta { order: 2; }
-  .rc-stick .rule-gold { display: block; width: 60px; height: 1px; margin: 3.6rem auto 0; background: var(--mt-lab); opacity: .55; }
-  .rc-title, .rc-lead { padding: 0 1.3rem; margin-left: auto; margin-right: auto; }
+  .rc-cta { order: 2; }
+  .rc-stick .rule-gold { order: 3; }
+  .rc-title, .rc-dia { order: 4; }
+  .rc-stick .rule-gold { display: block; width: 60px; height: 1px; margin: 2.4rem auto 0; background: var(--mt-lab); opacity: .55; }
+  .rc-title { padding: 0 1.3rem; margin-left: auto; margin-right: auto; }
+  .rc-dia { margin: 1.1rem auto; }
   .rc-cta { align-self: center; margin-bottom: 1rem; }
-  .rc-title { font-size: clamp(2.2rem, 9vw, 3rem); margin: 1.3rem 0 1.1rem; }
-  .rc-lead { margin-bottom: 1.5rem; max-width: 30ch; }
+  .rc-title { font-size: clamp(2.2rem, 9vw, 3rem); margin: 1.6rem 0 0; }
+  .rc-title2 { margin: 0 0 1.5rem; }
   .rc-main { padding: 7rem 1.3rem 1rem; max-width: none; gap: 3rem; }
   .rc-main { text-align: left; }
   .rc-first { text-align: center; }
