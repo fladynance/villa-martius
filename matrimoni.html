@@ -246,8 +246,8 @@
     place(fly[2],E.left-P.left+sm/2,E.top-P.top+E.height/2,sm,.5);
     flyMove();
   }
-  /* mobile: le fedi dell'apertura scendono staccate, rimpiccioliscono, si fermano accanto al titolo
-     "Il vostro sogno" e restano li; solo dopo essersi fermate si intersecano */
+  /* mobile: le fedi dell'apertura scendono staccate, rimpiccioliscono e si intersecano
+     man mano che si avvicinano al titolo "Il vostro sogno": arrivate, sono gia' unite */
   function flyMove(){
     if(!fly||!geo) return;
     var sy=window.pageYOffset,vh=window.innerHeight,s1=Math.max(140,geo.t1-vh*.5);
