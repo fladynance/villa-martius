@@ -120,6 +120,7 @@
 
       <div class="mt-end rv">
         <div class="mt-sig">Villa Martius</div>
+        <div class="mt-endslot" id="mtEndSlot" aria-hidden="true"></div>
         <a href="contatti.html" class="mt-seal">Richiedi un<br>preventivo</a>
       </div>
     </div>
@@ -198,22 +199,49 @@
     A.setAttribute('transform','translate('+(-g)+',0)'); C.setAttribute('transform','translate('+(-g)+',0)'); B.setAttribute('transform','translate('+g+',0)');
     C.style.opacity=cl((p-.8)*5); G.style.opacity=ez(cl((p-.5)*2)).toFixed(2);
   }
+  /* MOBILE: le fedi partono staccate nell'apertura, si fermano in piccolo a destra sui titoli
+     delle due sezioni e finiscono incrociate, a sinistra sotto "Villa Martius" */
+  var fly=null;
+  function mk(i){
+    var d=document.createElement('div'); d.className='mt-fx'; d.setAttribute('aria-hidden','true');
+    d.innerHTML='<div class="mt-fxg"></div><svg viewBox="0 0 420 210"><defs><linearGradient id="fg'+i+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E2C27A"/><stop offset=".5" stop-color="#B58A38"/><stop offset="1" stop-color="#7A5A22"/></linearGradient><clipPath id="fc'+i+'"><rect x="150" y="0" width="120" height="105"/></clipPath></defs><g class="a"><circle cx="150" cy="105" r="78" fill="none" stroke="url(#fg'+i+')" stroke-width="18"/></g><g class="b"><circle cx="270" cy="105" r="78" fill="none" stroke="url(#fg'+i+')" stroke-width="18"/></g><g class="c" clip-path="url(#fc'+i+')"><circle cx="150" cy="105" r="78" fill="none" stroke="url(#fg'+i+')" stroke-width="18"/></g></svg>';
+    document.body.appendChild(d);
+    return {el:d,a:d.querySelector('.a'),b:d.querySelector('.b'),c:d.querySelector('.c'),g:d.querySelector('.mt-fxg')};
+  }
+  function place(r,x,y,w,gap,op,glow){
+    r.el.style.width=w+'px';
+    r.el.style.transform='translate('+(x-w/2).toFixed(1)+'px,'+(y-w/4).toFixed(1)+'px)';
+    r.el.style.opacity=op.toFixed(3);
+    r.a.setAttribute('transform','translate('+(-gap)+',0)'); r.c.setAttribute('transform','translate('+(-gap)+',0)'); r.b.setAttribute('transform','translate('+gap+',0)');
+    r.c.style.opacity=gap<4?1:0; r.g.style.opacity=glow.toFixed(2);
+  }
+  function flyUpd(){
+    var vw=window.innerWidth,vh=window.innerHeight,sy=window.pageYOffset;
+    var hs=document.getElementById('mtRings'),ts=document.querySelectorAll('.mt-h'),es=document.getElementById('mtEndSlot');
+    if(!hs||ts.length<2||!es) return;
+    var H=hs.getBoundingClientRect(),T1=ts[0].getBoundingClientRect(),T2=ts[1].getBoundingClientRect(),E=es.getBoundingClientRect();
+    var sm=62,rx=vw-22-sm/2,bigW=Math.min(H.width,220);
+    var h={x:H.left+H.width/2,y:H.top+H.height/2},t1={x:rx,y:T1.top+T1.height/2},t2={x:rx,y:T2.top+T2.height/2};
+    /* A: dall'apertura al titolo della prima sezione */
+    var b=ez(cl(sy/Math.max(1,(T1.top+sy)-vh*.3)));
+    var ax=h.x+(t1.x-h.x)*b,ay=h.y+(t1.y-h.y)*b,aw=bigW+(sm-bigW)*b,ag=64+(24-64)*b;
+    place(fly[0],ax,ay,aw,ag,cl((ay-62)/90),0);
+    /* B: titolo della seconda sezione */
+    place(fly[1],t2.x,t2.y,sm,24,cl((vh*.94-t2.y)/(vh*.16))*cl((t2.y-62)/90),0);
+    /* C: finale, incrociate e piccole, sotto la firma */
+    var cy=E.top+E.height/2,j=ez(cl((vh*.92-cy)/(vh*.32)));
+    place(fly[2],E.left+sm/2,cy,sm,24*(1-j),cl((vh*.97-cy)/(vh*.1)),j*.9);
+  }
   function upd(){
     tick=false;
     var mob=window.innerWidth<=900;
+    if(mob){ if(!fly){ fly=[mk(1),mk(2),mk(3)]; document.documentElement.classList.add('js-fx'); } flyUpd(); return; }
     var max=document.documentElement.scrollHeight-window.innerHeight;
-    var p=mob?auto:cl(window.pageYOffset/Math.max(1,max*.7));
-    draw(p);
+    draw(cl(window.pageYOffset/Math.max(1,max*.7)));
   }
   function req(){ if(!tick){tick=true;requestAnimationFrame(upd);} }
-  window.addEventListener('scroll',req,{passive:true}); window.addEventListener('resize',req);
-  if(reduce){ auto=1; upd(); draw(1); }
-  else {
-    upd();
-    if(window.innerWidth<=900){
-      var t0=null; setTimeout(function(){ requestAnimationFrame(function step(t){ if(t0===null)t0=t; auto=cl((t-t0)/1700); upd(); if(auto<1)requestAnimationFrame(step); }); },450);
-    }
-  }
+  window.addEventListener('scroll',req,{passive:true}); window.addEventListener('resize',req); window.addEventListener('load',req);
+  upd();
   /* comparsa dolce dei blocchi (visibili senza JS) */
   if('IntersectionObserver' in window && !reduce){
     document.documentElement.classList.add('js-rv');
