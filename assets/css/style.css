@@ -2388,7 +2388,7 @@ body.mt-lock { overflow: hidden; }
 .rc-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
 .rc-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 6rem 2rem 3rem 3.4rem; overflow: hidden; }
 .rc-stick .label, .rc-sec .label, .rc-photo .label { display: block; color: var(--mt-lab); margin: 0; }
-.rc-stick .rule-gold { margin: 1.4rem 0 0; background: var(--mt-lab); opacity: .55; }
+.rc-stick .rule-gold { display: none; }
 .rc-title { position: relative; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2.3rem, 3.9vw, 3.6rem); line-height: 1.06; margin: 1.6rem 0 1.4rem; color: var(--mt-ink); text-wrap: balance; }
 .rc-lead { position: relative; font-family: var(--serif); font-size: 1.25rem; line-height: 1.6; margin: 0 0 2rem; max-width: 26ch; color: #2E1D12; }
 .rc-cta { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 2rem; border-radius: 999px; background: #A88A4E; border: 1.5px solid #A88A4E; color: #fff; text-decoration: none; font-family: var(--sans); font-weight: 300; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; transition: background .3s, border-color .3s, transform .3s; }
@@ -2401,6 +2401,8 @@ body.mt-lock { overflow: hidden; }
 .rc-quiet { font-size: 1.12rem; color: #4A3322; margin: 1.3rem 0 0; }
 /* prima sezione: due frasi + riconoscimento a schema */
 .rc-first { text-align: center; padding: .5rem 0 0; }
+.rc-lab { text-align: center; }
+.rc-sep { display: block; width: 60px; height: 1px; margin: 1.5rem auto 3rem; background: var(--mt-lab); opacity: .55; }
 .rc-recbox { text-align: center; }
 .rc-recbox .label { display: block; margin: 0; color: var(--mt-lab); }
 .rc-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
@@ -2435,15 +2437,14 @@ body.mt-lock { overflow: hidden; }
 @media (max-width: 900px) {
   .rc-split { display: flex; flex-direction: column; align-items: stretch; text-align: center; }
   .rc-stick { display: contents; }
-  .rc-stick .label { order: 0; padding: 6.8rem 1.3rem 0; text-align: center; }
   .rc-main { order: 1; }
   .rc-stick .rule-gold, .rc-title, .rc-lead, .rc-cta { order: 2; }
-  .rc-stick .rule-gold { margin: 3.6rem auto 0; }
+  .rc-stick .rule-gold { display: block; width: 60px; height: 1px; margin: 3.6rem auto 0; background: var(--mt-lab); opacity: .55; }
   .rc-title, .rc-lead { padding: 0 1.3rem; margin-left: auto; margin-right: auto; }
   .rc-cta { align-self: center; margin-bottom: 1rem; }
   .rc-title { font-size: clamp(2.2rem, 9vw, 3rem); margin: 1.3rem 0 1.1rem; }
   .rc-lead { margin-bottom: 1.5rem; max-width: 30ch; }
-  .rc-main { padding: 2.4rem 1.3rem 1rem; max-width: none; gap: 3rem; }
+  .rc-main { padding: 7rem 1.3rem 1rem; max-width: none; gap: 3rem; }
   .rc-main { text-align: left; }
   .rc-first { text-align: center; }
   .rc-cols { grid-template-columns: 1fr; }
