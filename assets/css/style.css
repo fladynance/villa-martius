@@ -2333,3 +2333,26 @@ body.mt-lock { overflow: hidden; }
 /* EVENTI · sfumatura continua del cielo (costruita dallo script; senza JS restano le sfumature per sezione) */
 .ev-sky.ev-gx > section { background: none !important; }
 .ev-page .footer { border-top: 0; }
+
+/* CONTATTI · tutto in moka */
+.ct-page .page-hero .hero-overlay { background: linear-gradient(180deg, rgba(90,71,51,.8), rgba(90,71,51,.6)); }
+.ct-page .section-dark { background: #5A4733; color: #EADFC8; }
+.ct-page .section-dark .display, .ct-page .contact-info .display { color: #F8F0DE; }
+.ct-page .section-dark .body-copy { color: #E4D8BE; }
+.ct-page .section-dark .label { color: #E0C48C; }
+.ct-page .contact-details .c-label { color: #E0C48C; }
+.ct-page .contact-details .c-val { color: #F1E7D2; }
+.ct-page .contact-details a { color: inherit; border-bottom: 1px solid rgba(224,196,140,.35); transition: color .3s, border-color .3s; }
+.ct-page .contact-details a:hover { color: #FFE2A8; border-color: #FFE2A8; }
+.ct-page .form-field label { color: #D9CBAE; }
+.ct-page .form-field input, .ct-page .form-field select, .ct-page .form-field textarea { color: #F8F0DE; border-bottom-color: rgba(240,225,190,.4); color-scheme: dark; }
+.ct-page .form-field input::placeholder, .ct-page .form-field textarea::placeholder { color: rgba(240,225,190,.55); }
+.ct-page .form-field input:focus, .ct-page .form-field select:focus, .ct-page .form-field textarea:focus { border-bottom-color: #E0C48C; }
+.ct-page .form-field select option { background: #5A4733; color: #F8F0DE; }
+.ct-page .form-privacy { color: #D9CBAE; font-size: .72rem; }
+.ct-page .form-privacy a { color: #F0D9A4; }
+.ct-page .contact-form .btn-solid-dark { background: #A88A4E; border-color: #A88A4E; color: #fff; border-radius: 999px; min-height: 54px; transition: background .3s, color .3s, border-color .3s; }
+.ct-page .contact-form .btn-solid-dark:hover { background: #F1E7D2; border-color: #F1E7D2; color: #3A2D21; }
+.ct-page .contact-form .btn-solid-dark:focus-visible, .ct-page .section-dark a:focus-visible { outline: 2px solid #F0D9A4; outline-offset: 3px; }
+.ct-page .section:not(.section-dark) .label { color: #5A4733; }
+.ct-page .section:not(.section-dark) .body-copy { color: #3A2D21; }
