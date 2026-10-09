@@ -83,7 +83,7 @@
 
   <section class="ev-ch c1 ev-dark">
     <div class="ev-wrap ev-grid rv">
-      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Area piscina allestita al calar della sera"><span class="mt-pic"><img src="assets/img/pool.jpg" alt="Area piscina allestita al calar della sera" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
+      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Il gazebo bianco di Villa Martius al tramonto"><span class="mt-pic"><img src="assets/img/hall.jpg" alt="Il gazebo bianco di Villa Martius al tramonto" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
       <div class="ev-tx">
         <span class="ev-tag">Al tramonto</span>
         <h3>Aperitivi al Tramonto &middot; Live Music</h3>
@@ -94,7 +94,7 @@
 
   <section class="ev-ch c2 ev-dark ev-rev">
     <div class="ev-wrap ev-grid rv">
-      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Sala allestita per una serata esclusiva"><span class="mt-pic"><img src="assets/img/hall.jpg" alt="Sala allestita per una serata esclusiva" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
+      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Area piscina allestita al calar della sera"><span class="mt-pic"><img src="assets/img/pool.jpg" alt="Area piscina allestita al calar della sera" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
       <div class="ev-tx">
         <span class="ev-tag">Quando scende la sera</span>
         <h3>Serate Aziendali di Prestigio</h3>
@@ -105,7 +105,7 @@
 
   <section class="ev-ch c3 ev-dark">
     <div class="ev-wrap ev-grid rv">
-      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Il giardino di Villa Martius"><span class="mt-pic"><img src="assets/img/hero-garden.jpg" alt="Il giardino di Villa Martius" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
+      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Il giardino di Villa Martius di notte"><span class="mt-pic"><img src="assets/img/hero-garden.jpg" alt="Il giardino di Villa Martius di notte" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
       <div class="ev-tx">
         <span class="ev-tag">A notte fonda</span>
         <h3>Eventi su Misura</h3>
@@ -241,8 +241,7 @@
     function top(e){return e.offsetTop-sky.offsetTop;}
     var mob=window.innerWidth<=900,h1=c1.offsetHeight;
     var keys=[[0,'#D5C4A4'],[top(c1),'#D5C4A4']];
-    if(mob) keys.push([top(c1)+.18*h1,'#E3B07A'],[top(c1)+.38*h1,'#CF7A5E'],[top(c1)+.6*h1,'#8F5468']);
-    else keys.push([top(c1)+.3*h1,'#E3B07A'],[top(c1)+.6*h1,'#CF7A5E'],[top(c1)+.82*h1,'#8F5468']);
+    keys.push([top(c1)+.3*h1,'#E3B07A'],[top(c1)+.6*h1,'#CF7A5E'],[top(c1)+.82*h1,'#8F5468']);
     keys.push([top(c2),'#6A4466'],[top(c3),'#2E315A'],[top(end),'#14263A'],[H,'#17110D']);
     var xs=[],L=[],A=[],B=[];
     keys.forEach(function(k,i){ if(i&&k[0]<=xs[xs.length-1]) k[0]=xs[xs.length-1]+1; var o=toOk(k[1]); xs.push(k[0]); L.push(o[0]); A.push(o[1]); B.push(o[2]); });
