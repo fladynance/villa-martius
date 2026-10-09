@@ -246,7 +246,7 @@
       var R=1.25*Math.pow(1-rnd()*.99,-1/1.55); if(R>30) continue;
       var ang=rnd()*6.283,rad=Math.sqrt(rnd())*N*.5*.96,px=N/2+Math.cos(ang)*rad,py=N/2+Math.sin(ang)*rad;
       var mm=maria(px,py); if(mm>.5&&R<18&&rnd()<.9) { n++; continue; }
-      crater(px,py,R,Math.min(.27*R,2.7)*(R>14?.5:1)*(.6+rnd()*.6)); craters.push([px,py,R]); n++;
+      if(R<2.4) crater(px,py,R,Math.min(.27*R,.9)); craters.push([px,py,R]); n++;
     }
     (function(){var T=new Float32Array(N*N),x,y;for(y=1;y<N-1;y++)for(x=1;x<N-1;x++){T[y*N+x]=(Hh[y*N+x]*4+Hh[y*N+x-1]+Hh[y*N+x+1]+Hh[(y-1)*N+x]+Hh[(y+1)*N+x])/8;}for(y=1;y<N-1;y++)for(x=1;x<N-1;x++)Hh[y*N+x]=T[y*N+x];for(y=1;y<N-1;y++)for(x=1;x<N-1;x++){T[y*N+x]=(Hh[y*N+x]*4+Hh[y*N+x-1]+Hh[y*N+x+1]+Hh[(y-1)*N+x]+Hh[(y+1)*N+x])/8;}for(y=1;y<N-1;y++)for(x=1;x<N-1;x++)Hh[y*N+x]=T[y*N+x];})();
     var img=cx.createImageData(N,N),d2=img.data,L=[-.55,-.62,.56],ll=Math.sqrt(L[0]*L[0]+L[1]*L[1]+L[2]*L[2]);L[0]/=ll;L[1]/=ll;L[2]/=ll;
