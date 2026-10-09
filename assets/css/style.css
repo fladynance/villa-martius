@@ -2356,3 +2356,13 @@ body.mt-lock { overflow: hidden; }
 .ct-page .contact-form .btn-solid-dark:focus-visible, .ct-page .section-dark a:focus-visible { outline: 2px solid #F0D9A4; outline-offset: 3px; }
 .ct-page .section:not(.section-dark) .label { color: #5A4733; }
 .ct-page .section:not(.section-dark) .body-copy { color: #3A2D21; }
+
+/* MATRIMONI · mobile: fedi che accompagnano i titoli (partono staccate, finiscono incrociate) */
+.mt-fx, .mt-endslot { display: none; }
+@media (max-width: 900px) {
+  .js-fx .mt-rings { visibility: hidden; }
+  .mt-fx { display: block; position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; will-change: transform, opacity; opacity: 0; }
+  .mt-fx svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .mt-fxg { position: absolute; inset: -40% -10%; background: radial-gradient(closest-side, rgba(255,235,170,.55), transparent); opacity: 0; }
+  .mt-endslot { display: block; align-self: flex-start; width: 62px; height: 31px; margin: -.3rem 0 1.6rem; }
+}
