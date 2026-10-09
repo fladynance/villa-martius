@@ -2226,7 +2226,7 @@ input, select, textarea { font-size: 16px; }
 
 /* ─── MATRIMONI · titolo e fedi fissi, lettera a destra, cartoline d'album ─── */
 .mt-body { --mt-ink: #2B1810; --mt-lab: #4A2012; --mt-rule: rgba(74,32,18,.38); background: #D5C4A4; }
-.mt-page { position: relative; padding-bottom: 10rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 50%, #CDB78D calc(100% - 20.00rem), #CBB58C calc(100% - 18.33rem), #C4AE88 calc(100% - 16.67rem), #BAA480 calc(100% - 15.00rem), #AE9876 calc(100% - 13.33rem), #A08B6A calc(100% - 11.67rem), #917D5E calc(100% - 10.00rem), #836F52 calc(100% - 8.33rem), #766248 calc(100% - 6.67rem), #6B573E calc(100% - 5.00rem), #624F38 calc(100% - 3.33rem), #5C4934 calc(100% - 1.67rem), #5A4733 100%); }
+.mt-page { position: relative; padding-bottom: 6rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 60%, #D3BF98 calc(100% - 9.00rem), #CFBB96 calc(100% - 8.10rem), #C6B18E calc(100% - 7.20rem), #B7A382 calc(100% - 6.30rem), #A69273 calc(100% - 5.40rem), #948063 calc(100% - 4.50rem), #836F54 calc(100% - 3.60rem), #735F46 calc(100% - 2.70rem), #66533B calc(100% - 1.80rem), #5D4A35 calc(100% - 0.90rem), #5A4733 100%); }
 .mt-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
 .mt-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 3rem 3.4rem; }
 .mt-stick .label, .mt-sec .label { display: block; color: var(--mt-lab); }
@@ -2279,7 +2279,7 @@ input, select, textarea { font-size: 16px; }
   .mt-split { grid-template-columns: 1fr; }
   .mt-stick { position: relative; height: auto; min-height: 0; padding: 6.6rem 1.3rem 1rem; align-items: center; text-align: center; }
   .mt-stick .rule-gold { margin-left: auto; margin-right: auto; }
-  .mt-page { padding-bottom: 9rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 50%, #CDB78D calc(100% - 15.00rem), #CBB58C calc(100% - 13.75rem), #C4AE88 calc(100% - 12.50rem), #BAA480 calc(100% - 11.25rem), #AE9876 calc(100% - 10.00rem), #A08B6A calc(100% - 8.75rem), #917D5E calc(100% - 7.50rem), #836F52 calc(100% - 6.25rem), #766248 calc(100% - 5.00rem), #6B573E calc(100% - 3.75rem), #624F38 calc(100% - 2.50rem), #5C4934 calc(100% - 1.25rem), #5A4733 100%); }
+  .mt-page { padding-bottom: 5rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 60%, #D3BF98 calc(100% - 7.00rem), #CFBB96 calc(100% - 6.30rem), #C6B18E calc(100% - 5.60rem), #B7A382 calc(100% - 4.90rem), #A69273 calc(100% - 4.20rem), #948063 calc(100% - 3.50rem), #836F54 calc(100% - 2.80rem), #735F46 calc(100% - 2.10rem), #66533B calc(100% - 1.40rem), #5D4A35 calc(100% - 0.70rem), #5A4733 100%); }
   .mt-title { font-size: clamp(2.2rem, 9vw, 3rem); margin-bottom: 1.4rem; }
   .mt-rings { width: min(100%, 220px); }
   .mt-main { padding: 1.6rem 1.3rem 3.6rem; max-width: none; }
@@ -2333,7 +2333,3 @@ body.mt-lock { overflow: hidden; }
 /* EVENTI · sfumatura continua del cielo (costruita dallo script; senza JS restano le sfumature per sezione) */
 .ev-sky.ev-gx > section { background: none !important; }
 .ev-page .footer { border-top: 0; }
-
-/* raccordo morbido tra la fine di ogni pagina e il footer in moka (Matrimoni ed Eventi hanno il proprio) */
-.footer::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 4.5rem; background: linear-gradient(180deg, rgba(90,71,51,0) 0%, rgba(90,71,51,.12) 35%, rgba(90,71,51,.5) 75%, #5A4733 100%); pointer-events: none; }
-.ev-page .footer::before, .mt-body .footer::before { display: none; }
