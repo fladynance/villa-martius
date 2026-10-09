@@ -83,7 +83,7 @@
 
   <section class="ev-ch c1 ev-dark">
     <div class="ev-wrap ev-grid rv">
-      <div class="ev-ph" role="img" aria-label="Area piscina allestita al calar della sera" style="background-image:url('assets/img/pool.jpg')"></div>
+      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Area piscina allestita al calar della sera"><span class="mt-pic"><img src="assets/img/pool.jpg" alt="Area piscina allestita al calar della sera" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
       <div class="ev-tx">
         <span class="ev-tag">Al tramonto</span>
         <h3>Aperitivi al Tramonto &middot; Live Music</h3>
@@ -94,7 +94,7 @@
 
   <section class="ev-ch c2 ev-dark ev-rev">
     <div class="ev-wrap ev-grid rv">
-      <div class="ev-ph" role="img" aria-label="Sala allestita per una serata esclusiva" style="background-image:url('assets/img/hall.jpg')"></div>
+      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Sala allestita per una serata esclusiva"><span class="mt-pic"><img src="assets/img/hall.jpg" alt="Sala allestita per una serata esclusiva" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
       <div class="ev-tx">
         <span class="ev-tag">Quando scende la sera</span>
         <h3>Serate Aziendali di Prestigio</h3>
@@ -105,7 +105,7 @@
 
   <section class="ev-ch c3 ev-dark">
     <div class="ev-wrap ev-grid rv">
-      <div class="ev-ph" role="img" aria-label="Il giardino di Villa Martius" style="background-image:url('assets/img/hero-garden.jpg')"></div>
+      <figure class="mt-card mt-big"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Il giardino di Villa Martius"><span class="mt-pic"><img src="assets/img/hero-garden.jpg" alt="Il giardino di Villa Martius" width="1600" height="1066" loading="lazy" decoding="async"></span></button></figure>
       <div class="ev-tx">
         <span class="ev-tag">A notte fonda</span>
         <h3>Eventi su Misura</h3>
@@ -224,6 +224,50 @@
     var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
     rv.forEach(function(e){io.observe(e);});
   }
+})();
+</script>
+<!-- Lightbox foto -->
+<div class="mt-lb" id="mtLb" role="dialog" aria-modal="true" aria-label="Foto ingrandita" hidden>
+  <button type="button" class="mt-lb-x" id="mtLbX" aria-label="Chiudi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button type="button" class="mt-lb-p" id="mtLbP" aria-label="Foto precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <figure class="mt-lb-fig"><img class="mt-lb-img" id="mtLbImg" alt="" draggable="false"><figcaption class="mt-lb-cap" id="mtLbCap"></figcaption><div class="mt-lb-n" id="mtLbN"></div></figure>
+  <button type="button" class="mt-lb-nx" id="mtLbN2" aria-label="Foto successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+<script>
+/* Eventi: lightbox delle cartoline (tastiera, swipe, frecce) */
+(function(){
+  var lb=document.getElementById('mtLb'); if(!lb) return;
+  var img=document.getElementById('mtLbImg'),cap=document.getElementById('mtLbCap'),num=document.getElementById('mtLbN');
+  var btns=[].slice.call(document.querySelectorAll('.mt-open')),cur=0,last=null;
+  function show(i){
+    cur=(i+btns.length)%btns.length;
+    var im=btns[cur].querySelector('img');
+    img.src=im.currentSrc||im.src; img.alt=im.alt; cap.textContent=im.alt; num.textContent=(cur+1)+' / '+btns.length;
+    var nx=btns[(cur+1)%btns.length].querySelector('img'); if(nx){var pre=new Image(); pre.src=nx.src;}
+  }
+  function open(i){ last=document.activeElement; lb.hidden=false; lb.classList.add('on'); document.body.classList.add('mt-lock'); show(i); document.getElementById('mtLbX').focus(); }
+  function close(){ lb.classList.remove('on'); lb.hidden=true; document.body.classList.remove('mt-lock'); img.removeAttribute('src'); if(last&&last.focus) last.focus(); }
+  btns.forEach(function(b,i){ b.addEventListener('click',function(){open(i)}); });
+  document.getElementById('mtLbX').addEventListener('click',close);
+  document.getElementById('mtLbP').addEventListener('click',function(){show(cur-1)});
+  document.getElementById('mtLbN2').addEventListener('click',function(){show(cur+1)});
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('on')) return;
+    if(e.key==='Escape') close();
+    else if(e.key==='ArrowLeft') show(cur-1);
+    else if(e.key==='ArrowRight') show(cur+1);
+    else if(e.key==='Tab'){
+      var f=[].slice.call(lb.querySelectorAll('button')); var i=f.indexOf(document.activeElement);
+      if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus();} else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus();}
+    }
+  });
+  var sx=null,sy=null;
+  lb.addEventListener('touchstart',function(e){ if(e.touches.length===1){sx=e.touches[0].clientX;sy=e.touches[0].clientY;} },{passive:true});
+  lb.addEventListener('touchend',function(e){
+    if(sx===null) return; var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy; sx=null;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.4) show(cur+(dx<0?1:-1));
+  },{passive:true});
 })();
 </script>
 <script src="assets/js/main.js" defer></script>
