@@ -2387,7 +2387,7 @@ body.mt-lock { overflow: hidden; }
 .rc-page { position: relative; padding-bottom: 5rem; background: #D5C4A4; }
 .rc-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
 .rc-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 6rem 2rem 3rem 3.4rem; overflow: hidden; }
-.rc-stick .label, .rc-sec .label { display: block; color: var(--mt-lab); margin: 0; }
+.rc-stick .label, .rc-sec .label, .rc-photo .label { display: block; color: var(--mt-lab); margin: 0; }
 .rc-stick .rule-gold { margin: 1.4rem 0 0; background: var(--mt-lab); opacity: .55; }
 .rc-title { position: relative; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2.3rem, 3.9vw, 3.6rem); line-height: 1.06; margin: 1.6rem 0 1.4rem; color: var(--mt-ink); text-wrap: balance; }
 .rc-lead { position: relative; font-family: var(--serif); font-size: 1.25rem; line-height: 1.6; margin: 0 0 2rem; max-width: 26ch; color: #2E1D12; }
@@ -2404,6 +2404,20 @@ body.mt-lock { overflow: hidden; }
 .rc-punch { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.1; margin: 0; color: var(--mt-ink); text-wrap: balance; }
 .rc-punch2 { color: #8A4A2A; }
 .rc-dia { display: block; width: 9px; height: 9px; margin: 1.4rem auto; transform: rotate(45deg); background: #A88A4E; box-shadow: -34px 0 0 -4px rgba(168,138,78,.6), 34px 0 0 -4px rgba(168,138,78,.6); }
+.rc-recbox { margin-top: 2.6rem; padding-top: 2rem; border-top: 1px solid rgba(168,138,78,.55); text-align: left; }
+.rc-recbox .label { display: block; margin: 0; color: var(--mt-lab); }
+.rc-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+.rc-cols p { font-family: var(--serif); font-size: 1.08rem; line-height: 1.55; margin: 0; color: #2E1D12; }
+.rc-cols em { font-style: italic; font-weight: 500; color: var(--mt-ink); }
+.rc-cols p + p { padding-left: 1.3rem; border-left: 2px solid rgba(168,138,78,.7); color: #4A3322; }
+/* polaroid */
+.rc-photo { margin: 0; padding: 12px 12px 4.1rem; background: #FBF4E4; border-radius: 6px; box-shadow: 0 26px 44px -26px rgba(60,25,10,.7); transform: rotate(-1.4deg); position: relative; }
+.rc-photo::before { content: ""; position: absolute; left: 50%; top: -13px; width: 86px; height: 26px; margin-left: -43px; background: rgba(255,246,222,.72); box-shadow: 0 1px 3px rgba(60,25,10,.25); transform: rotate(-3deg); }
+.rc-pic { display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 3px; background: #CDB48A; }
+.rc-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rc-photo figcaption { position: absolute; left: 0; right: 0; bottom: 13px; text-align: center; }
+.rc-photo .label { font-size: .6rem; }
+.rc-cap { display: block; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; color: var(--mt-ink); }
 /* vantaggi */
 .rc-advs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; }
 .rc-note { background: #FBF4E4; padding: 1.15rem 1.25rem 1.25rem; border-radius: 8px; box-shadow: 0 16px 28px -22px rgba(60,25,10,.7); }
@@ -2435,7 +2449,8 @@ body.mt-lock { overflow: hidden; }
   .rc-main { padding: 2.4rem 1.3rem 1rem; max-width: none; gap: 3rem; }
   .rc-main { text-align: left; }
   .rc-first { text-align: center; }
-    .rc-punch { font-size: clamp(1.9rem, 8vw, 2.4rem); }
+  .rc-cols { grid-template-columns: 1fr; }
+  .rc-punch { font-size: clamp(1.9rem, 8vw, 2.4rem); }
   .rc-copy { font-size: 1.2rem; }
   .rc-advs { gap: .7rem; }
   .rc-note { padding: .95rem .9rem 1.05rem; }
