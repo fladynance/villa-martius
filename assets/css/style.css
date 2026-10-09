@@ -2226,7 +2226,7 @@ input, select, textarea { font-size: 16px; }
 
 /* ─── MATRIMONI · titolo e fedi fissi, lettera a destra, cartoline d'album ─── */
 .mt-body { --mt-ink: #2B1810; --mt-lab: #4A2012; --mt-rule: rgba(74,32,18,.38); background: #D5C4A4; }
-.mt-page { position: relative; isolation: isolate; padding-bottom: 6rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 60%, #D3BF98 calc(100% - 9.00rem), #CEBB97 calc(100% - 8.25rem), #C3B08D calc(100% - 7.50rem), #B3A07E calc(100% - 6.75rem), #9F8C6C calc(100% - 6.00rem), #887658 calc(100% - 5.25rem), #716044 calc(100% - 4.50rem), #5A4A33 calc(100% - 3.75rem), #453724 calc(100% - 3.00rem), #322719 calc(100% - 2.25rem), #241B11 calc(100% - 1.50rem), #1B140D calc(100% - 0.75rem), #17110D 100%); }
+.mt-page { position: relative; isolation: isolate; padding-bottom: 6rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 100%); }
 .mt-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
 .mt-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 3rem 3.4rem; }
 .mt-stick .label, .mt-sec .label { display: block; color: var(--mt-lab); }
@@ -2279,7 +2279,7 @@ input, select, textarea { font-size: 16px; }
   .mt-split { grid-template-columns: 1fr; }
   .mt-stick { position: relative; height: auto; min-height: 0; padding: 6.6rem 1.3rem 1rem; align-items: center; text-align: center; }
   .mt-stick .rule-gold { margin-left: auto; margin-right: auto; }
-  .mt-page { padding-bottom: 5rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 60%, #D3BF98 calc(100% - 7.00rem), #CEBB97 calc(100% - 6.42rem), #C3B08D calc(100% - 5.83rem), #B3A07E calc(100% - 5.25rem), #9F8C6C calc(100% - 4.67rem), #887658 calc(100% - 4.08rem), #716044 calc(100% - 3.50rem), #5A4A33 calc(100% - 2.92rem), #453724 calc(100% - 2.33rem), #322719 calc(100% - 1.75rem), #241B11 calc(100% - 1.17rem), #1B140D calc(100% - 0.58rem), #17110D 100%); }
+  .mt-page { padding-bottom: 5rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 100%); }
   .mt-title { font-size: clamp(2.2rem, 9vw, 3rem); margin-bottom: 1.4rem; }
   .mt-rings { width: min(100%, 220px); }
   .mt-main { padding: 1.6rem 1.3rem 3.6rem; max-width: none; }
@@ -2378,9 +2378,7 @@ body.mt-lock { overflow: hidden; }
 .mt-olive { position: absolute; width: var(--w, 200px); height: auto; opacity: var(--o, .3); transform: translate3d(0, calc(var(--sy, 0) * var(--k, -.04) * 1px), 0) rotate(var(--r, 0deg)); will-change: transform; }
 .mt-olive path.s { fill: none; stroke: #8A6A2E; stroke-width: 1.8; stroke-linecap: round; }
 .mt-olive ellipse { fill: rgba(138,106,46,.28); stroke: #8A6A2E; stroke-width: .8; }
-.mt-lt { position: absolute; width: var(--d, 6px); height: var(--d, 6px); border-radius: 50%; background: radial-gradient(circle, #FFF3CF 0%, #FFD890 45%, rgba(255,200,110,0) 72%); box-shadow: 0 0 14px 5px rgba(255,205,120,.4); opacity: 0; animation: mtTw var(--t, 6s) ease-in-out var(--dl, 0s) infinite; }
-@keyframes mtTw { 0%, 100% { opacity: .15; transform: translateY(0) scale(.8); } 50% { opacity: .95; transform: translateY(-8px) scale(1.15); } }
 .mt-split { position: relative; z-index: 1; }
 @media (max-width: 900px) { .mt-olive { --o: .22; } }
-@media (prefers-reduced-motion: reduce) { .mt-lt { animation: none; opacity: .6; } .mt-olive { transform: rotate(var(--r, 0deg)); } }
+@media (prefers-reduced-motion: reduce) { .mt-olive { transform: rotate(var(--r, 0deg)); } }
 .mt-rings svg, .mt-fx svg { filter: drop-shadow(0 5px 6px rgba(80,50,10,.28)); }
