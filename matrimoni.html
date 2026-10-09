@@ -68,7 +68,7 @@
         <div class="mt-glow" id="mtGlow"></div>
         <svg viewBox="0 0 420 210">
           <defs>
-            <linearGradient id="mtg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3DD9B"/><stop offset=".5" stop-color="#C9A257"/><stop offset="1" stop-color="#8E6A2E"/></linearGradient>
+            <linearGradient id="mtg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1BC"/><stop offset=".3" stop-color="#E6C471"/><stop offset=".6" stop-color="#B98B3A"/><stop offset=".82" stop-color="#8E6A2E"/><stop offset="1" stop-color="#D9B462"/></linearGradient>
             <clipPath id="mtc"><rect x="150" y="0" width="120" height="105"/></clipPath>
           </defs>
           <g id="mtA"><circle cx="150" cy="105" r="78" fill="none" stroke="url(#mtg)" stroke-width="14"/></g>
@@ -177,10 +177,20 @@
 <script>
 /* Matrimoni: le fedi si uniscono mentre scorri la lettera */
 (function(){
+  /* fede metallica: fascia d'oro, bordo interno scuro, riflesso e ombra dell'anello */
+  function arc(cx,r,a0,a1){var p=function(a){a=a*Math.PI/180;return (cx+r*Math.cos(a)).toFixed(1)+' '+(105+r*Math.sin(a)).toFixed(1);};return 'M'+p(a0)+' A'+r+' '+r+' 0 0 1 '+p(a1);}
+  function ringLayers(cx,g,w){
+    return '<circle cx="'+cx+'" cy="105" r="78" fill="none" stroke="url(#'+g+')" stroke-width="'+w+'"/>'+
+      '<circle cx="'+cx+'" cy="105" r="'+(78-w/2+.6)+'" fill="none" stroke="rgba(90,58,14,.55)" stroke-width="1.6"/>'+
+      '<circle cx="'+cx+'" cy="105" r="'+(78+w/2-.4)+'" fill="none" stroke="rgba(255,246,214,.7)" stroke-width="1.3"/>'+
+      '<path d="'+arc(cx,78,196,262)+'" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="'+(w*.2).toFixed(1)+'" stroke-linecap="round"/>'+
+      '<path d="'+arc(cx,78,18,78)+'" fill="none" stroke="rgba(70,42,8,.32)" stroke-width="'+(w*.28).toFixed(1)+'" stroke-linecap="round"/>';
+  }
   var A=document.getElementById('mtA'),B=document.getElementById('mtB'),C=document.getElementById('mtC'),G=document.getElementById('mtGlow');
   if(!A) return;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var tick=false,auto=0;
+  [['mtA',150],['mtB',270],['mtC',150]].forEach(function(r){var e=document.getElementById(r[0]); if(e) e.innerHTML=ringLayers(r[1],'mtg',14);});
   /* PC: a fine pagina il centro delle fedi e quello del pulsante stanno sulla stessa linea */
   function align(){
     var main=document.querySelector('.mt-main'),ring=document.getElementById('mtRings'),seal=document.querySelector('.mt-seal');
@@ -205,7 +215,8 @@
   var fly=null;
   function mk(i){
     var d=document.createElement('div'); d.className='mt-fx'; d.setAttribute('aria-hidden','true');
-    d.innerHTML='<div class="mt-fxg"></div><svg viewBox="0 0 420 210"><defs><linearGradient id="fg'+i+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E2C27A"/><stop offset=".5" stop-color="#B58A38"/><stop offset="1" stop-color="#7A5A22"/></linearGradient><clipPath id="fc'+i+'"><rect x="150" y="0" width="120" height="105"/></clipPath></defs><g class="a"><circle cx="150" cy="105" r="78" fill="none" stroke="url(#fg'+i+')" stroke-width="18"/></g><g class="b"><circle cx="270" cy="105" r="78" fill="none" stroke="url(#fg'+i+')" stroke-width="18"/></g><g class="c" clip-path="url(#fc'+i+')"><circle cx="150" cy="105" r="78" fill="none" stroke="url(#fg'+i+')" stroke-width="18"/></g></svg>';
+    var g='fg'+i;
+    d.innerHTML='<div class="mt-fxg"></div><svg viewBox="0 0 420 210"><defs><linearGradient id="'+g+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6DE8E"/><stop offset=".3" stop-color="#D8B05C"/><stop offset=".6" stop-color="#A97B30"/><stop offset=".82" stop-color="#7A5A22"/><stop offset="1" stop-color="#C79F4E"/></linearGradient><clipPath id="fc'+i+'"><rect x="150" y="0" width="120" height="105"/></clipPath></defs><g class="a">'+ringLayers(150,g,18)+'</g><g class="b">'+ringLayers(270,g,18)+'</g><g class="c" clip-path="url(#fc'+i+')">'+ringLayers(150,g,18)+'</g></svg>';
     document.body.appendChild(d);
     return {el:d,a:d.querySelector('.a'),b:d.querySelector('.b'),c:d.querySelector('.c'),g:d.querySelector('.mt-fxg')};
   }
@@ -222,16 +233,17 @@
     if(!hs||ts.length<2||!es) return;
     var H=hs.getBoundingClientRect(),T1=ts[0].getBoundingClientRect(),T2=ts[1].getBoundingClientRect(),E=es.getBoundingClientRect();
     var sm=62,rx=vw-22-sm/2,bigW=Math.min(H.width,220);
-    var h={x:H.left+H.width/2,y:H.top+H.height/2},t1={x:rx,y:T1.top+T1.height/2},t2={x:rx,y:T2.top+T2.height/2};
+    function fl(el,r){var cs=getComputedStyle(el),lh=parseFloat(cs.lineHeight);if(!(lh>0))lh=parseFloat(cs.fontSize)*1.1;return r.top+lh/2;}
+    var h={x:H.left+H.width/2,y:H.top+H.height/2},t1={x:rx,y:fl(ts[0],T1)},t2={x:rx,y:fl(ts[1],T2)};
     /* A: dall'apertura al titolo della prima sezione */
     var b=ez(cl(sy/Math.max(1,(T1.top+sy)-vh*.3)));
-    var ax=h.x+(t1.x-h.x)*b,ay=h.y+(t1.y-h.y)*b,aw=bigW+(sm-bigW)*b,ag=64+(24-64)*b;
+    var ax=h.x+(t1.x-h.x)*b,ay=h.y+(t1.y-h.y)*b,aw=bigW+(sm-bigW)*b,ag=64*(1-b);
     place(fly[0],ax,ay,aw,ag,cl((ay-62)/90),0);
     /* B: titolo della seconda sezione */
-    place(fly[1],t2.x,t2.y,sm,24,cl((vh*.94-t2.y)/(vh*.16))*cl((t2.y-62)/90),0);
+    place(fly[1],t2.x,t2.y,sm,0,cl((vh*.94-t2.y)/(vh*.16))*cl((t2.y-62)/90),0);
     /* C: finale, incrociate e piccole, sotto la firma */
     var cy=E.top+E.height/2,j=ez(cl((vh*.92-cy)/(vh*.32)));
-    place(fly[2],E.left+sm/2,cy,sm,24*(1-j),cl((vh*.97-cy)/(vh*.1)),j*.9);
+    place(fly[2],E.left+sm/2,cy,sm,0,cl((vh*.97-cy)/(vh*.1)),j*.9);
   }
   function upd(){
     tick=false;
