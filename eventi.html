@@ -202,15 +202,15 @@
     var outView=cl((skyTop+skyH-(sy+vh*.5))/(vh*.6));      /* sfuma verso il footer */
     var vis=Math.min(inView,outView);
     var k=window.innerWidth<=900?.6:1;                      /* su mobile più discreti dietro il testo */
-    var s=cl(v/.44);                                       /* fase sole 0..1 */
-    var m=cl((v-.28)/.72);                                 /* fase luna 0..1: parte mentre il sole sta ancora tramontando */
-    sun.style.top=(14+s*62)+'%';
-    sun.style.opacity=(k*vis*(1-cl((v-.34)/.1))).toFixed(3);
+    var s=cl(v/.44);                                       /* fase sole 0..1: scende a destra */
+    var m=cl((v-.44)/.56);                                 /* fase luna 0..1: poi risale, sempre a destra */
+    var tp=(v<.44?(14+s*62):(76-m*54)).toFixed(2)+'%';     /* stessa traiettoria per sole e luna */
+    var x=cl((v-.34)/.1);                                  /* il sole si trasmuta in luna, sul posto */
+    sun.style.top=tp; moon.style.top=tp; moon.style.transform='';
+    sun.style.opacity=(k*vis*(1-x)).toFixed(3);
     sun.style.setProperty('--s',s.toFixed(3));
-    moon.style.top=(90-m*66)+'%';
-    moon.style.transform='translateX('+(-(1-m)*14).toFixed(2)+'vw)';   /* sorge scivolando da sinistra, senza sovrapporsi al sole */
     var vm=Math.min(inView,cl((skyTop+skyH-(sy+vh*.5))/(vh*.3)));   /* la luna resta fino in fondo alla sezione */
-    moon.style.opacity=(k*vm*cl((v-.28)/.12)).toFixed(3);   /* sempre presente dal tramonto alla notte */
+    moon.style.opacity=(k*vm*x).toFixed(3);
     cv.style.opacity=(vis*cl((v-.52)/.25)).toFixed(3);
   }
   var tick=false;
