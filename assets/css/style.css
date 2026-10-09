@@ -2221,7 +2221,7 @@ input, select, textarea { font-size: 16px; }
 
 /* ─── MATRIMONI · titolo e fedi fissi, lettera a destra, cartoline d'album ─── */
 .mt-body { --mt-ink: #2B1810; --mt-lab: #4A2012; --mt-rule: rgba(74,32,18,.38); background: #D5C4A4; }
-.mt-page { position: relative; padding-bottom: 13rem; background: linear-gradient(180deg, #D5C4A4 0%, #DEC08F 38%, #D4A472 calc(100% - 17rem), #8A5C3C calc(100% - 7rem), #17110D 100%); }
+.mt-page { position: relative; padding-bottom: 16rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 50%, #CDB78D calc(100% - 30rem), #C0A87D calc(100% - 25rem), #A58C66 calc(100% - 20rem), #7C6549 calc(100% - 15rem), #51402F calc(100% - 10rem), #2B2018 calc(100% - 5rem), #17110D 100%); }
 .mt-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
 .mt-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 3rem 3.4rem; }
 .mt-stick .label, .mt-sec .label { display: block; color: var(--mt-lab); }
@@ -2263,7 +2263,7 @@ input, select, textarea { font-size: 16px; }
 
 .mt-end { margin-top: 3.4rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .mt-sig { align-self: flex-start; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.45rem; color: var(--mt-ink); margin-bottom: 2.2rem; }
-.mt-seal { display: inline-flex; align-items: center; justify-content: center; width: 128px; height: 128px; border-radius: 50%; text-align: center; text-decoration: none; background: radial-gradient(circle at 35% 30%, #3A2C22, #17110D); color: #F4ECD8; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .2em; line-height: 1.6; text-transform: uppercase; box-shadow: 0 12px 28px -10px rgba(23,17,13,.75), inset 0 0 0 6px rgba(255,255,255,.1); transition: transform .3s; }
+.mt-seal { display: inline-flex; align-items: center; justify-content: center; width: 128px; height: 128px; border-radius: 50%; text-align: center; text-decoration: none; background: radial-gradient(circle at 35% 30%, #B25B3E, #8F4128); color: #FFF6EA; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .2em; line-height: 1.6; text-transform: uppercase; box-shadow: 0 12px 28px -10px rgba(143,65,40,.7), inset 0 0 0 6px rgba(255,255,255,.14); transition: transform .3s; }
 .mt-seal:hover { transform: rotate(-4deg) scale(1.05); }
 .mt-seal:focus-visible { outline: 2px solid var(--mt-ink); outline-offset: 5px; }
 
@@ -2274,7 +2274,7 @@ input, select, textarea { font-size: 16px; }
   .mt-split { grid-template-columns: 1fr; }
   .mt-stick { position: relative; height: auto; min-height: 0; padding: 6.6rem 1.3rem 1rem; align-items: center; text-align: center; }
   .mt-stick .rule-gold { margin-left: auto; margin-right: auto; }
-  .mt-page { padding-bottom: 11rem; background: linear-gradient(180deg, #D5C4A4 0%, #DEC08F 38%, #D4A472 calc(100% - 15rem), #8A5C3C calc(100% - 6rem), #17110D 100%); }
+  .mt-page { padding-bottom: 13rem; background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 50%, #CDB78D calc(100% - 26rem), #C0A87D calc(100% - 22rem), #A58C66 calc(100% - 18rem), #7C6549 calc(100% - 13rem), #51402F calc(100% - 9rem), #2B2018 calc(100% - 4.5rem), #17110D 100%); }
   .mt-title { font-size: clamp(2.2rem, 9vw, 3rem); margin-bottom: 1.4rem; }
   .mt-rings { width: min(100%, 220px); }
   .mt-main { padding: 1.6rem 1.3rem 3.6rem; max-width: none; }
@@ -2290,3 +2290,25 @@ input, select, textarea { font-size: 16px; }
   .mt-album .mt-card { padding: 7px; }
 }
 @media (prefers-reduced-motion: reduce) { .js-rv .mt-page .rv { transition: none; } .mt-seal { transition: none; } }
+
+/* cartoline apribili + lightbox */
+.mt-card { transition: transform .35s ease, box-shadow .35s ease; }
+.mt-card:hover { transform: rotate(0deg) scale(1.03); }
+.mt-open { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; font: inherit; color: inherit; cursor: zoom-in; border-radius: 4px; -webkit-tap-highlight-color: transparent; }
+.mt-open:focus-visible { outline: 2px solid var(--mt-ink); outline-offset: 3px; }
+.mt-lb { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; flex-direction: column; background: rgba(23,17,13,.95); padding: 4.2rem 1rem 3.4rem; }
+.mt-lb.on { display: flex; }
+.mt-lb-fig { position: relative; margin: 0; max-width: min(1100px, 94vw); display: flex; flex-direction: column; align-items: center; }
+.mt-lb-img { display: block; max-width: 100%; max-height: calc(100vh - 11rem); max-height: calc(100dvh - 11rem); width: auto; height: auto; object-fit: contain; border: 8px solid #FBF4E4; border-radius: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.7); background: #CDB48A; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; }
+.mt-lb-cap { margin-top: 1rem; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: #EADFC6; text-align: center; max-width: 60ch; }
+.mt-lb-n { margin-top: .3rem; font-family: var(--sans); font-weight: 300; font-size: .68rem; letter-spacing: .3em; color: #C9A66B; }
+.mt-lb button { z-index: 2; font: inherit; border: 0; cursor: pointer; color: #FBF4E4; background: rgba(23,17,13,.4); -webkit-tap-highlight-color: transparent; }
+.mt-lb button:focus-visible { outline: 2px solid #C9A66B; outline-offset: 2px; }
+.mt-lb-x { position: absolute; top: max(.9rem, env(safe-area-inset-top)); right: 1rem; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(251,244,228,.45) !important; display: flex; align-items: center; justify-content: center; }
+.mt-lb-p, .mt-lb-nx { position: absolute; top: 50%; width: 46px; height: 46px; margin-top: -23px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.mt-lb-p { left: .8rem; } .mt-lb-nx { right: .8rem; }
+.mt-lb svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.mt-lb button:hover { background: rgba(201,166,107,.35); }
+body.mt-lock { overflow: hidden; }
+@media (max-width: 700px) { .mt-lb { padding: 4rem .6rem 3rem; } .mt-lb-p { left: .4rem; } .mt-lb-nx { right: .4rem; } .mt-lb-img { border-width: 6px; } }
+@media (prefers-reduced-motion: reduce) { .mt-card { transition: none; } }
