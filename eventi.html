@@ -245,13 +245,13 @@
     keys.push([top(c1)+.34*h1,'#E6B27C'],[top(c1)+.78*h1,'#D4806A'],
               [top(c2)+.1*h2,'#A9596B'],[top(c2)+.62*h2,'#6A4466'],
               [top(c3)+.12*h3,'#3B3465'],[top(c3)+.72*h3,'#1E2B4A'],
-              [top(end)+.18*end.offsetHeight,'#1A2336'],[top(end)+.62*end.offsetHeight,'#3A2D21'],[H,'#6B5530']);
+              [top(end)+.18*end.offsetHeight,'#1A2336'],[top(end)+.62*end.offsetHeight,'#3A2D21'],[H,'#5A4733']);
     var xs=[],L=[],A=[],B=[];
     keys.forEach(function(k,i){ if(i&&k[0]<=xs[xs.length-1]) k[0]=xs[xs.length-1]+1; var o=toOk(k[1]); xs.push(k[0]); L.push(o[0]); A.push(o[1]); B.push(o[2]); });
     xs[xs.length-1]=H;
     var fL=pchip(xs,L),fA=pchip(xs,A),fB=pchip(xs,B),st=[],step=Math.max(40,Math.round(H/90));
     for(var y=0;y<H;y+=step) st.push(fromOk([fL(y),fA(y),fB(y)])+' '+y+'px');
-    st.push('#6B5530 '+H+'px');
+    st.push('#5A4733 '+H+'px');
     sky.style.background='linear-gradient(180deg,'+st.join(',')+')';
     sky.classList.add('ev-gx');
   }
