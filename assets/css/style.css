@@ -2330,3 +2330,7 @@ body.mt-lock { overflow: hidden; }
   .ev-ch.c1 .ev-tx h3 { color: #fff; }
   .ev-ch.c1 .ev-tx p { color: rgba(255,255,255,.95); }
 }
+
+/* EVENTI · sfumatura continua del cielo (costruita dallo script; senza JS restano le sfumature per sezione) */
+.ev-sky.ev-gx > section { background: none !important; }
+.ev-page .footer { border-top: 0; }
