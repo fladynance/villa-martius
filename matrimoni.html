@@ -233,7 +233,7 @@
     if(!fly){ fly=[mk(1),mk(2),mk(3)]; page.appendChild(fly[0].el); page.appendChild(fly[1].el); page.appendChild(fly[2].el); document.documentElement.classList.add('js-fx'); }
     fly.forEach(function(r){r.el.style.display='block';});
     var P=page.getBoundingClientRect(),sm=62,rx=P.width-22-sm/2;
-    function baseY(el){var r=el.getBoundingClientRect(),cs=getComputedStyle(el),lh=parseFloat(cs.lineHeight);if(!(lh>0))lh=parseFloat(cs.fontSize)*1.1;return r.bottom-P.top-lh*.18;}
+    function baseY(el){var r=el.getBoundingClientRect(),cs=getComputedStyle(el),lh=parseFloat(cs.lineHeight);if(!(lh>0))lh=parseFloat(cs.fontSize)*1.1;return r.bottom-P.top-lh/2;}
     place(fly[0],rx,baseY(ts[0]),sm,0);
     place(fly[1],rx,baseY(ts[1]),sm,0);
     var E=es.getBoundingClientRect();
