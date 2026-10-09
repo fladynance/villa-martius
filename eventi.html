@@ -241,8 +241,11 @@
     function top(e){return e.offsetTop-sky.offsetTop;}
     var mob=window.innerWidth<=900,h1=c1.offsetHeight;
     var keys=[[0,'#D5C4A4'],[top(c1),'#D5C4A4']];
-    keys.push([top(c1)+.3*h1,'#E3B07A'],[top(c1)+.6*h1,'#CF7A5E'],[top(c1)+.82*h1,'#8F5468']);
-    keys.push([top(c2),'#6A4466'],[top(c3),'#2E315A'],[top(end),'#14263A'],[H,'#17110D']);
+    var h2=c2.offsetHeight,h3=c3.offsetHeight;
+    keys.push([top(c1)+.34*h1,'#E6B27C'],[top(c1)+.78*h1,'#D4806A'],
+              [top(c2)+.1*h2,'#A9596B'],[top(c2)+.62*h2,'#6A4466'],
+              [top(c3)+.12*h3,'#3B3465'],[top(c3)+.72*h3,'#1E2B4A'],
+              [top(end)+.2*end.offsetHeight,'#16202F'],[H,'#17110D']);
     var xs=[],L=[],A=[],B=[];
     keys.forEach(function(k,i){ if(i&&k[0]<=xs[xs.length-1]) k[0]=xs[xs.length-1]+1; var o=toOk(k[1]); xs.push(k[0]); L.push(o[0]); A.push(o[1]); B.push(o[2]); });
     xs[xs.length-1]=H;
