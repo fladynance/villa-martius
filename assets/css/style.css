@@ -2383,3 +2383,15 @@ body.mt-lock { overflow: hidden; }
 @media (max-width: 900px) { .mt-olive { --o: .22; } }
 @media (prefers-reduced-motion: reduce) { .mt-olive { transform: rotate(var(--r, 0deg)); } }
 .mt-rings svg, .mt-fx svg { filter: drop-shadow(0 5px 6px rgba(80,50,10,.28)); }
+
+/* ESPLORA · i 4 riquadri: angoli arrotondati, spazio tra le tessere e ombra morbida (niente più linee nette) */
+.hub-grid:not(.hub-grid-2) { gap: 16px; padding: 16px; background: transparent; }
+.hub-grid:not(.hub-grid-2) .hub-tile { border-radius: 32px; box-shadow: 0 22px 44px -26px rgba(31,22,17,.6); transform: translateZ(0); transition: box-shadow .5s ease, transform .5s ease; }
+.hub-grid:not(.hub-grid-2) .hub-tile:hover { box-shadow: 0 28px 54px -24px rgba(31,22,17,.7); transform: translateY(-3px); }
+.hub-grid:not(.hub-grid-2) .hub-tile-overlay { background: linear-gradient(180deg, rgba(31,22,17,.5) 0%, rgba(31,22,17,.66) 100%); }
+.hub-grid:not(.hub-grid-2) .hub-tile:focus-visible { outline: 2px solid var(--gold-lt); outline-offset: 3px; }
+@media (max-width: 720px) {
+  .hub-grid:not(.hub-grid-2) { gap: 12px; padding: 12px; }
+  .hub-grid:not(.hub-grid-2) .hub-tile { border-radius: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { .hub-grid:not(.hub-grid-2) .hub-tile { transition: none; } }
