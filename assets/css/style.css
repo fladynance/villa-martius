@@ -2441,6 +2441,7 @@ body.mt-lock { overflow: hidden; }
   .rc-main { order: 1; }
   .rc-cta { order: 2; }
   .rc-small { display: none; }
+  .rc-stick .rc-sep { order: 3; display: block; width: 60px; height: 1px; margin: 2.4rem auto 0; background: var(--mt-lab); opacity: .55; }
   .rc-title { order: 4; }
   .rc-title { padding: 0 1.3rem; margin-left: auto; margin-right: auto; }
   .rc-cta { align-self: center; margin-bottom: 1rem; }
