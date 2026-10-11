@@ -246,12 +246,12 @@
     place(fly[2],E.left-P.left+sm/2,E.top-P.top+E.height/2,sm,.5);
     flyMove();
   }
-  /* mobile: le fedi dell'apertura scendono staccate, rimpiccioliscono, si fermano accanto al titolo
-     "Il vostro sogno" e restano li; solo dopo essersi fermate si intersecano */
+  /* mobile: le fedi dell'apertura scendono staccate, rimpiccioliscono e si intersecano
+     man mano che si avvicinano al titolo "Il vostro sogno": arrivate, sono gia' unite */
   function flyMove(){
     if(!fly||!geo) return;
-    var sy=window.pageYOffset,vh=window.innerHeight,s1=Math.max(140,geo.t1-vh*.5),s2=s1+170;
-    var u=ez(cl(sy/s1)),v=ez(cl((sy-s1)/(s2-s1))),g=64*(1-v);
+    var sy=window.pageYOffset,vh=window.innerHeight,s1=Math.max(140,geo.t1-vh*.5);
+    var u=ez(cl(sy/s1)),v=u,g=64*(1-v);
     var x=geo.hx+(geo.tx-geo.hx)*u,y=geo.hy+(geo.ty-geo.hy)*u,sc=1+(geo.sm/geo.bigW-1)*u,r=fly[0];
     r.el.style.transform='translate3d('+(x-geo.bigW/2).toFixed(1)+'px,'+(y-geo.bigW/4).toFixed(1)+'px,0) scale('+sc.toFixed(3)+')';
     r.el.style.opacity=1;
