@@ -398,9 +398,6 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <!-- MATRIMONI -->
   <section class="sec wed" id="s-matrimoni" aria-label="Galleria Matrimoni" hidden>
     <div class="wrap">
-      <div class="sec-intro">
-        <p class="lead">Il giorno del sì raccontato come un servizio su rivista: dalla cerimonia nel gazebo alla notte sulla terrazza. Scegliete un momento per vedere solo quelle foto.</p>
-      </div>
       <div class="tabs" role="group" aria-label="Momento della giornata" id="wedTabs"></div>
       <div class="story" id="story"></div>
       <div class="sec-end"><p>Immaginate il vostro giorno qui?</p><a class="btn" href="contatti.html">Richiedi un preventivo per il matrimonio</a></div>
@@ -644,7 +641,8 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     document.documentElement.classList.toggle('is-landing', !s);
     SECS.forEach(x => { $('#s-' + x.id).hidden = x.id !== current; });
     if (s) {
-      bannerImg.src = src(s.cover); bannerImg.alt = s.name; bannerImg.style.objectPosition = s.pos;
+      bannerImg.hidden = id === 'matrimoni';
+      if (!bannerImg.hidden) { bannerImg.src = src(s.cover); bannerImg.alt = s.name; bannerImg.style.objectPosition = s.pos; }
       $('#bannerLbl').textContent = s.lbl; $('#bannerTitle').textContent = s.name;
       $('#bannerCount').textContent = s.n + ' foto' + s.extra;
       const others = $('#others');
@@ -733,9 +731,10 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   /* ═══ MATRIMONI ═══ */
   (function () {
     const tabs = $('#wedTabs'), story = $('#story');
-    let filter = 'all';
-    const opts = [['all', 'Tutte', WED.length]].concat(Object.keys(WED_CH).map(c => [c, WED_CH[c], WED.filter(p => p.ch === c).length]));
-    tabs.innerHTML = opts.map(([id, name, n]) => '<button class="tab" type="button" data-id="' + id + '" aria-pressed="' + (id === 'all') + '">' + name + '<sup>' + n + '</sup></button>').join('');
+    const KEEP = ['r', 'd', 's'];
+    let filter = KEEP[0];
+    const opts = KEEP.map(c => [c, WED_CH[c], WED.filter(p => p.ch === c).length]);
+    tabs.innerHTML = opts.map(([id, name, n]) => '<button class="tab" type="button" data-id="' + id + '" aria-pressed="' + (id === filter) + '">' + name + '<sup>' + n + '</sup></button>').join('');
     $$('.tab', tabs).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.tab', tabs).forEach(t => t.setAttribute('aria-pressed', t === b)); render(); }));
     // righe composte: coppia, terzina, panoramica, colonna+due. Ogni riga è sempre piena.
     const CYCLE = ['pair', 'trio', 'pano', 'stack'], SIZE = { pair: 2, trio: 3, pano: 1, stack: 3 };
