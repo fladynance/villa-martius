@@ -174,6 +174,27 @@ a { color: inherit; }
 .sec-end p { margin: 0; font-size: 1.25rem; font-style: italic; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
+/* ═════════ CARTA A PILA · un'anteprima per categoria ═════════ */
+.stack-wrap { display: grid; justify-items: center; gap: 1.1rem; padding-block: .4rem clamp(1.4rem, 3vw, 2.2rem); }
+.stack { position: relative; width: 100%; max-width: 460px; animation: rise .6s ease both; }
+.stack::before, .stack::after { content: ""; position: absolute; inset: 0; background: #FBF7EE; border-radius: 16px; box-shadow: 0 10px 26px -16px rgba(31,22,17,.4); z-index: 0; }
+.stack::before { transform: rotate(-3.2deg) translateY(3px); }
+.stack::after { transform: rotate(2.6deg) translateY(3px); }
+.stack-card { position: relative; z-index: 1; display: grid; margin: 0; background: #FBF7EE; border-radius: 16px; padding: .9rem .9rem 1.6rem; box-shadow: 0 1px 2px rgba(31,22,17,.15), 0 20px 34px -16px rgba(31,22,17,.4); }
+.stack-photo { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3.1; border-radius: 10px; overflow: hidden; border: 0; padding: 0; cursor: pointer; background: var(--dark); }
+.stack-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+.stack-card:hover .stack-photo img { transform: scale(1.03); }
+.stack-count { position: absolute; top: .7rem; right: .7rem; display: inline-flex; align-items: center; gap: .4rem; padding: .5rem .8rem; border-radius: 999px; background: rgba(31,22,17,.72); color: #fff; font-family: var(--sans); font-weight: 300; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
+.stack-count svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+.stack-cap { padding: 1.1rem .4rem 0; display: grid; gap: .55rem; justify-items: start; text-align: left; }
+.stack-cap .label { color: var(--rust); }
+.stack-cap h3 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.1rem); margin: 0; line-height: 1.05; }
+.stack-cap p { margin: 0; font-size: 1rem; line-height: 1.5; color: var(--muted); max-width: 42ch; }
+.stack-cta { justify-self: start; margin-top: .3rem; display: inline-flex; align-items: center; gap: .6rem; padding: .9rem 1.4rem; border-radius: 999px; background: var(--dark); color: #fff; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; border: 0; cursor: pointer; transition: background .3s; }
+.stack-cta:hover { background: var(--rust); }
+.stack-cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; flex: 0 0 auto; }
+.stack-hint { margin: 0; text-align: center; font-style: italic; color: var(--muted); font-size: .92rem; }
+
 /* ═════════ MATRIMONI · racconto editoriale ═════════ */
 .wed .label { color: var(--rust); }
 .tabs { display: flex; flex-wrap: wrap; gap: 0 1.8rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.6rem; }
@@ -182,7 +203,7 @@ a { color: inherit; }
 .tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--rust); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
 .tab[aria-pressed="true"] { color: var(--dark); font-style: italic; }
 .tab[aria-pressed="true"]::after { transform: scaleX(1); }
-.story { display: grid; gap: clamp(14px, 2vw, 22px); }
+.story { display: grid; justify-items: center; gap: clamp(14px, 2vw, 22px); padding-block: .4rem clamp(1.4rem, 3vw, 2.2rem); }
 .row { display: grid; gap: clamp(10px, 1.6vw, 18px); animation: rise .6s ease both; }
 .row.pair  { grid-template-columns: 7fr 5fr; height: clamp(300px, 40vw, 500px); }
 .row.pair.flip { grid-template-columns: 5fr 7fr; }
@@ -432,15 +453,10 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <section class="sec evt" id="s-eventi" aria-label="Galleria Eventi" hidden>
     <div class="wrap">
       <div class="sec-intro">
-        <p class="lead">Compleanni, cene aziendali, anniversari, battesimi. Scorrete la parete di lato con il dito, oppure filtrate per tipo di evento.</p>
+        <p class="lead">Compleanni, cene aziendali, anniversari, battesimi: ogni occasione ha la sua villa. Filtrate per tipo di evento.</p>
       </div>
       <div class="chips" role="group" aria-label="Tipo di evento" id="evtChips"></div>
-      <div class="wall" id="wall" tabindex="0" aria-label="Foto degli eventi, scorri di lato"></div>
-      <div class="wall-ctrl">
-        <button class="arrow" id="wallPrev" aria-label="Scorri indietro"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <div class="prog" aria-hidden="true"><i id="wallProg"></i></div>
-        <button class="arrow" id="wallNext" aria-label="Scorri avanti"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-      </div>
+      <div class="stack-wrap" id="evtStack"></div>
       <div class="sec-end"><p>Una festa, una cena, un anniversario.</p><a class="btn" href="contatti.html">Organizza il tuo evento</a></div>
     </div>
   </section>
@@ -449,12 +465,12 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <section class="sec rito" id="s-riti" aria-label="Galleria Riti civili" hidden>
     <div class="wrap">
       <div class="sec-intro">
-        <p class="lead">Un momento sobrio e solenne, presentato come in una mostra: ogni foto con la sua cornice e la sua targhetta, tutte alla stessa altezza.</p>
+        <p class="lead">Un momento sobrio e solenne, dalla firma del registro al primo saluto da marito e moglie.</p>
         <div class="side">
           <span class="legal"><svg viewBox="0 0 24 24"><path d="M4 10h16M6 10v8M10 10v8M14 10v8M18 10v8M3 20h18M12 3l9 5H3z"/></svg>Sede equiparata a Casa Comunale</span>
         </div>
       </div>
-      <div class="salon"><div class="frames" id="frames"></div></div>
+      <div class="stack-wrap" id="ritoStack"></div>
       <div class="sec-end"><p>Il rito civile ha pieno valore legale, qui in villa.</p><a class="btn" href="rito-civile.html">Scopri il rito civile</a></div>
     </div>
   </section>
@@ -751,99 +767,76 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => el.addEventListener(t, end));
   })($('#lbStage'));
 
+  /* ─── CARTA A PILA: un'anteprima per categoria, si apre nel lightbox ─── */
+  function buildStack(container, label, title, desc, list, openName) {
+    const n = list.length, cover = list[0];
+    container.innerHTML =
+      '<div class="stack">' +
+        '<figure class="stack-card">' +
+          '<button type="button" class="stack-photo" aria-label="Apri: ' + esc(title) + ', ' + n + ' foto">' +
+            '<img src="' + src(cover.k) + '" alt="' + esc(cover.t) + '" loading="lazy">' +
+            '<span class="stack-count"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' + n + ' foto</span>' +
+          '</button>' +
+          '<figcaption class="stack-cap">' +
+            '<span class="label">' + esc(label) + '</span>' +
+            '<h3>' + esc(title) + '</h3>' +
+            '<p>' + esc(desc) + '</p>' +
+            '<button type="button" class="stack-cta">Sfoglia le ' + n + ' foto<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>' +
+          '</figcaption>' +
+        '</figure>' +
+      '</div>' +
+      '<p class="stack-hint">Toccate la foto per vederle tutte, poi scorrete con il dito.</p>';
+    const open = () => openLb(list, 0, openName);
+    $('.stack-photo', container).addEventListener('click', open);
+    $('.stack-cta', container).addEventListener('click', open);
+  }
+
   /* ═══ MATRIMONI ═══ */
   (function () {
     const tabs = $('#wedTabs'), story = $('#story');
     const KEEP = ['r', 'd', 's'];
+    const WED_DESC = {
+      r: 'La tavola, i brindisi e la festa sotto le stelle.',
+      d: 'I fiori, i candelabri e ogni piccola cura.',
+      s: 'I momenti più intimi, lontano dagli sguardi.'
+    };
     let filter = KEEP[0];
     const opts = KEEP.map(c => [c, WED_CH[c], WED.filter(p => p.ch === c).length]);
     tabs.innerHTML = opts.map(([id, name, n]) => '<button class="tab" type="button" data-id="' + id + '" aria-pressed="' + (id === filter) + '">' + name + '<sup>' + n + '</sup></button>').join('');
     $$('.tab', tabs).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.tab', tabs).forEach(t => t.setAttribute('aria-pressed', t === b)); render(); }));
-    // righe composte: coppia, terzina, panoramica, colonna+due. Ogni riga è sempre piena.
-    const CYCLE = ['pair', 'trio', 'pano', 'stack'], SIZE = { pair: 2, trio: 3, pano: 1, stack: 3 };
-    function rows(n) {
-      const out = []; let i = 0, alt = 0;
-      while (n > 0) {
-        let t = CYCLE[i % CYCLE.length]; i++;
-        if (SIZE[t] > n) t = n === 1 ? 'pano' : 'pair';
-        const asym = t === 'pair' || t === 'stack';
-        out.push({ t, flip: asym && (alt++ % 2 === 1) }); n -= SIZE[t];
-      }
-      return out;
-    }
     function render() {
-      const list = filter === 'all' ? WED : WED.filter(p => p.ch === filter);
-      story.innerHTML = ''; let idx = 0;
-      rows(list.length).forEach((r, ri) => {
-        const row = document.createElement('div'); row.className = 'row ' + r.t + (r.flip ? ' flip' : '');
-        row.style.animationDelay = Math.min(ri, 3) * 70 + 'ms';
-        for (let j = 0; j < SIZE[r.t]; j++, idx++) {
-          const p = list[idx], gi = WED.indexOf(p) + 1, li = idx;
-          const f = document.createElement('figure'); f.className = 'ph';
-          f.innerHTML = '<button type="button" aria-label="Apri: ' + esc(p.t) + '"><img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy"></button>' +
-            '<figcaption><b>' + String(gi).padStart(2, '0') + '</b><span>' + p.t + '</span><small>' + p.sub + '</small></figcaption>';
-          $('button', f).addEventListener('click', () => openLb(list, li, 'Matrimoni'));
-          row.appendChild(f);
-        }
-        story.appendChild(row);
-      });
+      const list = WED.filter(p => p.ch === filter);
+      buildStack(story, 'Matrimoni', WED_CH[filter], WED_DESC[filter], list, 'Matrimoni');
     }
     render();
   })();
 
   /* ═══ EVENTI ═══ */
   (function () {
-    const chips = $('#evtChips'), wall = $('#wall'), prog = $('#wallProg');
+    const chips = $('#evtChips'), stack = $('#evtStack');
+    const EVT_DESC = {
+      all: 'Compleanni, cene aziendali, anniversari, battesimi: ogni occasione ha la sua villa.',
+      gala: 'Tavoli imperiali, candele e un servizio impeccabile.',
+      comp: 'Feste su misura, dai primi anni in poi.',
+      azi: 'Eleganza e networking per i vostri eventi aziendali.',
+      ann: "Un brindisi per ogni anniversario che conta.",
+      bat: 'Il rinfresco in giardino, per i momenti più dolci.'
+    };
     let filter = 'all';
     const opts = [['all', 'Tutti', EVT.length]].concat(Object.keys(EVT_T).map(k => [k, EVT_T[k], EVT.filter(p => p.ty === k).length]));
     chips.innerHTML = opts.map(([id, name, n]) => '<button class="chip" type="button" data-id="' + id + '" aria-pressed="' + (id === 'all') + '">' + name + '<sup>' + n + '</sup></button>').join('');
     $$('.chip', chips).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.chip', chips).forEach(c => c.setAttribute('aria-pressed', c === b)); render(); }));
-    // tessere: grande, piccola, piccola, alta, larga, larga → 6 colonne piene
-    const PAT = ['b', 's', 's', 't', 'w', 'w'];
     function render() {
       const list = filter === 'all' ? EVT : EVT.filter(p => p.ty === filter);
-      wall.innerHTML = ''; wall.scrollLeft = 0;
-      list.forEach((p, i) => {
-        const shape = list.length <= 3 ? 'b' : PAT[i % PAT.length];
-        const d = document.createElement('div'); d.className = 'tile ' + shape; d.style.animationDelay = Math.min(i, 8) * 50 + 'ms';
-        d.innerHTML = '<button type="button" aria-label="Apri: ' + esc(p.t) + '"><img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy" draggable="false"></button><span class="tag">' + p.sub + '</span><span class="cap">' + p.t + '</span>';
-        $('button', d).addEventListener('click', e => { if (wall.dataset.moved === '1') { e.preventDefault(); return; } openLb(list, i, 'Eventi'); });
-        wall.appendChild(d);
-      });
-      upd();
+      const title = filter === 'all' ? 'Tutti gli eventi' : EVT_T[filter];
+      buildStack(stack, 'Eventi', title, EVT_DESC[filter], list, 'Eventi');
     }
-    function upd() {
-      const max = wall.scrollWidth - wall.clientWidth;
-      const vis = wall.clientWidth / Math.max(1, wall.scrollWidth);
-      prog.style.width = (vis * 100) + '%';
-      prog.style.left = (max > 0 ? (wall.scrollLeft / max) * (1 - vis) * 100 : 0) + '%';
-      $('#wallPrev').disabled = wall.scrollLeft <= 2; $('#wallNext').disabled = wall.scrollLeft >= max - 2;
-    }
-    onShow.eventi = () => requestAnimationFrame(upd);
-    wall.addEventListener('scroll', () => requestAnimationFrame(upd), { passive: true });
-    window.addEventListener('resize', upd);
-    const by = d => wall.scrollBy({ left: d * wall.clientWidth * .8, behavior: reduce ? 'auto' : 'smooth' });
-    $('#wallPrev').addEventListener('click', () => by(-1));
-    $('#wallNext').addEventListener('click', () => by(1));
-    wall.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); by(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); by(-1); } });
-    // trascinamento con il mouse (su iPad lo scorrimento con il dito è nativo)
-    let sx = null, sl = 0;
-    wall.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; sx = e.clientX; sl = wall.scrollLeft; wall.dataset.moved = '0'; });
-    window.addEventListener('pointermove', e => { if (sx === null) return; const dx = e.clientX - sx; if (Math.abs(dx) > 5) { wall.dataset.moved = '1'; wall.classList.add('dragging'); } wall.scrollLeft = sl - dx; });
-    window.addEventListener('pointerup', () => { if (sx === null) return; sx = null; wall.classList.remove('dragging'); setTimeout(() => { wall.dataset.moved = '0'; }, 0); });
     render();
   })();
 
   /* ═══ RITI CIVILI ═══ */
   (function () {
-    const box = $('#frames');
-    RITO.forEach((p, i) => {
-      const f = document.createElement('figure'); f.className = 'frame ' + p.f; f.style.animationDelay = Math.min(i, 8) * 50 + 'ms';
-      f.innerHTML = '<button type="button" aria-label="Apri: ' + esc(p.t) + '"><div class="pic"><img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy"></div></button>' +
-        '<figcaption class="plate"><small>N. ' + String(p.n).padStart(2, '0') + ' · ' + p.place + '</small><span>' + p.t + '</span></figcaption>';
-      $('button', f).addEventListener('click', () => openLb(RITO, i, 'Riti civili'));
-      box.appendChild(f);
-    });
+    buildStack($('#ritoStack'), 'Riti civili', 'La cerimonia', 'Dalla firma del registro al primo saluto da marito e moglie.', RITO, 'Riti civili');
   })();
 
   /* ═══ CASA VACANZA ═══ */
