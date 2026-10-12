@@ -67,12 +67,30 @@ a { color: inherit; }
 .nav-back { justify-self: start; display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; padding-right: .4rem; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; color: #fff; }
 .nav-back svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.3; flex: 0 0 auto; }
 .nav-logo img { height: 46px; width: auto; filter: brightness(0) invert(1); }
-.nav-cta { justify-self: end; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center; color: #fff; }
+.nav-actions { justify-self: end; display: flex; align-items: center; gap: .6rem; }
+.nav-cta { font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center; color: #fff; }
+
+/* ─── HAMBURGER + MENU (come nel resto del sito) ─── */
+.g-hamburger { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: transparent; border: 0; cursor: pointer; color: #fff; transition: color .3s; }
+.g-hamburger:hover { color: var(--gold-lt); }
+.g-hamb-icon { position: relative; width: 26px; height: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+.g-hamb-icon span { display: block; height: 1.5px; width: 100%; background: currentColor; transition: width .4s ease; }
+.g-hamb-icon span:nth-child(2) { width: 65%; align-self: flex-end; }
+.g-hamburger:hover .g-hamb-icon span:nth-child(2) { width: 100%; }
+.g-menu { position: fixed; inset: 0; z-index: 300; background: linear-gradient(160deg, #1F1611 0%, #2A1F16 60%, #1F1611 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem; padding: 5rem 2rem 3rem; transform: translateY(-100%); transition: transform .6s cubic-bezier(.76,0,.24,1); overflow-y: auto; }
+.g-menu.open { transform: translateY(0); }
+.g-menu::before { content: "Menu"; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .42em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+.g-menu-close { position: absolute; top: 1.6rem; right: 1.6rem; display: inline-flex; align-items: center; gap: .6rem; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.8); background: none; border: 0; padding: .6rem .9rem; cursor: pointer; transition: color .3s; }
+.g-menu-close:hover { color: var(--gold-lt); }
+.g-menu a { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 2.2rem; color: #fff; text-decoration: none; transition: color .3s; line-height: 1.2; display: inline-flex; align-items: center; gap: .9rem; }
+.g-menu a.active, .g-menu a:hover { color: var(--gold-lt); }
+.g-menu-cta { margin-top: 2rem; font-family: var(--sans); font-weight: 400; font-style: normal; font-size: .72rem; letter-spacing: .32em; text-transform: uppercase; color: var(--gold-lt); background: transparent; border: 1px solid var(--gold-lt); border-radius: 999px; padding: 1.1rem 2.6rem; text-decoration: none; transition: background .35s, color .35s; }
+.g-menu-cta:hover { background: var(--gold-lt); color: var(--dark); }
 
 /* ═════════ LIVELLO 1 · I QUATTRO RIQUADRI (6 modelli) ═════════ */
 .landing { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); background: var(--bg); }
-.doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); }
-.doors-grid { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
+.doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
+.doors-grid { width: 100%; height: 100%; max-width: 1160px; max-height: 820px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
   .doors-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); }
 }
@@ -346,7 +364,10 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <nav class="nav" aria-label="Navigazione principale">
     <a class="nav-back" href="esplora.html" aria-label="Torna a Esplora"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></a>
     <div class="nav-logo"><img src="assets/img/logo.png" alt="Villa Martius"></div>
-    <a class="nav-cta" href="contatti.html">Contattaci</a>
+    <div class="nav-actions">
+      <a class="nav-cta" href="contatti.html">Contattaci</a>
+      <button class="g-hamburger" id="gHamburger" aria-label="Apri menu" aria-expanded="false" type="button"><span class="g-hamb-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+    </div>
   </nav>
   <main class="doors">
     <h1 class="sr">Galleria di Villa Martius</h1>
@@ -359,7 +380,10 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <nav class="nav gbar" aria-label="Navigazione galleria">
     <button class="nav-back" id="gBack" type="button"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>Galleria</span></button>
     <div class="nav-logo"><img src="assets/img/logo.png" alt="Villa Martius"></div>
-    <a class="nav-cta" href="contatti.html">Contattaci</a>
+    <div class="nav-actions">
+      <a class="nav-cta" href="contatti.html">Contattaci</a>
+      <button class="g-hamburger" id="gHamburger2" aria-label="Apri menu" aria-expanded="false" type="button"><span class="g-hamb-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+    </div>
   </nav>
 
   <header class="banner">
@@ -462,6 +486,40 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
 
   <footer class="foot"><img src="assets/img/logo.png" alt="Villa Martius">Contrada Pirrera · 98045 San Pier Niceto (ME) · Sede equiparata a Casa Comunale</footer>
 </div>
+
+<!-- MENU (come nel resto del sito) -->
+<div class="g-menu" id="gMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+  <button class="g-menu-close" id="gMenuClose" type="button">✕ Chiudi</button>
+  <a href="esplora.html">Esplora</a>
+  <a href="casa-vacanza.html">Casa Vacanza</a>
+  <a href="rito-civile.html">Rito Civile</a>
+  <a href="galleria.html" class="active">Galleria</a>
+  <a href="matrimoni-eventi.html">Matrimoni &amp; Eventi</a>
+  <a href="virtual-tour.html">Virtual Tour</a>
+  <a href="contatti.html" class="g-menu-cta">Contattaci</a>
+</div>
+<script>
+(function () {
+  var menu = document.getElementById('gMenu');
+  var btns = [document.getElementById('gHamburger'), document.getElementById('gHamburger2')];
+  var close = document.getElementById('gMenuClose');
+  function open() {
+    menu.classList.add('open');
+    btns.forEach(function (b) { if (b) b.setAttribute('aria-expanded', 'true'); });
+    document.body.style.overflow = 'hidden';
+    close.focus();
+  }
+  function shut() {
+    menu.classList.remove('open');
+    btns.forEach(function (b) { if (b) b.setAttribute('aria-expanded', 'false'); });
+    document.body.style.overflow = '';
+  }
+  btns.forEach(function (b) { if (b) b.addEventListener('click', open); });
+  close.addEventListener('click', shut);
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', shut); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('open')) shut(); });
+})();
+</script>
 
 <!-- LIGHTBOX -->
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto a schermo intero">
