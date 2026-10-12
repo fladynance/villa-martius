@@ -74,6 +74,8 @@ a { color: inherit; }
 .nav-landing { background: rgba(213,196,164,.96); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(90,68,44,.18); }
 .nav-landing .nav-back { color: var(--ink); }
 .nav-landing .nav-back:hover { color: var(--gold); }
+.nav-landing .nav-back svg { stroke: var(--ink); }
+.nav-landing .nav-back:hover svg { stroke: var(--gold); }
 .nav-landing .nav-logo img { filter: none; }
 .nav-landing .nav-cta { color: var(--ink); border-color: var(--ink); }
 .nav-landing .nav-cta:hover { background: var(--ink); color: var(--bg); }
@@ -654,7 +656,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   $$('.door', doors).forEach(d => d.addEventListener('click', () => navigate(d.dataset.id, $('.vt', d))));
 
   /* ─── NAVIGAZIONE tra i due livelli ─── */
-  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg'), banner = $('.banner');
+  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg'), banner = $('.banner'), gbar = $('.gbar');
   let current = '';
   function setView(id) {
     const s = byId(id);
@@ -665,6 +667,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     if (s) {
       bannerImg.hidden = id === 'matrimoni';
       banner.classList.toggle('plain', id === 'matrimoni');
+      gbar.classList.toggle('nav-landing', id !== 'casa');
       if (!bannerImg.hidden) { bannerImg.src = src(s.cover); bannerImg.alt = s.name; bannerImg.style.objectPosition = s.pos; }
       $('#bannerLbl').textContent = s.lbl; $('#bannerTitle').textContent = s.name;
       $('#bannerCount').textContent = s.n + ' foto' + s.extra;
