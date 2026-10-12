@@ -70,6 +70,20 @@ a { color: inherit; }
 .nav-actions { justify-self: end; display: flex; align-items: center; gap: .6rem; }
 .nav-cta { font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center; color: #fff; }
 
+/* ─── BARRA CHIARA (come la nav di esplora.html) ─── */
+.nav-landing { background: rgba(213,196,164,.96); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(90,68,44,.18); }
+.nav-landing .nav-back { color: var(--ink); }
+.nav-landing .nav-back:hover { color: var(--gold); }
+.nav-landing .nav-logo img { filter: none; }
+.nav-landing .nav-cta { color: var(--ink); border-color: var(--ink); }
+.nav-landing .nav-cta:hover { background: var(--ink); color: var(--bg); }
+.nav-landing .g-hamburger { color: var(--ink); }
+.nav-landing .g-hamburger:hover { color: var(--gold); }
+.nav-vt { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border-radius: 999px; min-height: 44px; color: #fff; background: var(--gold); border: 1px solid var(--gold); transition: background .35s, color .35s, border-color .35s; }
+.nav-vt:hover { background: var(--ink); border-color: var(--ink); }
+.nav-vt-icon { width: 36px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 720px) { .nav-vt span { display: none; } .nav-vt { padding: .7rem; } }
+
 /* ─── HAMBURGER + MENU (come nel resto del sito) ─── */
 .g-hamburger { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: transparent; border: 0; cursor: pointer; color: #fff; transition: color .3s; }
 .g-hamburger:hover { color: var(--gold-lt); }
@@ -90,7 +104,7 @@ a { color: inherit; }
 /* ═════════ LIVELLO 1 · I QUATTRO RIQUADRI (6 modelli) ═════════ */
 .landing { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); background: var(--bg); }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
-.doors-grid { width: 100%; height: 100%; max-width: 1160px; max-height: 820px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
+.doors-grid { width: 100%; height: 100%; max-width: 900px; max-height: 760px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
   .doors-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); }
 }
@@ -142,6 +156,13 @@ a { color: inherit; }
 .banner .label { color: var(--gold-lt); }
 .banner h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem, 7vw, 5.4rem); line-height: 1; margin: .5rem 0 .6rem; letter-spacing: -.01em; }
 .banner-count { font-family: var(--sans); font-weight: 300; font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.78); }
+
+.banner.plain { height: clamp(180px, 22vw, 260px); background: var(--bg); color: var(--ink); align-items: center; border-bottom: 1px solid var(--rule); }
+.banner.plain::after { content: none; }
+.banner.plain .banner-in { padding-bottom: 0; }
+.banner.plain .label { color: var(--rust); }
+.banner.plain .label::before { content: ""; display: inline-block; width: 1.6em; height: 1px; background: var(--rust); margin-right: .6em; vertical-align: middle; opacity: .6; }
+.banner.plain .banner-count { color: var(--muted); }
 
 .sec { padding-block: clamp(2.2rem, 5vw, 3.6rem) clamp(3.4rem, 7vw, 5.4rem); }
 .sec-intro { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1rem 3rem; align-items: start; margin-bottom: clamp(1.6rem, 3.6vw, 2.6rem); }
@@ -361,10 +382,11 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
 <body>
 <!-- ═══ LIVELLO 1 · solo i quattro riquadri ═══ -->
 <div class="landing" id="landing">
-  <nav class="nav" aria-label="Navigazione principale">
+  <nav class="nav nav-landing" aria-label="Navigazione principale">
     <a class="nav-back" href="esplora.html" aria-label="Torna a Esplora"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></a>
     <div class="nav-logo"><img src="assets/img/logo.png" alt="Villa Martius"></div>
     <div class="nav-actions">
+      <a class="nav-vt" href="virtual-tour.html" aria-label="Virtual Tour"><svg class="nav-vt-icon" viewBox="0 -2 80 44" aria-hidden="true"><path d="M19.2 9.8C19.5 5.5 22.5 3.2 26 3.2C29.5 3.2 31.8 5.5 31.8 8.6C31.8 11.8 29.2 14 25.2 14.4C29.8 14.4 32.3 16.8 32.3 20.4C32.3 24.2 29.5 26.8 25.8 26.8C22.2 26.8 19.6 24.6 19.3 20.4"/><path d="M41.5 3.5L34.2 19"/><circle cx="39.5" cy="20.3" r="6"/><path d="M47.5 9.75A6.25 6.25 0 0 1 60 9.75V19.75A6.25 6.25 0 0 1 47.5 19.75Z"/><circle cx="64.5" cy="2.5" r="2.5"/><path d="M61 22.7A40 6.8 0 0 1 40 35.3"/><path d="M18 22.8A40 6.8 0 0 0 29 35"/><path d="M29 28.5V40.5L38 34.5Z"/></svg><span>Virtual Tour</span></a>
       <a class="nav-cta" href="contatti.html">Contattaci</a>
       <button class="g-hamburger" id="gHamburger" aria-label="Apri menu" aria-expanded="false" type="button"><span class="g-hamb-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
     </div>
@@ -632,7 +654,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   $$('.door', doors).forEach(d => d.addEventListener('click', () => navigate(d.dataset.id, $('.vt', d))));
 
   /* ─── NAVIGAZIONE tra i due livelli ─── */
-  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg');
+  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg'), banner = $('.banner');
   let current = '';
   function setView(id) {
     const s = byId(id);
@@ -642,6 +664,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     SECS.forEach(x => { $('#s-' + x.id).hidden = x.id !== current; });
     if (s) {
       bannerImg.hidden = id === 'matrimoni';
+      banner.classList.toggle('plain', id === 'matrimoni');
       if (!bannerImg.hidden) { bannerImg.src = src(s.cover); bannerImg.alt = s.name; bannerImg.style.objectPosition = s.pos; }
       $('#bannerLbl').textContent = s.lbl; $('#bannerTitle').textContent = s.name;
       $('#bannerCount').textContent = s.n + ' foto' + s.extra;
