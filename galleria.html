@@ -195,12 +195,15 @@ a { color: inherit; }
 .stack-cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; flex: 0 0 auto; }
 .stack-hint { margin: 0; text-align: center; font-style: italic; color: var(--muted); font-size: .92rem; }
 @media (min-width: 900px) {
-  .stack { max-width: 1060px; }
-  .stack-card { grid-template-columns: 1.2fr 1fr; align-items: stretch; gap: 0 2.6rem; padding: 1.1rem 2.4rem 1.1rem 1.1rem; }
-  .stack-photo { aspect-ratio: auto; min-height: 100%; }
-  .stack-cap { padding: 1rem 0; align-content: center; gap: .8rem; }
-  .stack-cap h3 { font-size: clamp(2rem, 2.6vw, 2.6rem); }
-  .stack-cap p { font-size: 1.08rem; max-width: 36ch; }
+  .stack-wrap, .story { justify-items: stretch; }
+  .stack { max-width: none; width: 100%; }
+  .stack::before { transform: rotate(-1.4deg) translateY(3px); }
+  .stack::after { transform: rotate(1.1deg) translateY(3px); }
+  .stack-card { grid-template-columns: 1.15fr 1fr; align-items: stretch; gap: 0 2.8rem; padding: 1.2rem 2.6rem 1.2rem 1.2rem; }
+  .stack-photo { aspect-ratio: 16 / 10.5; min-height: 0; }
+  .stack-cap { padding: 1rem 0; align-content: center; gap: .85rem; }
+  .stack-cap h3 { font-size: clamp(2rem, 2.4vw, 2.7rem); }
+  .stack-cap p { font-size: 1.1rem; max-width: 38ch; }
 }
 
 /* ═════════ MATRIMONI · racconto editoriale ═════════ */
