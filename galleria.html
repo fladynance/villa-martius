@@ -856,7 +856,11 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     const tabs = $('#units'), img = $('#lvImg'), thumbs = $('#lvThumbs');
     let U = UNITS[0], P = 0, x0 = null, dx = 0;
     tabs.innerHTML = UNITS.map((u, i) => '<button class="unit-t" role="tab" type="button" data-i="' + i + '" aria-selected="' + (i === 0) + '"><b>' + u.name + '</b><small>' + (u.m ? u.m + ' m² · ' + u.g + ' ospiti' : u.ph.length + ' foto') + '</small></button>').join('');
-    $$('.unit-t', tabs).forEach(b => b.addEventListener('click', () => pick(+b.dataset.i)));
+    $$('.unit-t', tabs).forEach(b => b.addEventListener('click', () => {
+      const i = +b.dataset.i;
+      if (window.matchMedia('(max-width: 900px)').matches) { location.href = SITE + UNITS[i].page; return; }
+      pick(i);
+    }));
     const list = () => U.ph.map(([k, t]) => ({ k, t, sub: U.name }));
     function photo(i) {
       P = (i + U.ph.length) % U.ph.length;
