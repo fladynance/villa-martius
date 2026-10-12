@@ -3,198 +3,811 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Galleria · Villa Martius</title>
-<meta name="description" content="Galleria fotografica di Villa Martius: giardino all'ora d'oro, sala dei banchetti, area piscina di notte, dettagli.">
+<meta name="description" content="La galleria di Villa Martius: matrimoni, eventi, riti civili e casa vacanza, da sfogliare come quattro cartoline.">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="Galleria · Villa Martius">
-<meta property="og:description" content="Galleria fotografica di Villa Martius: giardino all'ora d'oro, sala dei banchetti, area piscina di notte, dettagli.">
-<meta property="og:image" content="assets/img/hero-garden.jpg">
+<meta property="og:description" content="La galleria di Villa Martius: matrimoni, eventi, riti civili e casa vacanza, da sfogliare come quattro cartoline.">
+<meta property="og:image" content="assets/img/galleria/gazebo-full.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#D5C4A4">
 <link rel="icon" type="image/png" href="assets/img/logo.png">
+<title>Galleria Villa Martius · Cartoline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* Layout: due livelli. Livello 1 = le 4 cartoline a tutto schermo, senza scorrimento.
+   Livello 2 = pagina della singola galleria: fascia con la foto di copertina, poi l'impaginazione propria
+   (Matrimoni = racconto a righe composte · Eventi = parete orizzontale scura · Riti civili = sala con cornici
+   · Casa vacanza = schede per alloggio), in fondo le altre gallerie.
+   Tema unico chiaro come il sito (color-scheme: light). Palette dal file style.css del sito. */
+:root {
+  --bg:       #D5C4A4;   /* travertino */
+  --bg-warm:  #C6B48A;
+  --wall:     #DDD0B5;   /* parete della sala del rito */
+  --paper:    #F2EADA;
+  --mat:      #F8F2E6;   /* passe-partout */
+  --dark:     #1F1611;
+  --ink:      #2A1F14;
+  --muted:    #5E4E3B;
+  --gold:     #A88A4E;
+  --gold-lt:  #C9A66B;
+  --rust:     #4A2012;   /* etichette pagina Matrimoni del sito */
+  --terra:    #B25B3E;   /* terracotta del sito */
+  --rule:     rgba(90,70,45,0.28);
+  --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --sans:  'Josefin Sans', system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 1.08rem; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html.is-landing, html.is-landing body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+::selection { background: var(--gold); color: #fff; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.label { font-family: var(--sans); font-weight: 300; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 46px;
+  font-family: var(--sans); font-weight: 300; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+  padding: .9rem 1.7rem; border: 1px solid currentColor; border-radius: 999px; text-decoration: none; transition: background .3s, color .3s, border-color .3s;
+}
+.ph-note { font-style: italic; font-size: .95rem; color: var(--muted); margin: 0; }
+
+/* ─── BARRA SCURA (come la nav del sito) ─── */
+.nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; padding: .7rem clamp(12px, 3vw, 40px); background: var(--dark); color: #fff; }
+.nav-back { justify-self: start; display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; padding-right: .4rem; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; color: #fff; }
+.nav-back svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.3; flex: 0 0 auto; }
+.nav-logo img { height: 46px; width: auto; filter: brightness(0) invert(1); }
+.nav-cta { justify-self: end; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center; color: #fff; }
+
+/* ═════════ LIVELLO 1 · I QUATTRO RIQUADRI (6 modelli) ═════════ */
+.landing { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); background: var(--bg); }
+.doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); }
+.doors-grid { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
+@media (min-aspect-ratio: 5/4) and (min-width: 700px) {
+  .doors-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); }
+}
+.door { position: relative; display: block; width: 100%; height: 100%; min-height: 0; color: var(--ink); animation: doorIn .7s cubic-bezier(.2,.7,.2,1) both; }
+.doors-grid > :nth-child(2) { animation-delay: .07s; } .doors-grid > :nth-child(3) { animation-delay: .14s; } .doors-grid > :nth-child(4) { animation-delay: .21s; }
+@keyframes doorIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* Modello 1 · Cartoline */
+.d1 { --ar: .8; container-type: size; display: grid; place-items: center; }
+@media (min-aspect-ratio: 5/4) and (min-width: 700px) {
+  .doors-grid.m1 { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  .d1 { --ar: 1.32; }
+}
+@media (max-width: 560px) { .d1 { --ar: .64; } }
+.pc { position: relative; display: flex; flex-direction: column; width: min(90cqw, 94cqh * var(--ar)); aspect-ratio: var(--ar); background: #FBF7EE; padding: 4.5% 4.5% 0; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(31,22,17,.15), 0 16px 28px -12px rgba(31,22,17,.5); transform: rotate(var(--rot, 0deg)); transition: transform .5s cubic-bezier(.3,.7,.2,1), box-shadow .5s; }
+.d1:hover .pc, .d1:focus-visible .pc { transform: rotate(0deg) translateY(-5px); box-shadow: 0 1px 2px rgba(31,22,17,.15), 0 26px 36px -14px rgba(31,22,17,.55); }
+.d1:active .pc { transform: rotate(0deg) scale(.98); }
+.pc-photo { position: relative; flex: 1; min-height: 0; overflow: hidden; border-radius: 6px; background: var(--dark); }
+.pc-photo img { width: 100%; height: 100%; object-fit: cover; }
+.pc-stamp { --h: 2.4px; --t: 7px; position: absolute; top: 6.5%; right: 7%; width: 17%; aspect-ratio: .82; z-index: 1; filter: drop-shadow(0 1px 1.5px rgba(31,22,17,.4)); }
+.d1 .pc-stamp { width: calc(17% / max(1, var(--ar) * .9)); }
+.pc-stamp > span { position: absolute; inset: 0;
+  -webkit-mask: radial-gradient(circle var(--h) at 50% 0, #0000 96%, #000) 50% 0 / var(--t) 51% repeat-x, radial-gradient(circle var(--h) at 50% 100%, #0000 96%, #000) 50% 100% / var(--t) 51% repeat-x;
+          mask: radial-gradient(circle var(--h) at 50% 0, #0000 96%, #000) 50% 0 / var(--t) 51% repeat-x, radial-gradient(circle var(--h) at 50% 100%, #0000 96%, #000) 50% 100% / var(--t) 51% repeat-x; }
+.pc-stamp > span > span { position: absolute; inset: 0; display: grid; place-items: center; padding: 16%; background: #F3EBDA;
+  -webkit-mask: radial-gradient(circle var(--h) at 0 50%, #0000 96%, #000) 0 50% / 51% var(--t) repeat-y, radial-gradient(circle var(--h) at 100% 50%, #0000 96%, #000) 100% 50% / 51% var(--t) repeat-y;
+          mask: radial-gradient(circle var(--h) at 0 50%, #0000 96%, #000) 0 50% / 51% var(--t) repeat-y, radial-gradient(circle var(--h) at 100% 50%, #0000 96%, #000) 100% 50% / 51% var(--t) repeat-y; }
+.pc-stamp img { width: 100%; height: 100%; object-fit: contain; padding: 8%; outline: 1px solid rgba(74,32,18,.45); filter: sepia(.5); }
+.pc-mark { position: absolute; top: 9%; right: 6%; width: 27%; z-index: 2; transform: rotate(-12deg); pointer-events: none; fill: none; stroke: #2A1F14; stroke-width: 1.1; opacity: .55; mix-blend-mode: multiply; }
+.d1 .pc-mark { width: calc(27% / max(1, var(--ar) * .9)); }
+.pc-mark text { fill: #2A1F14; stroke: none; font-family: var(--sans); font-size: 6px; letter-spacing: .7px; }
+.pc-mark text.c { font-size: 5px; letter-spacing: .5px; }
+.pc-cap { display: grid; gap: .15rem; padding: 3.6% 1% 4.4%; }
+.pc-cap small { font-family: var(--sans); font-weight: 300; font-size: clamp(.46rem, 2cqw, .6rem); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.pc-cap > span { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 .6rem; }
+.pc-cap b { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 7.4cqw, 2.1rem); line-height: 1.05; color: var(--dark); }
+.pc-cap i { font-style: normal; font-family: var(--sans); font-weight: 300; font-size: clamp(.5rem, 2.2cqw, .66rem); letter-spacing: .2em; text-transform: uppercase; color: #86683A; white-space: nowrap; }
+@media (min-aspect-ratio: 5/4) and (min-width: 700px) {
+  .pc-cap b { font-size: clamp(1.05rem, 5cqw, 2rem); }
+  .pc-cap small, .pc-cap i { font-size: clamp(.5rem, 1.5cqw, .64rem); }
+}
+
+/* ═════════ LIVELLO 2 · PAGINA DELLA GALLERIA ═════════ */
+.gbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; }
+.banner { position: relative; height: clamp(230px, 34vw, 380px); overflow: hidden; background: var(--dark); color: #fff; display: flex; align-items: flex-end; }
+.banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31,22,17,.25), rgba(31,22,17,.78)); }
+.banner-in { position: relative; z-index: 1; width: 100%; padding-bottom: clamp(1.4rem, 3.4vw, 2.6rem); animation: rise .7s ease .15s both; }
+.banner .label { color: var(--gold-lt); }
+.banner h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem, 7vw, 5.4rem); line-height: 1; margin: .5rem 0 .6rem; letter-spacing: -.01em; }
+.banner-count { font-family: var(--sans); font-weight: 300; font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.78); }
+
+.sec { padding-block: clamp(2.2rem, 5vw, 3.6rem) clamp(3.4rem, 7vw, 5.4rem); }
+.sec-intro { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1rem 3rem; align-items: start; margin-bottom: clamp(1.6rem, 3.6vw, 2.6rem); }
+.sec-intro p.lead { margin: 0; font-size: 1.22rem; line-height: 1.6; max-width: 50ch; }
+.sec-intro .side { display: grid; gap: .8rem; justify-items: start; }
+.sec-end { display: flex; justify-content: space-between; align-items: center; gap: 1rem 2rem; flex-wrap: wrap; margin-top: clamp(2rem, 4vw, 3rem); padding-top: 1.6rem; border-top: 1px solid var(--rule); }
+.sec-end p { margin: 0; font-size: 1.25rem; font-style: italic; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ═════════ MATRIMONI · racconto editoriale ═════════ */
+.wed .label { color: var(--rust); }
+.tabs { display: flex; flex-wrap: wrap; gap: 0 1.8rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.6rem; }
+.tab { position: relative; min-height: 48px; font-family: var(--serif); font-size: 1.2rem; color: var(--muted); transition: color .3s; display: inline-flex; align-items: center; gap: .4rem; }
+.tab sup { font-family: var(--sans); font-size: .6rem; letter-spacing: .1em; color: var(--gold); }
+.tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--rust); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.tab[aria-pressed="true"] { color: var(--dark); font-style: italic; }
+.tab[aria-pressed="true"]::after { transform: scaleX(1); }
+.story { display: grid; gap: clamp(14px, 2vw, 22px); }
+.row { display: grid; gap: clamp(10px, 1.6vw, 18px); animation: rise .6s ease both; }
+.row.pair  { grid-template-columns: 7fr 5fr; height: clamp(300px, 40vw, 500px); }
+.row.pair.flip { grid-template-columns: 5fr 7fr; }
+.row.trio  { grid-template-columns: repeat(3, minmax(0, 1fr)); height: clamp(240px, 29vw, 360px); }
+.row.pano  { grid-template-columns: minmax(0, 1fr); height: clamp(260px, 38vw, 500px); }
+.row.stack { grid-template-columns: 5fr 7fr; grid-template-rows: 1fr 1fr; height: clamp(420px, 56vw, 700px); }
+.row.stack > :first-child { grid-row: span 2; }
+.row.stack.flip { grid-template-columns: 7fr 5fr; }
+.row.stack.flip > :first-child { grid-column: 2; grid-row: 1 / span 2; }
+.ph { margin: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; min-height: 0; }
+.ph button { position: relative; overflow: hidden; display: block; width: 100%; height: 100%; border-radius: 8px; background: var(--dark); }
+.ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+.ph button:hover img { transform: scale(1.03); }
+.ph figcaption { display: flex; gap: .7rem; align-items: baseline; padding-top: .55rem; font-size: 1rem; line-height: 1.3; min-width: 0; }
+.ph figcaption b { font-family: var(--sans); font-weight: 400; font-size: .6rem; letter-spacing: .14em; color: var(--rust); flex: 0 0 auto; font-variant-numeric: tabular-nums; }
+.ph figcaption span { font-style: italic; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ph figcaption small { margin-left: auto; font-family: var(--sans); font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); flex: 0 0 auto; }
+.wed .btn { color: var(--rust); }
+.wed .btn:hover { background: var(--rust); color: var(--paper); border-color: var(--rust); }
+
+/* ═════════ EVENTI · parete orizzontale ═════════ */
+.evt { background: var(--dark); color: rgba(255,255,255,.84); }
+.evt .label { color: var(--gold-lt); }
+.evt .ph-note { color: rgba(255,255,255,.55); }
+.chips { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; margin-bottom: 1.2rem; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: 0 0 auto; min-height: 44px; padding: .6rem 1.1rem; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.78); transition: background .3s, color .3s, border-color .3s; }
+.chip sup { color: var(--gold-lt); margin-left: .3rem; font-size: .6rem; }
+.chip[aria-pressed="true"] { background: var(--gold-lt); border-color: var(--gold-lt); color: var(--dark); }
+.chip[aria-pressed="true"] sup { color: var(--dark); }
+.wall {
+  --r: clamp(170px, 24vw, 260px); --c: clamp(130px, 17vw, 210px);
+  display: grid; grid-auto-flow: column dense; grid-template-rows: repeat(2, var(--r)); grid-auto-columns: var(--c);
+  gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none;
+  margin-inline: calc(-1 * clamp(16px, 4vw, 48px)); padding-inline: clamp(16px, 4vw, 48px); scroll-padding-inline: clamp(16px, 4vw, 48px);
+  cursor: grab;
+}
+.wall.dragging { cursor: grabbing; scroll-snap-type: none; }
+.wall::-webkit-scrollbar { display: none; }
+.tile { position: relative; overflow: hidden; border-radius: 8px; background: #2B211A; scroll-snap-align: start; animation: rise .5s ease both; }
+.tile.b { grid-row: span 2; grid-column: span 2; }
+.tile.t { grid-row: span 2; }
+.tile.w { grid-column: span 2; }
+.tile button { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; -webkit-user-drag: none; user-select: none; }
+.tile button:hover img { transform: scale(1.04); }
+.tile .tag { position: absolute; top: .7rem; left: .7rem; padding: .35rem .6rem; background: rgba(31,22,17,.72); color: var(--gold-lt); font-family: var(--sans); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; pointer-events: none; }
+.tile .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 2rem .8rem .7rem; background: linear-gradient(180deg, transparent, rgba(31,22,17,.85)); color: #fff; font-style: italic; font-size: 1.02rem; line-height: 1.25; text-align: left; pointer-events: none; }
+.tile.b .cap { font-size: 1.3rem; padding: 3rem 1.1rem 1rem; }
+.wall-ctrl { display: flex; align-items: center; gap: 1rem; margin-top: 1.1rem; }
+.prog { flex: 1; height: 1px; background: rgba(255,255,255,.2); position: relative; }
+.prog i { position: absolute; top: -1px; height: 3px; left: 0; background: var(--gold-lt); transition: left .15s linear, width .2s; }
+.arrow { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; flex: 0 0 auto; transition: background .3s, opacity .3s; }
+.arrow:hover { background: rgba(255,255,255,.1); }
+.arrow svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.3; }
+.arrow[disabled] { opacity: .3; pointer-events: none; }
+.evt .sec-end { border-color: rgba(255,255,255,.14); }
+.evt .btn { color: var(--gold-lt); }
+.evt .btn:hover { background: var(--gold-lt); color: var(--dark); border-color: var(--gold-lt); }
+
+/* ═════════ RITI CIVILI · sala d'esposizione ═════════ */
+.rito { background: var(--wall); }
+.legal { display: inline-flex; align-items: center; gap: .7rem; padding: .6rem .9rem; border: 1px solid var(--gold); border-radius: 999px; font-family: var(--sans); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--dark); }
+.legal svg { width: 18px; height: 18px; fill: none; stroke: var(--gold); stroke-width: 1.2; }
+.salon { position: relative; padding: clamp(2.6rem, 5vw, 3.6rem) 0 .5rem; }
+.salon::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(180deg, #B89C64, #8C7243); box-shadow: 0 2px 3px rgba(31,22,17,.18); }
+.frames { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: clamp(2rem, 4vw, 3.2rem) clamp(1.4rem, 3vw, 2.6rem); }
+.frame { margin: 0; display: grid; justify-items: center; gap: .9rem; animation: rise .6s ease both; }
+.frame button { display: block; background: var(--mat); padding: clamp(10px, 1.6vw, 18px); border: 1px solid #B89C64; border-radius: 10px; box-shadow: inset 0 0 0 4px var(--mat), inset 0 0 0 5px rgba(168,138,78,.45), 0 18px 30px -16px rgba(31,22,17,.55), 0 2px 4px rgba(31,22,17,.12); transition: transform .4s ease, box-shadow .4s ease; }
+.frame button:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 4px var(--mat), inset 0 0 0 5px rgba(168,138,78,.45), 0 26px 36px -16px rgba(31,22,17,.55), 0 2px 4px rgba(31,22,17,.12); }
+.frame img { object-fit: cover; width: 100%; height: 100%; }
+.frame .pic { overflow: hidden; border-radius: 5px; }
+.frame.p .pic { width: clamp(130px, 17vw, 200px); aspect-ratio: 3 / 4; }
+.frame.l .pic { width: clamp(180px, 25vw, 300px); aspect-ratio: 4 / 3; }
+.frame.q .pic { width: clamp(140px, 19vw, 220px); aspect-ratio: 1; }
+.plate { background: #EEE4CF; border: 1px solid rgba(168,138,78,.35); border-radius: 8px; padding: .45rem .8rem .5rem; text-align: center; display: grid; gap: .1rem; max-width: 220px; }
+.plate small { font-family: var(--sans); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.plate span { font-style: italic; font-size: 1rem; line-height: 1.2; color: var(--dark); }
+.rito .btn { color: var(--dark); }
+.rito .btn:hover { background: var(--dark); color: var(--wall); border-color: var(--dark); }
+
+/* ═════════ CASA VACANZA · schede per alloggio ═════════ */
+.casa { background: var(--bg-warm); }
+.casa .label { color: var(--terra); }
+.units { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--rule); background: rgba(242,234,218,.4); margin-bottom: 14px; }
+.unit-t { min-height: 64px; padding: .6rem .5rem; display: grid; align-content: center; gap: .15rem; border-right: 1px solid var(--rule); text-align: center; transition: background .3s, color .3s; }
+.unit-t:last-child { border-right: 0; }
+.unit-t b { font-weight: 400; font-size: 1.05rem; line-height: 1.15; }
+.unit-t small { font-family: var(--sans); font-size: .56rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.unit-t[aria-selected="true"] { background: var(--dark); color: #fff; }
+.unit-t[aria-selected="true"] small { color: var(--gold-lt); }
+.listing { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); background: var(--paper); }
+.lv { position: relative; background: var(--dark); min-height: 0; }
+.lv-main { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 10px; touch-action: pan-y; }
+.lv-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .35s ease; }
+.lv-main .open { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.lv-nav { position: absolute; z-index: 2; bottom: 1rem; right: 1rem; display: flex; gap: .4rem; align-items: center; }
+.lv-nav .arrow { background: rgba(31,22,17,.55); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.lv-count { position: absolute; z-index: 2; left: 1rem; bottom: 1rem; padding: .4rem .7rem; background: rgba(31,22,17,.62); color: #fff; font-family: var(--sans); font-size: .62rem; letter-spacing: .2em; font-variant-numeric: tabular-nums; }
+.lv-thumbs { display: flex; gap: 6px; padding: 6px; background: var(--dark); overflow-x: auto; scrollbar-width: none; }
+.lv-thumbs::-webkit-scrollbar { display: none; }
+.lv-thumbs button { flex: 0 0 clamp(84px, 17%, 132px); aspect-ratio: 4/3; overflow: hidden; border-radius: 6px; opacity: .5; transition: opacity .3s; outline-offset: -2px; }
+.lv-thumbs button[aria-current="true"] { opacity: 1; box-shadow: inset 0 0 0 2px var(--gold-lt); }
+.lv-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.li { padding: clamp(1.4rem, 3vw, 2.4rem); display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.li h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1.05; margin: .3rem 0 0; color: var(--dark); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 0; }
+.facts div { padding: .7rem .2rem; border-right: 1px solid var(--rule); text-align: center; }
+.facts div:last-child { border-right: 0; }
+.facts dt { font-family: var(--sans); font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-size: 1.35rem; line-height: 1.25; color: var(--dark); font-variant-numeric: tabular-nums; }
+.facts dd.sm { font-size: 1.02rem; padding-top: .2rem; font-style: italic; }
+.li p { margin: 0; }
+.li-btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: auto; }
+.casa .btn { color: var(--dark); }
+.casa .btn:hover { background: var(--dark); color: var(--paper); border-color: var(--dark); }
+.casa .btn.solid { background: var(--terra); border-color: var(--terra); border-radius: 999px; color: #fff; }
+.casa .btn.solid:hover { background: var(--dark); border-color: var(--dark); }
+
+/* ─── LE ALTRE GALLERIE ─── */
+.others { background: var(--bg); padding-block: clamp(2.6rem, 6vw, 4rem); border-top: 1px solid var(--rule); }
+.others h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.8rem, 3.4vw, 2.4rem); margin: .5rem 0 1.3rem; color: var(--dark); }
+.others-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 2vw, 18px); }
+.others .door { height: auto; animation: none; }
+.others .d1 { container-type: normal; display: block; }
+.others .pc { width: 100%; }
+.others .pc-cap b { font-size: clamp(1.15rem, 2.3vw, 1.6rem); }
+.others .pc-cap small, .others .pc-cap i { font-size: .52rem; }
+.back-all { margin-top: 1.4rem; display: flex; justify-content: center; }
+.back-all .btn { color: var(--dark); }
+.back-all .btn:hover { background: var(--dark); color: var(--bg); border-color: var(--dark); }
+
+/* ─── LIGHTBOX (unico per tutte le gallerie) ─── */
+.lb { position: fixed; inset: 0; z-index: 200; background: #120D09; color: #fff; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.lb-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem clamp(12px, 2vw, 24px); }
+.lb-where { font-family: var(--sans); font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.7); font-variant-numeric: tabular-nums; }
+.lb-where b { color: var(--gold-lt); font-weight: 400; }
+.lb-close { min-height: 44px; padding: .5rem 1rem; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; font-family: var(--sans); font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; }
+.lb-stage { position: relative; display: grid; place-items: center; overflow: hidden; touch-action: pan-y; padding: 0 clamp(0px, 5vw, 80px); }
+.lb-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; transition: transform .3s ease, opacity .3s ease; user-select: none; -webkit-user-drag: none; }
+.lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: rgba(18,13,9,.4); }
+.lb-prev { left: clamp(8px, 1.5vw, 20px); } .lb-next { right: clamp(8px, 1.5vw, 20px); }
+.lb-prev svg, .lb-next svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 1.3; }
+.lb-cap { padding: .9rem clamp(12px, 2vw, 24px) .5rem; text-align: center; }
+.lb-cap small { font-family: var(--sans); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); }
+.lb-cap h3 { margin: .15rem 0 0; font-weight: 300; font-size: 1.6rem; line-height: 1.2; font-style: italic; }
+.lb-rail { display: flex; gap: 6px; overflow-x: auto; padding: .6rem clamp(12px, 2vw, 24px) 1rem; scrollbar-width: none; justify-content: safe center; }
+.lb-rail::-webkit-scrollbar { display: none; }
+.lb-rail button { flex: 0 0 auto; width: 64px; height: 48px; overflow: hidden; border-radius: 4px; opacity: .4; transition: opacity .25s; }
+.lb-rail button[aria-current="true"] { opacity: 1; box-shadow: inset 0 0 0 2px var(--gold-lt); }
+.lb-rail img { width: 100%; height: 100%; object-fit: cover; }
+
+footer.foot { background: var(--dark); color: rgba(255,255,255,.6); padding: 2rem 16px 2.4rem; text-align: center; font-family: var(--sans); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; }
+footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: brightness(0) invert(1); opacity: .8; }
+
+/* ─── Passaggio animato riquadro → pagina (Safari 18+, Chrome) ─── */
+::view-transition-group(cover) { animation-duration: .55s; animation-timing-function: cubic-bezier(.3,.7,.2,1); overflow: hidden; }
+::view-transition-old(cover), ::view-transition-new(cover) { height: 100%; object-fit: cover; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .sec-intro { grid-template-columns: minmax(0, 1fr); }
+  .listing { grid-template-columns: minmax(0, 1fr); }
+  .units { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .unit-t:nth-child(3n) { border-right: 0; }
+  .unit-t:nth-child(-n+3) { border-bottom: 1px solid var(--rule); }
+}
+@media (max-width: 640px) {
+  .nav-back span { display: none; }
+  .nav-logo img { height: 38px; }
+  .nav-cta { font-size: .56rem; padding: .6rem .7rem; }
+  .row.pair, .row.pair.flip { grid-template-columns: minmax(0,1fr); height: auto; }
+  .row.pair .ph, .row.pano .ph { aspect-ratio: 4 / 3.4; }
+  .row.pano { height: auto; }
+  .row.trio { grid-template-columns: repeat(2, minmax(0,1fr)); height: auto; }
+  .row.trio .ph { aspect-ratio: 3 / 4; }
+  .row.trio .ph:first-child { grid-column: span 2; aspect-ratio: 4 / 3.2; }
+  .row.stack, .row.stack.flip { grid-template-columns: repeat(2, minmax(0,1fr)); grid-template-rows: auto; height: auto; }
+  .row.stack > :first-child, .row.stack.flip > :first-child { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 4.4; }
+  .row.stack > :not(:first-child) { aspect-ratio: 3 / 3.6; }
+  .ph figcaption small { display: none; }
+  .units { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .unit-t { border-bottom: 1px solid var(--rule); }
+  .unit-t:nth-child(3n) { border-right: 1px solid var(--rule); }
+  .unit-t:nth-child(2n) { border-right: 0; }
+  .unit-t:nth-last-child(-n+2) { border-bottom: 0; }
+  .others-grid { grid-template-columns: minmax(0, 1fr); }
+  .others .d1 { --ar: 1.32; }
+  .lb-prev, .lb-next { display: none; }
+  .lb-stage img { border-radius: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+
 </head>
-<body class="">
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
-  <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
-  <a href="esplora.html"          class="menu-link">Esplora</a>
-  <a href="casa-vacanza.html"     class="menu-link">Casa Vacanza</a>
-  <a href="rito-civile.html"      class="menu-link">Rito Civile</a>
-  <a href="galleria.html"         class="menu-link active">Galleria</a>
-  <a href="matrimoni-eventi.html" class="menu-link">Matrimoni &amp; Eventi</a>
-  <a href="virtual-tour.html"     class="menu-link">Virtual Tour</a>
-  <a href="contatti.html"         class="mobile-menu-cta">Contattaci</a>
+<body>
+<!-- ═══ LIVELLO 1 · solo i quattro riquadri ═══ -->
+<div class="landing" id="landing">
+  <nav class="nav" aria-label="Navigazione principale">
+    <a class="nav-back" href="esplora.html" aria-label="Torna a Esplora"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></a>
+    <div class="nav-logo"><img src="assets/img/logo.png" alt="Villa Martius"></div>
+    <a class="nav-cta" href="contatti.html">Contattaci</a>
+  </nav>
+  <main class="doors">
+    <h1 class="sr">Galleria di Villa Martius</h1>
+    <div class="doors-grid" id="doors"></div>
+  </main>
 </div>
 
-<!-- Nav -->
-<nav class="nav v2" aria-label="Navigazione principale">
-  <button class="nav-back" id="navBack" aria-label="Torna alla pagina precedente">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-  </button>
-  <div class="nav-logo">
-    <a href="esplora.html" aria-label="Villa Martius — esplora">
-      <img src="assets/img/logo.png" alt="Villa Martius">
-    </a>
-  </div>
-  <div class="nav-actions">
-    <a href="virtual-tour.html" class="nav-vt" aria-label="Virtual Tour">
-      <svg class="nav-vt-icon" viewBox="0 -2 80 44" aria-hidden="true"><path d="M19.2 9.8C19.5 5.5 22.5 3.2 26 3.2C29.5 3.2 31.8 5.5 31.8 8.6C31.8 11.8 29.2 14 25.2 14.4C29.8 14.4 32.3 16.8 32.3 20.4C32.3 24.2 29.5 26.8 25.8 26.8C22.2 26.8 19.6 24.6 19.3 20.4"/><path d="M41.5 3.5L34.2 19"/><circle cx="39.5" cy="20.3" r="6"/><path d="M47.5 9.75A6.25 6.25 0 0 1 60 9.75V19.75A6.25 6.25 0 0 1 47.5 19.75Z"/><circle cx="64.5" cy="2.5" r="2.5"/><path d="M61 22.7A40 6.8 0 0 1 40 35.3"/><path d="M18 22.8A40 6.8 0 0 0 29 35"/><path d="M29 28.5V40.5L38 34.5Z"/></svg>
-      <span class="nav-vt-text">Virtual Tour</span>
-    </a>
-    <a href="contatti.html" class="nav-cta" aria-label="Contattaci">
-      <svg class="nav-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z M4 6l8 6 8-6"/></svg>
-      Contattaci
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
-      <span class="hamb-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-    </button>
-  </div>
-</nav>
+<!-- ═══ LIVELLO 2 · pagina della galleria scelta ═══ -->
+<div id="gview" hidden>
+  <nav class="nav gbar" aria-label="Navigazione galleria">
+    <button class="nav-back" id="gBack" type="button"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>Galleria</span></button>
+    <div class="nav-logo"><img src="assets/img/logo.png" alt="Villa Martius"></div>
+    <a class="nav-cta" href="contatti.html">Contattaci</a>
+  </nav>
 
-<header class="page-hero" aria-labelledby="page-title">
-  <div class="hero-bg" style="background-image:url('assets/img/hero-garden.jpg');" role="img" aria-label="Villa Martius"></div>
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-content">
-    <h1 class="page-hero-title" id="page-title">Galleria</h1>
-    <p class="page-hero-sub">La villa in ogni sua luce</p>
-  </div>
-</header>
+  <header class="banner">
+    <img id="bannerImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+    <div class="banner-in wrap">
+      <span class="label" id="bannerLbl"></span>
+      <h1 id="bannerTitle"></h1>
+      <span class="banner-count" id="bannerCount"></span>
+    </div>
+  </header>
 
-<section class="section">
-  <div class="section-header">
-    <span class="label">I Giardini</span>
-    <h2 class="display">Ora dorata</h2>
-    <p class="body-copy">Il giardino di Villa Martius al calare della sera. Gazebo, palme e luce siciliana.</p>
-  </div>
-  <div class="gallery-grid">
-    <figure class="g-col-8 g-h-xl">
-      <img src="assets/img/hero-garden.jpg" alt="Il gazebo bianco nel giardino all'ora d'oro" loading="lazy">
-      <figcaption>Il gazebo · Ora dorata</figcaption>
-    </figure>
-    <figure class="g-col-4 g-h-xl">
-      <img src="assets/img/couple.jpg" alt="Sposi nel giardino di notte" loading="lazy">
-      <figcaption>Sposi · Notte</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="section section-warm">
-  <div class="section-header">
-    <span class="label">Gli Interni</span>
-    <h2 class="display">La sala dei banchetti</h2>
-    <p class="body-copy">Soffitti alti, luci calde, tavoli imperiali. La sala interna al momento del ricevimento.</p>
-  </div>
-  <div class="gallery-grid">
-    <figure class="g-col-12 g-h-xl">
-      <img src="assets/img/hall.jpg" alt="La sala interna allestita per un matrimonio" loading="lazy">
-      <figcaption>La sala · Ricevimento</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-header">
-    <span class="label">L'Ora del Cocktail</span>
-    <h2 class="display">L'area piscina</h2>
-    <p class="body-copy">Il cocktail hour a bordo piscina, con fiori bianchi e luci notturne. Uno dei momenti più fotografati della giornata.</p>
-  </div>
-  <div class="gallery-grid">
-    <figure class="g-col-7 g-h-lg">
-      <img src="assets/img/pool.jpg" alt="La piscina allestita per il cocktail" loading="lazy">
-      <figcaption>Piscina · Aperitivo</figcaption>
-    </figure>
-    <figure class="g-col-5 g-h-lg">
-      <img src="assets/img/couple.jpg" alt="Sposi al cocktail hour" loading="lazy">
-      <figcaption>Sposi · Cocktail</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="section section-warm">
-  <div class="section-header">
-    <span class="label">Il Nostro Sguardo</span>
-    <h2 class="display">Momenti scelti</h2>
-    <p class="body-copy">Frammenti che raccontano la villa più delle parole. Ogni foto è un giorno diverso, ogni giorno è una storia unica.</p>
-  </div>
-  <div class="gallery-grid">
-    <figure class="g-col-4 g-h-lg">
-      <img src="assets/img/hero-garden.jpg" alt="Il giardino" loading="lazy">
-    </figure>
-    <figure class="g-col-4 g-h-lg">
-      <img src="assets/img/hall.jpg" alt="La sala" loading="lazy">
-    </figure>
-    <figure class="g-col-4 g-h-lg">
-      <img src="assets/img/pool.jpg" alt="La piscina" loading="lazy">
-    </figure>
-    <figure class="g-col-6 g-h-md">
-      <img src="assets/img/couple.jpg" alt="Sposi al tramonto" loading="lazy">
-    </figure>
-    <figure class="g-col-6 g-h-md">
-      <img src="assets/img/hero-garden.jpg" alt="Il giardino di sera" loading="lazy">
-    </figure>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-header">
-    <span class="label">Seguiteci</span>
-    <h2 class="display">Ogni evento<br>è un racconto</h2>
-    <p class="body-copy">Le nuove immagini le pubblichiamo su Instagram, mano a mano che i nostri fotografi ci consegnano gli scatti.</p>
-    <a href="https://instagram.com/villa_martius_messina" target="_blank" rel="noopener" class="btn btn-ghost-dark" style="margin-top:2rem;">Seguici su Instagram</a>
-  </div>
-</section>
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <img src="assets/img/logo.png" alt="Villa Martius">
+  <!-- MATRIMONI -->
+  <section class="sec wed" id="s-matrimoni" aria-label="Galleria Matrimoni" hidden>
+    <div class="wrap">
+      <div class="sec-intro">
+        <p class="lead">Il giorno del sì raccontato come un servizio su rivista: dalla cerimonia nel gazebo alla notte sulla terrazza. Scegliete un momento per vedere solo quelle foto.</p>
       </div>
-      <p>Una residenza dedicata ai matrimoni e agli eventi tra le colline di San Pier Niceto, a pochi passi dallo stretto di Messina.</p>
+      <div class="tabs" role="group" aria-label="Momento della giornata" id="wedTabs"></div>
+      <div class="story" id="story"></div>
+      <div class="sec-end"><p>Immaginate il vostro giorno qui?</p><a class="btn" href="contatti.html">Richiedi un preventivo per il matrimonio</a></div>
     </div>
-    <div class="footer-col">
-      <h4>Naviga</h4>
-      <ul>
-        <li><a href="esplora.html">Esplora</a></li>
-        <li><a href="casa-vacanza.html">Casa Vacanza</a></li>
-        <li><a href="rito-civile.html">Rito Civile</a></li>
-        <li><a href="matrimoni.html">Eventi e Matrimoni</a></li>
-        <li><a href="galleria.html">Galleria</a></li>
-        <li><a href="virtual-tour.html">Virtual Tour</a></li>
-        <li><a href="contatti.html">Contatti</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Dove Siamo</h4>
-      <ul>
-        <li>Contrada Pirrera</li>
-        <li>98045 San Pier Niceto (ME)</li>
-        <li>Sicilia · Italia</li>
-        <li>Uscita autostradale Milazzo, 8 km</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contatti</h4>
-      <ul>
-        <li><a href="tel:+393315309082">331 530 9082</a></li>
-        <li><a href="tel:+393472650647">347 265 0647</a></li>
-        <li><a href="mailto:vacanze@villamartius.it">vacanze@villamartius.it</a></li>
-        <li><a href="https://instagram.com/villa_martius_messina" target="_blank" rel="noopener">Instagram</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Villa Martius — Tutti i diritti riservati</span>
-    <span>Sede equiparata a Casa Comunale</span>
-  </div>
-</footer>
+  </section>
 
-<script src="assets/js/main.js" defer></script>
+  <!-- EVENTI -->
+  <section class="sec evt" id="s-eventi" aria-label="Galleria Eventi" hidden>
+    <div class="wrap">
+      <div class="sec-intro">
+        <p class="lead">Compleanni, cene aziendali, anniversari, battesimi. Scorrete la parete di lato con il dito, oppure filtrate per tipo di evento.</p>
+      </div>
+      <div class="chips" role="group" aria-label="Tipo di evento" id="evtChips"></div>
+      <div class="wall" id="wall" tabindex="0" aria-label="Foto degli eventi, scorri di lato"></div>
+      <div class="wall-ctrl">
+        <button class="arrow" id="wallPrev" aria-label="Scorri indietro"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="prog" aria-hidden="true"><i id="wallProg"></i></div>
+        <button class="arrow" id="wallNext" aria-label="Scorri avanti"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="sec-end"><p>Una festa, una cena, un anniversario.</p><a class="btn" href="contatti.html">Organizza il tuo evento</a></div>
+    </div>
+  </section>
+
+  <!-- RITI CIVILI -->
+  <section class="sec rito" id="s-riti" aria-label="Galleria Riti civili" hidden>
+    <div class="wrap">
+      <div class="sec-intro">
+        <p class="lead">Un momento sobrio e solenne, presentato come in una mostra: ogni foto con la sua cornice e la sua targhetta, tutte alla stessa altezza.</p>
+        <div class="side">
+          <span class="legal"><svg viewBox="0 0 24 24"><path d="M4 10h16M6 10v8M10 10v8M14 10v8M18 10v8M3 20h18M12 3l9 5H3z"/></svg>Sede equiparata a Casa Comunale</span>
+        </div>
+      </div>
+      <div class="salon"><div class="frames" id="frames"></div></div>
+      <div class="sec-end"><p>Il rito civile ha pieno valore legale, qui in villa.</p><a class="btn" href="rito-civile.html">Scopri il rito civile</a></div>
+    </div>
+  </section>
+
+  <!-- CASA VACANZA -->
+  <section class="sec casa" id="s-casa" aria-label="Galleria Casa vacanza" hidden>
+    <div class="wrap">
+      <div class="sec-intro">
+        <p class="lead">Scegliete l'alloggio per vedere le sue foto, quanti ospiti accoglie e quanto è grande. Da qui si passa direttamente alla prenotazione.</p>
+      </div>
+      <div class="units" role="tablist" aria-label="Alloggio" id="units"></div>
+      <div class="listing">
+        <div class="lv">
+          <div class="lv-main" id="lvMain">
+            <img id="lvImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+            <button class="open" id="lvOpen" type="button" aria-label="Apri la foto a schermo intero"></button>
+            <span class="lv-count" id="lvCount">1 / 2</span>
+            <div class="lv-nav">
+              <button class="arrow" id="lvPrev" aria-label="Foto precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+              <button class="arrow" id="lvNext" aria-label="Foto successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+          <div class="lv-thumbs" id="lvThumbs"></div>
+        </div>
+        <div class="li">
+          <div><span class="label" id="liKind">Camera</span><h3 id="liName">Camera Standard</h3></div>
+          <dl class="facts">
+            <div><dt>Ospiti</dt><dd id="liG">2</dd></div>
+            <div><dt>Superficie</dt><dd id="liM">25 m²</dd></div>
+            <div><dt>In più</dt><dd class="sm" id="liX">TV</dd></div>
+          </dl>
+          <p id="liTxt"></p>
+          <div class="li-btns">
+            <a class="btn solid" id="liLink" href="#" target="_blank" rel="noopener">Vedi l'alloggio e prenota</a>
+            <button class="btn" id="liAll" type="button">Tutte le foto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="others" aria-labelledby="others-t">
+    <div class="wrap">
+      <span class="label">Continua a guardare</span>
+      <h2 id="others-t">Le altre gallerie</h2>
+      <div class="others-grid" id="others"></div>
+      <div class="back-all"><button class="btn" id="gBack2" type="button">Torna a tutte le gallerie</button></div>
+    </div>
+  </section>
+
+  <footer class="foot"><img src="assets/img/logo.png" alt="Villa Martius">Contrada Pirrera · 98045 San Pier Niceto (ME) · Sede equiparata a Casa Comunale</footer>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto a schermo intero">
+  <div class="lb-top"><span class="lb-where" id="lbWhere"></span><button class="lb-close" id="lbClose" type="button">✕ Chiudi</button></div>
+  <div class="lb-stage" id="lbStage">
+    <img id="lbImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+    <button class="lb-prev" id="lbPrev" aria-label="Foto precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="lb-next" id="lbNext" aria-label="Foto successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <div class="lb-cap"><small id="lbSub"></small><h3 id="lbTitle"></h3></div>
+  <div class="lb-rail" id="lbRail"></div>
+</div>
+
+<script>
+/* foto incorporate nel file, così la pagina funziona anche da sola */
+const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "assets/img/galleria/gazebo-L.jpg", "gazebo-PC": "assets/img/galleria/gazebo-PC.jpg", "gazebo-PL": "assets/img/galleria/gazebo-PL.jpg", "gazebo-PR": "assets/img/galleria/gazebo-PR.jpg", "gazebo-R": "assets/img/galleria/gazebo-R.jpg", "gazebo-TL": "assets/img/galleria/gazebo-TL.jpg", "gazebo-Z": "assets/img/galleria/gazebo-Z.jpg", "gazebo-full": "assets/img/galleria/gazebo-full.jpg", "logo": "assets/img/logo.png", "pad-BR": "assets/img/galleria/pad-BR.jpg", "pad-L": "assets/img/galleria/pad-L.jpg", "pad-PC": "assets/img/galleria/pad-PC.jpg", "pad-PL": "assets/img/galleria/pad-PL.jpg", "pad-PR": "assets/img/galleria/pad-PR.jpg", "pad-R": "assets/img/galleria/pad-R.jpg", "pad-TL": "assets/img/galleria/pad-TL.jpg", "pad-Z": "assets/img/galleria/pad-Z.jpg", "pad-full": "assets/img/galleria/pad-full.jpg", "pool-BR": "assets/img/galleria/pool-BR.jpg", "pool-L": "assets/img/galleria/pool-L.jpg", "pool-PC": "assets/img/galleria/pool-PC.jpg", "pool-PL": "assets/img/galleria/pool-PL.jpg", "pool-PR": "assets/img/galleria/pool-PR.jpg", "pool-R": "assets/img/galleria/pool-R.jpg", "pool-TL": "assets/img/galleria/pool-TL.jpg", "pool-Z": "assets/img/galleria/pool-Z.jpg", "pool-full": "assets/img/galleria/pool-full.jpg", "room-BR": "assets/img/galleria/room-BR.jpg", "room-L": "assets/img/galleria/room-L.jpg", "room-PC": "assets/img/galleria/room-PC.jpg", "room-PL": "assets/img/galleria/room-PL.jpg", "room-PR": "assets/img/galleria/room-PR.jpg", "room-R": "assets/img/galleria/room-R.jpg", "room-TL": "assets/img/galleria/room-TL.jpg", "room-Z": "assets/img/galleria/room-Z.jpg", "room-full": "assets/img/galleria/room-full.jpg", "terr-BR": "assets/img/galleria/terr-BR.jpg", "terr-L": "assets/img/galleria/terr-L.jpg", "terr-PC": "assets/img/galleria/terr-PC.jpg", "terr-PL": "assets/img/galleria/terr-PL.jpg", "terr-PR": "assets/img/galleria/terr-PR.jpg", "terr-R": "assets/img/galleria/terr-R.jpg", "terr-TL": "assets/img/galleria/terr-TL.jpg", "terr-Z": "assets/img/galleria/terr-Z.jpg", "terr-full": "assets/img/galleria/terr-full.jpg"};
+</script>
+<script>
+(function () {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SITE = '';
+  const src = k => IMG[k];
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+  /* ─── DATI: 60 posizioni (18 + 15 + 12 + 15) ─── */
+  const WED_CH = { c: 'La cerimonia', r: 'Il ricevimento', d: 'I dettagli', s: 'Gli sposi' };
+  const WED = [
+    ['gazebo-full', 'c', 'Il gazebo pronto per il sì'], ['terr-PL', 's', 'Gli sposi sulla terrazza'],
+    ['gazebo-PC', 'c', "L'altare tra i drappi"], ['pad-full', 'r', 'La tavola imperiale'],
+    ['pad-TL', 'd', 'Il candelabro centrale'], ['gazebo-L', 'c', 'Il prato del Green Eden'],
+    ['pool-full', 'r', 'Aperitivo a bordo piscina'], ['terr-L', 's', 'Un momento solo per loro'],
+    ['pad-Z', 'd', 'Calici e segnaposto'], ['gazebo-R', 'c', "L'uscita tra gli ospiti"],
+    ['pool-PC', 'd', 'I fiori bianchi sui tavoli'], ['terr-Z', 's', 'Il velo sotto le palme'],
+    ['pad-R', 'r', 'Il padiglione al crepuscolo'], ['gazebo-TL', 'd', 'I vasi in pietra'],
+    ['pool-R', 'r', "Le luci sull'acqua"], ['terr-full', 's', 'La notte sulla costa'],
+    ['gazebo-BR', 'c', 'La navata sul prato'], ['pad-PL', 'r', 'Il primo brindisi']
+  ].map(([k, ch, t]) => ({ k, ch, t, sub: WED_CH[ch] }));
+
+  const EVT_T = { gala: 'Cene di gala', comp: 'Compleanni', azi: 'Aziendali', ann: 'Anniversari', bat: 'Battesimi e comunioni' };
+  const EVT = [
+    ['pad-L', 'gala', 'Cena di gala sotto il padiglione'], ['pool-PL', 'comp', 'Diciottesimo a bordo piscina'],
+    ['pool-Z', 'azi', 'Cocktail aziendale'], ['pad-PC', 'ann', "Tavola per le nozze d'argento"],
+    ['pool-L', 'comp', 'La piscina illuminata'], ['pad-BR', 'gala', 'Il servizio ai tavoli'],
+    ['terr-R', 'ann', 'Brindisi sulla terrazza'], ['gazebo-Z', 'bat', 'Il rinfresco in giardino'],
+    ['pool-BR', 'azi', 'Lounge serale'], ['pad-PR', 'gala', 'Luci e drappi'],
+    ['pool-TL', 'comp', 'Il centrotavola'], ['gazebo-PR', 'bat', 'Il gazebo per la festa'],
+    ['terr-BR', 'ann', 'La bouganville illuminata'], ['pool-PR', 'azi', 'Aperitivo di networking'],
+    ['terr-PR', 'gala', 'La terrazza di sera']
+  ].map(([k, ty, t]) => ({ k, ty, t, sub: EVT_T[ty] }));
+
+  const RITO = [
+    ['gazebo-PL', 'p', "L'attesa degli ospiti", 'Green Eden'], ['terr-PC', 'p', 'Gli sposi dopo il rito', 'Terrazza'],
+    ['gazebo-full', 'l', 'Il gazebo allestito', 'Green Eden'], ['terr-TL', 'l', 'Le luci della costa', 'Terrazza'],
+    ['gazebo-TL', 'q', 'Il registro e la penna', 'Gazebo'], ['gazebo-PC', 'p', 'La lettura degli articoli', 'Gazebo'],
+    ['terr-full', 'l', 'Il saluto finale', 'Terrazza'], ['gazebo-BR', 'q', 'Le sedie sul prato', 'Green Eden'],
+    ['terr-Z', 'q', 'Lo scambio degli anelli', 'Terrazza'], ['gazebo-R', 'l', 'Il corteo', 'Green Eden'],
+    ['terr-L', 'p', 'Testimoni e famiglia', 'Terrazza'], ['gazebo-L', 'l', 'Il lancio del riso', 'Viale']
+  ].map(([k, f, t, place], i) => ({ k, f, t, place, n: i + 1, sub: place }));
+
+  const UNITS = [
+    { name: 'Camera Standard', kind: 'Camera matrimoniale', g: 2, m: 25, x: 'TV', page: 'camera-standard.html',
+      txt: "Camera matrimoniale raffinata, pensata per un soggiorno di charme in due. L'essenziale, curato nel dettaglio, con la quiete della campagna siciliana appena fuori dalla finestra.",
+      ph: [['room-L', 'Il letto matrimoniale'], ['room-TL', 'La parete in pietra']] },
+    { name: 'Camera Deluxe', kind: 'Camera matrimoniale', g: 3, m: 35, x: 'Esterno privato', page: 'camera-deluxe.html',
+      txt: "Più ampia e luminosa della Standard, con un piccolo spazio esterno privato dove iniziare la giornata all'aria aperta. Fino a tre ospiti per un comfort disteso.",
+      ph: [['room-R', 'La camera'], ['room-BR', 'Lo spazio esterno privato']] },
+    { name: 'Appartamento Standard', kind: 'Appartamento', g: 4, m: 50, x: 'Balcone privato', page: 'appartamento-standard.html',
+      txt: 'Zona giorno, camere separate e balcone privato affacciato sul paesaggio tirrenico. La soluzione ideale per famiglie e gruppi che cercano autonomia senza rinunciare al servizio.',
+      ph: [['room-full', 'La camera da letto'], ['room-PL', 'La zona giorno']] },
+    { name: 'Appartamento Superior', kind: 'Appartamento', g: 4, m: 65, x: 'Esterno ampio', page: 'appartamento-superior.html',
+      txt: 'Spazi generosi e area esterna estesa: la versione ampliata dello Standard, perfetta per la convivialità e i soggiorni lunghi. Sempre fino a quattro ospiti.',
+      ph: [['room-Z', 'La camera principale'], ['room-PC', "L'area esterna"]] },
+    { name: 'Appartamento Deluxe', kind: 'Appartamento', g: 3, m: 55, x: 'Terrazzo privato', page: 'appartamento-deluxe.html',
+      txt: 'Soggiorno intimo con terrazzo privato: la Sicilia tirrenica si gode da qui, in totale esclusiva. Per tre ospiti che cercano la vista più bella della villa.',
+      ph: [['room-PR', 'La camera'], ['terr-TL', 'Il terrazzo privato']] },
+    { name: 'Spazi comuni', kind: 'Per tutti gli ospiti', g: null, m: null, x: 'Piscina e giardino', page: 'casa-vacanza.html',
+      txt: 'La piscina, il giardino e la terrazza panoramica sono a disposizione di tutti gli ospiti della casa vacanza.',
+      ph: [['pool-full', 'La piscina'], ['gazebo-R', 'Il giardino'], ['terr-full', 'La terrazza panoramica'], ['gazebo-BR', 'Il viale'], ['pool-R', 'La piscina di sera']] }
+  ];
+  const CASA_N = UNITS.reduce((a, u) => a + u.ph.length, 0);
+
+  const SECS = [
+    { id: 'matrimoni', name: 'Matrimoni',    n: WED.length,  cover: 'gazebo-full', lbl: 'Il racconto del giorno', extra: '', pos: 'center 62%' },
+    { id: 'eventi',    name: 'Eventi',       n: EVT.length,  cover: 'pad-full',    lbl: 'Feste, cene e ricorrenze', extra: '', pos: 'center 55%' },
+    { id: 'riti',      name: 'Riti civili',  n: RITO.length, cover: 'terr-PL',     lbl: "Sala d'esposizione", extra: '', pos: 'center 82%' },
+    { id: 'casa',      name: 'Casa vacanza', n: CASA_N,      cover: 'room-full',   lbl: 'Camere e appartamenti', extra: ' · 5 alloggi e spazi comuni', pos: 'center 45%' }
+  ];
+  const byId = id => SECS.find(s => s.id === id);
+  const onShow = {};
+
+  /* ─── LIVELLO 1 · le quattro cartoline ─── */
+  const POS = { matrimoni: 'center 62%', eventi: 'center 45%', riti: 'center 85%', casa: 'center 50%' };
+  const ROT = ['-2.4deg', '1.8deg', '1.5deg', '-2deg'];
+  const attrs = s => ' type="button" data-id="' + s.id + '" aria-label="Apri la galleria ' + s.name + ', ' + s.n + ' foto"';
+  const cv = s => '<img class="cv" src="' + src(s.cover) + '" alt="" style="object-position:' + POS[s.id] + '">';
+  // timbro postale: cerchio con «San Pier Niceto · Messina» e le onde dell'annullo
+  let pmN = 0;
+  const postmark = () => { const i = pmN++; return '<svg class="pc-mark" viewBox="0 0 120 80" aria-hidden="true"><defs>' +
+    '<path id="pmT' + i + '" d="M18 40a22 22 0 1 1 44 0"/><path id="pmB' + i + '" d="M11.5 40a28.5 28.5 0 0 0 57 0"/></defs>' +
+    '<circle cx="40" cy="40" r="30"/><circle cx="40" cy="40" r="20"/>' +
+    '<text><textPath href="#pmT' + i + '" startOffset="50%" text-anchor="middle">SAN PIER NICETO</textPath></text>' +
+    '<text><textPath href="#pmB' + i + '" startOffset="50%" text-anchor="middle">MESSINA</textPath></text>' +
+    '<text class="c" x="40" y="39" text-anchor="middle">VILLA</text><text class="c" x="40" y="46" text-anchor="middle">MARTIUS</text>' +
+    '<path d="M74 30q5.5-5 11 0t11 0 11 0 11 0M74 40q5.5-5 11 0t11 0 11 0 11 0M74 50q5.5-5 11 0t11 0 11 0 11 0"/></svg>'; };
+  const postcard = (s, i) => '<button class="door d1"' + attrs(s) + ' style="--rot:' + ROT[i % ROT.length] + '"><span class="pc"><span class="pc-photo vt">' + cv(s) + '</span>' +
+    '<span class="pc-stamp"><span><span><img src="' + IMG.logo + '" alt=""></span></span></span>' + postmark() +
+    '<span class="pc-cap"><small>Saluti da Villa Martius</small><span><b>' + s.name + '</b><i>' + s.n + ' foto</i></span></span></span></button>';
+  const doors = $('#doors');
+  doors.className = 'doors-grid m1'; doors.parentElement.className = 'doors m1';
+  doors.innerHTML = SECS.map(postcard).join('');
+  $$('.door', doors).forEach(d => d.addEventListener('click', () => navigate(d.dataset.id, $('.vt', d))));
+
+  /* ─── NAVIGAZIONE tra i due livelli ─── */
+  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg');
+  let current = '';
+  function setView(id) {
+    const s = byId(id);
+    current = s ? id : '';
+    landing.hidden = !!s; gview.hidden = !s;
+    document.documentElement.classList.toggle('is-landing', !s);
+    SECS.forEach(x => { $('#s-' + x.id).hidden = x.id !== current; });
+    if (s) {
+      bannerImg.src = src(s.cover); bannerImg.alt = s.name; bannerImg.style.objectPosition = s.pos;
+      $('#bannerLbl').textContent = s.lbl; $('#bannerTitle').textContent = s.name;
+      $('#bannerCount').textContent = s.n + ' foto' + s.extra;
+      const others = $('#others');
+      others.innerHTML = SECS.filter(x => x.id !== id).map((x, i) => postcard(x, i + 1)).join('');
+      $$('.door', others).forEach(d => d.addEventListener('click', () => navigate(d.dataset.id, $('.vt', d))));
+      if (onShow[id]) onShow[id]();
+    }
+    window.scrollTo(0, 0);
+  }
+  function go(id, fromImg) {
+    const prev = current;
+    if (!document.startViewTransition || reduce) { setView(id); return; }
+    if (fromImg) fromImg.style.viewTransitionName = 'cover';
+    let toImg = null;
+    const t = document.startViewTransition(() => {
+      if (fromImg) fromImg.style.viewTransitionName = '';
+      setView(id);
+      toImg = id ? bannerImg : (prev ? $('.door[data-id="' + prev + '"] .vt', doors) : null);
+      if (fromImg && toImg) toImg.style.viewTransitionName = 'cover';
+    });
+    t.finished.finally(() => { if (toImg) toImg.style.viewTransitionName = ''; if (fromImg) fromImg.style.viewTransitionName = ''; });
+  }
+  function push(id) {
+    const url = id ? '#' + id : location.pathname + location.search;
+    try { history.pushState({ g: id }, '', url); } catch (e) { try { history.pushState({ g: id }, ''); } catch (e2) { /* niente cronologia: resta il tasto Galleria */ } }
+  }
+  function navigate(id, fromImg) { push(id); go(id, fromImg); }
+  function back() {
+    if (history.state && history.state.g) { try { history.back(); return; } catch (e) {} }
+    go('', bannerImg);
+  }
+  window.addEventListener('popstate', e => {
+    const id = (e.state && 'g' in e.state) ? e.state.g : location.hash.slice(1);
+    if (!lb.hidden) closeLb();
+    go(byId(id) ? id : '', current ? bannerImg : null);
+  });
+  $('#gBack').addEventListener('click', back);
+  $('#gBack2').addEventListener('click', back);
+
+  /* ─── LIGHTBOX ─── */
+  const lb = $('#lb'), lbImg = $('#lbImg'), rail = $('#lbRail');
+  let L = [], LI = 0, Lname = '', lastFocus = null;
+  function openLb(list, i, name) {
+    L = list; LI = i; Lname = name; lastFocus = document.activeElement;
+    rail.innerHTML = list.map((p, j) => '<button type="button" data-j="' + j + '" aria-label="Foto ' + (j + 1) + '"><img src="' + src(p.k) + '" alt="" loading="lazy"></button>').join('');
+    $$('button', rail).forEach(b => b.addEventListener('click', () => show(+b.dataset.j, 0)));
+    lb.hidden = false; document.body.style.overflow = 'hidden'; show(i, 0); $('#lbClose').focus();
+  }
+  function paint() {
+    const p = L[LI];
+    lbImg.src = src(p.k); lbImg.alt = p.t;
+    $('#lbWhere').innerHTML = '<b>' + Lname + '</b> · ' + (LI + 1) + ' / ' + L.length;
+    $('#lbSub').textContent = p.sub || ''; $('#lbTitle').textContent = p.t;
+    $$('button', rail).forEach((b, j) => {
+      const on = j === LI; b.setAttribute('aria-current', on);
+      if (on) rail.scrollTo({ left: b.offsetLeft - rail.clientWidth / 2 + b.offsetWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+  function show(i, dir) {
+    LI = (i + L.length) % L.length;
+    if (!dir || reduce) { paint(); return; }
+    lbImg.style.opacity = 0; lbImg.style.transform = 'translateX(' + (-dir * 40) + 'px)';
+    setTimeout(() => {
+      paint(); lbImg.style.transition = 'none'; lbImg.style.transform = 'translateX(' + (dir * 40) + 'px)';
+      requestAnimationFrame(() => requestAnimationFrame(() => { lbImg.style.transition = ''; lbImg.style.opacity = 1; lbImg.style.transform = ''; }));
+    }, 170);
+  }
+  function closeLb() { lb.hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+  $('#lbClose').addEventListener('click', closeLb);
+  $('#lbPrev').addEventListener('click', () => show(LI - 1, -1));
+  $('#lbNext').addEventListener('click', () => show(LI + 1, 1));
+  document.addEventListener('keydown', e => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowRight') show(LI + 1, 1);
+    if (e.key === 'ArrowLeft') show(LI - 1, -1);
+  });
+  (function swipe(el) {
+    let x0 = null, y0 = 0, dx = 0;
+    el.addEventListener('pointerdown', e => { if (e.target.closest('button')) return; x0 = e.clientX; y0 = e.clientY; dx = 0; });
+    el.addEventListener('pointermove', e => { if (x0 === null) return; dx = e.clientX - x0; if (Math.abs(dx) > Math.abs(e.clientY - y0)) { lbImg.style.transition = 'none'; lbImg.style.transform = 'translateX(' + dx + 'px)'; } });
+    const end = () => { if (x0 === null) return; lbImg.style.transition = ''; if (Math.abs(dx) > 60) show(LI + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); else lbImg.style.transform = ''; x0 = null; };
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => el.addEventListener(t, end));
+  })($('#lbStage'));
+
+  /* ═══ MATRIMONI ═══ */
+  (function () {
+    const tabs = $('#wedTabs'), story = $('#story');
+    let filter = 'all';
+    const opts = [['all', 'Tutte', WED.length]].concat(Object.keys(WED_CH).map(c => [c, WED_CH[c], WED.filter(p => p.ch === c).length]));
+    tabs.innerHTML = opts.map(([id, name, n]) => '<button class="tab" type="button" data-id="' + id + '" aria-pressed="' + (id === 'all') + '">' + name + '<sup>' + n + '</sup></button>').join('');
+    $$('.tab', tabs).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.tab', tabs).forEach(t => t.setAttribute('aria-pressed', t === b)); render(); }));
+    // righe composte: coppia, terzina, panoramica, colonna+due. Ogni riga è sempre piena.
+    const CYCLE = ['pair', 'trio', 'pano', 'stack'], SIZE = { pair: 2, trio: 3, pano: 1, stack: 3 };
+    function rows(n) {
+      const out = []; let i = 0, alt = 0;
+      while (n > 0) {
+        let t = CYCLE[i % CYCLE.length]; i++;
+        if (SIZE[t] > n) t = n === 1 ? 'pano' : 'pair';
+        const asym = t === 'pair' || t === 'stack';
+        out.push({ t, flip: asym && (alt++ % 2 === 1) }); n -= SIZE[t];
+      }
+      return out;
+    }
+    function render() {
+      const list = filter === 'all' ? WED : WED.filter(p => p.ch === filter);
+      story.innerHTML = ''; let idx = 0;
+      rows(list.length).forEach((r, ri) => {
+        const row = document.createElement('div'); row.className = 'row ' + r.t + (r.flip ? ' flip' : '');
+        row.style.animationDelay = Math.min(ri, 3) * 70 + 'ms';
+        for (let j = 0; j < SIZE[r.t]; j++, idx++) {
+          const p = list[idx], gi = WED.indexOf(p) + 1, li = idx;
+          const f = document.createElement('figure'); f.className = 'ph';
+          f.innerHTML = '<button type="button" aria-label="Apri: ' + esc(p.t) + '"><img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy"></button>' +
+            '<figcaption><b>' + String(gi).padStart(2, '0') + '</b><span>' + p.t + '</span><small>' + p.sub + '</small></figcaption>';
+          $('button', f).addEventListener('click', () => openLb(list, li, 'Matrimoni'));
+          row.appendChild(f);
+        }
+        story.appendChild(row);
+      });
+    }
+    render();
+  })();
+
+  /* ═══ EVENTI ═══ */
+  (function () {
+    const chips = $('#evtChips'), wall = $('#wall'), prog = $('#wallProg');
+    let filter = 'all';
+    const opts = [['all', 'Tutti', EVT.length]].concat(Object.keys(EVT_T).map(k => [k, EVT_T[k], EVT.filter(p => p.ty === k).length]));
+    chips.innerHTML = opts.map(([id, name, n]) => '<button class="chip" type="button" data-id="' + id + '" aria-pressed="' + (id === 'all') + '">' + name + '<sup>' + n + '</sup></button>').join('');
+    $$('.chip', chips).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.chip', chips).forEach(c => c.setAttribute('aria-pressed', c === b)); render(); }));
+    // tessere: grande, piccola, piccola, alta, larga, larga → 6 colonne piene
+    const PAT = ['b', 's', 's', 't', 'w', 'w'];
+    function render() {
+      const list = filter === 'all' ? EVT : EVT.filter(p => p.ty === filter);
+      wall.innerHTML = ''; wall.scrollLeft = 0;
+      list.forEach((p, i) => {
+        const shape = list.length <= 3 ? 'b' : PAT[i % PAT.length];
+        const d = document.createElement('div'); d.className = 'tile ' + shape; d.style.animationDelay = Math.min(i, 8) * 50 + 'ms';
+        d.innerHTML = '<button type="button" aria-label="Apri: ' + esc(p.t) + '"><img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy" draggable="false"></button><span class="tag">' + p.sub + '</span><span class="cap">' + p.t + '</span>';
+        $('button', d).addEventListener('click', e => { if (wall.dataset.moved === '1') { e.preventDefault(); return; } openLb(list, i, 'Eventi'); });
+        wall.appendChild(d);
+      });
+      upd();
+    }
+    function upd() {
+      const max = wall.scrollWidth - wall.clientWidth;
+      const vis = wall.clientWidth / Math.max(1, wall.scrollWidth);
+      prog.style.width = (vis * 100) + '%';
+      prog.style.left = (max > 0 ? (wall.scrollLeft / max) * (1 - vis) * 100 : 0) + '%';
+      $('#wallPrev').disabled = wall.scrollLeft <= 2; $('#wallNext').disabled = wall.scrollLeft >= max - 2;
+    }
+    onShow.eventi = () => requestAnimationFrame(upd);
+    wall.addEventListener('scroll', () => requestAnimationFrame(upd), { passive: true });
+    window.addEventListener('resize', upd);
+    const by = d => wall.scrollBy({ left: d * wall.clientWidth * .8, behavior: reduce ? 'auto' : 'smooth' });
+    $('#wallPrev').addEventListener('click', () => by(-1));
+    $('#wallNext').addEventListener('click', () => by(1));
+    wall.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); by(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); by(-1); } });
+    // trascinamento con il mouse (su iPad lo scorrimento con il dito è nativo)
+    let sx = null, sl = 0;
+    wall.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; sx = e.clientX; sl = wall.scrollLeft; wall.dataset.moved = '0'; });
+    window.addEventListener('pointermove', e => { if (sx === null) return; const dx = e.clientX - sx; if (Math.abs(dx) > 5) { wall.dataset.moved = '1'; wall.classList.add('dragging'); } wall.scrollLeft = sl - dx; });
+    window.addEventListener('pointerup', () => { if (sx === null) return; sx = null; wall.classList.remove('dragging'); setTimeout(() => { wall.dataset.moved = '0'; }, 0); });
+    render();
+  })();
+
+  /* ═══ RITI CIVILI ═══ */
+  (function () {
+    const box = $('#frames');
+    RITO.forEach((p, i) => {
+      const f = document.createElement('figure'); f.className = 'frame ' + p.f; f.style.animationDelay = Math.min(i, 8) * 50 + 'ms';
+      f.innerHTML = '<button type="button" aria-label="Apri: ' + esc(p.t) + '"><div class="pic"><img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy"></div></button>' +
+        '<figcaption class="plate"><small>N. ' + String(p.n).padStart(2, '0') + ' · ' + p.place + '</small><span>' + p.t + '</span></figcaption>';
+      $('button', f).addEventListener('click', () => openLb(RITO, i, 'Riti civili'));
+      box.appendChild(f);
+    });
+  })();
+
+  /* ═══ CASA VACANZA ═══ */
+  (function () {
+    const tabs = $('#units'), img = $('#lvImg'), thumbs = $('#lvThumbs');
+    let U = UNITS[0], P = 0, x0 = null, dx = 0;
+    tabs.innerHTML = UNITS.map((u, i) => '<button class="unit-t" role="tab" type="button" data-i="' + i + '" aria-selected="' + (i === 0) + '"><b>' + u.name + '</b><small>' + (u.m ? u.m + ' m² · ' + u.g + ' ospiti' : u.ph.length + ' foto') + '</small></button>').join('');
+    $$('.unit-t', tabs).forEach(b => b.addEventListener('click', () => pick(+b.dataset.i)));
+    const list = () => U.ph.map(([k, t]) => ({ k, t, sub: U.name }));
+    function photo(i) {
+      P = (i + U.ph.length) % U.ph.length;
+      img.style.opacity = 0;
+      setTimeout(() => { img.src = src(U.ph[P][0]); img.alt = U.ph[P][1]; img.style.opacity = 1; }, reduce ? 0 : 150);
+      $('#lvCount').textContent = (P + 1) + ' / ' + U.ph.length + ' · ' + U.ph[P][1];
+      $$('button', thumbs).forEach((b, j) => b.setAttribute('aria-current', j === P));
+    }
+    function pick(i) {
+      U = UNITS[i];
+      $$('.unit-t', tabs).forEach((b, j) => b.setAttribute('aria-selected', j === i));
+      thumbs.innerHTML = U.ph.map(([k, t]) => '<button type="button" aria-label="' + esc(t) + '"><img src="' + src(k) + '" alt="" loading="lazy"></button>').join('');
+      $$('button', thumbs).forEach((b, j) => b.addEventListener('click', () => photo(j)));
+      $('#liKind').textContent = U.kind; $('#liName').textContent = U.name;
+      $('#liG').textContent = U.g ? U.g : 'Tutti'; $('#liM').textContent = U.m ? U.m + ' m²' : '—'; $('#liX').textContent = U.x;
+      $('#liTxt').textContent = U.txt; $('#liLink').href = SITE + U.page;
+      $('#liLink').textContent = U.m ? "Vedi l'alloggio e prenota" : 'Vedi la casa vacanza';
+      $('#lvPrev').hidden = $('#lvNext').hidden = U.ph.length < 2;
+      photo(0);
+    }
+    $('#lvPrev').addEventListener('click', () => photo(P - 1));
+    $('#lvNext').addEventListener('click', () => photo(P + 1));
+    $('#lvOpen').addEventListener('click', () => { if (Math.abs(dx) > 10) return; openLb(list(), P, 'Casa vacanza · ' + U.name); });
+    $('#liAll').addEventListener('click', () => openLb(list(), 0, 'Casa vacanza · ' + U.name));
+    const main = $('#lvMain');
+    main.addEventListener('pointerdown', e => { if (e.target.closest('.arrow')) return; x0 = e.clientX; dx = 0; });
+    main.addEventListener('pointermove', e => { if (x0 !== null) dx = e.clientX - x0; });
+    main.addEventListener('pointerup', () => { if (x0 !== null && Math.abs(dx) > 50) photo(P + (dx < 0 ? 1 : -1)); x0 = null; });
+    pick(0);
+  })();
+
+  /* ─── Avvio: riquadri, oppure la galleria indicata nel link (#matrimoni, #eventi, #riti, #casa) ─── */
+  const start = location.hash.slice(1);
+  if (byId(start)) { try { history.replaceState({ g: start }, ''); } catch (e) {} setView(start); }
+  else { try { history.replaceState({ g: '' }, ''); } catch (e) {} setView(''); }
+})();
+</script>
 </body>
 </html>
