@@ -143,6 +143,15 @@ a { color: inherit; }
 .banner h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem, 7vw, 5.4rem); line-height: 1; margin: .5rem 0 .6rem; letter-spacing: -.01em; }
 .banner-count { font-family: var(--sans); font-weight: 300; font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.78); }
 
+/* Matrimoni: niente foto di copertina → prima sezione sullo stesso beige del sito,
+   separata dalla seconda sezione (tab, foto, CTA) da una sottile linea. */
+.banner.no-img { height: auto; min-height: clamp(190px, 24vw, 270px); align-items: center; background: var(--bg); color: var(--ink); border-bottom: 1px solid var(--rule); }
+.banner.no-img::after { content: none; }
+.banner.no-img .banner-in { padding-bottom: 0; }
+.banner.no-img .label { color: var(--rust); }
+.banner.no-img h1 { color: var(--dark); }
+.banner.no-img .banner-count { color: var(--muted); }
+
 .sec { padding-block: clamp(2.2rem, 5vw, 3.6rem) clamp(3.4rem, 7vw, 5.4rem); }
 .sec-intro { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1rem 3rem; align-items: start; margin-bottom: clamp(1.6rem, 3.6vw, 2.6rem); }
 .sec-intro p.lead { margin: 0; font-size: 1.22rem; line-height: 1.6; max-width: 50ch; }
@@ -386,7 +395,7 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     </div>
   </nav>
 
-  <header class="banner">
+  <header class="banner" id="banner">
     <img id="bannerImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
     <div class="banner-in wrap">
       <span class="label" id="bannerLbl"></span>
@@ -632,7 +641,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   $$('.door', doors).forEach(d => d.addEventListener('click', () => navigate(d.dataset.id, $('.vt', d))));
 
   /* ─── NAVIGAZIONE tra i due livelli ─── */
-  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg');
+  const landing = $('#landing'), gview = $('#gview'), bannerEl = $('#banner'), bannerImg = $('#bannerImg');
   let current = '';
   function setView(id) {
     const s = byId(id);
@@ -642,6 +651,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     SECS.forEach(x => { $('#s-' + x.id).hidden = x.id !== current; });
     if (s) {
       bannerImg.hidden = id === 'matrimoni';
+      bannerEl.classList.toggle('no-img', id === 'matrimoni');
       if (!bannerImg.hidden) { bannerImg.src = src(s.cover); bannerImg.alt = s.name; bannerImg.style.objectPosition = s.pos; }
       $('#bannerLbl').textContent = s.lbl; $('#bannerTitle').textContent = s.name;
       $('#bannerCount').textContent = s.n + ' foto' + s.extra;
