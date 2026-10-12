@@ -401,7 +401,7 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
 
 <!-- ═══ LIVELLO 2 · pagina della galleria scelta ═══ -->
 <div id="gview" hidden>
-  <nav class="nav gbar" aria-label="Navigazione galleria">
+  <nav class="nav gbar nav-landing" aria-label="Navigazione galleria">
     <button class="nav-back" id="gBack" type="button"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>Galleria</span></button>
     <div class="nav-logo"><img src="assets/img/logo.png" alt="Villa Martius"></div>
     <div class="nav-actions">
@@ -410,7 +410,7 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     </div>
   </nav>
 
-  <header class="banner">
+  <header class="banner plain">
     <img id="bannerImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
     <div class="banner-in wrap">
       <span class="label" id="bannerLbl"></span>
@@ -656,7 +656,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   $$('.door', doors).forEach(d => d.addEventListener('click', () => navigate(d.dataset.id, $('.vt', d))));
 
   /* ─── NAVIGAZIONE tra i due livelli ─── */
-  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg'), banner = $('.banner'), gbar = $('.gbar');
+  const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg');
   let current = '';
   function setView(id) {
     const s = byId(id);
@@ -665,10 +665,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     document.documentElement.classList.toggle('is-landing', !s);
     SECS.forEach(x => { $('#s-' + x.id).hidden = x.id !== current; });
     if (s) {
-      bannerImg.hidden = id === 'matrimoni';
-      banner.classList.toggle('plain', id === 'matrimoni');
-      gbar.classList.toggle('nav-landing', id !== 'casa');
-      if (!bannerImg.hidden) { bannerImg.src = src(s.cover); bannerImg.alt = s.name; bannerImg.style.objectPosition = s.pos; }
+      bannerImg.hidden = true;
       $('#bannerLbl').textContent = s.lbl; $('#bannerTitle').textContent = s.name;
       $('#bannerCount').textContent = s.n + ' foto' + s.extra;
       const others = $('#others');
