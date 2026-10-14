@@ -105,8 +105,17 @@ a { color: inherit; }
 .g-menu-cta:hover { background: var(--gold-lt); color: var(--dark); }
 
 /* ═════════ LIVELLO 1 · I QUATTRO RIQUADRI (6 modelli) ═════════ */
-.landing { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); background: var(--bg); }
+.landing { height: 100%; display: grid; grid-template-rows: auto auto minmax(0, 1fr); background: var(--bg); }
+.doors-head { text-align: center; padding: clamp(10px, 2.2vw, 20px) clamp(16px, 4vw, 48px) clamp(4px, 1vw, 10px); display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+.doors-head .label { color: var(--gold); }
+.doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 .1rem; }
+.doors-head .doors-title { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 2.4vw, 1.9rem); color: var(--ink); margin: 0; line-height: 1.1; letter-spacing: .01em; }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
+@media (max-width: 640px) {
+  .doors-head { padding: 8px 14px 4px; gap: .3rem; }
+  .doors-head .doors-title { font-size: 1.1rem; }
+  .doors-head .doors-rule { width: 36px; margin: .2rem 0 .05rem; }
+}
 .doors-grid { width: 100%; height: 100%; max-width: 900px; max-height: 760px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
   .doors-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); max-width: min(92vw, 1800px); max-height: min(62vh, 620px); }
@@ -301,8 +310,12 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
       <button class="g-hamburger" id="gHamburger" aria-label="Apri menu" aria-expanded="false" type="button"><span class="g-hamb-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
     </div>
   </nav>
+  <header class="doors-head">
+    <span class="label">Galleria</span>
+    <span class="doors-rule" aria-hidden="true"></span>
+    <h1 class="doors-title">La villa, in ogni sua luce</h1>
+  </header>
   <main class="doors">
-    <h1 class="sr">Galleria di Villa Martius</h1>
     <div class="doors-grid" id="doors"></div>
   </main>
 </div>
