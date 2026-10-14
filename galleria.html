@@ -174,36 +174,24 @@ a { color: inherit; }
 .sec-end p { margin: 0; font-size: 1.25rem; font-style: italic; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-/* ═════════ CARTA A PILA · un'anteprima per categoria ═════════ */
-.stack-wrap { display: grid; justify-items: center; gap: 1.1rem; padding-block: .4rem clamp(1.4rem, 3vw, 2.2rem); }
-.stack { position: relative; width: 100%; max-width: 460px; animation: rise .6s ease both; }
-.stack::before, .stack::after { content: ""; position: absolute; inset: 0; background: #FBF7EE; border-radius: 16px; box-shadow: 0 10px 26px -16px rgba(31,22,17,.4); z-index: 0; }
-.stack::before { transform: rotate(-3.2deg) translateY(3px); }
-.stack::after { transform: rotate(2.6deg) translateY(3px); }
-.stack-card { position: relative; z-index: 1; display: grid; margin: 0; background: #FBF7EE; color: var(--ink); border-radius: 16px; padding: .9rem .9rem 1.6rem; box-shadow: 0 1px 2px rgba(31,22,17,.15), 0 20px 34px -16px rgba(31,22,17,.4); }
-.stack-photo { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3.1; border-radius: 10px; overflow: hidden; border: 0; padding: 0; cursor: pointer; background: var(--dark); }
-.stack-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
-.stack-card:hover .stack-photo img { transform: scale(1.03); }
-.stack-count { position: absolute; top: .7rem; right: .7rem; display: inline-flex; align-items: center; gap: .4rem; padding: .5rem .8rem; border-radius: 999px; background: rgba(31,22,17,.72); color: #fff; font-family: var(--sans); font-weight: 300; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
-.stack-count svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; }
-.stack-cap { padding: 1.1rem .4rem 0; display: grid; gap: .55rem; justify-items: start; text-align: left; }
-.stack-cap .label { color: var(--rust); }
-.stack-cap h3 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.1rem); margin: 0; line-height: 1.05; }
-.stack-cap p { margin: 0; font-size: 1rem; line-height: 1.5; color: var(--muted); max-width: 42ch; }
-.stack-cta { justify-self: start; margin-top: .3rem; display: inline-flex; align-items: center; gap: .6rem; padding: .9rem 1.4rem; border-radius: 999px; background: var(--dark); color: #fff; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; border: 0; cursor: pointer; transition: background .3s; }
-.stack-cta:hover { background: var(--rust); }
-.stack-cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; flex: 0 0 auto; }
-.stack-hint { margin: 0; text-align: center; font-style: italic; color: var(--muted); font-size: .92rem; }
-@media (min-width: 900px) {
-  .stack-wrap, .story { justify-items: stretch; }
-  .stack { max-width: none; width: 100%; }
-  .stack::before { transform: rotate(-1.4deg) translateY(3px); }
-  .stack::after { transform: rotate(1.1deg) translateY(3px); }
-  .stack-card { grid-template-columns: 1.15fr 1fr; align-items: stretch; gap: 0 2.8rem; padding: 1.2rem 2.6rem 1.2rem 1.2rem; }
-  .stack-photo { aspect-ratio: 16 / 10.5; min-height: 0; }
-  .stack-cap { padding: 1rem 0; align-content: center; gap: .85rem; }
-  .stack-cap h3 { font-size: clamp(2rem, 2.4vw, 2.7rem); }
-  .stack-cap p { font-size: 1.1rem; max-width: 38ch; }
+/* ═════════ IL TAVOLO LUMINOSO · tutte le foto della categoria, dense su un piano retroilluminato ═════════ */
+.tl-lead { margin: 0 0 1rem; font-size: 1.08rem; line-height: 1.6; color: var(--muted); max-width: 68ch; }
+.tl-count { font-family: var(--sans); font-weight: 300; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--rust); white-space: nowrap; }
+.evt .tl-lead { color: rgba(255,255,255,.72); } .evt .tl-count { color: var(--gold-lt); }
+.tl-table { background: radial-gradient(ellipse at 50% 0%, #FBF3DF 0%, #E9D9B6 55%, #D8C49C 100%); border-radius: 16px; padding: clamp(12px, 2.2vw, 22px); box-shadow: inset 0 0 0 1px rgba(90,70,45,.15), 0 20px 40px -24px rgba(31,22,17,.4); animation: rise .6s ease both; }
+.tl-grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: clamp(6px, 1vw, 10px); }
+.tl-cell { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; cursor: pointer; box-shadow: 0 1px 2px rgba(31,22,17,.12); transition: transform .3s ease, box-shadow .3s ease; }
+.tl-cell img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.1); display: block; transition: none; }
+.tl-cell .n { position: absolute; top: 4px; left: 5px; font-size: .5rem; color: rgba(255,255,255,.9); font-variant-numeric: tabular-nums; text-shadow: 0 1px 2px rgba(0,0,0,.65); z-index: 2; pointer-events: none; }
+.tl-cell:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) {
+  .tl-cell:hover { transform: scale(1.5); z-index: 5; box-shadow: 0 16px 32px -10px rgba(31,22,17,.55), 0 0 0 3px #fff, 0 0 26px 4px rgba(255,220,150,.65); }
+}
+@media (max-width: 900px) { .tl-grid { grid-template-columns: repeat(4, minmax(0,1fr)); gap: 7px; } }
+@media (max-width: 560px) {
+  .tl-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; }
+  .tl-table { border-radius: 12px; }
+  .tl-cell .n { font-size: .46rem; top: 3px; left: 4px; }
 }
 
 /* ═════════ MATRIMONI · racconto editoriale ═════════ */
@@ -359,8 +347,12 @@ a { color: inherit; }
 .lb-prev { left: clamp(8px, 1.5vw, 20px); } .lb-next { right: clamp(8px, 1.5vw, 20px); }
 .lb-prev svg, .lb-next svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 1.3; }
 .lb-cap { padding: .9rem clamp(12px, 2vw, 24px) .5rem; text-align: center; }
+.lb-cap-row { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.lb-cap-text { min-width: 0; }
 .lb-cap small { font-family: var(--sans); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); }
 .lb-cap h3 { margin: .15rem 0 0; font-weight: 300; font-size: 1.6rem; line-height: 1.2; font-style: italic; }
+.lb-arrow2 { display: none; width: 42px; height: 42px; flex: 0 0 auto; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: rgba(255,255,255,.06); }
+.lb-arrow2 svg { width: 17px; height: 17px; fill: none; stroke: #fff; stroke-width: 1.4; }
 .lb-rail { display: flex; gap: 6px; overflow-x: auto; padding: .6rem clamp(12px, 2vw, 24px) 1rem; scrollbar-width: none; justify-content: safe center; }
 .lb-rail::-webkit-scrollbar { display: none; }
 .lb-rail button { flex: 0 0 auto; width: 64px; height: 48px; overflow: hidden; border-radius: 4px; opacity: .4; transition: opacity .25s; }
@@ -405,7 +397,8 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   .others-grid { grid-template-columns: minmax(0, 1fr); }
   .others .d1 { --ar: 1.32; }
   .lb-prev, .lb-next { display: none; }
-  .lb-stage { align-items: end; padding-bottom: .6rem; }
+  .lb-arrow2 { display: inline-flex; }
+  .lb-stage { padding-bottom: .6rem; }
   .lb-stage img { border-radius: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -578,7 +571,13 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     <button class="lb-prev" id="lbPrev" aria-label="Foto precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
     <button class="lb-next" id="lbNext" aria-label="Foto successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
-  <div class="lb-cap"><small id="lbSub"></small><h3 id="lbTitle"></h3></div>
+  <div class="lb-cap">
+    <div class="lb-cap-row">
+      <button class="lb-arrow2 prev" id="lbPrev2" aria-label="Foto precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="lb-cap-text"><small id="lbSub"></small><h3 id="lbTitle"></h3></div>
+      <button class="lb-arrow2 next" id="lbNext2" aria-label="Foto successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
   <div class="lb-rail" id="lbRail"></div>
 </div>
 
@@ -765,6 +764,8 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   $('#lbClose').addEventListener('click', closeLb);
   $('#lbPrev').addEventListener('click', () => show(LI - 1, -1));
   $('#lbNext').addEventListener('click', () => show(LI + 1, 1));
+  $('#lbPrev2').addEventListener('click', () => show(LI - 1, -1));
+  $('#lbNext2').addEventListener('click', () => show(LI + 1, 1));
   document.addEventListener('keydown', e => {
     if (lb.hidden) return;
     if (e.key === 'Escape') closeLb();
@@ -779,28 +780,16 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => el.addEventListener(t, end));
   })($('#lbStage'));
 
-  /* ─── CARTA A PILA: un'anteprima per categoria, si apre nel lightbox ─── */
-  function buildStack(container, label, title, desc, list, openName) {
-    const n = list.length, cover = list[0];
+  /* ─── IL TAVOLO LUMINOSO: tutte le foto della categoria, dense su un piano retroilluminato ─── */
+  function buildTavolo(container, list, openName, desc) {
     container.innerHTML =
-      '<div class="stack">' +
-        '<figure class="stack-card">' +
-          '<button type="button" class="stack-photo" aria-label="Apri: ' + esc(title) + ', ' + n + ' foto">' +
-            '<img src="' + src(cover.k) + '" alt="' + esc(cover.t) + '" loading="lazy">' +
-            '<span class="stack-count"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' + n + ' foto</span>' +
-          '</button>' +
-          '<figcaption class="stack-cap">' +
-            '<span class="label">' + esc(label) + '</span>' +
-            '<h3>' + esc(title) + '</h3>' +
-            '<p>' + esc(desc) + '</p>' +
-            '<button type="button" class="stack-cta">Sfoglia le ' + n + ' foto<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>' +
-          '</figcaption>' +
-        '</figure>' +
-      '</div>' +
-      '<p class="stack-hint">Toccate la foto per vederle tutte, poi scorrete con il dito.</p>';
-    const open = () => openLb(list, 0, openName);
-    $('.stack-photo', container).addEventListener('click', open);
-    $('.stack-cta', container).addEventListener('click', open);
+      '<p class="tl-lead">' + (desc ? esc(desc) + ' ' : '') + '<span class="tl-count">' + list.length + ' foto</span></p>' +
+      '<div class="tl-table"><div class="tl-grid">' +
+        list.map((p, i) => '<button type="button" class="tl-cell" aria-label="Apri: ' + esc(p.t) + ', foto ' + (i + 1) + ' di ' + list.length + '">' +
+          '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
+          '<img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy"></button>').join('') +
+      '</div></div>';
+    $$('.tl-cell', container).forEach((c, i) => c.addEventListener('click', () => openLb(list, i, openName)));
   }
 
   /* ═══ MATRIMONI ═══ */
@@ -818,7 +807,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     $$('.tab', tabs).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.tab', tabs).forEach(t => t.setAttribute('aria-pressed', t === b)); render(); }));
     function render() {
       const list = WED.filter(p => p.ch === filter);
-      buildStack(story, 'Matrimoni', WED_CH[filter], WED_DESC[filter], list, 'Matrimoni');
+      buildTavolo(story, list, 'Matrimoni', WED_DESC[filter]);
     }
     render();
   })();
@@ -840,15 +829,14 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     $$('.chip', chips).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.chip', chips).forEach(c => c.setAttribute('aria-pressed', c === b)); render(); }));
     function render() {
       const list = filter === 'all' ? EVT : EVT.filter(p => p.ty === filter);
-      const title = filter === 'all' ? 'Tutti gli eventi' : EVT_T[filter];
-      buildStack(stack, 'Eventi', title, EVT_DESC[filter], list, 'Eventi');
+      buildTavolo(stack, list, 'Eventi', filter === 'all' ? null : EVT_DESC[filter]);
     }
     render();
   })();
 
   /* ═══ RITI CIVILI ═══ */
   (function () {
-    buildStack($('#ritoStack'), 'Riti civili', 'La cerimonia', 'Dalla firma del registro al primo saluto da marito e moglie.', RITO, 'Riti civili');
+    buildTavolo($('#ritoStack'), RITO, 'Riti civili');
   })();
 
   /* ═══ CASA VACANZA ═══ */
