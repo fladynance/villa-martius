@@ -2201,6 +2201,9 @@ input, select, textarea { font-size: 16px; }
 .ev-ph { aspect-ratio: 4 / 5; max-height: 560px; width: 100%; border-radius: 220px 220px 10px 10px; background-size: cover; background-position: center; box-shadow: 0 34px 70px -30px rgba(0,0,0,.65); }
 .ev-rev .ev-ph { border-radius: 10px 10px 220px 220px; }
 .ev-tag { font-family: var(--sans); font-weight: 300; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: #F2ECE0; }
+.ev-num { display: block; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 2.4rem; line-height: 1; letter-spacing: .04em; color: #D4C195; margin: 0 0 .9rem; opacity: .85; }
+.ev-num::after { content: ""; display: block; width: 36px; height: 1px; background: currentColor; margin-top: .55rem; opacity: .6; }
+.ev-ch.c1 .ev-num { color: #4A2012; opacity: .78; }
 .ev-tx h3 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.08; margin: .6rem 0 1rem; color: #fff; }
 .ev-tx p { font-family: var(--serif); font-size: 1.24rem; line-height: 1.68; margin: 0; max-width: 40ch; color: rgba(255,255,255,.95); }
 
@@ -2224,6 +2227,8 @@ input, select, textarea { font-size: 16px; }
   .ev-intro { padding: 1.5rem 0 2.8rem; }
   .ev-copy { font-size: 1.18rem; }
   .ev-ch { padding: 1.8rem 0; }
+  .ev-num { font-size: 2rem; margin-bottom: .7rem; }
+  .ev-num::after { width: 30px; }
   .ev-grid { grid-template-columns: 1fr; gap: 1.6rem; }
   .ev-rev .ev-ph { order: 0; }
   .ev-ph, .ev-rev .ev-ph { aspect-ratio: 16 / 11; max-height: none; border-radius: 110px 110px 8px 8px; }
