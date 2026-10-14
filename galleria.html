@@ -108,7 +108,7 @@ a { color: inherit; }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
 .doors-grid { width: 100%; height: 100%; max-width: 900px; max-height: 760px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
-  .doors-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); }
+  .doors-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); max-width: 1360px; max-height: 480px; }
 }
 .door { position: relative; display: block; width: 100%; height: 100%; min-height: 0; color: var(--ink); animation: doorIn .7s cubic-bezier(.2,.7,.2,1) both; }
 .doors-grid > :nth-child(2) { animation-delay: .07s; } .doors-grid > :nth-child(3) { animation-delay: .14s; } .doors-grid > :nth-child(4) { animation-delay: .21s; }
@@ -117,7 +117,6 @@ a { color: inherit; }
 /* Modello 1 · Cartoline */
 .d1 { --ar: .8; container-type: size; display: grid; place-items: center; }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
-  .doors-grid.m1 { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
   .d1 { --ar: 1.32; }
 }
 @media (max-width: 560px) { .d1 { --ar: .64; } }
@@ -166,19 +165,17 @@ a { color: inherit; }
 .banner.plain .label::before { content: ""; display: inline-block; width: 1.6em; height: 1px; background: var(--rust); margin-right: .6em; vertical-align: middle; opacity: .6; }
 .banner.plain .banner-count { color: var(--muted); }
 
-.sec { padding-block: clamp(2.2rem, 5vw, 3.6rem) clamp(3.4rem, 7vw, 5.4rem); }
-.sec-intro { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1rem 3rem; align-items: start; margin-bottom: clamp(1.6rem, 3.6vw, 2.6rem); }
+.sec { padding-block: clamp(1.1rem, 2.6vw, 1.8rem) clamp(1.6rem, 3.4vw, 2.4rem); }
+.sec-intro { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: .6rem 3rem; align-items: start; margin-bottom: clamp(.7rem, 1.8vw, 1.1rem); }
 .sec-intro p.lead { margin: 0; font-size: 1.22rem; line-height: 1.6; max-width: 50ch; }
 .sec-intro .side { display: grid; gap: .8rem; justify-items: start; }
-.sec-end { display: flex; justify-content: space-between; align-items: center; gap: 1rem 2rem; flex-wrap: wrap; margin-top: clamp(2rem, 4vw, 3rem); padding-top: 1.6rem; border-top: 1px solid var(--rule); }
-.sec-end p { margin: 0; font-size: 1.25rem; font-style: italic; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 /* ═════════ IL TAVOLO LUMINOSO · tutte le foto della categoria, dense su un piano retroilluminato ═════════ */
-.tl-lead { margin: 0 0 1rem; font-size: 1.08rem; line-height: 1.6; color: var(--muted); max-width: 68ch; }
+.tl-lead { margin: 0 0 .6rem; font-size: 1.08rem; line-height: 1.5; color: var(--muted); max-width: 68ch; }
 .tl-count { font-family: var(--sans); font-weight: 300; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--rust); white-space: nowrap; }
 .evt .tl-lead { color: rgba(255,255,255,.72); } .evt .tl-count { color: var(--gold-lt); }
-.tl-table { background: radial-gradient(ellipse at 50% 0%, #FBF3DF 0%, #E9D9B6 55%, #D8C49C 100%); border-radius: 16px; padding: clamp(12px, 2.2vw, 22px); box-shadow: inset 0 0 0 1px rgba(90,70,45,.15), 0 20px 40px -24px rgba(31,22,17,.4); animation: rise .6s ease both; }
+.tl-table { background: radial-gradient(ellipse at 50% 0%, #FBF3DF 0%, #E9D9B6 55%, #D8C49C 100%); border-radius: 16px; padding: clamp(8px, 1.4vw, 14px); box-shadow: inset 0 0 0 1px rgba(90,70,45,.15), 0 20px 40px -24px rgba(31,22,17,.4); animation: rise .6s ease both; }
 .tl-grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: clamp(6px, 1vw, 10px); }
 .tl-cell { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; cursor: pointer; box-shadow: 0 1px 2px rgba(31,22,17,.12); transition: transform .3s ease, box-shadow .3s ease; }
 .tl-cell img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.1); display: block; transition: none; }
@@ -196,7 +193,7 @@ a { color: inherit; }
 
 /* ═════════ MATRIMONI · racconto editoriale ═════════ */
 .wed .label { color: var(--rust); }
-.tabs { display: flex; flex-wrap: wrap; gap: 0 1.8rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.6rem; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0 1.8rem; border-bottom: 1px solid var(--rule); margin-bottom: .9rem; }
 .tab { position: relative; min-height: 48px; font-family: var(--serif); font-size: 1.2rem; color: var(--muted); transition: color .3s; display: inline-flex; align-items: center; gap: .4rem; }
 .tab sup { font-family: var(--sans); font-size: .6rem; letter-spacing: .1em; color: var(--gold); }
 .tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--rust); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
@@ -227,7 +224,7 @@ a { color: inherit; }
 .evt { background: var(--dark); color: rgba(255,255,255,.84); }
 .evt .label { color: var(--gold-lt); }
 .evt .ph-note { color: rgba(255,255,255,.55); }
-.chips { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; margin-bottom: 1.2rem; }
+.chips { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; margin-bottom: .7rem; }
 .chips::-webkit-scrollbar { display: none; }
 .chip { flex: 0 0 auto; min-height: 44px; padding: .6rem 1.1rem; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.78); transition: background .3s, color .3s, border-color .3s; }
 .chip sup { color: var(--gold-lt); margin-left: .3rem; font-size: .6rem; }
@@ -259,7 +256,6 @@ a { color: inherit; }
 .arrow:hover { background: rgba(255,255,255,.1); }
 .arrow svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.3; }
 .arrow[disabled] { opacity: .3; pointer-events: none; }
-.evt .sec-end { border-color: rgba(255,255,255,.14); }
 .evt .btn { color: var(--gold-lt); }
 .evt .btn:hover { background: var(--gold-lt); color: var(--dark); border-color: var(--gold-lt); }
 
@@ -287,10 +283,10 @@ a { color: inherit; }
 /* ═════════ CASA VACANZA · il tavolo intelligente a filtri ═════════ */
 .casa { background: var(--bg-warm); }
 .casa .label { color: var(--dark); }
-.casa-chips { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.casa-chips { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .7rem; }
 .casa-chip { min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--rule); border-radius: 999px; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); background: rgba(242,234,218,.5); transition: background .3s, color .3s, border-color .3s; }
 .casa-chip[aria-pressed="true"] { background: var(--dark); color: #fff; border-color: var(--dark); }
-.casa-info { display: none; align-items: center; justify-content: space-between; gap: 1rem 1.6rem; flex-wrap: wrap; background: var(--paper); border-radius: 10px; padding: .8rem 1.1rem; margin-bottom: 1rem; }
+.casa-info { display: none; align-items: center; justify-content: space-between; gap: 1rem 1.6rem; flex-wrap: wrap; background: var(--paper); border-radius: 10px; padding: .7rem 1rem; margin-bottom: .7rem; }
 .casa-info.show { display: flex; }
 .casa-info .f { display: flex; gap: 20px; }
 .casa-info dt { font-family: var(--sans); font-size: .54rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
@@ -435,7 +431,6 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     <div class="wrap">
       <div class="tabs" role="group" aria-label="Momento della giornata" id="wedTabs"></div>
       <div class="story" id="story"></div>
-      <div class="sec-end"><p>Immaginate il vostro giorno qui?</p><a class="btn" href="contatti.html">Richiedi un preventivo per il matrimonio</a></div>
     </div>
   </section>
 
@@ -447,7 +442,6 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
       </div>
       <div class="chips" role="group" aria-label="Tipo di evento" id="evtChips"></div>
       <div class="stack-wrap" id="evtStack"></div>
-      <div class="sec-end"><p>Una festa, una cena, un anniversario.</p><a class="btn" href="contatti.html">Organizza il tuo evento</a></div>
     </div>
   </section>
 
@@ -461,7 +455,6 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
         </div>
       </div>
       <div class="stack-wrap" id="ritoStack"></div>
-      <div class="sec-end"><p>Il rito civile ha pieno valore legale, qui in villa.</p><a class="btn" href="rito-civile.html">Scopri il rito civile</a></div>
     </div>
   </section>
 
