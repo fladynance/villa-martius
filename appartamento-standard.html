@@ -61,7 +61,7 @@
 <section class="room-detail">
   <div class="rd-top">
     <a class="rd-crumb" href="casa-vacanza.html">Tutte le sistemazioni</a>
-    <div class="rd-mosaic rd-n3"><button type="button" class="rd-tile" data-i="0" aria-label="Apri foto 1"><img src="assets/img/hero-garden.jpg" alt="Appartamento Standard — foto 1" loading="eager"></button><button type="button" class="rd-tile" data-i="1" aria-label="Apri foto 2"><img src="assets/img/pool.jpg" alt="Appartamento Standard — foto 2" loading="lazy"></button><button type="button" class="rd-tile" data-i="2" aria-label="Apri foto 3"><img src="assets/img/casa-vacanza.jpg" alt="Appartamento Standard — foto 3" loading="lazy"></button><button type="button" class="rd-swap" aria-label="Foto successiva" title="Foto successiva"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="M5 4l15 20L5 44"/></svg></button></div>
+    <div class="rd-mosaic rd-n5"><button type="button" class="rd-tile" data-i="0" aria-label="Apri foto 1"><img src="assets/img/hero-garden.jpg" alt="Appartamento Standard — foto 1" loading="eager"></button><button type="button" class="rd-tile" data-i="1" aria-label="Apri foto 2"><img src="assets/img/pool.jpg" alt="Appartamento Standard — foto 2" loading="lazy"></button><button type="button" class="rd-tile" data-i="2" aria-label="Apri foto 3"><img src="assets/img/casa-vacanza.jpg" alt="Appartamento Standard — foto 3" loading="lazy"></button><button type="button" class="rd-tile" data-i="3" aria-label="Apri foto 4"><img src="assets/img/hall.jpg" alt="Appartamento Standard — foto 4" loading="lazy"></button><button type="button" class="rd-tile" data-i="4" aria-label="Apri foto 5"><img src="assets/img/couple.jpg" alt="Appartamento Standard — foto 5" loading="lazy"></button><button type="button" class="rd-swap" aria-label="Foto successiva" title="Foto successiva"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="M5 4l15 20L5 44"/></svg></button><button type="button" class="rd-showall" aria-label="Mostra tutte le foto"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Mostra tutte le foto</button></div>
   </div>
 
   <header class="rd-head">
@@ -98,7 +98,7 @@
 
 <script>
 (function(){
-  var mosaic=document.querySelector('.rd-mosaic'),tiles=[].slice.call(document.querySelectorAll('.rd-tile')),swap=document.querySelector('.rd-swap');
+  var mosaic=document.querySelector('.rd-mosaic'),tiles=[].slice.call(document.querySelectorAll('.rd-tile')),swap=document.querySelector('.rd-swap'),showall=document.querySelector('.rd-showall');
   /* barra fissa mobile: compare quando il modulo disponibilita esce dallo schermo */
   var form=document.querySelector('.rd-book'), bar=document.querySelector('.rd-sticky');
   if(form&&bar&&'IntersectionObserver' in window){
@@ -123,6 +123,7 @@
     document.addEventListener('keydown',key);box.querySelector('.lb-x').focus();
   }
   tiles.forEach(function(t){t.addEventListener('click',function(){open(tiles.indexOf(t));});});
+  if(showall)showall.addEventListener('click',function(){open(0);});
   if(swap&&tiles.length>1){
     swap.addEventListener('click',function(){
       mosaic.classList.add('is-swapping');
