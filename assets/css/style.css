@@ -2153,7 +2153,7 @@ input, select, textarea { font-size: 16px; }
 .ev-story { --a: #D5C4A4; --b: #D5C4A4; }
 .ev-intro { --a: #D5C4A4; --b: #D5C4A4; }
 /* il tramonto parte subito dopo "Occasioni rare" */
-.ev-ch.c1 { --a: #D5C4A4; --b: #6A4466; background: linear-gradient(180deg, #D5C4A4 0%, #E3B07A 22%, #D98B66 45%, #BF6F62 62%, #8F5468 82%, #6A4466 100%); color: #2A1410; }
+.ev-ch.c1 { --a: #D5C4A4; --b: #5A4A5A; background: linear-gradient(180deg, #D5C4A4 0%, #D7BA98 22%, #BC8F7E 45%, #A6796C 62%, #7C5F67 82%, #5A4A5A 100%); color: #2A1410; }
 .ev-ch.c1 .ev-tag { color: #4A2012; }
 .ev-ch.c1 .ev-tx h3 { color: #2A1410; }
 .ev-ch.c1 .ev-tx p { color: #2A1410; }
@@ -2164,20 +2164,20 @@ input, select, textarea { font-size: 16px; }
 
 /* sole e luna: fissi nella finestra, si muovono con lo scroll */
 .ev-cel { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-.ev-sun, .ev-moon { position: absolute; right: 7vw; border-radius: 50%; opacity: 0; will-change: top, opacity; }
+.ev-sun, .ev-moon { position: absolute; left: 7vw; border-radius: 50%; opacity: 0; will-change: top, opacity; }
 .ev-sun {
-  --s: 0; top: 14%; width: 104px; height: 104px; margin-top: -52px;
-  background: radial-gradient(circle at 36% 34%, #FFF6DC, #FFD58E 55%, #FFB066);
-  box-shadow: 0 0 110px 36px rgba(255,196,120,.55);
+  --s: 0; top: 14%; width: 72px; height: 72px; margin-top: -36px;
+  background: radial-gradient(circle at 36% 34%, #F8EFD9, #E8CFA0 55%, #C9A77F);
+  box-shadow: 0 0 80px 24px rgba(220,180,130,.38);
 }
 .ev-sun::after {
   content: ""; position: absolute; inset: 0; border-radius: 50%; opacity: var(--s);
-  background: radial-gradient(circle at 36% 34%, #FFDCAA, #FF8A4E 58%, #E4573D);
-  box-shadow: 0 0 120px 40px rgba(255,120,70,.45);
+  background: radial-gradient(circle at 36% 34%, #ECD2B4, #C9876A 58%, #A86354);
+  box-shadow: 0 0 90px 28px rgba(195,120,90,.32);
 }
 .ev-moon {
-  top: 14%; width: 104px; height: 104px; margin-top: -52px;
-  box-shadow: 0 0 110px 34px rgba(205,218,255,.42), 0 0 34px 4px rgba(255,252,238,.36);
+  top: 14%; width: 72px; height: 72px; margin-top: -36px;
+  box-shadow: 0 0 80px 24px rgba(190,200,220,.32), 0 0 26px 3px rgba(240,235,220,.3);
 }
 .ev-moon-svg { display: block; width: 100%; height: 100%; border-radius: 50%; }
 .ev-stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0; }
@@ -2219,9 +2219,9 @@ input, select, textarea { font-size: 16px; }
 .js-rv .rv.in { opacity: 1; transform: none; }
 
 @media (max-width: 900px) {
-  .ev-sun, .ev-moon { right: 14px; opacity: 0; }
-  .ev-sun { width: 64px; height: 64px; margin-top: -32px; }
-  .ev-moon { width: 64px; height: 64px; margin-top: -32px; }
+  .ev-sun, .ev-moon { left: 14px; opacity: 0; }
+  .ev-sun { width: 48px; height: 48px; margin-top: -24px; }
+  .ev-moon { width: 48px; height: 48px; margin-top: -24px; }
   .ev-wrap { padding: 0 1.2rem; }
   .ev-story { padding: 6.5rem 0 1.5rem; }
   .ev-intro { padding: 1.5rem 0 2.8rem; }
