@@ -174,36 +174,24 @@ a { color: inherit; }
 .sec-end p { margin: 0; font-size: 1.25rem; font-style: italic; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-/* ═════════ CARTA A PILA · un'anteprima per categoria ═════════ */
-.stack-wrap { display: grid; justify-items: center; gap: 1.1rem; padding-block: .4rem clamp(1.4rem, 3vw, 2.2rem); }
-.stack { position: relative; width: 100%; max-width: 460px; animation: rise .6s ease both; }
-.stack::before, .stack::after { content: ""; position: absolute; inset: 0; background: #FBF7EE; border-radius: 16px; box-shadow: 0 10px 26px -16px rgba(31,22,17,.4); z-index: 0; }
-.stack::before { transform: rotate(-3.2deg) translateY(3px); }
-.stack::after { transform: rotate(2.6deg) translateY(3px); }
-.stack-card { position: relative; z-index: 1; display: grid; margin: 0; background: #FBF7EE; color: var(--ink); border-radius: 16px; padding: .9rem .9rem 1.6rem; box-shadow: 0 1px 2px rgba(31,22,17,.15), 0 20px 34px -16px rgba(31,22,17,.4); }
-.stack-photo { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3.1; border-radius: 10px; overflow: hidden; border: 0; padding: 0; cursor: pointer; background: var(--dark); }
-.stack-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
-.stack-card:hover .stack-photo img { transform: scale(1.03); }
-.stack-count { position: absolute; top: .7rem; right: .7rem; display: inline-flex; align-items: center; gap: .4rem; padding: .5rem .8rem; border-radius: 999px; background: rgba(31,22,17,.72); color: #fff; font-family: var(--sans); font-weight: 300; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
-.stack-count svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; }
-.stack-cap { padding: 1.1rem .4rem 0; display: grid; gap: .55rem; justify-items: start; text-align: left; }
-.stack-cap .label { color: var(--rust); }
-.stack-cap h3 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.1rem); margin: 0; line-height: 1.05; }
-.stack-cap p { margin: 0; font-size: 1rem; line-height: 1.5; color: var(--muted); max-width: 42ch; }
-.stack-cta { justify-self: start; margin-top: .3rem; display: inline-flex; align-items: center; gap: .6rem; padding: .9rem 1.4rem; border-radius: 999px; background: var(--dark); color: #fff; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; border: 0; cursor: pointer; transition: background .3s; }
-.stack-cta:hover { background: var(--rust); }
-.stack-cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; flex: 0 0 auto; }
-.stack-hint { margin: 0; text-align: center; font-style: italic; color: var(--muted); font-size: .92rem; }
-@media (min-width: 900px) {
-  .stack-wrap, .story { justify-items: stretch; }
-  .stack { max-width: none; width: 100%; }
-  .stack::before { transform: rotate(-1.4deg) translateY(3px); }
-  .stack::after { transform: rotate(1.1deg) translateY(3px); }
-  .stack-card { grid-template-columns: 1.15fr 1fr; align-items: stretch; gap: 0 2.8rem; padding: 1.2rem 2.6rem 1.2rem 1.2rem; }
-  .stack-photo { aspect-ratio: 16 / 10.5; min-height: 0; }
-  .stack-cap { padding: 1rem 0; align-content: center; gap: .85rem; }
-  .stack-cap h3 { font-size: clamp(2rem, 2.4vw, 2.7rem); }
-  .stack-cap p { font-size: 1.1rem; max-width: 38ch; }
+/* ═════════ IL TAVOLO LUMINOSO · tutte le foto della categoria, dense su un piano retroilluminato ═════════ */
+.tl-lead { margin: 0 0 1rem; font-size: 1.08rem; line-height: 1.6; color: var(--muted); max-width: 68ch; }
+.tl-count { font-family: var(--sans); font-weight: 300; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--rust); white-space: nowrap; }
+.evt .tl-lead { color: rgba(255,255,255,.72); } .evt .tl-count { color: var(--gold-lt); }
+.tl-table { background: radial-gradient(ellipse at 50% 0%, #FBF3DF 0%, #E9D9B6 55%, #D8C49C 100%); border-radius: 16px; padding: clamp(12px, 2.2vw, 22px); box-shadow: inset 0 0 0 1px rgba(90,70,45,.15), 0 20px 40px -24px rgba(31,22,17,.4); animation: rise .6s ease both; }
+.tl-grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: clamp(6px, 1vw, 10px); }
+.tl-cell { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; cursor: pointer; box-shadow: 0 1px 2px rgba(31,22,17,.12); transition: transform .3s ease, box-shadow .3s ease; }
+.tl-cell img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.1); display: block; transition: none; }
+.tl-cell .n { position: absolute; top: 4px; left: 5px; font-size: .5rem; color: rgba(255,255,255,.9); font-variant-numeric: tabular-nums; text-shadow: 0 1px 2px rgba(0,0,0,.65); z-index: 2; pointer-events: none; }
+.tl-cell:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) {
+  .tl-cell:hover { transform: scale(1.5); z-index: 5; box-shadow: 0 16px 32px -10px rgba(31,22,17,.55), 0 0 0 3px #fff, 0 0 26px 4px rgba(255,220,150,.65); }
+}
+@media (max-width: 900px) { .tl-grid { grid-template-columns: repeat(4, minmax(0,1fr)); gap: 7px; } }
+@media (max-width: 560px) {
+  .tl-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; }
+  .tl-table { border-radius: 12px; }
+  .tl-cell .n { font-size: .46rem; top: 3px; left: 4px; }
 }
 
 /* ═════════ MATRIMONI · racconto editoriale ═════════ */
@@ -296,43 +284,22 @@ a { color: inherit; }
 .rito .btn { color: var(--dark); }
 .rito .btn:hover { background: var(--dark); color: var(--wall); border-color: var(--dark); }
 
-/* ═════════ CASA VACANZA · schede per alloggio ═════════ */
+/* ═════════ CASA VACANZA · il tavolo intelligente a filtri ═════════ */
 .casa { background: var(--bg-warm); }
-.casa .label { color: var(--terra); }
-.units { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--rule); background: rgba(242,234,218,.4); margin-bottom: 14px; }
-.unit-t { min-height: 64px; padding: .6rem .5rem; display: grid; align-content: center; gap: .15rem; border-right: 1px solid var(--rule); text-align: center; transition: background .3s, color .3s; }
-.unit-t:last-child { border-right: 0; }
-.unit-t b { font-weight: 400; font-size: 1.05rem; line-height: 1.15; }
-.unit-t small { font-family: var(--sans); font-size: .56rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-.unit-t[aria-selected="true"] { background: var(--dark); color: #fff; }
-.unit-t[aria-selected="true"] small { color: var(--gold-lt); }
-.listing { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); background: var(--paper); }
-.lv { position: relative; background: var(--dark); min-height: 0; }
-.lv-main { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 10px; touch-action: pan-y; }
-.lv-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .35s ease; }
-.lv-main .open { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
-.lv-nav { position: absolute; z-index: 2; bottom: 1rem; right: 1rem; display: flex; gap: .4rem; align-items: center; }
-.lv-nav .arrow { background: rgba(31,22,17,.55); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
-.lv-count { position: absolute; z-index: 2; left: 1rem; bottom: 1rem; padding: .4rem .7rem; background: rgba(31,22,17,.62); color: #fff; font-family: var(--sans); font-size: .62rem; letter-spacing: .2em; font-variant-numeric: tabular-nums; }
-.lv-thumbs { display: flex; gap: 6px; padding: 6px; background: var(--dark); overflow-x: auto; scrollbar-width: none; }
-.lv-thumbs::-webkit-scrollbar { display: none; }
-.lv-thumbs button { flex: 0 0 clamp(84px, 17%, 132px); aspect-ratio: 4/3; overflow: hidden; border-radius: 6px; opacity: .5; transition: opacity .3s; outline-offset: -2px; }
-.lv-thumbs button[aria-current="true"] { opacity: 1; box-shadow: inset 0 0 0 2px var(--gold-lt); }
-.lv-thumbs img { width: 100%; height: 100%; object-fit: cover; }
-.li { padding: clamp(1.4rem, 3vw, 2.4rem); display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
-.li h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1.05; margin: .3rem 0 0; color: var(--dark); }
-.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 0; }
-.facts div { padding: .7rem .2rem; border-right: 1px solid var(--rule); text-align: center; }
-.facts div:last-child { border-right: 0; }
-.facts dt { font-family: var(--sans); font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
-.facts dd { margin: 0; font-size: 1.35rem; line-height: 1.25; color: var(--dark); font-variant-numeric: tabular-nums; }
-.facts dd.sm { font-size: 1.02rem; padding-top: .2rem; font-style: italic; }
-.li p { margin: 0; }
-.li-btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: auto; }
+.casa .label { color: var(--dark); }
+.casa-chips { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.casa-chip { min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--rule); border-radius: 999px; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); background: rgba(242,234,218,.5); transition: background .3s, color .3s, border-color .3s; }
+.casa-chip[aria-pressed="true"] { background: var(--dark); color: #fff; border-color: var(--dark); }
+.casa-info { display: none; align-items: center; justify-content: space-between; gap: 1rem 1.6rem; flex-wrap: wrap; background: var(--paper); border-radius: 10px; padding: .8rem 1.1rem; margin-bottom: 1rem; }
+.casa-info.show { display: flex; }
+.casa-info .f { display: flex; gap: 20px; }
+.casa-info dt { font-family: var(--sans); font-size: .54rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.casa-info dd { margin: 0; font-size: 1.1rem; color: var(--dark); font-variant-numeric: tabular-nums; }
+.tl-cell .u { position: absolute; top: 4px; left: 5px; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 1.5px rgba(255,255,255,.85); z-index: 2; }
 .casa .btn { color: var(--dark); }
 .casa .btn:hover { background: var(--dark); color: var(--paper); border-color: var(--dark); }
-.casa .btn.solid { background: var(--terra); border-color: var(--terra); border-radius: 999px; color: #fff; }
-.casa .btn.solid:hover { background: var(--dark); border-color: var(--dark); }
+.casa .btn.solid { background: var(--dark); border-color: var(--dark); border-radius: 999px; color: #fff; }
+.casa .btn.solid:hover { background: var(--rust); border-color: var(--rust); }
 
 /* ─── LE ALTRE GALLERIE ─── */
 .others { background: var(--bg); padding-block: clamp(2.6rem, 6vw, 4rem); border-top: 1px solid var(--rule); }
@@ -359,8 +326,18 @@ a { color: inherit; }
 .lb-prev { left: clamp(8px, 1.5vw, 20px); } .lb-next { right: clamp(8px, 1.5vw, 20px); }
 .lb-prev svg, .lb-next svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 1.3; }
 .lb-cap { padding: .9rem clamp(12px, 2vw, 24px) .5rem; text-align: center; }
+.lb-cap-row { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.lb-cap-text { min-width: 0; }
 .lb-cap small { font-family: var(--sans); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); }
 .lb-cap h3 { margin: .15rem 0 0; font-weight: 300; font-size: 1.6rem; line-height: 1.2; font-style: italic; }
+.lb-arrow2 { display: none; width: 42px; height: 42px; flex: 0 0 auto; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: rgba(255,255,255,.06); }
+.lb-book { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: .6rem; }
+.lb-book .f { display: flex; gap: 16px; }
+.lb-book dt { font-family: var(--sans); font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+.lb-book dd { margin: 0; font-size: 1rem; color: #fff; font-variant-numeric: tabular-nums; }
+.lb-book .btn { min-height: 38px; padding: .5rem .9rem; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; color: #fff; font-family: var(--sans); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; transition: background .3s, color .3s; }
+.lb-book .btn:hover { background: #fff; color: var(--dark); }
+.lb-arrow2 svg { width: 17px; height: 17px; fill: none; stroke: #fff; stroke-width: 1.4; }
 .lb-rail { display: flex; gap: 6px; overflow-x: auto; padding: .6rem clamp(12px, 2vw, 24px) 1rem; scrollbar-width: none; justify-content: safe center; }
 .lb-rail::-webkit-scrollbar { display: none; }
 .lb-rail button { flex: 0 0 auto; width: 64px; height: 48px; overflow: hidden; border-radius: 4px; opacity: .4; transition: opacity .25s; }
@@ -405,7 +382,8 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   .others-grid { grid-template-columns: minmax(0, 1fr); }
   .others .d1 { --ar: 1.32; }
   .lb-prev, .lb-next { display: none; }
-  .lb-stage { align-items: end; padding-bottom: .6rem; }
+  .lb-arrow2 { display: inline-flex; }
+  .lb-stage { padding-bottom: .6rem; }
   .lb-stage img { border-radius: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -491,36 +469,11 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <section class="sec casa" id="s-casa" aria-label="Galleria Casa vacanza" hidden>
     <div class="wrap">
       <div class="sec-intro">
-        <p class="lead">Scegliete l'alloggio per vedere le sue foto, quanti ospiti accoglie e quanto è grande. Da qui si passa direttamente alla prenotazione.</p>
+        <p class="lead">Tutte le foto dei nostri alloggi, in un unico colpo d'occhio. Filtrate per vedere un alloggio alla volta, con i suoi numeri e la prenotazione.</p>
       </div>
-      <div class="units" role="tablist" aria-label="Alloggio" id="units"></div>
-      <div class="listing">
-        <div class="lv">
-          <div class="lv-main" id="lvMain">
-            <img id="lvImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
-            <button class="open" id="lvOpen" type="button" aria-label="Apri la foto a schermo intero"></button>
-            <span class="lv-count" id="lvCount">1 / 2</span>
-            <div class="lv-nav">
-              <button class="arrow" id="lvPrev" aria-label="Foto precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-              <button class="arrow" id="lvNext" aria-label="Foto successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-            </div>
-          </div>
-          <div class="lv-thumbs" id="lvThumbs"></div>
-        </div>
-        <div class="li">
-          <div><span class="label" id="liKind">Camera</span><h3 id="liName">Camera Standard</h3></div>
-          <dl class="facts">
-            <div><dt>Ospiti</dt><dd id="liG">2</dd></div>
-            <div><dt>Superficie</dt><dd id="liM">25 m²</dd></div>
-            <div><dt>In più</dt><dd class="sm" id="liX">TV</dd></div>
-          </dl>
-          <p id="liTxt"></p>
-          <div class="li-btns">
-            <a class="btn solid" id="liLink" href="#" target="_blank" rel="noopener">Vedi l'alloggio e prenota</a>
-            <button class="btn" id="liAll" type="button">Tutte le foto</button>
-          </div>
-        </div>
-      </div>
+      <div class="casa-chips" role="group" aria-label="Filtra per alloggio" id="casaChips"></div>
+      <div class="casa-info" id="casaInfo"></div>
+      <div class="tl-table"><div class="tl-grid" id="casaGrid"></div></div>
     </div>
   </section>
 
@@ -578,7 +531,14 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     <button class="lb-prev" id="lbPrev" aria-label="Foto precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
     <button class="lb-next" id="lbNext" aria-label="Foto successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
-  <div class="lb-cap"><small id="lbSub"></small><h3 id="lbTitle"></h3></div>
+  <div class="lb-cap">
+    <div class="lb-cap-row">
+      <button class="lb-arrow2 prev" id="lbPrev2" aria-label="Foto precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="lb-cap-text"><small id="lbSub"></small><h3 id="lbTitle"></h3></div>
+      <button class="lb-arrow2 next" id="lbNext2" aria-label="Foto successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="lb-book" id="lbBook"></div>
+  </div>
   <div class="lb-rail" id="lbRail"></div>
 </div>
 
@@ -734,10 +694,10 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   $('#gBack2').addEventListener('click', back);
 
   /* ─── LIGHTBOX ─── */
-  const lb = $('#lb'), lbImg = $('#lbImg'), rail = $('#lbRail');
-  let L = [], LI = 0, Lname = '', lastFocus = null;
-  function openLb(list, i, name) {
-    L = list; LI = i; Lname = name; lastFocus = document.activeElement;
+  const lb = $('#lb'), lbImg = $('#lbImg'), rail = $('#lbRail'), lbBook = $('#lbBook');
+  let L = [], LI = 0, Lname = '', Lunit = null, lastFocus = null;
+  function openLb(list, i, name, unit) {
+    L = list; LI = i; Lname = name; Lunit = unit || null; lastFocus = document.activeElement;
     rail.innerHTML = list.map((p, j) => '<button type="button" data-j="' + j + '" aria-label="Foto ' + (j + 1) + '"><img src="' + src(p.k) + '" alt="" loading="lazy"></button>').join('');
     $$('button', rail).forEach(b => b.addEventListener('click', () => show(+b.dataset.j, 0)));
     lb.hidden = false; document.body.style.overflow = 'hidden'; show(i, 0); $('#lbClose').focus();
@@ -747,6 +707,9 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     lbImg.src = src(p.k); lbImg.alt = p.t;
     $('#lbWhere').innerHTML = '<b>' + Lname + '</b> · ' + (LI + 1) + ' / ' + L.length;
     $('#lbSub').textContent = p.sub || ''; $('#lbTitle').textContent = p.t;
+    lbBook.innerHTML = (Lunit && Lunit.g) ?
+      '<div class="f"><div><dt>Ospiti</dt><dd>' + Lunit.g + '</dd></div><div><dt>m²</dt><dd>' + Lunit.m + '</dd></div><div><dt>In più</dt><dd>' + esc(Lunit.x) + '</dd></div></div>' +
+      '<a class="btn" href="' + SITE + Lunit.page + '" target="_blank" rel="noopener">Vedi e prenota</a>' : '';
     $$('button', rail).forEach((b, j) => {
       const on = j === LI; b.setAttribute('aria-current', on);
       if (on) rail.scrollTo({ left: b.offsetLeft - rail.clientWidth / 2 + b.offsetWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
@@ -765,6 +728,8 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   $('#lbClose').addEventListener('click', closeLb);
   $('#lbPrev').addEventListener('click', () => show(LI - 1, -1));
   $('#lbNext').addEventListener('click', () => show(LI + 1, 1));
+  $('#lbPrev2').addEventListener('click', () => show(LI - 1, -1));
+  $('#lbNext2').addEventListener('click', () => show(LI + 1, 1));
   document.addEventListener('keydown', e => {
     if (lb.hidden) return;
     if (e.key === 'Escape') closeLb();
@@ -779,28 +744,16 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => el.addEventListener(t, end));
   })($('#lbStage'));
 
-  /* ─── CARTA A PILA: un'anteprima per categoria, si apre nel lightbox ─── */
-  function buildStack(container, label, title, desc, list, openName) {
-    const n = list.length, cover = list[0];
+  /* ─── IL TAVOLO LUMINOSO: tutte le foto della categoria, dense su un piano retroilluminato ─── */
+  function buildTavolo(container, list, openName, desc) {
     container.innerHTML =
-      '<div class="stack">' +
-        '<figure class="stack-card">' +
-          '<button type="button" class="stack-photo" aria-label="Apri: ' + esc(title) + ', ' + n + ' foto">' +
-            '<img src="' + src(cover.k) + '" alt="' + esc(cover.t) + '" loading="lazy">' +
-            '<span class="stack-count"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' + n + ' foto</span>' +
-          '</button>' +
-          '<figcaption class="stack-cap">' +
-            '<span class="label">' + esc(label) + '</span>' +
-            '<h3>' + esc(title) + '</h3>' +
-            '<p>' + esc(desc) + '</p>' +
-            '<button type="button" class="stack-cta">Sfoglia le ' + n + ' foto<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>' +
-          '</figcaption>' +
-        '</figure>' +
-      '</div>' +
-      '<p class="stack-hint">Toccate la foto per vederle tutte, poi scorrete con il dito.</p>';
-    const open = () => openLb(list, 0, openName);
-    $('.stack-photo', container).addEventListener('click', open);
-    $('.stack-cta', container).addEventListener('click', open);
+      '<p class="tl-lead">' + (desc ? esc(desc) + ' ' : '') + '<span class="tl-count">' + list.length + ' foto</span></p>' +
+      '<div class="tl-table"><div class="tl-grid">' +
+        list.map((p, i) => '<button type="button" class="tl-cell" aria-label="Apri: ' + esc(p.t) + ', foto ' + (i + 1) + ' di ' + list.length + '">' +
+          '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
+          '<img src="' + src(p.k) + '" alt="' + esc(p.t) + '" loading="lazy"></button>').join('') +
+      '</div></div>';
+    $$('.tl-cell', container).forEach((c, i) => c.addEventListener('click', () => openLb(list, i, openName)));
   }
 
   /* ═══ MATRIMONI ═══ */
@@ -818,7 +771,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     $$('.tab', tabs).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.tab', tabs).forEach(t => t.setAttribute('aria-pressed', t === b)); render(); }));
     function render() {
       const list = WED.filter(p => p.ch === filter);
-      buildStack(story, 'Matrimoni', WED_CH[filter], WED_DESC[filter], list, 'Matrimoni');
+      buildTavolo(story, list, 'Matrimoni', WED_DESC[filter]);
     }
     render();
   })();
@@ -840,56 +793,48 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
     $$('.chip', chips).forEach(b => b.addEventListener('click', () => { filter = b.dataset.id; $$('.chip', chips).forEach(c => c.setAttribute('aria-pressed', c === b)); render(); }));
     function render() {
       const list = filter === 'all' ? EVT : EVT.filter(p => p.ty === filter);
-      const title = filter === 'all' ? 'Tutti gli eventi' : EVT_T[filter];
-      buildStack(stack, 'Eventi', title, EVT_DESC[filter], list, 'Eventi');
+      buildTavolo(stack, list, 'Eventi', filter === 'all' ? null : EVT_DESC[filter]);
     }
     render();
   })();
 
   /* ═══ RITI CIVILI ═══ */
   (function () {
-    buildStack($('#ritoStack'), 'Riti civili', 'La cerimonia', 'Dalla firma del registro al primo saluto da marito e moglie.', RITO, 'Riti civili');
+    buildTavolo($('#ritoStack'), RITO, 'Riti civili');
   })();
 
-  /* ═══ CASA VACANZA ═══ */
+  /* ═══ CASA VACANZA · il tavolo intelligente a filtri ═══ */
   (function () {
-    const tabs = $('#units'), img = $('#lvImg'), thumbs = $('#lvThumbs');
-    let U = UNITS[0], P = 0, x0 = null, dx = 0;
-    tabs.innerHTML = UNITS.map((u, i) => '<button class="unit-t" role="tab" type="button" data-i="' + i + '" aria-selected="' + (i === 0) + '"><b>' + u.name + '</b><small>' + (u.m ? u.m + ' m² · ' + u.g + ' ospiti' : u.ph.length + ' foto') + '</small></button>').join('');
-    $$('.unit-t', tabs).forEach(b => b.addEventListener('click', () => {
-      const i = +b.dataset.i;
-      if (window.matchMedia('(max-width: 900px)').matches) { location.href = SITE + UNITS[i].page; return; }
-      pick(i);
+    const chipsEl = $('#casaChips'), info = $('#casaInfo'), grid = $('#casaGrid');
+    const COLORS = ['#A88A4E', '#4A2012', '#7A5A2E', '#5E4E3B', '#8C6A3E', '#2F6F5E'];
+    const all = [];
+    UNITS.forEach((u, ui) => u.ph.forEach(([k, t]) => all.push({ u, ui, k, t })));
+    chipsEl.innerHTML = UNITS.map((u, i) => '<button class="casa-chip" type="button" data-i="' + i + '" aria-pressed="false">' + esc(u.name) + '</button>').join('');
+    grid.innerHTML = all.map((e, i) => '<button type="button" class="tl-cell" data-i="' + i + '" aria-label="Apri: ' + esc(e.t) + ', ' + esc(e.u.name) + '"><span class="u" style="background:' + COLORS[e.ui % COLORS.length] + '"></span><img src="' + src(e.k) + '" alt="' + esc(e.t) + '" loading="lazy"></button>').join('');
+    let active = null;
+    function render() {
+      $$('.casa-chip', chipsEl).forEach((c, i) => c.setAttribute('aria-pressed', i === active));
+      $$('.tl-cell', grid).forEach((c, i) => { c.hidden = active !== null && all[i].ui !== active; });
+      const u = active === null ? null : UNITS[active];
+      if (u && u.g) {
+        info.classList.add('show');
+        info.innerHTML = '<div class="f"><div><dt>Ospiti</dt><dd>' + u.g + '</dd></div><div><dt>m²</dt><dd>' + u.m + '</dd></div><div><dt>In più</dt><dd>' + esc(u.x) + '</dd></div></div>' +
+          '<a class="btn solid" href="' + SITE + u.page + '" target="_blank" rel="noopener">Vedi e prenota</a>';
+      } else {
+        info.classList.remove('show'); info.innerHTML = '';
+      }
+    }
+    $$('.casa-chip', chipsEl).forEach(c => c.addEventListener('click', () => {
+      const i = +c.dataset.i;
+      active = active === i ? null : i;
+      render();
     }));
-    const list = () => U.ph.map(([k, t]) => ({ k, t, sub: U.name }));
-    function photo(i) {
-      P = (i + U.ph.length) % U.ph.length;
-      img.style.opacity = 0;
-      setTimeout(() => { img.src = src(U.ph[P][0]); img.alt = U.ph[P][1]; img.style.opacity = 1; }, reduce ? 0 : 150);
-      $('#lvCount').textContent = (P + 1) + ' / ' + U.ph.length + ' · ' + U.ph[P][1];
-      $$('button', thumbs).forEach((b, j) => b.setAttribute('aria-current', j === P));
-    }
-    function pick(i) {
-      U = UNITS[i];
-      $$('.unit-t', tabs).forEach((b, j) => b.setAttribute('aria-selected', j === i));
-      thumbs.innerHTML = U.ph.map(([k, t]) => '<button type="button" aria-label="' + esc(t) + '"><img src="' + src(k) + '" alt="" loading="lazy"></button>').join('');
-      $$('button', thumbs).forEach((b, j) => b.addEventListener('click', () => photo(j)));
-      $('#liKind').textContent = U.kind; $('#liName').textContent = U.name;
-      $('#liG').textContent = U.g ? U.g : 'Tutti'; $('#liM').textContent = U.m ? U.m + ' m²' : '—'; $('#liX').textContent = U.x;
-      $('#liTxt').textContent = U.txt; $('#liLink').href = SITE + U.page;
-      $('#liLink').textContent = U.m ? "Vedi l'alloggio e prenota" : 'Vedi la casa vacanza';
-      $('#lvPrev').hidden = $('#lvNext').hidden = U.ph.length < 2;
-      photo(0);
-    }
-    $('#lvPrev').addEventListener('click', () => photo(P - 1));
-    $('#lvNext').addEventListener('click', () => photo(P + 1));
-    $('#lvOpen').addEventListener('click', () => { if (Math.abs(dx) > 10) return; openLb(list(), P, 'Casa vacanza · ' + U.name); });
-    $('#liAll').addEventListener('click', () => openLb(list(), 0, 'Casa vacanza · ' + U.name));
-    const main = $('#lvMain');
-    main.addEventListener('pointerdown', e => { if (e.target.closest('.arrow')) return; x0 = e.clientX; dx = 0; });
-    main.addEventListener('pointermove', e => { if (x0 !== null) dx = e.clientX - x0; });
-    main.addEventListener('pointerup', () => { if (x0 !== null && Math.abs(dx) > 50) photo(P + (dx < 0 ? 1 : -1)); x0 = null; });
-    pick(0);
+    $$('.tl-cell', grid).forEach(c => c.addEventListener('click', () => {
+      const i = +c.dataset.i, e = all[i];
+      const list = e.u.ph.map(([k, t]) => ({ k, t, sub: e.u.name }));
+      openLb(list, e.u.ph.findIndex(p => p[0] === e.k), 'Casa vacanza · ' + e.u.name, e.u);
+    }));
+    render();
   })();
 
   /* ─── Avvio: riquadri, oppure la galleria indicata nel link (#matrimoni, #eventi, #riti, #casa) ─── */
