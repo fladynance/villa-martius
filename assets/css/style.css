@@ -995,10 +995,11 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 
 /* ─── Rooms grid (Casa Vacanze · Camere) ──────────────────── */
 .rooms-hero {
-  height: 340px;
-  min-height: 340px;
-  max-height: 340px;
-  padding: 6rem 2rem 2rem;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  padding: 2.5rem 2rem 2rem;
+  justify-content: flex-start;
 }
 .rooms-hero .hero-content {
   max-width: 780px;
@@ -1039,7 +1040,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   margin: 0 auto;
 }
 @media (max-width: 640px) {
-  .rooms-hero { height: 260px; min-height: 260px; max-height: 260px; padding: 4.5rem 1.4rem 1.4rem; }
+  .rooms-hero { height: auto; min-height: 0; max-height: none; padding: 2rem 1.4rem 1.6rem; }
   .rooms-hero-title { font-size: 1.9rem; }
   .rooms-hero-sub { font-size: 0.9rem; }
 }
@@ -1280,6 +1281,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 }
 /* room-cta rendered as <a> keeps the same visual as button */
 a.room-cta { text-decoration: none; }
+.room-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
 
 /* ─── ROOM DETAIL (hero cinematografico + mosaico) ───────────── */
 .room-detail {
@@ -2504,7 +2511,7 @@ body.mt-lock { overflow: hidden; }
 .rc-cta { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 2rem; border-radius: 999px; background: #9F876A; border: 1.5px solid #9F876A; color: #fff; text-decoration: none; font-family: var(--sans); font-weight: 300; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; transition: background .3s, border-color .3s, transform .3s; }
 .rc-cta:hover { background: var(--dark); border-color: var(--dark); transform: translateY(-2px); }
 .rc-cta:focus-visible { outline: 2px solid var(--mt-ink); outline-offset: 4px; }
-.rc-main { padding: 7.4rem 3.4rem 2rem 1.6rem; max-width: 720px; display: flex; flex-direction: column; gap: 4rem; }
+.rc-main { padding: 2.8rem 3.4rem 2rem 1.6rem; max-width: 720px; display: flex; flex-direction: column; gap: 4rem; }
 .rc-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.08; margin: .8rem 0 1.3rem; color: var(--mt-ink); text-wrap: balance; }
 .rc-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.65; margin: 0 0 1rem; color: #2E1D12; }
 .rc-copy em { font-style: italic; font-weight: 500; color: var(--mt-ink); }
@@ -2556,7 +2563,7 @@ body.mt-lock { overflow: hidden; }
   .rc-cta { align-self: center; margin-bottom: 1rem; }
   .rc-title { font-size: clamp(2.2rem, 9vw, 3rem); margin: 1.6rem 0 0; }
   .rc-title2 { margin: 1.8rem 0 1.5rem; }
-  .rc-main { padding: 7rem 1.3rem 1rem; max-width: none; gap: 3rem; }
+  .rc-main { padding: 2.4rem 1.3rem 1rem; max-width: none; gap: 3rem; }
   .rc-main { text-align: left; }
   .rc-first { text-align: center; }
   .rc-cols { grid-template-columns: 1fr; }
