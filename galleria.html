@@ -11,7 +11,7 @@
 <meta property="og:description" content="La galleria di Villa Martius: matrimoni, eventi, riti civili e casa vacanza, da sfogliare come quattro cartoline.">
 <meta property="og:image" content="assets/img/galleria/gazebo-full.jpg">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#D5C4A4">
+<meta name="theme-color" content="#E6DBC8">
 <link rel="icon" type="image/png" href="assets/img/logo.png">
 <title>Galleria Villa Martius · Cartoline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,16 +24,16 @@
    · Casa vacanza = schede per alloggio), in fondo le altre gallerie.
    Tema unico chiaro come il sito (color-scheme: light). Palette dal file style.css del sito. */
 :root {
-  --bg:       #D5C4A4;   /* travertino */
-  --bg-warm:  #C6B48A;
+  --bg:       #E6DBC8;   /* travertino */
+  --bg-warm:  #D1C1A0;
   --wall:     #DDD0B5;   /* parete della sala del rito */
   --paper:    #F2EADA;
   --mat:      #F8F2E6;   /* passe-partout */
   --dark:     #1F1611;
   --ink:      #2A1F14;
   --muted:    #5E4E3B;
-  --gold:     #A88A4E;
-  --gold-lt:  #C9A66B;
+  --gold:     #9F876A;
+  --gold-lt:  #C4B296;
   --rust:     #4A2012;   /* etichette pagina Matrimoni del sito */
   --terra:    #B25B3E;   /* terracotta del sito */
   --rule:     rgba(90,70,45,0.28);
@@ -72,7 +72,7 @@ a { color: inherit; }
 @media (min-width: 721px) { .nav-cta-icon { display: none; } }
 
 /* ─── BARRA CHIARA (come la nav di esplora.html) ─── */
-.nav-landing { background: rgba(213,196,164,.96); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(90,68,44,.18); }
+.nav-landing { background: rgba(230,219,200,.96); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(90,68,44,.18); }
 .nav-landing .nav-back { color: var(--ink); }
 .nav-landing .nav-back:hover { color: var(--gold); }
 .nav-landing .nav-back svg { stroke: var(--ink); }
@@ -661,7 +661,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   /* ═══ CASA VACANZA · il tavolo intelligente a filtri ═══ */
   (function () {
     const chipsEl = $('#casaChips'), info = $('#casaInfo'), grid = $('#casaGrid');
-    const COLORS = ['#A88A4E', '#4A2012', '#7A5A2E', '#5E4E3B', '#8C6A3E', '#2F6F5E'];
+    const COLORS = ['#9F876A', '#4A2012', '#7A5A2E', '#5E4E3B', '#8C6A3E', '#2F6F5E'];
     const all = [];
     UNITS.forEach((u, ui) => u.ph.forEach(([k, t]) => all.push({ u, ui, k, t })));
     chipsEl.innerHTML = UNITS.map((u, i) => '<button class="casa-chip" type="button" data-i="' + i + '" aria-pressed="false">' + esc(u.name) + '</button>').join('');
