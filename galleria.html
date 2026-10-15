@@ -115,7 +115,7 @@ a { color: inherit; }
 .g-hamburger:hover .g-hamb-icon span:nth-child(2) { width: 100%; }
 .g-menu { position: fixed; inset: 0; z-index: 300; background: linear-gradient(160deg, #1F1611 0%, #2A1F16 60%, #1F1611 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem; padding: 5rem 2rem 3rem; transform: translateY(-100%); transition: transform .6s cubic-bezier(.76,0,.24,1); overflow-y: auto; }
 .g-menu.open { transform: translateY(0); }
-.g-menu::before { content: "Menu"; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .42em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+.g-menu::before { content: "Menu"; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .42em; text-indent: .42em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
 .g-menu-close { position: absolute; top: 1.6rem; right: 1.6rem; display: inline-flex; align-items: center; gap: .6rem; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.8); background: none; border: 0; padding: .6rem .9rem; cursor: pointer; transition: color .3s; }
 .g-menu-close:hover { color: var(--gold-lt); }
 .g-menu a { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 2.2rem; color: #fff; text-decoration: none; transition: color .3s; line-height: 1.2; display: inline-flex; align-items: center; gap: .9rem; }
@@ -360,7 +360,7 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 /* ─── WhatsApp: stesso pulsante del resto del sito ─── */
-.wa-fab { position: fixed; z-index: 95; right: clamp(14px, 2.2vw, 26px); bottom: calc(clamp(14px, 2.2vw, 26px) + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; justify-content: flex-start; gap: .75rem; width: 56px; height: 56px; padding: 0 15px; border-radius: 999px; overflow: hidden; text-decoration: none; background: #1E6A55; color: #fff; box-shadow: 0 12px 30px -12px rgba(16,70,55,.65), 0 2px 6px rgba(0,0,0,.16); transition: width .38s cubic-bezier(.2,.7,.3,1), background .3s, box-shadow .3s; }
+.wa-fab { position: fixed; z-index: 95; right: clamp(14px, 2.2vw, 26px); bottom: calc(clamp(14px, 2.2vw, 26px) + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; justify-content: center; gap: .75rem; width: 56px; height: 56px; padding: 0 15px; border-radius: 999px; overflow: hidden; text-decoration: none; background: #1E6A55; color: #fff; box-shadow: 0 12px 30px -12px rgba(16,70,55,.65), 0 2px 6px rgba(0,0,0,.16); transition: width .38s cubic-bezier(.2,.7,.3,1), background .3s, box-shadow .3s; }
 .wa-fab svg { width: 26px; height: 26px; flex: 0 0 auto; fill: currentColor; }
 .wa-fab .wa-txt { font-family: var(--sans); font-weight: 400; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; opacity: 0; transition: opacity .25s ease; }
 .wa-fab:hover, .wa-fab:focus-visible { width: 262px; background: #175443; }
