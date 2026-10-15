@@ -106,7 +106,38 @@ a { color: inherit; }
 .g-menu-cta:hover { background: var(--gold-lt); color: var(--dark); }
 
 /* ═════════ LIVELLO 1 · I QUATTRO RIQUADRI (6 modelli) ═════════ */
-.landing { height: 100%; display: grid; grid-template-rows: auto auto minmax(0, 1fr); background: var(--bg); }
+.landing { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); }
+/* ─── Filter bar ─── */
+.gal-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(14px, 2.4vw, 32px); padding: clamp(14px, 1.6vw, 24px) clamp(16px, 4vw, 48px) clamp(8px, 1.2vw, 16px); border-bottom: 1px solid rgba(159,135,106,.22); }
+.gal-filters .gf { appearance: none; background: transparent; border: 0; padding: .5rem .2rem; cursor: pointer; position: relative; font-family: var(--sans); font-weight: 300; font-size: .74rem; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); transition: color .3s; }
+.gal-filters .gf::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: center; transition: transform .35s ease; }
+.gal-filters .gf:hover { color: var(--ink); }
+.gal-filters .gf.on { color: var(--ink); }
+.gal-filters .gf.on::after { transform: scaleX(1); }
+@media (max-width: 640px) { .gal-filters { gap: 14px; padding: 10px 10px 6px; } .gal-filters .gf { font-size: .64rem; letter-spacing: .18em; } }
+/* ─── Masonry grid ─── */
+.gallery { flex: 1 1 auto; padding: clamp(14px, 2.2vw, 28px) clamp(14px, 3.2vw, 44px) clamp(32px, 4vw, 60px); background: var(--bg); }
+.masonry { columns: 4; column-gap: 10px; max-width: 1480px; margin: 0 auto; }
+@media (max-width: 1100px) { .masonry { columns: 3; } }
+@media (max-width: 720px)  { .masonry { columns: 2; column-gap: 6px; } }
+@media (max-width: 420px)  { .masonry { columns: 1; } }
+.ms-item { display: block; width: 100%; border: 0; padding: 0; margin: 0 0 10px; background: #1a1510; border-radius: 3px; overflow: hidden; cursor: pointer; break-inside: avoid; position: relative; transition: transform .5s cubic-bezier(.2,.65,.3,1), box-shadow .4s ease; }
+@media (max-width: 720px) { .ms-item { margin-bottom: 6px; } }
+.ms-item img { display: block; width: 100%; height: auto; transition: transform .9s cubic-bezier(.2,.65,.3,1), filter .5s; }
+.ms-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,15,10,0) 55%, rgba(20,15,10,.55) 100%); opacity: 0; transition: opacity .4s; pointer-events: none; }
+.ms-item .ms-cap { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #F6EFDE; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: .01em; opacity: 0; transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; pointer-events: none; }
+.ms-item:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -18px rgba(31,22,17,.35); }
+.ms-item:hover img { transform: scale(1.03); }
+.ms-item:hover::after { opacity: 1; }
+.ms-item:hover .ms-cap { opacity: 1; transform: translateY(0); }
+.ms-item.hide { display: none; }
+/* fade-in iniziale leggero */
+.ms-item { animation: msFade .55s ease-out both; }
+.ms-item:nth-child(4n+1) { animation-delay: 0s; }
+.ms-item:nth-child(4n+2) { animation-delay: .05s; }
+.ms-item:nth-child(4n+3) { animation-delay: .1s; }
+.ms-item:nth-child(4n+4) { animation-delay: .15s; }
+@keyframes msFade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
 .doors-head { text-align: center; padding: clamp(28px, 2.8vw, 44px) clamp(16px, 4vw, 48px) clamp(10px, 1.4vw, 18px); display: flex; flex-direction: column; align-items: center; gap: .5rem; }
 .doors-head .label { color: var(--gold); }
 .doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 .1rem; }
@@ -322,9 +353,18 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <header class="doors-head">
     <h1 class="label">Galleria</h1>
     <span class="doors-rule" aria-hidden="true"></span>
+    <p class="doors-title">La villa, in ogni sua luce</p>
   </header>
-  <main class="doors">
-    <div class="doors-grid" id="doors"></div>
+  <nav class="gal-filters" id="galFilters" aria-label="Filtra per luogo">
+    <button class="gf on" data-cat="all"      type="button">Tutto</button>
+    <button class="gf"    data-cat="gazebo"   type="button">Giardino</button>
+    <button class="gf"    data-cat="pool"     type="button">Piscina</button>
+    <button class="gf"    data-cat="room"     type="button">Interni</button>
+    <button class="gf"    data-cat="pad"      type="button">Dimore</button>
+    <button class="gf"    data-cat="terr"     type="button">Terrazze</button>
+  </nav>
+  <main class="gallery">
+    <div class="masonry" id="masonry"></div>
   </main>
 </div>
 
@@ -519,12 +559,11 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   const byId = id => SECS.find(s => s.id === id);
   const onShow = {};
 
-  /* ─── LIVELLO 1 · le quattro cartoline ─── */
+  /* ─── Helpers condivisi: cartoline usate ancora in #others ─── */
   const POS = { matrimoni: 'center 62%', eventi: 'center 45%', riti: 'center 85%', casa: 'center 50%' };
   const ROT = ['-2.4deg', '1.8deg', '1.5deg', '-2deg'];
   const attrs = s => ' type="button" data-id="' + s.id + '" aria-label="Apri la galleria ' + s.name + ', ' + s.n + ' foto"';
   const cv = s => '<img class="cv" src="' + src(s.cover) + '" alt="" style="object-position:' + POS[s.id] + '">';
-  // timbro postale: cerchio con «San Pier Niceto · Messina» e le onde dell'annullo
   let pmN = 0;
   const postmark = () => { const i = pmN++; return '<svg class="pc-mark" viewBox="0 0 120 80" aria-hidden="true"><defs>' +
     '<path id="pmT' + i + '" d="M18 40a22 22 0 1 1 44 0"/><path id="pmB' + i + '" d="M11.5 40a28.5 28.5 0 0 0 57 0"/></defs>' +
@@ -536,10 +575,54 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   const postcard = (s, i) => '<button class="door d1"' + attrs(s) + ' style="--rot:' + ROT[i % ROT.length] + '"><span class="pc"><span class="pc-photo vt">' + cv(s) + '</span>' +
     '<span class="pc-stamp"><span><span><img src="' + IMG.logo + '" alt=""></span></span></span>' + postmark() +
     '<span class="pc-cap"><small>Saluti da Villa Martius</small><span><b>' + s.name + '</b><i>' + s.n + ' foto</i></span></span></span></button>';
-  const doors = $('#doors');
-  doors.className = 'doors-grid m1'; doors.parentElement.className = 'doors m1';
-  doors.innerHTML = SECS.map(postcard).join('');
-  $$('.door', doors).forEach(d => d.addEventListener('click', () => navigate(d.dataset.id, $('.vt', d))));
+
+  /* ─── LIVELLO 1 · masonry editoriale con filtri ─── */
+  const CATS = {
+    gazebo: { name: 'Giardino', keys: ['gazebo-full','gazebo-PC','gazebo-TL','gazebo-L','gazebo-R','gazebo-PL','gazebo-PR','gazebo-Z','gazebo-BR'] },
+    pool:   { name: 'Piscina',  keys: ['pool-full','pool-PC','pool-R','pool-L','pool-PL','pool-PR','pool-Z','pool-TL','pool-BR'] },
+    room:   { name: 'Interni',  keys: ['room-full','room-PC','room-L','room-R','room-PL','room-PR','room-Z','room-TL','room-BR'] },
+    pad:    { name: 'Dimore',   keys: ['pad-full','pad-PC','pad-TL','pad-L','pad-R','pad-PL','pad-PR','pad-Z','pad-BR'] },
+    terr:   { name: 'Terrazze', keys: ['terr-full','terr-PC','terr-L','terr-R','terr-PL','terr-PR','terr-Z','terr-TL','terr-BR'] }
+  };
+  // Mescola i luoghi per una distribuzione editoriale, non "a blocchi"
+  const ORDER = ['gazebo','pool','room','pad','terr'];
+  const MASONRY = [];
+  for (let i = 0; i < 9; i++) {
+    ORDER.forEach(c => { const k = CATS[c].keys[i]; if (k && IMG[k]) MASONRY.push({ k, cat: c, t: CATS[c].name }); });
+  }
+  const masonry = $('#masonry');
+  masonry.innerHTML = MASONRY.map((p, i) =>
+    '<button type="button" class="ms-item" data-cat="' + p.cat + '" data-i="' + i + '" aria-label="Apri foto · ' + p.t + '">' +
+      '<img src="' + src(p.k) + '" alt="' + p.t + '" loading="lazy">' +
+      '<span class="ms-cap">' + p.t + '</span>' +
+    '</button>'
+  ).join('');
+
+  // Click → lightbox con la lista filtrata corrente
+  let currentCat = 'all';
+  function currentList() {
+    return currentCat === 'all' ? MASONRY : MASONRY.filter(p => p.cat === currentCat);
+  }
+  $$('.ms-item', masonry).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const list = currentList();
+      const idx = list.findIndex(p => p.k === MASONRY[+btn.dataset.i].k);
+      if (idx >= 0) openLb(list, idx, 'La villa, in ogni sua luce');
+    });
+  });
+
+  // Filtri
+  const galFilters = $('#galFilters');
+  $$('.gf', galFilters).forEach(b => {
+    b.addEventListener('click', () => {
+      $$('.gf', galFilters).forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      currentCat = b.dataset.cat;
+      $$('.ms-item', masonry).forEach(it => {
+        it.classList.toggle('hide', !(currentCat === 'all' || it.dataset.cat === currentCat));
+      });
+    });
+  });
 
   /* ─── NAVIGAZIONE tra i due livelli ─── */
   const landing = $('#landing'), gview = $('#gview'), bannerImg = $('#bannerImg');
