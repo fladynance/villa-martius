@@ -300,6 +300,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   font-weight: 400;
   font-size: 0.68rem;
   letter-spacing: 0.42em;
+  text-indent: 0.42em;          /* compensa lo spazio finale della spaziatura */
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 1.2rem;
@@ -350,26 +351,39 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 .mobile-menu a.active::before {
   width: 24px;
 }
-.mobile-menu-cta {
-  margin-top: 2rem;
+.mobile-menu .mobile-menu-cta {
+  margin-top: 2.2rem;
+  /* .mobile-menu a e' piu' specifico e imponeva serif corsivo 2.2rem:
+     qui si alza la specificita' per riportare il tasto al sans del sito */
   font-family: var(--sans);
   font-weight: 400;
-  font-style: normal;              /* override italic ereditato */
+  font-style: normal;
   font-size: 0.72rem;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;              /* compensa lo spazio finale della spaziatura */
   text-transform: uppercase;
-  color: var(--gold-lt);           /* testo oro chiaro */
-  background: transparent;         /* ghost, non più bianco pieno */
-  border: 1px solid var(--gold-lt);
-  padding: 1.1rem 2.6rem;
-  border-radius: 999px;            /* stessa forma del tasto Contattaci in nav */
-  transition: background 0.35s, color 0.35s, letter-spacing 0.35s, border-color 0.35s;
+  line-height: 1;
+  gap: 0;
+  color: #1F1611;
+  background: linear-gradient(180deg, #E4CF9C 0%, var(--gold-lt) 55%, #B9A079 100%);
+  border: 1px solid rgba(255,245,215,.55);
+  padding: 1.05rem 3rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  box-shadow: 0 16px 34px -16px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,250,232,.6);
+  transition: background 0.35s, color 0.35s, transform 0.35s, box-shadow 0.35s, border-color 0.35s;
 }
-.mobile-menu-cta:hover {
-  background: var(--gold-lt);
-  color: var(--dark);
-  border-color: var(--gold-lt);
-  letter-spacing: 0.36em;
+.mobile-menu .mobile-menu-cta::before { display: none; }
+.mobile-menu .mobile-menu-cta:hover,
+.mobile-menu .mobile-menu-cta:focus-visible {
+  background: linear-gradient(180deg, #FFF4D6 0%, #EFDCAC 55%, #CBB184 100%);
+  color: #1F1611;
+  border-color: rgba(255,250,232,.85);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -16px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,252,240,.75);
 }
 
 /* ─── HERO (full screen, home) ─────────────────────────────── */
@@ -2562,7 +2576,8 @@ body.mt-lock { overflow: hidden; }
   position: fixed; z-index: 95;
   right: clamp(14px, 2.2vw, 26px);
   bottom: calc(clamp(14px, 2.2vw, 26px) + env(safe-area-inset-bottom, 0px));
-  display: inline-flex; align-items: center; justify-content: flex-start; gap: .75rem;
+  /* centrato: da chiuso centra l'icona, da aperto centra icona + scritta */
+  display: inline-flex; align-items: center; justify-content: center; gap: .75rem;
   width: 56px; height: 56px; padding: 0 15px;
   border-radius: 999px; overflow: hidden; text-decoration: none;
   background: #1E6A55; color: #fff;
@@ -2589,6 +2604,29 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
    Prima la sezione era un blocco marrone scuro che stonava con tutte
    le altre pagine. */
 .ct-page .page-hero .hero-overlay { background: linear-gradient(180deg, rgba(31,22,17,.52), rgba(31,22,17,.38)); }
+/* etichetta e filetto erano inline, quindi finivano sulla STESSA riga:
+   l'una a sinistra e l'altro a destra del centro. Qui si impilano. */
+.page-hero .hero-content .label { display: block; }
+.page-hero .hero-content .rule-gold { display: block; margin: .8rem auto 1rem; }
+/* fascia foto piu' bassa e sezione piu' vicina, cosi' il modulo di
+   contatto si vede intero appena si apre la pagina */
+.ct-page .page-hero { padding: calc(var(--nav-h) + 10px) 2rem 1.1rem; }
+.ct-page .page-hero-title { font-size: clamp(2rem, 3.2vw, 2.9rem); }
+.ct-page .page-hero-sub { margin-top: .35rem; font-size: clamp(.9rem, 1.4vw, 1.05rem); }
+.ct-page .section-dark { padding-top: 1.4rem; padding-bottom: 2.2rem; }
+.ct-page .contact-info .display { font-size: clamp(1.8rem, 2.8vw, 2.5rem); margin: .8rem 0 1.1rem; }
+.ct-page .contact-details { margin-top: 1.6rem; gap: .85rem; }
+.ct-page .contact-form { padding: clamp(1.2rem, 1.8vw, 1.7rem); }
+.ct-page .form-field { padding-bottom: .78rem; }
+.ct-page .form-field textarea { min-height: 64px; }
+.ct-page .form-privacy { margin: .5rem 0 1rem; }
+/* "Dove siamo" era a 440px dal modulo: avvicinato e introdotto dal
+   separatore col rombo, lo stesso di matrimoni ed eventi */
+.ct-page .section:not(.section-dark) { padding-top: 0; padding-bottom: 4rem; }
+.ct-page .ct-sep { display: flex; align-items: center; gap: 1rem; max-width: 1240px; margin: 0 auto; padding: 0 var(--pad-page); }
+.ct-page .ct-sep::before, .ct-page .ct-sep::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .45; }
+.ct-page .ct-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; }
+.ct-page .section:not(.section-dark) .section-header { margin-top: 1.8rem; }
 .ct-page .section-dark { background: var(--bg); color: var(--body-txt); }
 .ct-page .section-dark .display, .ct-page .contact-info .display { color: var(--dark); }
 .ct-page .section-dark .body-copy { color: var(--body-txt); }
