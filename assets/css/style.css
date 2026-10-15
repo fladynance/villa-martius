@@ -1969,6 +1969,18 @@ a.room-cta { text-decoration: none; }
   grid-template-rows: 1fr;
 }
 .hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
+/* l'ancora #chiesa non deve finire sotto la barra fissa */
+#chiesa { scroll-margin-top: var(--page-top); }
+/* tre vie di cerimonia: civile, matrimonio, chiesa consacrata */
+.hub-grid.hub-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+}
+.hub-grid.hub-grid-3 .hub-tile { min-height: 60vh; }
+@media (max-width: 1000px) {
+  .hub-grid.hub-grid-3 { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); }
+  .hub-grid.hub-grid-3 .hub-tile { min-height: 36vh; }
+}
 @media (max-width: 720px) {
   .hub-grid.hub-grid-2 {
     grid-template-columns: 1fr;
