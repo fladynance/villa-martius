@@ -362,6 +362,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   background: transparent;         /* ghost, non più bianco pieno */
   border: 1px solid var(--gold-lt);
   padding: 1.1rem 2.6rem;
+  border-radius: 999px;            /* stessa forma del tasto Contattaci in nav */
   transition: background 0.35s, color 0.35s, letter-spacing 0.35s, border-color 0.35s;
 }
 .mobile-menu-cta:hover {
@@ -2554,25 +2555,95 @@ body.mt-lock { overflow: hidden; }
 .ev-sky.ev-gx > section { background: none !important; }
 .ev-page .footer { border-top: 0; }
 
-/* CONTATTI · tutto in moka */
-.ct-page .page-hero .hero-overlay { background: linear-gradient(180deg, rgba(90,71,51,.8), rgba(90,71,51,.6)); }
-.ct-page .section-dark { background: #5A4733; color: #EADFC8; }
-.ct-page .section-dark .display, .ct-page .contact-info .display { color: #F8F0DE; }
-.ct-page .section-dark .body-copy { color: #E4D8BE; }
-.ct-page .section-dark .label { color: #E0C48C; }
-.ct-page .contact-details .c-label { color: #E0C48C; }
-.ct-page .contact-details .c-val { color: #F1E7D2; }
-.ct-page .contact-details a { color: inherit; border-bottom: 1px solid rgba(224,196,140,.35); transition: color .3s, border-color .3s; }
-.ct-page .contact-details a:hover { color: #FFE2A8; border-color: #FFE2A8; }
-.ct-page .form-field label { color: #D9CBAE; }
-.ct-page .form-field input, .ct-page .form-field select, .ct-page .form-field textarea { color: #F8F0DE; border-bottom-color: rgba(240,225,190,.4); color-scheme: dark; }
-.ct-page .form-field input::placeholder, .ct-page .form-field textarea::placeholder { color: rgba(240,225,190,.55); }
-.ct-page .form-field input:focus, .ct-page .form-field select:focus, .ct-page .form-field textarea:focus { border-bottom-color: #E0C48C; }
-.ct-page .form-field select option { background: #5A4733; color: #F8F0DE; }
-.ct-page .form-privacy { color: #D9CBAE; font-size: .72rem; }
-.ct-page .form-privacy a { color: #F0D9A4; }
-.ct-page .contact-form .btn-solid-dark { background: #9F876A; border-color: #9F876A; color: #fff; border-radius: 999px; min-height: 54px; transition: background .3s, color .3s, border-color .3s; }
-.ct-page .contact-form .btn-solid-dark:hover { background: #F1E7D2; border-color: #F1E7D2; color: #3A2D21; }
+/* ─── WhatsApp: pulsante fisso, su tutte le pagine ──────────────
+   Chiuso e' un cerchio con la sola icona; al passaggio del mouse si
+   allunga e scopre la scritta. Su telefono resta il solo cerchio. */
+.wa-fab {
+  position: fixed; z-index: 95;
+  right: clamp(14px, 2.2vw, 26px);
+  bottom: calc(clamp(14px, 2.2vw, 26px) + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; justify-content: flex-start; gap: .75rem;
+  width: 56px; height: 56px; padding: 0 15px;
+  border-radius: 999px; overflow: hidden; text-decoration: none;
+  background: #1E6A55; color: #fff;
+  box-shadow: 0 12px 30px -12px rgba(16,70,55,.65), 0 2px 6px rgba(0,0,0,.16);
+  transition: width .38s cubic-bezier(.2,.7,.3,1), background .3s, box-shadow .3s;
+}
+.wa-fab svg { width: 26px; height: 26px; flex: 0 0 auto; fill: currentColor; }
+.wa-fab .wa-txt {
+  font-family: var(--sans); font-weight: 400; font-size: .7rem;
+  letter-spacing: .18em; text-transform: uppercase; white-space: nowrap;
+  opacity: 0; transition: opacity .25s ease;
+}
+.wa-fab:hover, .wa-fab:focus-visible {
+  width: 262px; background: #175443;
+  box-shadow: 0 16px 36px -12px rgba(16,70,55,.7), 0 2px 6px rgba(0,0,0,.18);
+}
+.wa-fab:hover .wa-txt, .wa-fab:focus-visible .wa-txt { opacity: 1; }
+.wa-fab:focus-visible { outline: 2px solid var(--gold-lt); outline-offset: 3px; }
+/* sulle pagine camera, quando compare la barra di prenotazione, si alza */
+body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+@media (prefers-reduced-motion: reduce) { .wa-fab { transition: none; } }
+
+/* CONTATTI · stessa sabbia del resto del sito, form su scheda chiara.
+   Prima la sezione era un blocco marrone scuro che stonava con tutte
+   le altre pagine. */
+.ct-page .page-hero .hero-overlay { background: linear-gradient(180deg, rgba(31,22,17,.52), rgba(31,22,17,.38)); }
+.ct-page .section-dark { background: var(--bg); color: var(--body-txt); }
+.ct-page .section-dark .display, .ct-page .contact-info .display { color: var(--dark); }
+.ct-page .section-dark .body-copy { color: var(--body-txt); }
+.ct-page .section-dark .label { color: var(--gold); }
+
+/* colonna di sinistra: i recapiti, in editoriale */
+.ct-page .contact-details .c-label { color: var(--gold); }
+.ct-page .contact-details .c-val { color: var(--dark); }
+.ct-page .contact-details a { color: inherit; border-bottom: 1px solid rgba(159,135,106,.45); transition: color .3s, border-color .3s; }
+.ct-page .contact-details a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* colonna di destra: il modulo dentro una scheda chiara arrotondata */
+.ct-page .contact-form {
+  background: #FBF6EC;
+  border: 1px solid rgba(159,135,106,.22);
+  border-radius: 16px;
+  padding: clamp(1.6rem, 2.6vw, 2.4rem);
+  box-shadow: 0 26px 60px -34px rgba(31,22,17,.45);
+}
+.ct-page .form-field label { color: var(--muted); }
+.ct-page .form-field input,
+.ct-page .form-field select,
+.ct-page .form-field textarea { color: var(--dark); border-bottom-color: rgba(90,70,45,.3); color-scheme: light; }
+.ct-page .form-field input::placeholder,
+.ct-page .form-field textarea::placeholder { color: rgba(90,70,45,.45); }
+.ct-page .form-field input:focus,
+.ct-page .form-field select:focus,
+.ct-page .form-field textarea:focus { border-bottom-color: var(--gold); }
+.ct-page .form-field select option { background: #FBF6EC; color: var(--dark); }
+.ct-page .form-privacy { color: var(--muted); font-size: .72rem; }
+.ct-page .form-privacy a { color: var(--gold); }
+.ct-page .contact-form .btn-solid-dark {
+  background: var(--gold); border-color: var(--gold); color: #fff;
+  border-radius: 999px; min-height: 54px;
+  transition: background .3s, color .3s, border-color .3s;
+}
+.ct-page .contact-form .btn-solid-dark:hover { background: var(--dark); border-color: var(--dark); color: #fff; }
+
+/* mappa: stessi angoli morbidi del resto. Sotto all'iframe c'e' l'indirizzo,
+   così se la mappa non carica il riquadro non resta vuoto. */
+.ct-page .map-wrap {
+  position: relative; border-radius: 14px; overflow: hidden;
+  border: 1px solid rgba(159,135,106,.25);
+  display: grid; place-items: center;
+}
+.ct-page .map-wrap::before {
+  content: "Contrada Pirrera · 98045 San Pier Niceto (ME) · Sicilia";
+  position: absolute; z-index: 0; padding: 0 1.4rem; text-align: center;
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(1rem, 1.6vw, 1.25rem); color: var(--muted);
+}
+.ct-page .map-wrap iframe { position: relative; z-index: 1; }
+.ct-page .map-note { text-align: center; margin: 1rem 0 0; font-family: var(--sans); font-weight: 300; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; }
+.ct-page .map-note a { color: var(--gold); border-bottom: 1px solid rgba(159,135,106,.45); transition: color .3s, border-color .3s; }
+.ct-page .map-note a:hover { color: var(--dark); border-color: var(--dark); }
 .ct-page .contact-form .btn-solid-dark:focus-visible, .ct-page .section-dark a:focus-visible { outline: 2px solid #F0D9A4; outline-offset: 3px; }
 .ct-page .section:not(.section-dark) .label { color: #5A4733; }
 .ct-page .section:not(.section-dark) .body-copy { color: #3A2D21; }
@@ -2581,7 +2652,7 @@ body.mt-lock { overflow: hidden; }
 .mt-fx, .mt-endslot { display: none; }
 @media (max-width: 900px) {
   .js-fx .mt-rings { visibility: hidden; }
-  .mt-fx { display: block; position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; will-change: transform; }
+  .mt-fx { display: block; position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; will-change: transform; transform: translateZ(0); contain: layout paint; }
   .mt-fx svg { width: 100%; height: auto; display: block; overflow: visible; }
   .mt-fxg { position: absolute; inset: -40% -10%; background: radial-gradient(closest-side, rgba(255,235,170,.55), transparent); opacity: 0; }
   .mt-endslot { display: block; align-self: flex-start; width: 62px; height: 31px; margin: -.3rem 0 1.6rem; }
@@ -2602,7 +2673,11 @@ body.mt-lock { overflow: hidden; }
 .mt-split { position: relative; z-index: 1; }
 @media (max-width: 900px) { .mt-olive { --o: .22; } }
 @media (prefers-reduced-motion: reduce) { .mt-olive { transform: rotate(var(--r, 0deg)); } }
-.mt-rings svg, .mt-fx svg { filter: drop-shadow(0 5px 6px rgba(80,50,10,.28)); }
+/* L'ombra resta solo sulle fedi ferme del desktop. Su .mt-fx (che viene
+   trasformato a ogni frame) un drop-shadow costringe il browser a
+   ricalcolare il filtro frame per frame: su telefono è la causa
+   principale degli scatti. */
+.mt-rings svg { filter: drop-shadow(0 5px 6px rgba(80,50,10,.28)); }
 
 /* ─── RITO CIVILE · le partecipazioni (titolo fisso, cartoline che si impilano) ─── */
 .rc-body { background: #E6DBC8; }

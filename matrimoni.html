@@ -223,7 +223,8 @@
     var light=grad(g1,'<stop offset="0" stop-color="#FFF1BC"/><stop offset=".3" stop-color="#E6C471"/><stop offset=".6" stop-color="#B98B3A"/><stop offset=".82" stop-color="#8E6A2E"/><stop offset="1" stop-color="#D9B462"/>');
     function set(cx){return dual?'<g class="s1">'+ringLayers(cx,g1,14)+'</g><g class="s2">'+ringLayers(cx,g,18)+'</g>':ringLayers(cx,g,18);}
     d.innerHTML='<div class="mt-fxg"></div><svg viewBox="0 0 420 210"><defs>'+dark+(dual?light:'')+'<clipPath id="fc'+i+'"><rect x="150" y="0" width="120" height="105"/></clipPath></defs><g class="a">'+set(150)+'</g><g class="b">'+set(270)+'</g><g class="c" clip-path="url(#fc'+i+')">'+set(150)+'</g></svg>';
-    return {el:d,a:d.querySelector('.a'),b:d.querySelector('.b'),c:d.querySelector('.c'),g:d.querySelector('.mt-fxg'),s2:dual?d.querySelectorAll('.s2'):null};
+    return {el:d,a:d.querySelector('.a'),b:d.querySelector('.b'),c:d.querySelector('.c'),g:d.querySelector('.mt-fxg'),
+            s1:dual?d.querySelectorAll('.s1'):null,s2:dual?d.querySelectorAll('.s2'):null,_p:{}};
   }
   /* le fedi piccole dei titoli e del finale sono ancorate al documento (position:absolute):
      scorrono con la pagina e restano ferme, senza calcoli a ogni scroll e quindi senza rimbalzi */
@@ -247,20 +248,64 @@
     var E=es.getBoundingClientRect();
     place(fly[2],E.left-P.left+sm/2,E.top-P.top+E.height/2,sm,.5);
     flyMove();
+    if(!joinStarted){ joinStarted=1; joinStart(); }
   }
-  /* mobile: le fedi dell'apertura scendono staccate, rimpiccioliscono e si intersecano
-     man mano che si avvicinano al titolo "Il vostro sogno": arrivate, sono gia' unite */
+  var joinStarted=0;
+  /* mobile, in due tempi: prima le fedi si avvicinano e si incrociano restando
+     in alto; solo quando sono gia' intrecciate scendono verso "Il vostro sogno",
+     rimpicciolendosi. Arrivano quindi unite.
+     Ogni stile viene riscritto solo se il valore e' davvero cambiato: su telefono
+     le scritture inutili nel DOM a ogni frame sono la causa degli scatti. */
+  /* L'incrocio non e' legato allo scroll: su telefono il titolo "Il vostro sogno"
+     e' gia' visibile senza scorrere, quindi la corsa utile e' di ~150px e le due
+     fasi insieme risultavano schiacciate in un gesto solo. Qui l'intreccio e'
+     un'animazione a tempo che parte da sola; allo scroll resta la sola discesa,
+     che ha cosi' tutta la corsa a disposizione. */
+  var joinT=0, joinRAF=0;
+  function joinStart(){
+    if(reduce){ joinT=1; flyMove(); return; }
+    var t0=0, DUR=900;
+    cancelAnimationFrame(joinRAF);
+    joinRAF=requestAnimationFrame(function step(ts){
+      if(!t0) t0=ts;
+      joinT=cl((ts-t0)/DUR);
+      flyMove();
+      if(joinT<1) joinRAF=requestAnimationFrame(step);
+    });
+  }
+  function setp(r,k,val){ if(r._p[k]===val) return false; r._p[k]=val; return true; }
   function flyMove(){
     if(!fly||!geo) return;
     var sy=window.pageYOffset,vh=window.innerHeight,s1=Math.max(140,geo.t1-vh*.5);
-    var u=ez(cl(sy/s1)),v=u,g=64*(1-v);
-    var x=geo.hx+(geo.tx-geo.hx)*u,y=geo.hy+(geo.ty-geo.hy)*u,sc=1+(geo.sm/geo.bigW-1)*u,r=fly[0];
-    r.el.style.transform='translate3d('+(x-geo.bigW/2).toFixed(1)+'px,'+(y-geo.bigW/4).toFixed(1)+'px,0) scale('+sc.toFixed(3)+')';
-    r.el.style.opacity=1;
-    r.a.setAttribute('transform','translate('+(-g).toFixed(1)+',0)'); r.c.setAttribute('transform','translate('+(-g).toFixed(1)+',0)'); r.b.setAttribute('transform','translate('+g.toFixed(1)+',0)');
-    r.c.style.opacity=v>.95?1:0; r.g.style.opacity=(v*.6).toFixed(2);
-    [].forEach.call(r.el.querySelectorAll('.s1'),function(e){e.style.opacity=(1-u).toFixed(2);});
-    [].forEach.call(r.el.querySelectorAll('.s2'),function(e){e.style.opacity=u.toFixed(2);});
+    var r=fly[0];
+    var pJoin=ez(joinT);                                 /* incrocio, a tempo */
+    /* la discesa si apre solo quando l'intreccio e' quasi concluso */
+    var gate=ez(cl((joinT-.7)/.3));
+    var pMove=ez(cl(sy/s1))*gate;                        /* discesa, a scroll */
+    var g=64*(1-pJoin);
+    var x=geo.hx+(geo.tx-geo.hx)*pMove,y=geo.hy+(geo.ty-geo.hy)*pMove,
+        sc=1+(geo.sm/geo.bigW-1)*pMove;
+
+    var tr='translate3d('+(x-geo.bigW/2).toFixed(1)+'px,'+(y-geo.bigW/4).toFixed(1)+'px,0) scale('+sc.toFixed(4)+')';
+    if(setp(r,'tr',tr)) r.el.style.transform=tr;
+
+    var gs=(-g).toFixed(1),gd=g.toFixed(1);
+    if(setp(r,'g',gs)){
+      r.a.setAttribute('transform','translate('+gs+',0)');
+      r.c.setAttribute('transform','translate('+gs+',0)');
+      r.b.setAttribute('transform','translate('+gd+',0)');
+    }
+    /* l'intreccio compare in dissolvenza mentre le fedi si chiudono, non di scatto */
+    var co=cl((pJoin-.5)/.5).toFixed(2);
+    if(setp(r,'c',co)) r.c.style.opacity=co;
+    var go=(pJoin*.6).toFixed(2);
+    if(setp(r,'go',go)) r.g.style.opacity=go;
+
+    if(r.s1&&setp(r,'s',pMove.toFixed(2))){
+      var o1=(1-pMove).toFixed(2),o2=pMove.toFixed(2),i;
+      for(i=0;i<r.s1.length;i++) r.s1[i].style.opacity=o1;
+      for(i=0;i<r.s2.length;i++) r.s2[i].style.opacity=o2;
+    }
   }
   function upd(){
     tick=false;
@@ -345,5 +390,11 @@
 })();
 </script>
 <script src="assets/js/main.js" defer></script>
+
+<!-- WhatsApp -->
+<a class="wa-fab" href="https://wa.me/393315309082?text=Salve! Vi scrivo dal sito di Villa Martius. Vorrei ricevere informazioni e disponibilit%C3%A0." target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg>
+  <span class="wa-txt">Scrivici su WhatsApp</span>
+</a>
 </body>
 </html>
