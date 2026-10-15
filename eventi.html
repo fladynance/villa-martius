@@ -26,8 +26,9 @@
   <a href="esplora.html"          class="menu-link">Esplora</a>
   <a href="casa-vacanza.html"     class="menu-link">Casa Vacanza</a>
   <a href="rito-civile.html"      class="menu-link">Rito Civile</a>
+  <a href="eventi.html"           class="menu-link">Eventi</a>
   <a href="galleria.html"         class="menu-link">Galleria</a>
-  <a href="matrimoni-eventi.html" class="menu-link active">Matrimoni &amp; Eventi</a>
+  <a href="matrimoni-eventi.html" class="menu-link active">Matrimoni &amp; Riti Civili</a>
   <a href="virtual-tour.html"     class="menu-link">Virtual Tour</a>
   <a href="contatti.html"         class="mobile-menu-cta">Contattaci</a>
 </div>
@@ -163,7 +164,8 @@
         <li><a href="esplora.html">Esplora</a></li>
         <li><a href="casa-vacanza.html">Casa Vacanza</a></li>
         <li><a href="rito-civile.html">Rito Civile</a></li>
-        <li><a href="matrimoni.html">Eventi e Matrimoni</a></li>
+        <li><a href="eventi.html">Eventi</a></li>
+        <li><a href="matrimoni-eventi.html">Matrimoni &amp; Riti Civili</a></li>
         <li><a href="galleria.html">Galleria</a></li>
         <li><a href="virtual-tour.html">Virtual Tour</a></li>
         <li><a href="contatti.html">Contatti</a></li>
@@ -221,57 +223,110 @@
     moon.style.opacity=(k*vm*x).toFixed(3);
     cv.style.opacity=(vis*cl((v-.52)/.25)).toFixed(3);
   }
-  /* luna: disco generato una volta sola con crateri veri (bordo luminoso, ombra sul lato opposto alla luce),
-     mari lunari, rilievo e ombreggiatura sferica */
-  (function(){
+  /* Luna: disco generato una volta sola. Campo di altezza con crateri veri
+     (bordo rilevato, pavimento in ombra), mari lunari, raggiere sui crateri
+     giovani, oscuramento al bordo e illuminazione da sinistra in alto. */
+  var buildMoon=function(){
     var holder=document.querySelector('.ev-moon'); if(!holder||!holder.querySelector) return;
-    var N=320,cv2=document.createElement('canvas'); cv2.width=N; cv2.height=N; cv2.className='ev-moon-svg';
+    var dpr=Math.min(3,window.devicePixelRatio||1);
+    var N=Math.min(480,Math.round(160*dpr)*2);          // risoluzione del disco (limitata: il disco si vede a 72px)
+    var cv2=document.createElement('canvas'); cv2.width=N; cv2.height=N; cv2.className='ev-moon-svg';
     var cx=cv2.getContext('2d'); if(!cx) return;
     var seed=29; function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
-    var Hh=new Float32Array(N*N),i,j,k;
+    var Hh=new Float32Array(N*N), Ray=new Float32Array(N*N);
+
+    /* un cratere: conca, bordo rilevato, falda esterna */
     function crater(px,py,R,depth){
-      var x0=Math.max(0,Math.floor(px-R*1.9)),x1=Math.min(N-1,Math.ceil(px+R*1.9)),y0=Math.max(0,Math.floor(py-R*1.9)),y1=Math.min(N-1,Math.ceil(py+R*1.9));
+      var x0=Math.max(0,Math.floor(px-R*2.1)),x1=Math.min(N-1,Math.ceil(px+R*2.1)),
+          y0=Math.max(0,Math.floor(py-R*2.1)),y1=Math.min(N-1,Math.ceil(py+R*2.1));
       for(var y=y0;y<=y1;y++)for(var x=x0;x<=x1;x++){
         var dx=x-px,dy=y-py,d=Math.sqrt(dx*dx+dy*dy)/R,v=0;
-        if(d<1){ v=-depth*(1-d*d*d*d)+depth*.0; }
-        v+=depth*.5*Math.exp(-((d-1)*(d-1))/.05);
-        if(d>1) v+=depth*.1*Math.exp(-(d-1)*2.8);
+        if(d<1) v=-depth*(1-d*d*d*d);                  // conca
+        v+=depth*.62*Math.exp(-((d-1)*(d-1))/.045);    // bordo
+        if(d>1) v+=depth*.12*Math.exp(-(d-1)*2.6);     // falda
         Hh[y*N+x]+=v;
       }
     }
-    /* mari: rumore a bassa frequenza (valore somma di seni) */
-    var BL=[[.40,.30,.15,.15],[.58,.33,.09,.09],[.66,.47,.11,.10],[.80,.38,.05,.05],[.22,.52,.12,.20],[.46,.72,.09,.08],[.80,.58,.06,.07],[.33,.40,.1,.08]];
+    /* raggiera di un cratere giovane: strisce chiare che si allontanano */
+    function rays(px,py,R,strength){
+      var m=42+Math.floor(rnd()*18);
+      for(var a=0;a<m;a++){
+        var ang=rnd()*6.283, len=R*(4+rnd()*7), wid=R*(.42+rnd()*.55);
+        for(var t=R*1.1;t<len;t+=.6){
+          var fall=(1-t/len), px2=px+Math.cos(ang)*t, py2=py+Math.sin(ang)*t,
+              w=wid*(1+t/len*1.7), x0=Math.max(0,Math.floor(px2-w)),x1=Math.min(N-1,Math.ceil(px2+w)),
+              y0=Math.max(0,Math.floor(py2-w)),y1=Math.min(N-1,Math.ceil(py2+w));
+          for(var y=y0;y<=y1;y++)for(var x=x0;x<=x1;x++){
+            var dx=(x-px2)/w,dy=(y-py2)/w,dd=dx*dx+dy*dy; if(dd>1) continue;
+            Ray[y*N+x]+=strength*fall*fall*(1-dd)*.0045;
+          }
+        }
+      }
+    }
+    /* mari: macchie larghe e morbide, bordi appena irregolari */
+    var BL=[[.40,.30,.15,.15],[.58,.33,.09,.09],[.66,.47,.11,.10],[.80,.38,.05,.05],
+            [.22,.52,.12,.20],[.46,.72,.09,.08],[.80,.58,.06,.07],[.33,.40,.10,.08]];
     function maria(x,y){
       var u=x/N,v=y/N,s=0,q;
-      u+=.012*Math.sin(v*38+1.7)+.008*Math.sin(v*71+u*20);v+=.012*Math.cos(u*33+.6)+.008*Math.sin(u*64+v*15);
+      u+=.012*Math.sin(v*38+1.7)+.008*Math.sin(v*71+u*20);
+      v+=.012*Math.cos(u*33+.6)+.008*Math.sin(u*64+v*15);
       for(q=0;q<BL.length;q++){var dx=(u-BL[q][0])/BL[q][2],dy=(v-BL[q][1])/BL[q][3];s+=Math.exp(-(dx*dx+dy*dy)*1.15);}
       return s;
     }
-    var craters=[],n=0;
-    while(n<900){
-      var R=1.25*Math.pow(1-rnd()*.99,-1/1.55); if(R>30) continue;
-      var ang=rnd()*6.283,rad=Math.sqrt(rnd())*N*.5*.96,px=N/2+Math.cos(ang)*rad,py=N/2+Math.sin(ang)*rad;
-      var mm=maria(px,py); if(mm>.5&&R<18&&rnd()<.9) { n++; continue; }
-      if(R<2.4) crater(px,py,R,Math.min(.27*R,.9)); craters.push([px,py,R]); n++;
+
+    /* crateri: tutti incisi nel rilievo, non solo i piccolissimi */
+    var k=N/320, n=0, big=[];
+    while(n<1100){
+      var R=1.3*k*Math.pow(1-rnd()*.99,-1/1.6); if(R>26*k){ continue; }
+      var ang=rnd()*6.283, rad=Math.sqrt(rnd())*N*.5*.955,
+          px=N/2+Math.cos(ang)*rad, py=N/2+Math.sin(ang)*rad;
+      n++;
+      var mm=maria(px,py);
+      if(mm>.5 && R<14*k && rnd()<.88) continue;       // i mari sono lisci
+      crater(px,py,R,Math.min(.30*R/k,1.15));
+      if(R>7*k) big.push([px,py,R]);
     }
-    (function(){var T=new Float32Array(N*N),x,y;for(y=1;y<N-1;y++)for(x=1;x<N-1;x++){T[y*N+x]=(Hh[y*N+x]*4+Hh[y*N+x-1]+Hh[y*N+x+1]+Hh[(y-1)*N+x]+Hh[(y+1)*N+x])/8;}for(y=1;y<N-1;y++)for(x=1;x<N-1;x++)Hh[y*N+x]=T[y*N+x];for(y=1;y<N-1;y++)for(x=1;x<N-1;x++){T[y*N+x]=(Hh[y*N+x]*4+Hh[y*N+x-1]+Hh[y*N+x+1]+Hh[(y-1)*N+x]+Hh[(y+1)*N+x])/8;}for(y=1;y<N-1;y++)for(x=1;x<N-1;x++)Hh[y*N+x]=T[y*N+x];})();
-    var img=cx.createImageData(N,N),d2=img.data,L=[-.55,-.62,.56],ll=Math.sqrt(L[0]*L[0]+L[1]*L[1]+L[2]*L[2]);L[0]/=ll;L[1]/=ll;L[2]/=ll;
+    /* due crateri giovani con raggiera, come Tycho e Copernico */
+    (function(){
+      var picks=[[N*.42,N*.78,7.5*k,.85],[N*.60,N*.42,5.4*k,.5]];
+      for(var i=0;i<picks.length;i++){
+        crater(picks[i][0],picks[i][1],picks[i][2],1.25);
+        rays(picks[i][0],picks[i][1],picks[i][2],picks[i][3]);
+      }
+    })();
+
+    /* due passate di smoothing sul rilievo */
+    (function(){var T=new Float32Array(N*N),x,y,p;
+      for(p=0;p<2;p++){
+        for(y=1;y<N-1;y++)for(x=1;x<N-1;x++) T[y*N+x]=(Hh[y*N+x]*4+Hh[y*N+x-1]+Hh[y*N+x+1]+Hh[(y-1)*N+x]+Hh[(y+1)*N+x])/8;
+        for(y=1;y<N-1;y++)for(x=1;x<N-1;x++) Hh[y*N+x]=T[y*N+x];
+      }})();
+
+    var img=cx.createImageData(N,N),d2=img.data,i,j;
+    var L=[-.52,-.60,.61],ll=Math.sqrt(L[0]*L[0]+L[1]*L[1]+L[2]*L[2]);L[0]/=ll;L[1]/=ll;L[2]/=ll;
     for(j=0;j<N;j++)for(i=0;i<N;i++){
       var ox=(i+.5-N/2)/(N/2),oy=(j+.5-N/2)/(N/2),rr=Math.sqrt(ox*ox+oy*oy),o=(j*N+i)*4;
       if(rr>1.02){d2[o+3]=0;continue;}
-      var hx=(Hh[j*N+Math.min(N-1,i+1)]-Hh[j*N+Math.max(0,i-1)])*.5,hy=(Hh[Math.min(N-1,j+1)*N+i]-Hh[Math.max(0,j-1)*N+i])*.5;
+      var hx=(Hh[j*N+Math.min(N-1,i+1)]-Hh[j*N+Math.max(0,i-1)])*.5,
+          hy=(Hh[Math.min(N-1,j+1)*N+i]-Hh[Math.max(0,j-1)*N+i])*.5;
       var nz=Math.sqrt(Math.max(0,1-Math.min(1,rr*rr))),
-          sn=[ox*.55,oy*.55,nz+.35]; var sl=Math.sqrt(sn[0]*sn[0]+sn[1]*sn[1]+sn[2]*sn[2]);sn[0]/=sl;sn[1]/=sl;sn[2]/=sl;
-      var nn=[sn[0]-hx*.42,sn[1]-hy*.42,sn[2]],nl=Math.sqrt(nn[0]*nn[0]+nn[1]*nn[1]+nn[2]*nn[2]);nn[0]/=nl;nn[1]/=nl;nn[2]/=nl;
-      var dot=nn[0]*L[0]+nn[1]*L[1]+nn[2]*L[2],base=.7+.28*dot;
-      var mm2=maria(i,j),mar=Math.max(0,Math.min(1,(mm2-.3)/.55)),alb=.93-.25*mar+(rnd()-.5)*.03;
-      var limb=1-.2*Math.pow(rr,3.2),v=Math.max(.12,Math.min(1.05,base*alb*limb*1.12));
-      d2[o]=Math.min(255,v*252);d2[o+1]=Math.min(255,v*248);d2[o+2]=Math.min(255,v*236);
+          sn=[ox*.55,oy*.55,nz+.35],sl=Math.sqrt(sn[0]*sn[0]+sn[1]*sn[1]+sn[2]*sn[2]);
+      sn[0]/=sl;sn[1]/=sl;sn[2]/=sl;
+      var nn=[sn[0]-hx*.50,sn[1]-hy*.50,sn[2]],nl=Math.sqrt(nn[0]*nn[0]+nn[1]*nn[1]+nn[2]*nn[2]);
+      nn[0]/=nl;nn[1]/=nl;nn[2]/=nl;
+      var dot=nn[0]*L[0]+nn[1]*L[1]+nn[2]*L[2], base=.72+.30*dot;
+      var mm2=maria(i,j), mar=Math.max(0,Math.min(1,(mm2-.34)/.62));
+      var alb=.97-.27*mar + Math.min(.16,Ray[j*N+i]) + (rnd()-.5)*.016;
+      var limb=1-.34*Math.pow(rr,2.4);                 // bordo più scuro
+      var v=Math.max(.10,Math.min(1.06,base*alb*limb*1.02));
+      d2[o]=Math.min(255,v*253); d2[o+1]=Math.min(255,v*250); d2[o+2]=Math.min(255,v*241);
       d2[o+3]=Math.max(0,Math.min(1,(1.0-rr)*N*.5+1))*255;
     }
     cx.putImageData(img,0,0);
     var old=holder.querySelector('svg'); if(old) holder.replaceChild(cv2,old); else holder.appendChild(cv2);
-  })();
+  };
+  /* fuori dal primo rendering: il disco sta sotto la piega, non serve subito */
+  if(window.requestIdleCallback) requestIdleCallback(buildMoon,{timeout:1500}); else setTimeout(buildMoon,60);
   var tick=false;
   function onScroll(){ if(tick) return; tick=true; requestAnimationFrame(function(){tick=false;update();}); }
   window.addEventListener('scroll',onScroll,{passive:true});
