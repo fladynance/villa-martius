@@ -37,6 +37,12 @@
   --rust:     #4A2012;   /* etichette pagina Matrimoni del sito */
   --terra:    #B25B3E;   /* terracotta del sito */
   --rule:     rgba(90,70,45,0.28);
+  /* Stessi token di ritmo verticale di assets/css/style.css.
+     NB: qui la nav NON e' position:fixed ma in flusso, quindi i blocchi
+     di testa usano --page-gap (non --page-top) per non sommare la nav. */
+  --nav-h:    78px;
+  --page-gap: 64px;
+  --page-top: calc(var(--nav-h) + var(--page-gap));
   --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --sans:  'Josefin Sans', system-ui, -apple-system, sans-serif;
   color-scheme: light;
@@ -46,6 +52,7 @@
 html { background: var(--bg); -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 1.08rem; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 html.is-landing { overscroll-behavior: none; }
+@media (max-width: 760px) { :root { --nav-h: 64px; --page-gap: 44px; } }
 img { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
 a { color: inherit; }
@@ -86,7 +93,18 @@ a { color: inherit; }
 .nav-vt { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border-radius: 999px; min-height: 44px; color: #fff; background: var(--gold); border: 1px solid var(--gold); transition: background .35s, color .35s, border-color .35s; }
 .nav-vt:hover { background: var(--ink); border-color: var(--ink); }
 .nav-vt-icon { width: 36px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-@media (max-width: 720px) { .nav-vt span { display: none; } .nav-vt { padding: .7rem; } }
+@media (max-width: 720px) {
+  /* stesse misure di .nav.v2 nel resto del sito, così l'altezza della barra combacia */
+  .nav { padding: .8rem 1.2rem; }
+  .nav-logo img { height: 40px; }
+  .nav-vt span { display: none; }
+  .nav-vt { padding: .55rem; gap: 0; min-width: 40px; min-height: 40px; justify-content: center; }
+  .nav-vt-icon { width: 32px; height: 18px; }
+  .nav-cta { font-size: .62rem; padding: .6rem .95rem; letter-spacing: .2em; min-height: 40px; }
+  .nav-back { min-height: 40px; }
+  .g-hamburger { width: 40px; height: 40px; }
+  .nav-actions { gap: .5rem; }
+}
 
 /* ─── HAMBURGER + MENU (come nel resto del sito) ─── */
 .g-hamburger { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: transparent; border: 0; cursor: pointer; color: #fff; transition: color .3s; }
@@ -117,13 +135,16 @@ a { color: inherit; }
 @media (max-width: 640px) { .gal-filters { gap: 14px; padding: 10px 10px 6px; } .gal-filters .gf { font-size: .64rem; letter-spacing: .18em; } }
 /* ─── Masonry grid ─── */
 .gallery { flex: 1 1 auto; padding: 1.6rem clamp(14px, 3.2vw, 44px) 3rem; background: var(--bg); }
-.masonry { columns: 4; column-gap: 10px; max-width: 1480px; margin: 0 auto; }
-@media (max-width: 1100px) { .masonry { columns: 3; } }
-@media (max-width: 720px)  { .masonry { columns: 2; column-gap: 6px; } }
-@media (max-width: 420px)  { .masonry { columns: 1; } }
-.ms-item { display: block; width: 100%; border: 0; padding: 0; margin: 0 0 10px; background: #1a1510; border-radius: 3px; overflow: hidden; cursor: pointer; break-inside: avoid; position: relative; transition: transform .5s cubic-bezier(.2,.65,.3,1), box-shadow .4s ease; }
-@media (max-width: 720px) { .ms-item { margin-bottom: 6px; } }
-.ms-item img { display: block; width: 100%; height: auto; transition: transform .9s cubic-bezier(.2,.65,.3,1), filter .5s; }
+/* Colonne reali (non CSS multi-column): il JS distribuisce ogni foto
+   nella colonna più corta, così il bordo inferiore resta pareggiato.
+   --ms-cols è letto dal JS per sapere quante colonne costruire. */
+.masonry { --ms-cols: 4; --ms-gap: 10px; display: flex; align-items: flex-start; gap: var(--ms-gap); max-width: 1480px; margin: 0 auto; }
+.ms-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--ms-gap); }
+@media (max-width: 1100px) { .masonry { --ms-cols: 3; } }
+@media (max-width: 720px)  { .masonry { --ms-cols: 2; --ms-gap: 6px; } }
+@media (max-width: 360px)  { .masonry { --ms-cols: 1; } }
+.ms-item { display: block; width: 100%; border: 0; padding: 0; margin: 0; background: #1a1510; border-radius: 3px; overflow: hidden; cursor: pointer; position: relative; aspect-ratio: var(--ar, 1); transition: transform .5s cubic-bezier(.2,.65,.3,1), box-shadow .4s ease; }
+.ms-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.65,.3,1), filter .5s; }
 .ms-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,15,10,0) 55%, rgba(20,15,10,.55) 100%); opacity: 0; transition: opacity .4s; pointer-events: none; }
 .ms-item .ms-cap { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #F6EFDE; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: .01em; opacity: 0; transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; pointer-events: none; }
 .ms-item:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -18px rgba(31,22,17,.35); }
@@ -133,12 +154,12 @@ a { color: inherit; }
 .ms-item.hide { display: none; }
 /* fade-in iniziale leggero */
 .ms-item { animation: msFade .55s ease-out both; }
-.ms-item:nth-child(4n+1) { animation-delay: 0s; }
-.ms-item:nth-child(4n+2) { animation-delay: .05s; }
-.ms-item:nth-child(4n+3) { animation-delay: .1s; }
-.ms-item:nth-child(4n+4) { animation-delay: .15s; }
+.ms-col:nth-child(2) .ms-item { animation-delay: .06s; }
+.ms-col:nth-child(3) .ms-item { animation-delay: .12s; }
+.ms-col:nth-child(4) .ms-item { animation-delay: .18s; }
 @keyframes msFade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
-.doors-head { text-align: center; padding: 76px clamp(16px, 4vw, 48px) 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+@media (prefers-reduced-motion: reduce) { .ms-item { animation: none; } }
+.doors-head { text-align: center; padding: var(--page-gap) clamp(16px, 4vw, 48px) 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
 .doors-head .label { color: var(--gold); margin: 0; }
 .doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 0; }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
@@ -147,7 +168,7 @@ a { color: inherit; }
 .gal-sep::before, .gal-sep::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .5; }
 .gal-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; }
 @media (max-width: 640px) {
-  .doors-head { padding: 76px 14px 0; gap: .3rem; }
+  .doors-head { padding: var(--page-gap) 14px 0; gap: .3rem; }
   .doors-head .doors-rule { width: 36px; margin: .2rem 0 0; }
   .gal-sep { margin-top: 1rem; padding: 0 14px; }
 }
@@ -427,8 +448,10 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     </div>
   </section>
 
-  <footer class="foot"><img src="assets/img/logo.png" alt="Villa Martius">Contrada Pirrera · 98045 San Pier Niceto (ME) · Sede equiparata a Casa Comunale</footer>
 </div>
+
+<!-- Footer fuori da #gview: deve comparire sia sulla landing sia nelle gallerie interne -->
+<footer class="foot"><img src="assets/img/logo.png" alt="Villa Martius">Contrada Pirrera · 98045 San Pier Niceto (ME) · Sede equiparata a Casa Comunale</footer>
 
 <!-- MENU (come nel resto del sito) -->
 <div class="g-menu" id="gMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
@@ -586,25 +609,60 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   for (let i = 0; i < 9; i++) {
     ORDER.forEach(c => { const k = CATS[c].keys[i]; if (k && IMG[k]) MASONRY.push({ k, cat: c, t: CATS[c].name }); });
   }
-  const masonry = $('#masonry');
-  masonry.innerHTML = MASONRY.map((p, i) =>
-    '<button type="button" class="ms-item" data-cat="' + p.cat + '" data-i="' + i + '" aria-label="Apri foto · ' + p.t + '">' +
-      '<img src="' + src(p.k) + '" alt="' + p.t + '" loading="lazy">' +
-      '<span class="ms-cap">' + p.t + '</span>' +
-    '</button>'
-  ).join('');
+  // Ritmo editoriale dei formati: ogni foto ha un'altezza nota, così le
+  // colonne si possono bilanciare senza aspettare il caricamento immagini.
+  const AR = [0.8, 1, 1.4, 0.75, 1, 1.5, 0.8, 1.25, 0.75, 1.33];
+  MASONRY.forEach((p, i) => { p.ar = AR[i % AR.length]; });
 
-  // Click → lightbox con la lista filtrata corrente
+  const masonry = $('#masonry');
   let currentCat = 'all';
   function currentList() {
     return currentCat === 'all' ? MASONRY : MASONRY.filter(p => p.cat === currentCat);
   }
-  $$('.ms-item', masonry).forEach(btn => {
-    btn.addEventListener('click', () => {
-      const list = currentList();
-      const idx = list.findIndex(p => p.k === MASONRY[+btn.dataset.i].k);
-      if (idx >= 0) openLb(list, idx, 'La villa, in ogni sua luce');
+  function cols() {
+    const v = parseInt(getComputedStyle(masonry).getPropertyValue('--ms-cols'), 10);
+    return Number.isFinite(v) && v > 0 ? v : 1;
+  }
+  // Distribuisce le foto visibili nella colonna di volta in volta più corta,
+  // poi riscala le proporzioni di ogni colonna perché tutte finiscano alla
+  // stessa quota: niente bordo inferiore frastagliato.
+  function layout() {
+    const list = currentList();
+    const n = cols();
+    const heights = new Array(n).fill(0);
+    const buckets = Array.from({ length: n }, () => []);
+    list.forEach(p => {
+      let s = 0;
+      for (let c = 1; c < n; c++) if (heights[c] < heights[s]) s = c;
+      buckets[s].push(p);
+      heights[s] += 1 / p.ar;            // altezza relativa a larghezza colonna
     });
+    const target = Math.max(...heights, 0);
+    masonry.innerHTML = buckets.map((items, c) => {
+      const k = heights[c] > 0 ? target / heights[c] : 1;   // ≥ 1
+      return '<div class="ms-col">' + items.map(p => {
+        const ar = (p.ar / k).toFixed(4);                   // più basso = più alto
+        return '<button type="button" class="ms-item" data-k="' + p.k + '" style="--ar:' + ar + '" aria-label="Apri foto · ' + p.t + '">' +
+          '<img src="' + src(p.k) + '" alt="' + p.t + '" loading="lazy">' +
+          '<span class="ms-cap">' + p.t + '</span>' +
+        '</button>';
+      }).join('') + '</div>';
+    }).join('');
+    $$('.ms-item', masonry).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const l = currentList();
+        const idx = l.findIndex(p => p.k === btn.dataset.k);
+        if (idx >= 0) openLb(l, idx, 'La villa, in ogni sua luce');
+      });
+    });
+  }
+  layout();
+
+  // Ricostruisce solo quando cambia davvero il numero di colonne
+  let lastCols = cols(), rT;
+  window.addEventListener('resize', () => {
+    clearTimeout(rT);
+    rT = setTimeout(() => { const c = cols(); if (c !== lastCols) { lastCols = c; layout(); } }, 150);
   });
 
   // Filtri
@@ -614,9 +672,7 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
       $$('.gf', galFilters).forEach(x => x.classList.remove('on'));
       b.classList.add('on');
       currentCat = b.dataset.cat;
-      $$('.ms-item', masonry).forEach(it => {
-        it.classList.toggle('hide', !(currentCat === 'all' || it.dataset.cat === currentCat));
-      });
+      layout();
     });
   });
 

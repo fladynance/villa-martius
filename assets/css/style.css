@@ -25,6 +25,18 @@
   /* Scale */
   --pad-page:   3rem;
   --pad-section:8rem;
+
+  /* Ritmo verticale di testa pagina — unica fonte di verità.
+     --nav-h = altezza reale della nav fissa; --page-gap = respiro
+     fra la nav e l'etichetta/titolo di pagina. Ogni pagina usa
+     --page-top come padding-top del suo primo blocco, così il
+     distacco nav→titolo è identico su tutto il sito. */
+  --nav-h:      78px;
+  --page-gap:   64px;
+  --page-top:   calc(var(--nav-h) + var(--page-gap));
+}
+@media (max-width: 760px) {
+  :root { --nav-h: 64px; --page-gap: 44px; }
 }
 
 /* ─── Palette MATRIMONI · Prugna & Oro Rosa ─────────────── */
@@ -460,15 +472,15 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 /* ─── PAGE HERO (subpages) — fascia stretta, altezza fissa ───── */
 .page-hero {
   position: relative;
-  height: 280px;
+  height: auto;
   min-height: 0;
-  max-height: 280px;
-  padding: 5rem 2rem 1.4rem;
+  max-height: none;
+  padding: var(--page-top) 2rem 2.6rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .page-hero .hero-bg { transform: scale(1); animation: none; }
 .page-hero .hero-overlay {
@@ -998,7 +1010,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   height: auto;
   min-height: 0;
   max-height: none;
-  padding: 76px 2rem 2rem;
+  padding: var(--page-top) 2rem 2.6rem;
   justify-content: flex-start;
 }
 .rooms-hero .hero-content {
@@ -1040,7 +1052,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   margin: 0 auto;
 }
 @media (max-width: 640px) {
-  .rooms-hero { height: auto; min-height: 0; max-height: none; padding: 76px 1.4rem 1.6rem; }
+  .rooms-hero { height: auto; min-height: 0; max-height: none; padding: var(--page-top) 1.4rem 1.8rem; }
   .rooms-hero-title { font-size: 1.9rem; }
   .rooms-hero-sub { font-size: 0.9rem; }
 }
@@ -1292,7 +1304,7 @@ a.room-cta { text-decoration: none; }
 .room-detail {
   --rd-serif: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
   --rd-sans: 'Instrument Sans', 'Josefin Sans', system-ui, sans-serif;
-  padding-top: 78px;                /* altezza nav fissa */
+  padding-top: var(--nav-h);        /* altezza nav fissa */
   padding-bottom: 4.5rem;
   font-family: var(--rd-sans);
   color: var(--body-txt);
@@ -1574,7 +1586,7 @@ a.room-cta { text-decoration: none; }
 /* ─── HUB 4-TILE ───────────────────────────────────────────── */
 .hub {
   min-height: 100svh;
-  padding-top: 76px;                 /* room for fixed nav */
+  padding-top: var(--nav-h);         /* room for fixed nav */
   display: flex;
   flex-direction: column;
 }
@@ -1946,12 +1958,13 @@ a.room-cta { text-decoration: none; }
 
 /* Virtual Tour placeholder */
 .vt-placeholder {
-  min-height: calc(100svh - 76px);
-  padding-top: 76px;
+  min-height: calc(100svh - var(--nav-h));
+  padding-top: var(--page-top);
+  padding-bottom: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   padding-inline: 2rem;
   background: var(--bg);
@@ -2038,7 +2051,7 @@ input, select, textarea { font-size: 16px; }
 
 /* Hub mobile: 4 tile in colonna verticale */
 @media (max-width: 720px) {
-  .hub { padding-top: 68px; min-height: 100svh; }
+  .hub { padding-top: var(--nav-h); min-height: 100svh; }
   .hub-head { padding: 1.1rem 1.2rem 0.9rem; }
   .hub-head .rule-gold { margin: 0.5rem 0 0.7rem; }
   .hub-head-sub { font-size: 0.9rem; }
@@ -2085,7 +2098,7 @@ input, select, textarea { font-size: 16px; }
   .hero-scroll { bottom: 1.6rem; font-size: 0.55rem; }
   .scroll-line { height: 32px; }
 
-  .page-hero { height: 220px; max-height: 220px; min-height: 0; padding: 4.2rem 1.4rem 1.1rem; }
+  .page-hero { height: auto; max-height: none; min-height: 0; padding: var(--page-top) 1.4rem 1.8rem; }
   .page-hero-title { font-size: 2rem; }
   .page-hero-sub { font-size: 0.95rem; }
   .breadcrumb { font-size: 0.58rem; letter-spacing: 0.24em; margin-bottom: 0.6rem; }
@@ -2287,13 +2300,19 @@ input, select, textarea { font-size: 16px; }
 .ev-center { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .ev-light { color: #2A1410; }
 .ev-dark { color: #fff; }
-.ev-story { padding: 9rem 0 1.2rem; }
+.ev-story { padding: var(--page-top) 0 1.2rem; }
 .ev-intro { padding: 1.2rem 0 4.5rem; }
 .ev-sep { display: flex; align-items: center; gap: 1rem; margin: 0 auto; max-width: 1060px; padding: 0 2.2rem; }
 .ev-sep::before, .ev-sep::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .5; }
 .ev-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; }
 .ev-light .label { color: var(--dark); }
-.ev-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.3rem, 5.4vw, 4rem); line-height: 1.04; margin: 1rem 0 1.6rem; color: var(--title); text-wrap: balance; }
+/* Stessa scala tipografica di matrimoni: h1 dell'hero = .mt-title,
+   titoli di sezione = .mt-h (più piccoli) */
+.ev-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.3rem, 3.9vw, 3.6rem); line-height: 1.06; margin: 1rem 0 1.6rem; color: var(--title); text-wrap: balance; }
+.ev-intro .ev-h { font-size: clamp(2.1rem, 3.6vw, 3rem); line-height: 1.08; }
+/* Sezione allineata a sinistra (come .mt-sec di matrimoni) */
+.ev-left { text-align: left; display: flex; flex-direction: column; align-items: flex-start; }
+.ev-left .rule-gold { margin-left: 0; }
 .ev-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.7; max-width: 44ch; margin: 0 0 1.1rem; }
 .ev-copy-strong { font-style: italic; font-size: 1.45rem; font-weight: 500; }
 
@@ -2325,7 +2344,7 @@ input, select, textarea { font-size: 16px; }
   .ev-sun { width: 48px; height: 48px; margin-top: -24px; }
   .ev-moon { width: 48px; height: 48px; margin-top: -24px; }
   .ev-wrap { padding: 0 1.2rem; }
-  .ev-story { padding: 6.5rem 0 .8rem; }
+  .ev-story { padding: var(--page-top) 0 .8rem; }
   .ev-intro { padding: .8rem 0 2.8rem; }
   .ev-sep { padding: 0 1.2rem; }
   .ev-copy { font-size: 1.18rem; }
@@ -2344,7 +2363,7 @@ input, select, textarea { font-size: 16px; }
 .mt-body { --mt-ink: #2B1810; --mt-lab: #4A2012; --mt-rule: rgba(74,32,18,.38); background: #E6DBC8; }
 .mt-page { position: relative; isolation: isolate; padding-bottom: 6rem; background: linear-gradient(180deg, #E6DBC8 0%, #D9CDB4 100%); }
 .mt-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
-.mt-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 3rem 3.4rem; }
+.mt-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: flex-start; padding: var(--page-top) 2rem 3rem 3.4rem; }
 .mt-stick .label, .mt-sec .label { display: block; color: var(--mt-lab); }
 .mt-stick .rule-gold, .mt-sec .rule-gold { margin-left: 0; background: var(--mt-lab); opacity: .55; }
 .mt-title { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.3rem, 3.9vw, 3.6rem); line-height: 1.06; margin: .8rem 0 2.2rem; color: var(--mt-ink); text-wrap: balance; }
@@ -2393,7 +2412,7 @@ input, select, textarea { font-size: 16px; }
 
 @media (max-width: 900px) {
   .mt-split { grid-template-columns: 1fr; }
-  .mt-stick { position: relative; height: auto; min-height: 0; padding: 6.6rem 1.3rem 1rem; align-items: center; text-align: center; }
+  .mt-stick { position: relative; height: auto; min-height: 0; padding: var(--page-top) 1.3rem 1rem; align-items: center; text-align: center; }
   .mt-stick .rule-gold { margin-left: auto; margin-right: auto; }
   .mt-page { padding-bottom: 5rem; background: linear-gradient(180deg, #E6DBC8 0%, #D9CDB4 100%); }
   .mt-title { font-size: clamp(2.2rem, 9vw, 3rem); margin-bottom: 1.4rem; }
@@ -2506,7 +2525,7 @@ body.mt-lock { overflow: hidden; }
 .rc-body .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .rc-page { position: relative; padding-bottom: 5rem; background: #E6DBC8; }
 .rc-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
-.rc-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 6rem 2rem 3rem 3.4rem; overflow: hidden; }
+.rc-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; padding: var(--page-top) 2rem 3rem 3.4rem; overflow: hidden; }
 .rc-stick .label, .rc-sec .label, .rc-photo .label { display: block; color: var(--mt-lab); margin: 0; }
 .rc-stick .rule-gold { display: none; }
 .rc-title { position: relative; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2.3rem, 3.9vw, 3.6rem); line-height: 1.06; margin: 1.6rem 0 1.4rem; color: var(--mt-ink); text-wrap: balance; }
@@ -2515,13 +2534,13 @@ body.mt-lock { overflow: hidden; }
 .rc-cta { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 2rem; border-radius: 999px; background: #9F876A; border: 1.5px solid #9F876A; color: #fff; text-decoration: none; font-family: var(--sans); font-weight: 300; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; transition: background .3s, border-color .3s, transform .3s; }
 .rc-cta:hover { background: var(--dark); border-color: var(--dark); transform: translateY(-2px); }
 .rc-cta:focus-visible { outline: 2px solid var(--mt-ink); outline-offset: 4px; }
-.rc-main { padding: 76px 3.4rem 2rem 1.6rem; max-width: 720px; display: flex; flex-direction: column; gap: 4rem; }
+.rc-main { padding: var(--page-top) 3.4rem 2rem 1.6rem; max-width: 720px; display: flex; flex-direction: column; gap: 4rem; }
 .rc-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.08; margin: .8rem 0 1.3rem; color: var(--mt-ink); text-wrap: balance; }
 .rc-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.65; margin: 0 0 1rem; color: #2E1D12; }
 .rc-copy em { font-style: italic; font-weight: 500; color: var(--mt-ink); }
 .rc-quiet { font-size: 1.12rem; color: #4A3322; margin: 1.3rem 0 0; }
 /* prima sezione: due frasi + riconoscimento a schema */
-.rc-first { text-align: center; padding: .5rem 0 0; }
+.rc-first { text-align: center; padding: 0; }
 .rc-lab { text-align: center; }
 .rc-sep { display: block; width: 60px; height: 1px; margin: 1.5rem auto 3rem; background: var(--mt-lab); opacity: .55; }
 .rc-recbox { text-align: center; }
@@ -2556,8 +2575,11 @@ body.mt-lock { overflow: hidden; }
 .rc-step h3 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.55rem; line-height: 1.12; margin: 0 0 .45rem; color: var(--mt-ink); }
 .rc-step p { font-family: var(--serif); font-size: 1.1rem; line-height: 1.55; margin: 0; color: #3A2818; }
 @media (max-width: 900px) {
-  .rc-split { display: flex; flex-direction: column; align-items: stretch; text-align: center; }
+  .rc-split { display: flex; flex-direction: column; align-items: stretch; text-align: center; padding-top: var(--page-top); }
   .rc-stick { display: contents; }
+  /* su mobile le due colonne si impilano: l'etichetta della sidebar
+     duplicherebbe l'h1 "Rito Civile" di .rc-main, quindi si nasconde */
+  .rc-stick > .label { display: none; }
   .rc-main { order: 1; }
   .rc-cta { order: 2; }
   .rc-small { display: none; }
@@ -2567,7 +2589,7 @@ body.mt-lock { overflow: hidden; }
   .rc-cta { align-self: center; margin-bottom: 1rem; }
   .rc-title { font-size: clamp(2.2rem, 9vw, 3rem); margin: 1.6rem 0 0; }
   .rc-title2 { margin: 1.8rem 0 1.5rem; }
-  .rc-main { padding: 76px 1.3rem 1rem; max-width: none; gap: 3rem; }
+  .rc-main { padding: 0 1.3rem 1rem; max-width: none; gap: 3rem; }
   .rc-main { text-align: left; }
   .rc-first { text-align: center; }
   .rc-cols { grid-template-columns: 1fr; }
