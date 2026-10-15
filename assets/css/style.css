@@ -1382,6 +1382,48 @@ a.room-cta { text-decoration: none; }
 .rd-chip .rd-ic { color: var(--gold); }
 .rd-fact .rd-ic { color: var(--gold-lt); }
 
+/* ── Hero a due colonne da desktop ──────────────────────────────
+   Foto a sinistra, nome della sistemazione e form di prenotazione a
+   destra: così entrando nella pagina si vedono tutti e tre sullo
+   stesso piano, senza scorrere. L'altezza del mosaico è legata al
+   viewport perché resti dentro la prima schermata anche sui portatili. */
+@media (min-width: 901px) {
+  .room-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1.32fr) minmax(350px, 0.68fr);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "photos info"
+      "photos form"
+      "photos ."
+      "body   body"
+      "more   more";
+    column-gap: clamp(1.6rem, 2.4vw, 2.8rem);
+    padding-top: calc(var(--nav-h) + 30px);
+    max-width: 1460px;
+    margin-inline: auto;
+    padding-inline: clamp(1.4rem, 2.6vw, 2.6rem);
+  }
+  .room-detail > * { max-width: none; margin-inline: 0; }
+  .room-detail > .rd-top  { grid-area: photos; }
+  .room-detail > .rd-head { grid-area: info; padding: 0 0 1.2rem; }
+  .room-detail > .rd-book { grid-area: form; width: 100%; max-width: none; margin: 0; align-self: start; }
+  .room-detail > .rd-body { grid-area: body; width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: 0; }
+  .room-detail > .rd-more { grid-area: more; width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: 0; }
+
+  .rd-mosaic { height: clamp(360px, calc(100vh - 262px), 560px); border-radius: 12px; overflow: hidden; }
+  .rd-mosaic.rd-n1,
+  .rd-mosaic.rd-n2 { height: auto; grid-template-rows: clamp(360px, calc(100vh - 262px), 560px); }
+
+  /* titolo proporzionato alla colonna stretta */
+  .rd-title { font-size: clamp(2.1rem, 2.9vw, 3.2rem); }
+
+  /* form in verticale: ogni campo su una riga, CTA a tutta larghezza */
+  .rd-book { grid-template-columns: 1fr; }
+  .rd-field { border-right: 0; border-bottom: 1px solid rgba(90,70,45,.16); padding: .85rem 1.3rem; }
+  .rd-cta { border-radius: 0 0 14px 14px; min-height: 58px; padding: 0 1.6rem; }
+}
+
 /* Altre sistemazioni */
 .rd-more { padding: 3.2rem 2.2rem 0; }
 .rd-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
