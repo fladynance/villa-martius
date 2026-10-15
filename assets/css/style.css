@@ -1692,19 +1692,50 @@ a.room-cta { text-decoration: none; }
   text-shadow: 0 1px 10px rgba(0,0,0,0.55);
   margin: 0;
 }
+.hub-tile::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  height: 1px;
+  background: var(--gold-lt, #D4C195);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.22, 0.65, 0.3, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+.hub-tile-frame {
+  position: absolute;
+  width: 1px;
+  top: 14px;
+  bottom: 14px;
+  background: var(--gold-lt, #D4C195);
+  transform: scaleY(0);
+  transition: transform 0.65s cubic-bezier(0.22, 0.65, 0.3, 1) 0.18s;
+  z-index: 2;
+  pointer-events: none;
+}
+.hub-tile-frame-l { left: 14px; transform-origin: top center; }
+.hub-tile-frame-r { right: 14px; transform-origin: bottom center; }
+.hub-tile:hover::before { transform: scaleX(1); }
+.hub-tile:hover .hub-tile-frame { transform: scaleY(1); }
 .hub-tile::after {
   content: "";
   position: absolute;
-  bottom: 0; left: 50%;
-  width: 0;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
   height: 1px;
-  background: var(--gold-lt);
-  transition: width 0.6s ease, left 0.6s ease;
+  background: var(--gold-lt, #D4C195);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.65s cubic-bezier(0.22, 0.65, 0.3, 1);
+  z-index: 2;
+  pointer-events: none;
 }
-.hub-tile:hover::after {
-  width: 60%;
-  left: 20%;
-}
+.hub-tile:hover::after { transform: scaleX(1); }
 
 /* ─── NAV V2 (persistent with CTA) ─────────────────────────── */
 .nav.v2 {
