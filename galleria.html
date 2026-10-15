@@ -45,7 +45,7 @@
 [hidden] { display: none !important; }
 html { background: var(--bg); -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 1.08rem; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-html.is-landing, html.is-landing body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+html.is-landing { overscroll-behavior: none; }
 img { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
 a { color: inherit; }
@@ -62,11 +62,11 @@ a { color: inherit; }
 }
 
 /* ─── BARRA SCURA (come la nav del sito) ─── */
-.nav { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: .7rem clamp(12px, 3vw, 40px); background: var(--dark); color: #fff; }
+.nav { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: 1rem clamp(16px, 2vw, 32px); background: var(--dark); color: #fff; }
 .nav .nav-logo { display: inline-flex; justify-content: flex-start; padding-left: .4rem; }
 .nav-back { justify-self: start; display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; padding-right: .4rem; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; color: #fff; }
 .nav-back svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.3; flex: 0 0 auto; }
-.nav-logo img { height: 46px; width: auto; filter: brightness(0) invert(1); }
+.nav-logo img { height: 42px; width: auto; filter: brightness(0) invert(1); }
 .nav-actions { justify-self: end; display: flex; align-items: center; gap: .6rem; }
 .nav-cta { font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center; gap: .5rem; color: #fff; }
 .nav-cta-icon { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.4; flex: 0 0 auto; }
@@ -108,7 +108,7 @@ a { color: inherit; }
 /* ═════════ LIVELLO 1 · I QUATTRO RIQUADRI (6 modelli) ═════════ */
 .landing { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); }
 /* ─── Filter bar ─── */
-.gal-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(14px, 2.4vw, 32px); padding: clamp(14px, 1.6vw, 24px) clamp(16px, 4vw, 48px) clamp(8px, 1.2vw, 16px); border-bottom: 1px solid rgba(159,135,106,.22); }
+.gal-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(14px, 2.4vw, 32px); padding: 1.1rem clamp(16px, 4vw, 48px) 1.2rem; border-bottom: 1px solid rgba(159,135,106,.22); }
 .gal-filters .gf { appearance: none; background: transparent; border: 0; padding: .5rem .2rem; cursor: pointer; position: relative; font-family: var(--sans); font-weight: 300; font-size: .74rem; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); transition: color .3s; }
 .gal-filters .gf::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: center; transition: transform .35s ease; }
 .gal-filters .gf:hover { color: var(--ink); }
@@ -116,7 +116,7 @@ a { color: inherit; }
 .gal-filters .gf.on::after { transform: scaleX(1); }
 @media (max-width: 640px) { .gal-filters { gap: 14px; padding: 10px 10px 6px; } .gal-filters .gf { font-size: .64rem; letter-spacing: .18em; } }
 /* ─── Masonry grid ─── */
-.gallery { flex: 1 1 auto; padding: clamp(14px, 2.2vw, 28px) clamp(14px, 3.2vw, 44px) clamp(32px, 4vw, 60px); background: var(--bg); }
+.gallery { flex: 1 1 auto; padding: 1.6rem clamp(14px, 3.2vw, 44px) 3rem; background: var(--bg); }
 .masonry { columns: 4; column-gap: 10px; max-width: 1480px; margin: 0 auto; }
 @media (max-width: 1100px) { .masonry { columns: 3; } }
 @media (max-width: 720px)  { .masonry { columns: 2; column-gap: 6px; } }
@@ -138,15 +138,18 @@ a { color: inherit; }
 .ms-item:nth-child(4n+3) { animation-delay: .1s; }
 .ms-item:nth-child(4n+4) { animation-delay: .15s; }
 @keyframes msFade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
-.doors-head { text-align: center; padding: 76px clamp(16px, 4vw, 48px) clamp(10px, 1.4vw, 18px); display: flex; flex-direction: column; align-items: center; gap: .5rem; }
-.doors-head .label { color: var(--gold); }
-.doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 .1rem; }
-.doors-head .doors-title { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 2.4vw, 1.9rem); color: var(--ink); margin: 0; line-height: 1.1; letter-spacing: .01em; }
+.doors-head { text-align: center; padding: 76px clamp(16px, 4vw, 48px) 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+.doors-head .label { color: var(--gold); margin: 0; }
+.doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 0; }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
+/* Divider ornamentale (identico a .mt-sep di matrimoni) */
+.gal-sep { display: flex; align-items: center; gap: 1rem; max-width: 560px; margin: 1.4rem auto 0; padding: 0 clamp(16px, 4vw, 48px); }
+.gal-sep::before, .gal-sep::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .5; }
+.gal-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; }
 @media (max-width: 640px) {
-  .doors-head { padding: 76px 14px 10px; gap: .3rem; }
-  .doors-head .doors-title { font-size: 1.1rem; }
-  .doors-head .doors-rule { width: 36px; margin: .2rem 0 .05rem; }
+  .doors-head { padding: 76px 14px 0; gap: .3rem; }
+  .doors-head .doors-rule { width: 36px; margin: .2rem 0 0; }
+  .gal-sep { margin-top: 1rem; padding: 0 14px; }
 }
 .doors-grid { width: 100%; height: 100%; max-width: 900px; max-height: 760px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
@@ -353,8 +356,8 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <header class="doors-head">
     <h1 class="label">Galleria</h1>
     <span class="doors-rule" aria-hidden="true"></span>
-    <p class="doors-title">La villa, in ogni sua luce</p>
   </header>
+  <div class="gal-sep" aria-hidden="true"><i></i></div>
   <nav class="gal-filters" id="galFilters" aria-label="Filtra per luogo">
     <button class="gf on" data-cat="all"      type="button">Tutto</button>
     <button class="gf"    data-cat="gazebo"   type="button">Giardino</button>
