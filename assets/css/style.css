@@ -1605,9 +1605,10 @@ a.room-cta { text-decoration: none; }
   letter-spacing: 0.42em;
   text-indent: 0.42em;             /* compensa lo spazio finale della spaziatura */
   text-transform: uppercase;
-  color: var(--gold-lt);           /* come .label nel resto del sito */
-  /* la foto sotto e' chiara: senza un'ombra morbida l'oro si perde */
-  text-shadow: 0 1px 10px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.4);
+  /* la foto sotto e' chiarissima all'orizzonte: l'oro medio ci si perde,
+     serve un tono piu' caldo e chiaro con un'ombra che lo stacchi */
+  color: #F2E6D2;
+  text-shadow: 0 1px 12px rgba(0,0,0,.7), 0 0 3px rgba(0,0,0,.55);
   margin-bottom: 1.2rem;
 }
 /* filetto oro sotto l'occhiello: e' la firma usata in tutte le altre pagine */
