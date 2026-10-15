@@ -2287,8 +2287,11 @@ input, select, textarea { font-size: 16px; }
 .ev-center { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .ev-light { color: #2A1410; }
 .ev-dark { color: #fff; }
-.ev-story { padding: 9rem 0 2.5rem; }
-.ev-intro { padding: 2.5rem 0 4.5rem; }
+.ev-story { padding: 9rem 0 1.2rem; }
+.ev-intro { padding: 1.2rem 0 4.5rem; }
+.ev-sep { display: flex; align-items: center; gap: 1rem; margin: 0 auto; max-width: 1060px; padding: 0 2.2rem; }
+.ev-sep::before, .ev-sep::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .5; }
+.ev-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; }
 .ev-light .label { color: var(--dark); }
 .ev-h { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.3rem, 5.4vw, 4rem); line-height: 1.04; margin: 1rem 0 1.6rem; color: var(--title); text-wrap: balance; }
 .ev-copy { font-family: var(--serif); font-size: 1.28rem; line-height: 1.7; max-width: 44ch; margin: 0 0 1.1rem; }
@@ -2322,8 +2325,9 @@ input, select, textarea { font-size: 16px; }
   .ev-sun { width: 48px; height: 48px; margin-top: -24px; }
   .ev-moon { width: 48px; height: 48px; margin-top: -24px; }
   .ev-wrap { padding: 0 1.2rem; }
-  .ev-story { padding: 6.5rem 0 1.5rem; }
-  .ev-intro { padding: 1.5rem 0 2.8rem; }
+  .ev-story { padding: 6.5rem 0 .8rem; }
+  .ev-intro { padding: .8rem 0 2.8rem; }
+  .ev-sep { padding: 0 1.2rem; }
   .ev-copy { font-size: 1.18rem; }
   .ev-ch { padding: 1.8rem 0; }
   .ev-num { font-size: 2rem; margin-bottom: .7rem; }
