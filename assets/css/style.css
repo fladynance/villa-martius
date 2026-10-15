@@ -2319,19 +2319,62 @@ input, select, textarea { font-size: 16px; }
 /* sole e luna: fissi nella finestra, si muovono con lo scroll */
 .ev-cel { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
 .ev-sun, .ev-moon { position: absolute; left: 7vw; border-radius: 50%; opacity: 0; will-change: top, opacity; }
+/* Sole: disco con oscuramento al bordo (limb darkening, come il sole vero,
+   più luminoso al centro) e corona a tre strati invece di un alone piatto. */
 .ev-sun {
   --s: 0; top: 14%; width: 72px; height: 72px; margin-top: -36px;
-  background: radial-gradient(circle at 36% 34%, #F8EFD9, #E8CFA0 55%, #C9A77F);
-  box-shadow: 0 0 80px 24px rgba(220,180,130,.38);
+  background:
+    radial-gradient(circle at 50% 50%,
+      #FFFEF8 0%, #FFF8E2 26%, #FFEFC4 48%,
+      #FBDC9E 68%, #F0C178 85%, #DFA463 96%, rgba(223,164,99,0) 100%);
+  box-shadow: 0 0 16px 2px rgba(255,236,190,.45);
 }
+/* Corona esterna. Molti stop con caduta quasi esponenziale: senza, i pochi
+   stop disegnano anelli concentrici visibili sul fondo piatto. */
+.ev-sun::before {
+  content: ""; position: absolute; inset: -150%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle,
+    rgba(255,231,178,.26)  0%,
+    rgba(255,226,170,.205) 11%,
+    rgba(254,217,158,.153) 20%,
+    rgba(252,207,147,.111) 28%,
+    rgba(250,197,137,.078) 36%,
+    rgba(247,186,127,.053) 44%,
+    rgba(244,176,118,.035) 52%,
+    rgba(241,166,110,.022) 60%,
+    rgba(238,157,103,.013) 69%,
+    rgba(235,149,98,.006)  79%,
+    rgba(232,143,94,.002)  89%,
+    rgba(230,140,92,0)     100%);
+}
+/* stato tramonto: stessa costruzione, toni più caldi e profondi */
 .ev-sun::after {
   content: ""; position: absolute; inset: 0; border-radius: 50%; opacity: var(--s);
-  background: radial-gradient(circle at 36% 34%, #ECD2B4, #C9876A 58%, #A86354);
-  box-shadow: 0 0 90px 28px rgba(195,120,90,.32);
+  background:
+    radial-gradient(circle at 50% 50%,
+      #FFF2DC 0%, #FBDDB2 24%, #EFBF8C 46%,
+      #DE9D6E 68%, #C87A58 86%, #B0624C 96%, rgba(176,98,76,0) 100%);
+  box-shadow: 0 0 18px 3px rgba(240,180,130,.42);
 }
 .ev-moon {
   top: 14%; width: 72px; height: 72px; margin-top: -36px;
-  box-shadow: 0 0 80px 24px rgba(190,200,220,.32), 0 0 26px 3px rgba(240,235,220,.3);
+  box-shadow: 0 0 14px 1px rgba(236,240,250,.34);
+}
+/* alone lunare: stessa caduta graduale della corona del sole, in toni freddi */
+.ev-moon::before {
+  content: ""; position: absolute; inset: -170%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle,
+    rgba(216,228,248,.22)  0%,
+    rgba(210,223,246,.170) 11%,
+    rgba(203,217,243,.126) 20%,
+    rgba(196,211,240,.091) 28%,
+    rgba(189,205,237,.064) 36%,
+    rgba(183,199,234,.043) 44%,
+    rgba(177,193,231,.028) 52%,
+    rgba(171,188,228,.017) 60%,
+    rgba(166,183,225,.010) 69%,
+    rgba(161,179,222,.004) 80%,
+    rgba(158,176,220,0)    100%);
 }
 .ev-moon-svg { display: block; width: 100%; height: 100%; border-radius: 50%; }
 .ev-stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0; }
