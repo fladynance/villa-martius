@@ -208,9 +208,10 @@
   function cl(x){return x<0?0:x>1?1:x}
   function ez(t){return t*t*(3-2*t)}
   function draw(p){
-    var g=(1-ez(p))*64;
+    /* restano staccate per la prima meta', poi si chiudono e si intrecciano */
+    var j=ez(cl((p-.45)/.55)), g=(1-j)*64;
     A.setAttribute('transform','translate('+(-g)+',0)'); C.setAttribute('transform','translate('+(-g)+',0)'); B.setAttribute('transform','translate('+g+',0)');
-    C.style.opacity=cl((p-.8)*5); G.style.opacity=ez(cl((p-.5)*2)).toFixed(2);
+    C.style.opacity=cl((j-.45)/.55).toFixed(2); G.style.opacity=(j*.85).toFixed(2);
   }
   /* MOBILE: le fedi partono staccate nell'apertura, si fermano in piccolo a destra sui titoli
      delle due sezioni e finiscono incrociate, a sinistra sotto "Villa Martius" */
@@ -242,46 +243,36 @@
     var P=page.getBoundingClientRect(),sm=62,rx=P.width-22-sm/2;
     function baseY(el){var r=el.getBoundingClientRect(),cs=getComputedStyle(el),lh=parseFloat(cs.lineHeight);if(!(lh>0))lh=parseFloat(cs.fontSize)*1.1;return r.bottom-P.top-lh/2;}
     var H=hs.getBoundingClientRect(),bigW=Math.min(H.width,220);
-    geo={hx:H.left+H.width/2-P.left,hy:H.top+H.height/2-P.top,tx:rx,ty:baseY(ts[0]),bigW:bigW,sm:sm,t1:ts[0].getBoundingClientRect().top+window.pageYOffset};
+    /* le fedi si fermano SOPRA la scritta "Il Nostro Approccio", centrate
+       sulla colonna: e' li' che arrivano unite */
+    var lab=document.querySelector('.mt-sec .label'),endW=84;
+    var L=lab?lab.getBoundingClientRect():ts[0].getBoundingClientRect();
+    var col=document.querySelector('.mt-main')||page, C2=col.getBoundingClientRect();
+    var endX=C2.left+C2.width/2-P.left,
+        endY=L.top-P.top-18-endW/4;            /* altezza del blocco = larghezza/2 */
+    geo={hx:H.left+H.width/2-P.left,hy:H.top+H.height/2-P.top,
+         tx:endX,ty:endY,bigW:bigW,sm:endW,
+         t1:L.top+window.pageYOffset};
     fly[0].el.style.width=bigW+'px'; fly[0].el.style.left='0px'; fly[0].el.style.top='0px'; fly[0].el.style.transformOrigin='50% 50%';
     place(fly[1],rx,baseY(ts[1]),sm,0);
     var E=es.getBoundingClientRect();
     place(fly[2],E.left-P.left+sm/2,E.top-P.top+E.height/2,sm,.5);
     flyMove();
-    if(!joinStarted){ joinStarted=1; joinStart(); }
   }
-  var joinStarted=0;
-  /* mobile, in due tempi: prima le fedi si avvicinano e si incrociano restando
-     in alto; solo quando sono gia' intrecciate scendono verso "Il vostro sogno",
-     rimpicciolendosi. Arrivano quindi unite.
+  /* mobile: le fedi partono staccate e grandi in alto; scorrendo scendono
+     verso "Il Nostro Approccio" e, nell'ultima parte della corsa, si chiudono
+     e si intrecciano, cosi' arrivano unite esattamente sopra la scritta.
      Ogni stile viene riscritto solo se il valore e' davvero cambiato: su telefono
      le scritture inutili nel DOM a ogni frame sono la causa degli scatti. */
-  /* L'incrocio non e' legato allo scroll: su telefono il titolo "Il vostro sogno"
-     e' gia' visibile senza scorrere, quindi la corsa utile e' di ~150px e le due
-     fasi insieme risultavano schiacciate in un gesto solo. Qui l'intreccio e'
-     un'animazione a tempo che parte da sola; allo scroll resta la sola discesa,
-     che ha cosi' tutta la corsa a disposizione. */
-  var joinT=0, joinRAF=0;
-  function joinStart(){
-    if(reduce){ joinT=1; flyMove(); return; }
-    var t0=0, DUR=900;
-    cancelAnimationFrame(joinRAF);
-    joinRAF=requestAnimationFrame(function step(ts){
-      if(!t0) t0=ts;
-      joinT=cl((ts-t0)/DUR);
-      flyMove();
-      if(joinT<1) joinRAF=requestAnimationFrame(step);
-    });
-  }
   function setp(r,k,val){ if(r._p[k]===val) return false; r._p[k]=val; return true; }
   function flyMove(){
     if(!fly||!geo) return;
-    var sy=window.pageYOffset,vh=window.innerHeight,s1=Math.max(140,geo.t1-vh*.5);
+    var sy=window.pageYOffset,vh=window.innerHeight,s1=Math.max(230,geo.t1-vh*.55);
     var r=fly[0];
-    var pJoin=ez(joinT);                                 /* incrocio, a tempo */
-    /* la discesa si apre solo quando l'intreccio e' quasi concluso */
-    var gate=ez(cl((joinT-.7)/.3));
-    var pMove=ez(cl(sy/s1))*gate;                        /* discesa, a scroll */
+    var p=cl(sy/s1);
+    var pMove=ez(p);                                     /* discesa */
+    /* l'unione avviene nell'ultimo tratto: sopra "Il Nostro Approccio" */
+    var pJoin=ez(cl((p-.45)/.55));
     var g=64*(1-pJoin);
     var x=geo.hx+(geo.tx-geo.hx)*pMove,y=geo.hy+(geo.ty-geo.hy)*pMove,
         sc=1+(geo.sm/geo.bigW-1)*pMove;
@@ -311,8 +302,10 @@
     tick=false;
     if(window.__mtBg) window.__mtBg.style.setProperty('--sy',(window.pageYOffset).toFixed(0));
     if(window.innerWidth<=900){ flyMove(); return; }
-    var max=document.documentElement.scrollHeight-window.innerHeight;
-    draw(cl(window.pageYOffset/Math.max(1,max*.7)));
+    /* unite quando si arriva a "Il Nostro Approccio", non a fine pagina */
+    var lab=document.querySelector('.mt-sec .label');
+    var win=lab? Math.max(240,(lab.getBoundingClientRect().top+window.pageYOffset)-window.innerHeight*.45) : 240;
+    draw(cl(window.pageYOffset/win));
   }
   /* sfondo: rami d'ulivo con leggero parallasse e lanterne che si accendono verso la sera */
   (function(){

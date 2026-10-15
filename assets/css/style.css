@@ -282,7 +282,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: linear-gradient(160deg, #1F1611 0%, #2A1F16 60%, #1F1611 100%);
+  background: #17110D;            /* stesso fondo del footer */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1603,9 +1603,23 @@ a.room-cta { text-decoration: none; }
   font-weight: 400;
   font-size: 0.75rem;
   letter-spacing: 0.42em;
+  text-indent: 0.42em;             /* compensa lo spazio finale della spaziatura */
   text-transform: uppercase;
-  color: rgba(255,255,255,0.92);
-  margin-bottom: 1.8rem;
+  color: var(--gold-lt);           /* come .label nel resto del sito */
+  /* la foto sotto e' chiara: senza un'ombra morbida l'oro si perde */
+  text-shadow: 0 1px 10px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.4);
+  margin-bottom: 1.2rem;
+}
+/* filetto oro sotto l'occhiello: e' la firma usata in tutte le altre pagine */
+.splash-eyebrow::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 1px;
+  background: var(--gold-lt);
+  opacity: .85;
+  margin: 1rem auto 0;
+  text-indent: 0;
 }
 .splash-h1 {
   font-family: var(--serif);
@@ -1626,16 +1640,22 @@ a.room-cta { text-decoration: none; }
   font-weight: 500;
   font-size: 0.75rem;
   letter-spacing: 0.36em;
+  text-indent: 0.36em;
   text-transform: uppercase;
-  color: var(--dark);
-  background: #fff;
-  padding: 1.2rem 2.8rem;
-  transition: background 0.4s, color 0.4s, gap 0.4s;
+  color: #fff;
+  background: var(--gold);
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;            /* pillola, come ogni CTA del sito */
+  min-height: 54px;
+  padding: 0 2.6rem;
+  box-shadow: 0 18px 38px -18px rgba(0,0,0,.7);
+  transition: background 0.4s, color 0.4s, gap 0.4s, border-color 0.4s;
 }
 .splash-cta svg { transition: transform 0.4s; }
 .splash:hover .splash-cta {
-  background: var(--gold);
-  color: #fff;
+  background: #fff;
+  border-color: #fff;
+  color: var(--dark);
   gap: 1.4rem;
 }
 .splash:hover .splash-cta svg { transform: translateX(4px); }
@@ -2333,7 +2353,7 @@ input, select, textarea { font-size: 16px; }
 
 /* sole e luna: fissi nella finestra, si muovono con lo scroll */
 .ev-cel { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-.ev-sun, .ev-moon { position: absolute; left: 7vw; border-radius: 50%; opacity: 0; will-change: top, opacity; }
+.ev-sun, .ev-moon { position: absolute; right: 7vw; border-radius: 50%; opacity: 0; will-change: top, opacity; }
 /* Sole: disco con oscuramento al bordo (limb darkening, come il sole vero,
    più luminoso al centro) e corona a tre strati invece di un alone piatto. */
 .ev-sun {
@@ -2440,7 +2460,7 @@ input, select, textarea { font-size: 16px; }
 .js-rv .rv.in { opacity: 1; transform: none; }
 
 @media (max-width: 900px) {
-  .ev-sun, .ev-moon { left: 14px; opacity: 0; }
+  .ev-sun, .ev-moon { right: 14px; opacity: 0; }
   .ev-sun { width: 48px; height: 48px; margin-top: -24px; }
   .ev-moon { width: 48px; height: 48px; margin-top: -24px; }
   .ev-wrap { padding: 0 1.2rem; }
@@ -2635,7 +2655,39 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
 .ct-page .section-dark .body-copy { color: var(--body-txt); }
 .ct-page .section-dark .label { color: var(--gold); }
 
-/* colonna di sinistra: i recapiti, in editoriale */
+/* Impaginazione: intro e recapiti a sinistra, modulo a destra.
+   Da telefono l'ordine diventa intro → modulo → recapiti, così i
+   contatti non spingono il modulo troppo in basso. */
+.ct-page .contact-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "intro form" "dett form";
+  align-items: start;
+  gap: 1.8rem 4rem;
+}
+.ct-page .contact-info { grid-area: intro; }
+.ct-page .contact-form { grid-area: form; }
+.ct-page .contact-details { grid-area: dett; }
+@media (max-width: 900px) {
+  .ct-page .contact-grid { grid-template-columns: 1fr; grid-template-areas: "intro" "form" "dett"; gap: 1.6rem; }
+}
+
+/* i recapiti in riquadri affiancati, due per riga */
+.ct-page .contact-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7rem;
+  margin: 0;
+  list-style: none;
+}
+/* i recapiti sono cinque: l'ultimo occupa la riga intera, niente mezzo buco */
+.ct-page .contact-details li:last-child { grid-column: 1 / -1; }
+.ct-page .contact-details li {
+  display: flex; flex-direction: column; gap: .25rem;
+  background: #FBF6EC;
+  border: 1px solid rgba(159,135,106,.22);
+  border-radius: 12px;
+  padding: .85rem 1rem .95rem;
+}
 .ct-page .contact-details .c-label { color: var(--gold); }
 .ct-page .contact-details .c-val { color: var(--dark); }
 .ct-page .contact-details a { color: inherit; border-bottom: 1px solid rgba(159,135,106,.45); transition: color .3s, border-color .3s; }
