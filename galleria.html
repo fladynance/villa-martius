@@ -219,15 +219,23 @@ a { color: inherit; }
 .casa .btn.solid:hover { background: var(--rust); border-color: var(--rust); }
 
 /* ─── LE ALTRE GALLERIE ─── */
-.others { background: var(--bg); padding-block: clamp(2.6rem, 6vw, 4rem); border-top: 1px solid var(--rule); }
-.others h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.8rem, 3.4vw, 2.4rem); margin: .5rem 0 1.3rem; color: var(--dark); }
-.others-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 2vw, 18px); }
+.others { background: var(--bg); padding-block: clamp(2.2rem, 5vw, 3.4rem); border-top: 1px solid var(--rule); }
+.others h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.5rem, 2.6vw, 2rem); margin: .4rem 0 1.1rem; color: var(--dark); }
+.others-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 20px); max-width: 820px; margin: 0 auto; }
 .others .door { height: auto; animation: none; }
-.others .d1 { container-type: normal; display: block; }
-.others .pc { width: 100%; }
-.others .pc-cap b { font-size: clamp(1.15rem, 2.3vw, 1.6rem); }
-.others .pc-cap small, .others .pc-cap i { font-size: .52rem; }
-.back-all { margin-top: 1.4rem; display: flex; justify-content: center; }
+.others .d1 { container-type: inline-size; display: block; }
+.others .d1 .pc { width: 100%; max-width: 240px; margin: 0 auto; aspect-ratio: 0.85; padding: 10px 10px 0; border-radius: 10px; transform: rotate(var(--rot, 0deg)); transition: transform .4s cubic-bezier(.3,.7,.2,1), box-shadow .4s; }
+.others .d1 .pc-photo { border-radius: 4px; }
+.others .pc-cap { padding: 6% 1% 7%; gap: .1rem; }
+.others .pc-cap b { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.05rem; line-height: 1.1; }
+.others .pc-cap small { font-size: .5rem; letter-spacing: .18em; }
+.others .pc-cap i { font-size: .5rem; letter-spacing: .18em; }
+.others .pc-stamp, .others .pc-mark { display: none; }
+.others .d1:nth-child(3n+1) .pc { --rot: -1.4deg; }
+.others .d1:nth-child(3n+2) .pc { --rot: 1deg; }
+.others .d1:nth-child(3n+3) .pc { --rot: -.6deg; }
+.others .d1:hover .pc, .others .d1:focus-visible .pc { transform: rotate(0deg) translateY(-3px); box-shadow: 0 1px 2px rgba(31,22,17,.15), 0 18px 28px -14px rgba(31,22,17,.5); }
+.back-all { margin-top: 1.6rem; display: flex; justify-content: center; }
 .back-all .btn { color: var(--dark); }
 .back-all .btn:hover { background: var(--dark); color: var(--bg); border-color: var(--dark); }
 
@@ -311,9 +319,8 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     </div>
   </nav>
   <header class="doors-head">
-    <span class="label">Galleria</span>
+    <h1 class="label">Galleria</h1>
     <span class="doors-rule" aria-hidden="true"></span>
-    <h1 class="doors-title">La villa, in ogni sua luce</h1>
   </header>
   <main class="doors">
     <div class="doors-grid" id="doors"></div>

@@ -1014,6 +1014,13 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   margin: 0.4rem 0 1rem;
   opacity: 0.75;
 }
+.rooms-hero--light {
+  background: linear-gradient(180deg, #D5C4A4 0%, #D3BF98 100%);
+}
+.rooms-hero--light .label { color: var(--gold); }
+.rooms-hero--light .rule-gold { background: var(--gold); opacity: 0.85; }
+.rooms-hero--light .rooms-hero-title { color: var(--dark); text-shadow: none; }
+.rooms-hero--light .rooms-hero-sub { color: var(--muted); text-shadow: none; }
 .rooms-hero-title {
   font-family: var(--serif);
   font-weight: 400;
