@@ -1605,9 +1605,10 @@ a.room-cta { text-decoration: none; }
   letter-spacing: 0.42em;
   text-indent: 0.42em;             /* compensa lo spazio finale della spaziatura */
   text-transform: uppercase;
-  color: var(--gold-lt);           /* come .label nel resto del sito */
-  /* la foto sotto e' chiara: senza un'ombra morbida l'oro si perde */
-  text-shadow: 0 1px 10px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.4);
+  /* la foto sotto e' chiarissima all'orizzonte: l'oro medio ci si perde,
+     serve un tono piu' caldo e chiaro con un'ombra che lo stacchi */
+  color: #F2E6D2;
+  text-shadow: 0 1px 12px rgba(0,0,0,.7), 0 0 3px rgba(0,0,0,.55);
   margin-bottom: 1.2rem;
 }
 /* filetto oro sotto l'occhiello: e' la firma usata in tutte le altre pagine */
@@ -1968,6 +1969,18 @@ a.room-cta { text-decoration: none; }
   grid-template-rows: 1fr;
 }
 .hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
+/* l'ancora #chiesa non deve finire sotto la barra fissa */
+#chiesa { scroll-margin-top: var(--page-top); }
+/* tre vie di cerimonia: civile, matrimonio, chiesa consacrata */
+.hub-grid.hub-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+}
+.hub-grid.hub-grid-3 .hub-tile { min-height: 60vh; }
+@media (max-width: 1000px) {
+  .hub-grid.hub-grid-3 { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); }
+  .hub-grid.hub-grid-3 .hub-tile { min-height: 36vh; }
+}
 @media (max-width: 720px) {
   .hub-grid.hub-grid-2 {
     grid-template-columns: 1fr;
