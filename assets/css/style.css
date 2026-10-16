@@ -1979,7 +1979,10 @@ a.room-cta { text-decoration: none; }
 .hub-grid.hub-grid-3 .hub-tile { min-height: 60vh; }
 @media (max-width: 1000px) {
   .hub-grid.hub-grid-3 { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); }
-  .hub-grid.hub-grid-3 .hub-tile { min-height: 36vh; }
+  /* 36vh x 3 piu' la barra sforava la finestra e il terzo riquadro restava
+     tagliato: senza minimo le tre righe si dividono l'altezza disponibile
+     e si vedono tutte all'apertura. Il floor serve solo ai display cortissimi. */
+  .hub-grid.hub-grid-3 .hub-tile { min-height: 140px; }
 }
 @media (max-width: 720px) {
   .hub-grid.hub-grid-2 {
@@ -2478,7 +2481,9 @@ input, select, textarea { font-size: 16px; }
   .ev-moon { width: 48px; height: 48px; margin-top: -24px; }
   .ev-wrap { padding: 0 1.2rem; }
   .ev-story { padding: var(--page-top) 0 .8rem; }
-  .ev-intro { padding: .8rem 0 2.8rem; }
+  /* il rombo divideva 36px sopra e 12px sotto: la label sembrava
+     attaccata al separatore. Spazi pari da entrambi i lati. */
+  .ev-intro { padding: 2.5rem 0 2.8rem; }
   .ev-sep { padding: 0 1.2rem; }
   .ev-copy { font-size: 1.18rem; }
   .ev-ch { padding: 1.8rem 0; }
