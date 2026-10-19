@@ -1969,21 +1969,6 @@ a.room-cta { text-decoration: none; }
   grid-template-rows: 1fr;
 }
 .hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
-/* l'ancora #chiesa non deve finire sotto la barra fissa */
-#chiesa { scroll-margin-top: var(--page-top); }
-/* tre vie di cerimonia: civile, matrimonio, chiesa consacrata */
-.hub-grid.hub-grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-}
-.hub-grid.hub-grid-3 .hub-tile { min-height: 60vh; }
-@media (max-width: 1000px) {
-  .hub-grid.hub-grid-3 { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); }
-  /* 36vh x 3 piu' la barra sforava la finestra e il terzo riquadro restava
-     tagliato: senza minimo le tre righe si dividono l'altezza disponibile
-     e si vedono tutte all'apertura. Il floor serve solo ai display cortissimi. */
-  .hub-grid.hub-grid-3 .hub-tile { min-height: 140px; }
-}
 @media (max-width: 720px) {
   .hub-grid.hub-grid-2 {
     grid-template-columns: 1fr;
@@ -2874,77 +2859,3 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
   .rc-step h3 { font-size: 1.4rem; }
 }
 @media (prefers-reduced-motion: reduce) { .rc-cta { transition: none; } }
-
-/* ─── LA CHIESA ──────────────────────────────────────────────
-   La pagina riusa l'impianto del rito civile. Cambia un elemento
-   solo, ma e' quello che dice "chiesa" senza scriverlo: l'arcata.
-   La foto e' tagliata a tutto sesto, come l'apertura di un'abside,
-   e un filo d'oro la segue a un paio di millimetri di distanza. */
-.ch-arch {
-  margin: clamp(2.4rem, 5vw, 4rem) 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-.ch-arch-plate {
-  width: min(100%, 420px);
-  aspect-ratio: 3 / 4.1;
-  border-radius: 50% 50% 6px 6px / 34% 34% 2% 2%;
-  background: linear-gradient(180deg, var(--bg-warm) 0%, #C9B894 100%);
-  border: 1px solid var(--gold);
-  box-shadow: 0 18px 50px rgba(60, 44, 28, .18), inset 0 0 0 7px rgba(255, 255, 255, .22);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.1rem;
-  padding: 2rem 1.6rem;
-}
-.ch-plate-rule { width: 38px; height: 1px; background: var(--dark); opacity: .4; }
-.ch-plate-name {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.5rem, 2.6vw, 2.05rem);
-  line-height: 1.22;
-  color: var(--dark);
-  margin: 0;
-}
-.ch-plate-dia { width: 6px; height: 6px; transform: rotate(45deg); background: var(--dark); opacity: .55; }
-.ch-plate-loc {
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: .64rem;
-  letter-spacing: .3em;
-  text-indent: .3em;
-  text-transform: uppercase;
-  color: var(--dark);
-  opacity: .72;
-  margin: 0;
-}
-.ch-lead {
-  font-family: var(--serif);
-  font-size: clamp(1.02rem, 1.5vw, 1.18rem);
-  line-height: 1.7;
-  color: var(--body-txt);
-  max-width: 62ch;
-  margin: 1.2rem 0 2.2rem;
-}
-.ch-two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.4rem 2.6rem;
-  margin-top: 1.4rem;
-}
-.ch-two p {
-  font-family: var(--serif);
-  font-size: 1.02rem;
-  line-height: 1.75;
-  color: var(--body-txt);
-  margin: 0;
-}
-@media (max-width: 760px) {
-  .ch-arch-plate { width: min(100%, 290px); }
-  .ch-two { grid-template-columns: 1fr; gap: 1rem; }
-}
