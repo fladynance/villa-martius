@@ -1970,11 +1970,19 @@ a.room-cta { text-decoration: none; }
 }
 .hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
 @media (max-width: 720px) {
+  /* due riquadri affiancati anche da telefono: due colonne alte quanto
+     la finestra, non uno sotto l'altro */
   .hub-grid.hub-grid-2 {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
   }
-  .hub-grid.hub-grid-2 .hub-tile { min-height: 44vh; }
+  .hub-grid.hub-grid-2 .hub-tile { min-height: 0; }
+  /* colonna stretta: testo piu' piccolo e margini ridotti, altrimenti
+     il sottotitolo va a capo cinque volte */
+  .hub-grid.hub-grid-2 .hub-tile-content { padding: 1.3rem .9rem; gap: .4rem; }
+  .hub-grid.hub-grid-2 .hub-tile-title { font-size: 1.5rem; }
+  .hub-grid.hub-grid-2 .hub-tile-sub { font-size: .78rem; line-height: 1.45; }
+  .hub-grid.hub-grid-2 .hub-tile-label { font-size: .58rem; }
 }
 
 /* ─── SERVICE LIST (numbered services in text column) ───── */
@@ -2133,11 +2141,15 @@ input, select, textarea { font-size: 16px; }
   .hub-head { padding: 1.1rem 1.2rem 0.9rem; }
   .hub-head .rule-gold { margin: 0.5rem 0 0.7rem; }
   .hub-head-sub { font-size: 0.9rem; }
+  /* le righe erano alte 25vh ciascuna: quattro facevano tutta la finestra,
+     ma partono sotto la barra, quindi l'ultima restava fuori di 64px.
+     Ora dividono lo spazio disponibile e si vedono tutte all'apertura. */
   .hub-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, minmax(180px, 25vh));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
   }
-  .hub-tile { min-height: 180px; }
+  .hub-tile { min-height: 0; }
+  .hub-tile-content { padding: 1.2rem 1.4rem; gap: 0.35rem; }
   .hub-tile-content { padding: 1.8rem 1.4rem; gap: 0.5rem; }
   .hub-tile-title { font-size: 1.85rem; }
   .hub-tile-num { font-size: 0.95rem; gap: 0.6rem; }
