@@ -393,6 +393,30 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
 .wa-fab:hover .wa-txt, .wa-fab:focus-visible .wa-txt { max-width: 200px; margin-left: .75rem; opacity: 1; }
 .wa-fab:focus-visible { outline: 2px solid var(--gold-lt); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .wa-fab { transition: none; } }
+
+/* ─── LIGHTBOX ───────────────────────────────────────────────
+   Questa pagina non linka style.css, quindi il markup .mt-lb era
+   senza stili: la lightbox restava nel flusso, compariva dove si
+   era arrivati scorrendo e il tasto di chiusura era largo zero.
+   Regole identiche a quelle di matrimoni ed eventi. */
+.mt-lb { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; flex-direction: column; background: rgba(23,17,13,.95); padding: 4.2rem 1rem 3.4rem; }
+.mt-lb.on { display: flex; }
+.mt-lb-fig { position: relative; margin: 0; max-width: min(1100px, 94vw); display: flex; flex-direction: column; align-items: center; }
+.mt-lb-img { display: block; max-width: 100%; max-height: calc(100vh - 11rem); max-height: calc(100dvh - 11rem); width: auto; height: auto; object-fit: contain; border: 8px solid #FBF4E4; border-radius: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.7); background: #CDB48A; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; }
+.mt-lb-cap { margin-top: 1rem; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: #EADFC6; text-align: center; max-width: 60ch; }
+.mt-lb-n { margin-top: .3rem; font-family: var(--sans); font-weight: 300; font-size: .68rem; letter-spacing: .3em; color: #C4B296; }
+.mt-lb button { z-index: 2; font: inherit; border: 0; cursor: pointer; color: #FBF4E4; background: rgba(23,17,13,.4); -webkit-tap-highlight-color: transparent; }
+.mt-lb button:focus-visible { outline: 2px solid #C4B296; outline-offset: 2px; }
+.mt-lb-x { position: absolute; top: max(.9rem, env(safe-area-inset-top)); right: 1rem; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(251,244,228,.45); display: flex; align-items: center; justify-content: center; }
+.mt-lb-p, .mt-lb-nx { position: absolute; top: 50%; width: 46px; height: 46px; margin-top: -23px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.mt-lb-p { left: .8rem; } .mt-lb-nx { right: .8rem; }
+.mt-lb svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.mt-lb button:hover { background: rgba(196,178,150,.35); }
+@media (max-width: 640px) {
+  .mt-lb { padding: 3.6rem .6rem 3rem; }
+  .mt-lb-img { border-width: 5px; max-height: calc(100dvh - 9rem); }
+  .mt-lb-cap { font-size: 1rem; margin-top: .7rem; }
+}
 </style>
 
 </head>
@@ -776,9 +800,13 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
   /* ─── LIGHTBOX (stile matrimoni / eventi) ─── */
   const lb = $('#lb'), lbImg = $('#lbImg');
   let L = [], LI = 0, Lname = '', Lunit = null, lastFocus = null;
+  /* bloccare lo scorrimento del corpo azzera la posizione nella pagina:
+     la si annota all'apertura e la si rimette alla chiusura. */
+  let lbY = 0;
   function openLb(list, i, name, unit) {
     L = list; LI = i; Lname = name; Lunit = unit || null; lastFocus = document.activeElement;
-    lb.hidden = false; lb.classList.add('on'); document.body.style.overflow = 'hidden'; show(i, 0); $('#lbClose').focus();
+    lbY = window.pageYOffset;
+    lb.hidden = false; lb.classList.add('on'); document.body.style.overflow = 'hidden'; show(i, 0); $('#lbClose').focus({ preventScroll: true });
   }
   function paint() {
     const p = L[LI];
@@ -795,7 +823,10 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
       requestAnimationFrame(() => requestAnimationFrame(() => { lbImg.style.transition = ''; lbImg.style.opacity = 1; lbImg.style.transform = ''; }));
     }, 170);
   }
-  function closeLb() { lb.classList.remove('on'); lb.hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+  function closeLb() { lb.classList.remove('on'); lb.hidden = true; document.body.style.overflow = '';
+    /* la pagina deve prima ridistendersi: scorrere nello stesso istante
+       finisce bloccato sull'altezza ancora compressa */
+    window.scrollTo(0, lbY); requestAnimationFrame(() => window.scrollTo(0, lbY)); if (lastFocus) lastFocus.focus({ preventScroll: true }); }
   $('#lbClose').addEventListener('click', closeLb);
   $('#lbPrev').addEventListener('click', () => show(LI - 1, -1));
   $('#lbNext').addEventListener('click', () => show(LI + 1, 1));
