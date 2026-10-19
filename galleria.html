@@ -180,12 +180,19 @@ a { color: inherit; }
 .doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 0; }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
 /* Divider ornamentale (identico a .mt-sep di matrimoni) */
-.gal-sep { display: flex; align-items: center; gap: 1rem; max-width: 560px; margin: 1.4rem auto 0; padding: 0 clamp(16px, 4vw, 48px); }
-.gal-sep::before, .gal-sep::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .5; }
-.gal-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; flex: 0 0 auto; }
-/* il rombo da solo sembrava un segno rimasto li': ora accompagna il
-   conteggio, che dice quante foto si stanno guardando e cambia col filtro */
-.gal-count { font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .24em; text-indent: .24em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+/* I margini orizzontali auto disattivavano lo stretch nel flex in colonna:
+   il divisore si restringeva al contenuto e i filetti restavano lunghi 64px.
+   Centrato con align-self, ora occupa la larghezza che gli spetta. */
+.gal-sep { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 560px; align-self: center; margin: 1.4rem 0 0; padding: 0 clamp(16px, 4vw, 48px); }
+.gal-sep::before { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(159,135,106,.18) 0%, rgba(159,135,106,.7) 100%); }
+.gal-sep::after  { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(159,135,106,.7) 0%, rgba(159,135,106,.18) 100%); }
+/* Fregio: tre rombi in scala al centro di due filetti che sfumano verso
+   l'esterno. Un segno, non un dato: il conteggio faceva catalogo. */
+.gal-sep::before, .gal-sep::after { opacity: 1; }
+.gal-orn { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; }
+.gal-orn i { display: block; transform: rotate(45deg); background: var(--gold); }
+.gal-orn .o-b { width: 7px; height: 7px; opacity: .85; }
+.gal-orn .o-s { width: 4px; height: 4px; opacity: .5; }
 @media (max-width: 640px) {
   .doors-head { padding: var(--page-gap) 14px 0; gap: .3rem; }
   .doors-head .doors-rule { width: 36px; margin: .2rem 0 0; }
@@ -405,7 +412,7 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     <h1 class="label">Galleria</h1>
     <span class="doors-rule" aria-hidden="true"></span>
   </header>
-  <div class="gal-sep"><i aria-hidden="true"></i><span class="gal-count" id="galCount" aria-live="polite"></span><i aria-hidden="true"></i></div>
+  <div class="gal-sep" aria-hidden="true"><span class="gal-orn"><i class="o-s"></i><i class="o-b"></i><i class="o-s"></i></span></div>
   <nav class="gal-filters" id="galFilters" aria-label="Filtra per luogo">
     <button class="gf on" data-cat="all"      type="button" aria-pressed="true">Tutto</button>
     <button class="gf"    data-cat="gazebo"   type="button" aria-pressed="false">Giardino</button>
@@ -676,8 +683,6 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
         '</button>';
       }).join('') + '</div>';
     }).join('');
-    const cnt = $('#galCount');
-    if (cnt) cnt.textContent = list.length + (list.length === 1 ? ' fotografia' : ' fotografie');
     $$('.ms-item', masonry).forEach(btn => {
       btn.addEventListener('click', () => {
         const l = currentList();
