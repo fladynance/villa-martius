@@ -360,8 +360,15 @@
     img.src=im.currentSrc||im.src; img.alt=im.alt; cap.textContent=im.alt; num.textContent=(cur+1)+' / '+btns.length;
     var nx=btns[(cur+1)%btns.length].querySelector('img'); if(nx){var pre=new Image(); pre.src=nx.src;}
   }
-  function open(i){ last=document.activeElement; lb.hidden=false; lb.classList.add('on'); document.body.classList.add('mt-lock'); show(i); document.getElementById('mtLbX').focus(); }
-  function close(){ lb.classList.remove('on'); lb.hidden=true; document.body.classList.remove('mt-lock'); img.removeAttribute('src'); if(last&&last.focus) last.focus(); }
+  /* bloccare lo scorrimento del corpo azzera la posizione nella pagina:
+     la si annota all'apertura e la si rimette alla chiusura, altrimenti
+     chiudendo una foto si torna in cima. */
+  var lbY=0;
+  function open(i){ last=document.activeElement; lbY=window.pageYOffset; lb.hidden=false; lb.classList.add('on'); document.body.classList.add('mt-lock'); show(i); document.getElementById('mtLbX').focus({preventScroll:true}); }
+  function close(){ lb.classList.remove('on'); lb.hidden=true; document.body.classList.remove('mt-lock'); img.removeAttribute('src');
+    /* la pagina deve prima ridistendersi: scorrere nello stesso istante
+       finisce bloccato sull'altezza ancora compressa */
+    window.scrollTo(0,lbY); requestAnimationFrame(function(){ window.scrollTo(0,lbY); }); if(last&&last.focus) last.focus({preventScroll:true}); }
   btns.forEach(function(b,i){ b.addEventListener('click',function(){open(i)}); });
   document.getElementById('mtLbX').addEventListener('click',close);
   document.getElementById('mtLbP').addEventListener('click',function(){show(cur-1)});
