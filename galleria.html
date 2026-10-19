@@ -132,7 +132,18 @@ a { color: inherit; }
 .gal-filters .gf:hover { color: var(--ink); }
 .gal-filters .gf.on { color: var(--ink); }
 .gal-filters .gf.on::after { transform: scaleX(1); }
-@media (max-width: 640px) { .gal-filters { gap: 14px; padding: 10px 10px 6px; } .gal-filters .gf { font-size: .64rem; letter-spacing: .18em; } }
+@media (max-width: 640px) {
+  /* a sei voci l'ultima andava a capo da sola, centrata sotto le altre:
+     la barra diventa una riga sola che scorre, come si fa di norma */
+  .gal-filters { gap: 18px; padding: 10px 14px 6px; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .gal-filters::-webkit-scrollbar { display: none; }
+  .gal-filters .gf { font-size: .64rem; letter-spacing: .18em; flex: 0 0 auto; }
+  /* sfuma il lato verso cui si puo' ancora scorrere, cosi' si capisce che
+     la riga continua invece di sembrare tagliata */
+  .gal-filters.can-end   { -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 34px), transparent 100%); mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 34px), transparent 100%); }
+  .gal-filters.can-start { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 100%); mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 100%); }
+  .gal-filters.can-start.can-end { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 34px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 34px), transparent 100%); }
+}
 /* ─── Masonry grid ─── */
 .gallery { flex: 1 1 auto; padding: 1.6rem clamp(14px, 3.2vw, 44px) 3rem; background: var(--bg); }
 /* Colonne reali (non CSS multi-column): il JS distribuisce ogni foto
@@ -147,7 +158,12 @@ a { color: inherit; }
 .ms-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.65,.3,1), filter .5s; }
 .ms-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,15,10,0) 55%, rgba(20,15,10,.55) 100%); opacity: 0; transition: opacity .4s; pointer-events: none; }
 .ms-item .ms-cap { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #F6EFDE; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: .01em; opacity: 0; transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; pointer-events: none; }
+/* un filo d'oro sopra la foto: le inquadra come lastre invece di
+   lasciarle a filo come piastrelle */
+.ms-item::before { content: ""; position: absolute; inset: 0; z-index: 3; border: 1px solid rgba(159,135,106,.45); border-radius: 3px; pointer-events: none; transition: border-color .4s; }
 .ms-item:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -18px rgba(31,22,17,.35); }
+.ms-item:hover::before { border-color: rgba(159,135,106,.9); }
+.ms-item:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .ms-item:hover img { transform: scale(1.03); }
 .ms-item:hover::after { opacity: 1; }
 .ms-item:hover .ms-cap { opacity: 1; transform: translateY(0); }
@@ -166,7 +182,10 @@ a { color: inherit; }
 /* Divider ornamentale (identico a .mt-sep di matrimoni) */
 .gal-sep { display: flex; align-items: center; gap: 1rem; max-width: 560px; margin: 1.4rem auto 0; padding: 0 clamp(16px, 4vw, 48px); }
 .gal-sep::before, .gal-sep::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .5; }
-.gal-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; }
+.gal-sep i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); opacity: .75; flex: 0 0 auto; }
+/* il rombo da solo sembrava un segno rimasto li': ora accompagna il
+   conteggio, che dice quante foto si stanno guardando e cambia col filtro */
+.gal-count { font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .24em; text-indent: .24em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 @media (max-width: 640px) {
   .doors-head { padding: var(--page-gap) 14px 0; gap: .3rem; }
   .doors-head .doors-rule { width: 36px; margin: .2rem 0 0; }
@@ -386,14 +405,14 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     <h1 class="label">Galleria</h1>
     <span class="doors-rule" aria-hidden="true"></span>
   </header>
-  <div class="gal-sep" aria-hidden="true"><i></i></div>
+  <div class="gal-sep"><i aria-hidden="true"></i><span class="gal-count" id="galCount" aria-live="polite"></span><i aria-hidden="true"></i></div>
   <nav class="gal-filters" id="galFilters" aria-label="Filtra per luogo">
-    <button class="gf on" data-cat="all"      type="button">Tutto</button>
-    <button class="gf"    data-cat="gazebo"   type="button">Giardino</button>
-    <button class="gf"    data-cat="pool"     type="button">Piscina</button>
-    <button class="gf"    data-cat="room"     type="button">Interni</button>
-    <button class="gf"    data-cat="pad"      type="button">Dimore</button>
-    <button class="gf"    data-cat="terr"     type="button">Terrazze</button>
+    <button class="gf on" data-cat="all"      type="button" aria-pressed="true">Tutto</button>
+    <button class="gf"    data-cat="gazebo"   type="button" aria-pressed="false">Giardino</button>
+    <button class="gf"    data-cat="pool"     type="button" aria-pressed="false">Piscina</button>
+    <button class="gf"    data-cat="room"     type="button" aria-pressed="false">Interni</button>
+    <button class="gf"    data-cat="pad"      type="button" aria-pressed="false">Dimore</button>
+    <button class="gf"    data-cat="terr"     type="button" aria-pressed="false">Terrazze</button>
   </nav>
   <main class="gallery">
     <div class="masonry" id="masonry"></div>
@@ -657,6 +676,8 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
         '</button>';
       }).join('') + '</div>';
     }).join('');
+    const cnt = $('#galCount');
+    if (cnt) cnt.textContent = list.length + (list.length === 1 ? ' fotografia' : ' fotografie');
     $$('.ms-item', masonry).forEach(btn => {
       btn.addEventListener('click', () => {
         const l = currentList();
@@ -676,12 +697,24 @@ const IMG = {"gazebo-BR": "assets/img/galleria/gazebo-BR.jpg", "gazebo-L": "asse
 
   // Filtri
   const galFilters = $('#galFilters');
+  // segnala da che lato la riga dei filtri puo' ancora scorrere
+  function filtersEdges() {
+    const max = galFilters.scrollWidth - galFilters.clientWidth;
+    galFilters.classList.toggle('can-start', galFilters.scrollLeft > 2);
+    galFilters.classList.toggle('can-end', max > 2 && galFilters.scrollLeft < max - 2);
+  }
+  galFilters.addEventListener('scroll', filtersEdges, { passive: true });
+  window.addEventListener('resize', filtersEdges);
+  filtersEdges();
   $$('.gf', galFilters).forEach(b => {
     b.addEventListener('click', () => {
-      $$('.gf', galFilters).forEach(x => x.classList.remove('on'));
-      b.classList.add('on');
+      $$('.gf', galFilters).forEach(x => { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); });
+      b.classList.add('on'); b.setAttribute('aria-pressed', 'true');
       currentCat = b.dataset.cat;
       layout();
+      // la voce scelta entra nella vista: da telefono la barra scorre
+      if (b.scrollIntoView) b.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      setTimeout(filtersEdges, 420);
     });
   });
 
