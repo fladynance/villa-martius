@@ -1977,19 +1977,14 @@ a.room-cta { text-decoration: none; }
 }
 .hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
 @media (max-width: 720px) {
-  /* due riquadri affiancati anche da telefono: due colonne alte quanto
-     la finestra, non uno sotto l'altro */
+  /* due riquadri uno sotto l'altro, che si dividono lo spazio
+     disponibile: cosi' si vedono entrambi senza scorrere, su qualunque
+     altezza di schermo. Niente minimo in vh, che sforava la finestra. */
   .hub-grid.hub-grid-2 {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
   }
   .hub-grid.hub-grid-2 .hub-tile { min-height: 0; }
-  /* colonna stretta: testo piu' piccolo e margini ridotti, altrimenti
-     il sottotitolo va a capo cinque volte */
-  .hub-grid.hub-grid-2 .hub-tile-content { padding: 1.3rem .9rem; gap: .4rem; }
-  .hub-grid.hub-grid-2 .hub-tile-title { font-size: 1.5rem; }
-  .hub-grid.hub-grid-2 .hub-tile-sub { font-size: .78rem; line-height: 1.45; }
-  .hub-grid.hub-grid-2 .hub-tile-label { font-size: .58rem; }
 }
 
 /* ─── SERVICE LIST (numbered services in text column) ───── */
