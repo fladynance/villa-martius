@@ -1728,7 +1728,9 @@ a.room-cta { text-decoration: none; }
   background-size: cover;
   background-position: center;
   transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform: scale(1.02);
+  /* niente zoom a riposo: il 2% fisso tagliava foto senza servire a
+     nulla, l'ingrandimento al passaggio del mouse parte comunque da 1 */
+  transform: scale(1);
   z-index: -2;
 }
 .hub-tile-overlay {
