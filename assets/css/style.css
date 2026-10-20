@@ -1976,15 +1976,18 @@ a.room-cta { text-decoration: none; }
   grid-template-rows: 1fr;
 }
 .hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
-@media (max-width: 720px) {
-  /* due riquadri uno sotto l'altro, che si dividono lo spazio
-     disponibile: cosi' si vedono entrambi senza scorrere, su qualunque
-     altezza di schermo. Niente minimo in vh, che sforava la finestra. */
+/* Fino a 1024px (telefono e iPad in verticale) i due riquadri stanno uno
+   sotto l'altro e si dividono lo spazio: su iPad erano affiancati e la
+   pagina risultava diversa da quella del telefono. Oltre, due colonne. */
+@media (max-width: 1024px) {
   .hub-grid.hub-grid-2 {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, minmax(0, 1fr));
   }
   .hub-grid.hub-grid-2 .hub-tile { min-height: 0; }
+}
+@media (max-width: 720px) {
+
 }
 
 /* ─── SERVICE LIST (numbered services in text column) ───── */
@@ -2910,3 +2913,46 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
   .rc-step h3 { font-size: 1.4rem; }
 }
 @media (prefers-reduced-motion: reduce) { .rc-cta { transition: none; } }
+
+/* ─── ICONE SOCIAL NEL FOOTER ─── */
+.footer-social { display: flex; gap: .7rem; margin-top: .2rem; }
+.footer-social a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgba(196,178,150,.4);
+  color: var(--gold-lt);
+  transition: color .3s, border-color .3s, background .3s;
+}
+.footer-social a:hover { color: var(--dark); background: var(--gold-lt); border-color: var(--gold-lt); }
+.footer-social svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.footer-social svg path { fill: currentColor; stroke: none; }
+
+/* ─── PAGINA DI TESTO (condizioni) ────────────────────────── */
+.doc-body { background: var(--bg); }
+.doc-page { padding: var(--page-top) 0 5rem; background: linear-gradient(180deg, var(--bg) 0%, #DFD3BC 100%); }
+.doc-wrap { max-width: 760px; margin: 0 auto; padding: 0 var(--pad-page); }
+.doc-head { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.doc-head .label { color: var(--gold); }
+.doc-head .rule-gold { margin: .7rem auto 1.1rem; }
+.doc-title { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2rem, 4.4vw, 3rem); line-height: 1.08; margin: 0; color: var(--dark); }
+.doc-sub { font-family: var(--sans); font-weight: 300; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 1rem 0 0; }
+.doc-sep { margin: 2.2rem auto 2.6rem; }
+.doc-sec { margin-bottom: 2.6rem; }
+.doc-h { display: flex; align-items: baseline; gap: .9rem; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.4rem, 2.4vw, 1.8rem); line-height: 1.2; color: var(--dark); margin: 0 0 .9rem; }
+.doc-n { flex: 0 0 auto; font-family: var(--sans); font-style: normal; font-weight: 400; font-size: .7rem; letter-spacing: .2em; color: var(--gold); }
+.doc-sec p { font-family: var(--serif); font-size: 1.06rem; line-height: 1.75; color: var(--body-txt); margin: 0 0 .9rem; }
+.doc-sec b { font-weight: 600; color: var(--dark); }
+.doc-list { list-style: none; margin: 0 0 .9rem; padding: 0; }
+.doc-list li { position: relative; font-family: var(--serif); font-size: 1.06rem; line-height: 1.7; color: var(--body-txt); padding: 0 0 .7rem 1.4rem; }
+.doc-list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 5px; height: 5px; transform: rotate(45deg); background: var(--gold); opacity: .8; }
+/* righe che segnalano a noi cosa manca, non all'ospite */
+.doc-note { border-left: 2px solid var(--gold); padding-left: .9rem; font-style: italic; font-size: .96rem !important; color: var(--muted) !important; }
+.doc-end { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(159,135,106,.35); text-align: center; }
+.doc-end p { font-family: var(--serif); font-size: 1.06rem; color: var(--body-txt); margin: 0; }
+.doc-end a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .doc-sec { margin-bottom: 2rem; }
+  .doc-h { gap: .6rem; }
+}
+.footer-bottom a { color: var(--gold-lt); text-decoration: none; border-bottom: 1px solid rgba(196,178,150,.35); transition: color .3s, border-color .3s; }
+.footer-bottom a:hover { color: #fff; border-color: rgba(255,255,255,.6); }
