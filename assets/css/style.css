@@ -2974,3 +2974,10 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
   pointer-events: none;
 }
 .splash-video.on { opacity: 1; }
+/* Da telefono il ritaglio verticale cadeva tutto dentro la piscina e si
+   vedeva solo un rettangolo blu: spostato di lato, cosi' entrano anche
+   il bordo, i tavoli e il prato. */
+@media (max-width: 760px) {
+  .splash-video { object-position: 31% center; }
+  .splash-bg { background-position: 31% center; }
+}
