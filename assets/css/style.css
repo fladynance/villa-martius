@@ -1742,15 +1742,6 @@ a.room-cta { text-decoration: none; }
   z-index: -1;
 }
 .hub-tile:hover .hub-tile-bg { transform: scale(1.06); }
-/* Riquadro 03: la foto e' 3:2, il riquadro molto piu' largo. Su desktop
-   basta scendere a meta' altezza, su mobile il taglio e' tale che l'arco
-   illuminato uscirebbe di scena: li' si ingrandisce e si punta su di lui. */
-.hub-tile-bg--scalinata { background-position: center 50%; }
-/* Fra i 721 e i 1024px il riquadro diventa alto e stretto: il taglio
-   passa in orizzontale e l'arco finisce fuori dal bordo destro. */
-@media (min-width: 721px) and (max-width: 1024px) {
-  .hub-tile-bg--scalinata { background-position: 66% 40%; }
-}
 .hub-tile:hover .hub-tile-overlay {
   background: linear-gradient(180deg, rgba(31,22,17,0.12) 0%, rgba(31,22,17,0.22) 55%, rgba(31,22,17,0.5) 100%);
 }
@@ -2165,7 +2156,6 @@ input, select, textarea { font-size: 16px; }
     grid-template-rows: repeat(4, minmax(0, 1fr));
   }
   .hub-tile { min-height: 0; }
-  .hub-tile-bg--scalinata { background-size: 140% auto; background-position: 70% 6%; }
   .hub-tile-content { padding: 1.2rem 1.4rem; gap: 0.35rem; }
   .hub-tile-content { padding: 1.8rem 1.4rem; gap: 0.5rem; }
   .hub-tile-title { font-size: 1.85rem; }
