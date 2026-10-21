@@ -2535,7 +2535,7 @@ input, select, textarea { font-size: 16px; }
 .mt-row p { font-family: var(--serif); font-size: 1.15rem; line-height: 1.65; margin: 0; color: #2E1D12; }
 
 /* griglia di 8 cartoline */
-.mt-album { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem .9rem; margin: 5rem 0 0; padding: 0 .3rem; }
+.mt-album { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1.3rem; margin: 5rem 0 0; padding: 0 .3rem; }
 .mt-album .mt-card { padding: 6px; border-radius: 7px; box-shadow: 0 14px 24px -16px rgba(60,25,10,.7); }
 .mt-album .mt-card .mt-pic { border-radius: 3px; }
 .mt-album .mt-card:nth-child(4n+1) { --rot: -2.4deg; }
@@ -2605,7 +2605,7 @@ input, select, textarea { font-size: 16px; }
   .mt-album { margin-top: 3.6rem; }
 }
 @media (max-width: 520px) {
-  .mt-album { grid-template-columns: repeat(2, 1fr); gap: 1.2rem 1rem; }
+  .mt-album { grid-template-columns: 1fr; gap: 1.6rem; }
   .mt-album .mt-card { padding: 7px; }
 }
 @media (prefers-reduced-motion: reduce) { .js-rv .mt-page .rv { transition: none; } .mt-seal { transition: none; } }
