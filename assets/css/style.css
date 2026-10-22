@@ -1995,25 +1995,32 @@ a.room-cta { text-decoration: none; }
 .nav.v2.scrolled .nav-cta:hover { background: #fff; color: var(--dark); }
 
 /* ─── HUB 2-TILE (intermediate hub Matrimoni/Eventi) ────── */
-/* Uno sotto l'altro, e ogni riquadro ha le proporzioni della foto
-   (1600x1062): cosi' l'immagine ci sta dentro intera, senza ritagli.
-   La pagina scorre: due riquadri alti quanto la foto non entrano in una
-   schermata sola. */
+/* Affiancati da PC: i due riquadri entrano insieme nella prima schermata,
+   senza dover scorrere. Le proporzioni sono quelle della foto Rito Civile
+   ritagliata (1600x918), che percio' ci sta esatta; la foto Matrimoni e'
+   piu' alta ed e' ancorata in cima, cosi' cede solo la tovaglia in primo
+   piano e il lampadario resta intero. */
 /* I riquadri hanno un'altezza propria: la pagina non deve piu' riempire
    la finestra a forza, altrimenti sotto resta una fascia vuota. */
 .hub.hub-stack { min-height: 0; }
 .hub-grid.hub-grid-2 {
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto;
-  align-content: start;   /* niente spazio vuoto fra i due riquadri */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  align-content: start;   /* niente spazio vuoto sotto i riquadri */
 }
 .hub-grid.hub-grid-2 .hub-tile {
   min-height: 0;
-  aspect-ratio: 1600 / 1062;
+  aspect-ratio: 1600 / 918;
+  /* su monitor molto larghi e bassi i riquadri restano dentro la schermata */
+  max-height: calc(100svh - 72px);
 }
-.hub-grid.hub-grid-2 .hub-tile-bg { background-size: contain; background-repeat: no-repeat; }
-@media (max-width: 720px) {
-
+@media (max-width: 1023px) {
+  /* Da tablet in giu' uno sotto l'altro: affiancati i riquadri si
+     schiacciano e il titolo finisce sotto la barra del menu. */
+  .hub-grid.hub-grid-2 {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
 }
 
 /* ─── SERVICE LIST (numbered services in text column) ───── */
