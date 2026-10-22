@@ -1995,21 +1995,14 @@ a.room-cta { text-decoration: none; }
 .nav.v2.scrolled .nav-cta:hover { background: #fff; color: var(--dark); }
 
 /* ─── HUB 2-TILE (intermediate hub Matrimoni/Eventi) ────── */
+/* Uno sotto l'altro a qualunque larghezza: a tutta larghezza la foto si
+   vede intera di lato e la scena resta lontana, invece di essere
+   ritagliata in una colonna stretta. */
 .hub-grid.hub-grid-2 {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
-.hub-grid.hub-grid-2 .hub-tile { min-height: 60vh; }
-/* Fino a 1024px (telefono e iPad in verticale) i due riquadri stanno uno
-   sotto l'altro e si dividono lo spazio: su iPad erano affiancati e la
-   pagina risultava diversa da quella del telefono. Oltre, due colonne. */
-@media (max-width: 1024px) {
-  .hub-grid.hub-grid-2 {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-  }
-  .hub-grid.hub-grid-2 .hub-tile { min-height: 0; }
-}
+.hub-grid.hub-grid-2 .hub-tile { min-height: 0; }
 @media (max-width: 720px) {
 
 }
