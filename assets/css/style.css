@@ -2164,26 +2164,26 @@ input, select, textarea { font-size: 16px; }
   .g-h-lg, .g-h-md, .g-h-sm, .g-h-xl { height: 280px; }
 }
 
-/* Hub mobile: i 4 riquadri a griglia 2x2 */
+/* Hub mobile: 4 tile in colonna verticale */
 @media (max-width: 720px) {
   .hub { padding-top: 0; min-height: 100svh; }
   .hub-head { padding: 1.1rem 1.2rem 0.9rem; }
   .hub-head .rule-gold { margin: 0.5rem 0 0.7rem; }
   .hub-head-sub { font-size: 0.9rem; }
-  /* Due colonne per due righe: i quattro riquadri stanno nella finestra
-     e si leggono come una griglia, non come un elenco da scorrere. */
+  /* le righe erano alte 25vh ciascuna: quattro facevano tutta la finestra,
+     ma partono sotto la barra, quindi l'ultima restava fuori di 64px.
+     Ora dividono lo spazio disponibile e si vedono tutte all'apertura. */
   .hub-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
   }
   .hub-tile { min-height: 0; }
-  /* il riquadro e' largo meta' schermo: testo piu' piccolo e margini
-     stretti, altrimenti i titoli lunghi si spezzano in quattro righe */
-  .hub-tile-content { padding: 0.9rem 0.8rem; gap: 0.3rem; }
-  .hub-tile-title { font-size: 1.02rem; line-height: 1.12; }
-  .hub-tile-num { font-size: 0.72rem; gap: 0.4rem; }
-  .hub-tile-num::after { width: 14px; }
-  .hub-tile-sub { font-size: 0.72rem; line-height: 1.3; }
+  .hub-tile-content { padding: 1.2rem 1.4rem; gap: 0.35rem; }
+  .hub-tile-content { padding: 1.8rem 1.4rem; gap: 0.5rem; }
+  .hub-tile-title { font-size: 1.85rem; }
+  .hub-tile-num { font-size: 0.95rem; gap: 0.6rem; }
+  .hub-tile-num::after { width: 22px; }
+  .hub-tile-sub { font-size: 0.9rem; }
   .nav.v2 { padding: 0.8rem 1.2rem; }
   .nav.v2 .nav-cta {
     font-size: 0.62rem;
