@@ -1671,7 +1671,7 @@ a.room-cta { text-decoration: none; }
 /* ─── HUB 4-TILE ───────────────────────────────────────────── */
 .hub {
   min-height: 100svh;
-  padding-top: var(--nav-h);         /* room for fixed nav */
+  padding-top: 0;                    /* le foto salgono sotto la barra */
   display: flex;
   flex-direction: column;
 }
@@ -1854,6 +1854,16 @@ a.room-cta { text-decoration: none; }
   box-shadow: 0 1px 0 rgba(255,255,255,0.12);
 }
 /* Nav senza freccia (esplora.html): logo a sinistra, actions a destra */
+/* Barra sopra la foto: nessun fondo, solo una velatura che sfuma verso il
+   basso. Si usa dove l'immagine sale fin sotto la barra (esplora,
+   matrimoni-eventi, contatti); altrove il fondo chiaro mangerebbe il
+   testo bianco. */
+.nav.v2.nav-over {
+  background: linear-gradient(180deg, rgba(31,22,17,0.58) 0%, rgba(31,22,17,0.26) 55%, rgba(31,22,17,0) 100%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
 .nav.v2.no-back { grid-template-columns: auto 1fr; }
 .nav.v2.no-back .nav-logo { grid-column: 1; justify-content: flex-start; padding-left: 0; }
 .nav.v2.no-back .nav-actions { grid-column: 2; justify-content: flex-end; }
@@ -2130,7 +2140,7 @@ input, select, textarea { font-size: 16px; }
 
 /* Hub mobile: 4 tile in colonna verticale */
 @media (max-width: 720px) {
-  .hub { padding-top: var(--nav-h); min-height: 100svh; }
+  .hub { padding-top: 0; min-height: 100svh; }
   .hub-head { padding: 1.1rem 1.2rem 0.9rem; }
   .hub-head .rule-gold { margin: 0.5rem 0 0.7rem; }
   .hub-head-sub { font-size: 0.9rem; }
