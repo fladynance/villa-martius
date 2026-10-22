@@ -1847,11 +1847,11 @@ a.room-cta { text-decoration: none; }
 .nav.v2 {
   grid-template-columns: auto 1fr auto;
   padding: 1rem 2rem;
-  /* Barra scura e translucida: la pagina si intravede sotto. */
-  background: rgba(31,22,17,0.55);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.12);
+  /* Trasparente in cima alla pagina. Il fondo lo mettono le varianti:
+     nav-over sopra le foto, nav-clear sulle pagine chiare, e .scrolled
+     riporta la velatura appena si scorre. */
+  background: transparent;
+  box-shadow: none;
 }
 /* Nav senza freccia (esplora.html): logo a sinistra, actions a destra */
 /* Barra sopra la foto: nessun fondo, solo una velatura che sfuma verso il
@@ -1864,6 +1864,15 @@ a.room-cta { text-decoration: none; }
   backdrop-filter: none;
   box-shadow: none;
 }
+/* Pagine con fondo chiaro: barra trasparente e scritte scure, perche'
+   il bianco su beige sparisce (1.18:1 misurato). */
+.nav.v2.nav-clear .nav-logo img { filter: none; }
+.nav.v2.nav-clear .hamburger,
+.nav.v2.nav-clear .nav-back { color: #3A2417; }
+.nav.v2.nav-clear .hamburger:hover,
+.nav.v2.nav-clear .nav-back:hover { color: var(--gold); }
+.nav.v2.nav-clear .nav-cta { color: var(--dark); border-color: var(--dark); }
+.nav.v2.nav-clear .nav-cta:hover { background: var(--dark); color: var(--bg); }
 .nav.v2.no-back { grid-template-columns: auto 1fr; }
 .nav.v2.no-back .nav-logo { grid-column: 1; justify-content: flex-start; padding-left: 0; }
 .nav.v2.no-back .nav-actions { grid-column: 2; justify-content: flex-end; }
@@ -1967,6 +1976,23 @@ a.room-cta { text-decoration: none; }
   background: #fff;
   color: var(--dark);
 }
+
+/* Scorrendo, sotto la barra passano le foto: torna la velatura scura e
+   le scritte bianche, su qualunque pagina. La classe la mette main.js
+   oltre i 60px di scorrimento. */
+.nav.v2.scrolled {
+  background: rgba(31,22,17,0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.12);
+}
+.nav.v2.scrolled .nav-logo img { filter: brightness(0) invert(1); }
+.nav.v2.scrolled .hamburger,
+.nav.v2.scrolled .nav-back { color: #fff; }
+.nav.v2.scrolled .hamburger:hover,
+.nav.v2.scrolled .nav-back:hover { color: var(--gold-lt); }
+.nav.v2.scrolled .nav-cta { color: #fff; border-color: rgba(255,255,255,0.7); }
+.nav.v2.scrolled .nav-cta:hover { background: #fff; color: var(--dark); }
 
 /* ─── HUB 2-TILE (intermediate hub Matrimoni/Eventi) ────── */
 .hub-grid.hub-grid-2 {

@@ -80,11 +80,15 @@ a { color: inherit; }
 @media (min-width: 721px) { .nav-cta-icon { display: none; } }
 
 /* ─── BARRA CHIARA (come la nav di esplora.html) ─── */
-.nav-landing { background: rgba(31,22,17,0.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(255,255,255,.12); }
-.nav-landing .nav-back:hover { color: var(--gold-lt); }
-.nav-landing .nav-back:hover svg { stroke: var(--gold-lt); }
-.nav-landing .nav-cta:hover { background: #fff; color: var(--dark); }
-.nav-landing .g-hamburger:hover { color: var(--gold-lt); }
+.nav-landing { background: transparent; box-shadow: none; }
+.nav-landing .nav-back { color: var(--ink); }
+.nav-landing .nav-back svg { stroke: var(--ink); }
+.nav-landing .nav-back:hover, .nav-landing .nav-back:hover svg { color: var(--gold); stroke: var(--gold); }
+.nav-landing .nav-logo img { filter: none; }
+.nav-landing .nav-cta { color: var(--ink); border-color: var(--ink); }
+.nav-landing .nav-cta:hover { background: var(--ink); color: var(--bg); }
+.nav-landing .g-hamburger { color: var(--ink); }
+.nav-landing .g-hamburger:hover { color: var(--gold); }
 .nav-vt { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--sans); font-weight: 300; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; padding: .7rem 1.1rem; border-radius: 999px; min-height: 44px; color: #fff; background: var(--gold); border: 1px solid var(--gold); transition: background .35s, color .35s, border-color .35s; }
 .nav-vt:hover { background: var(--ink); border-color: var(--ink); }
 .nav-vt-icon { width: 36px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
