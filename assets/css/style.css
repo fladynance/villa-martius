@@ -2557,6 +2557,10 @@ input, select, textarea { font-size: 16px; }
 .mt-card .mt-pic { display: block; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; background: #CDB48A; }
 .mt-card img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(var(--z, 1)); transform-origin: var(--ox, 50%) var(--oy, 50%); }
 .mt-card.mt-big { width: min(100%, 470px); margin: 2.8rem 0 .6rem; }
+/* Cartolina in piedi, per le foto verticali: nel 3:2 orizzontale si
+   perderebbero i due terzi dell'altezza. Vale solo dove la si chiede,
+   cosi' le cartoline di eventi.html restano orizzontali. */
+.mt-card.mt-big-v .mt-pic { aspect-ratio: 3 / 4; }
 .mt-card.mt-big::before { content: ""; position: absolute; left: 50%; top: -13px; width: 86px; height: 26px; margin-left: -43px; background: rgba(255,246,222,.72); box-shadow: 0 1px 3px rgba(60,25,10,.25); transform: rotate(-3deg); }
 
 .mt-list { margin-top: 2.2rem; }
