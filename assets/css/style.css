@@ -1995,14 +1995,23 @@ a.room-cta { text-decoration: none; }
 .nav.v2.scrolled .nav-cta:hover { background: #fff; color: var(--dark); }
 
 /* ─── HUB 2-TILE (intermediate hub Matrimoni/Eventi) ────── */
-/* Uno sotto l'altro a qualunque larghezza: a tutta larghezza la foto si
-   vede intera di lato e la scena resta lontana, invece di essere
-   ritagliata in una colonna stretta. */
+/* Uno sotto l'altro, e ogni riquadro ha le proporzioni della foto
+   (1600x1062): cosi' l'immagine ci sta dentro intera, senza ritagli.
+   La pagina scorre: due riquadri alti quanto la foto non entrano in una
+   schermata sola. */
+/* I riquadri hanno un'altezza propria: la pagina non deve piu' riempire
+   la finestra a forza, altrimenti sotto resta una fascia vuota. */
+.hub.hub-stack { min-height: 0; }
 .hub-grid.hub-grid-2 {
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  align-content: start;   /* niente spazio vuoto fra i due riquadri */
 }
-.hub-grid.hub-grid-2 .hub-tile { min-height: 0; }
+.hub-grid.hub-grid-2 .hub-tile {
+  min-height: 0;
+  aspect-ratio: 1600 / 1062;
+}
+.hub-grid.hub-grid-2 .hub-tile-bg { background-size: contain; background-repeat: no-repeat; }
 @media (max-width: 720px) {
 
 }
