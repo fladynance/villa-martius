@@ -1847,25 +1847,27 @@ a.room-cta { text-decoration: none; }
 .nav.v2 {
   grid-template-columns: auto 1fr auto;
   padding: 1rem 2rem;
-  background: rgba(230,219,200,0.96);   /* beige caldo medio */
+  /* Barra scura e translucida: la pagina si intravede sotto. */
+  background: rgba(31,22,17,0.82);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 rgba(90,68,44,0.18);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.12);
 }
 /* Nav senza freccia (esplora.html): logo a sinistra, actions a destra */
 .nav.v2.no-back { grid-template-columns: auto 1fr; }
 .nav.v2.no-back .nav-logo { grid-column: 1; justify-content: flex-start; padding-left: 0; }
 .nav.v2.no-back .nav-actions { grid-column: 2; justify-content: flex-end; }
 .nav.v2 .nav-logo img {
-  filter: none;
+  filter: brightness(0) invert(1);
   height: 42px;
 }
 .nav.v2 .hamburger {
   display: inline-flex;
-  color: #3A2417;                       /* marrone scuro caldo */
+  color: #fff;
   margin: 0;
   padding: 0.5rem;
 }
-.nav.v2 .hamburger:hover { color: var(--gold); }
+.nav.v2 .hamburger:hover { color: var(--gold-lt); }
 .nav.v2 .hamb-label { display: none; } /* la parola Menu non compare in nav v2 */
 
 /* ─── NAV BACK (solo icona freccia, in ogni pagina) ──────── */
@@ -1896,8 +1898,8 @@ a.room-cta { text-decoration: none; }
   stroke-linejoin: round;
   display: block;
 }
-.nav.v2.on-dark .nav-back { color: #fff; }
-.nav.v2.on-dark .nav-back:hover { color: var(--gold-lt); }
+.nav.v2 .nav-back { color: #fff; }
+.nav.v2 .nav-back:hover { color: var(--gold-lt); }
 .nav.v2 .nav-logo { justify-content: flex-start; padding-left: 0.5rem; }
 .nav-actions {
   display: flex;
@@ -1947,29 +1949,13 @@ a.room-cta { text-decoration: none; }
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.nav.v2.on-dark {
-  background: rgba(31,22,17,0.72);
-  backdrop-filter: blur(10px);
-}
-.nav.v2.on-dark .nav-logo img { filter: brightness(0) invert(1); }
-.nav.v2.on-dark .hamburger { color: #fff; }
-.nav.v2.on-dark .hamburger:hover { color: var(--gold-lt); }
-.nav.v2.on-dark .nav-cta {
+.nav.v2 .nav-cta {
   color: #fff;
   border-color: rgba(255,255,255,0.7);
 }
-.nav.v2.on-dark .nav-cta:hover {
+.nav.v2 .nav-cta:hover {
   background: #fff;
   color: var(--dark);
-}
-.nav.v2.on-dark .nav-vt {
-  color: var(--gold-lt);
-  border-color: rgba(196,178,150,0.75);
-}
-.nav.v2.on-dark .nav-vt:hover {
-  background: var(--gold-lt);
-  color: var(--dark);
-  border-color: var(--gold-lt);
 }
 
 /* ─── HUB 2-TILE (intermediate hub Matrimoni/Eventi) ────── */
