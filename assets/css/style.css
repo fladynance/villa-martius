@@ -5,8 +5,8 @@
 
 :root {
   /* Palette — Oro Antico (default) */
-  --bg:         #E6DBC8;
-  --bg-warm:    #D1C1A0;
+  --bg:         #F0EBE3;
+  --bg-warm:    #DDD5C9;
   --bg-dark:    #1F1611;
   --dark:       #1F1611;
   --body-txt:   #2A1F14;
@@ -32,7 +32,7 @@
      --page-top come padding-top del suo primo blocco, così il
      distacco nav→titolo è identico su tutto il sito. */
   --nav-h:      78px;
-  --page-gap:   64px;
+  --page-gap:   40px;
   --page-top:   calc(var(--nav-h) + var(--page-gap));
 }
 @media (max-width: 760px) {
@@ -1043,7 +1043,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   opacity: 0.75;
 }
 .rooms-hero--light {
-  background: linear-gradient(180deg, #E6DBC8 0%, #D9CDB4 100%);
+  background: linear-gradient(180deg, #F0EBE3 0%, #E4DFD7 100%);
 }
 .rooms-hero--light .label { color: var(--gold); }
 .rooms-hero--light .rule-gold { background: var(--gold); opacity: 0.85; }
@@ -2408,10 +2408,10 @@ input, select, textarea { font-size: 16px; }
 /* la sfumatura è divisa per sezioni, senza stacchi: parte dal travertino del sito,
    passa per tramonto, viola e notte, e si chiude sul colore del footer */
 .ev-sky > section { background: linear-gradient(180deg, var(--a), var(--b)); }
-.ev-story { --a: #E6DBC8; --b: #E6DBC8; }
-.ev-intro { --a: #E6DBC8; --b: #E6DBC8; }
+.ev-story { --a: #F0EBE3; --b: #F0EBE3; }
+.ev-intro { --a: #F0EBE3; --b: #F0EBE3; }
 /* il tramonto parte subito dopo "Occasioni rare" */
-.ev-ch.c1 { --a: #E6DBC8; --b: #5A4A5A; background: linear-gradient(180deg, #E6DBC8 0%, #D7BA98 22%, #BC8F7E 45%, #A6796C 62%, #7C5F67 82%, #5A4A5A 100%); color: #2A1410; }
+.ev-ch.c1 { --a: #F0EBE3; --b: #5A4A5A; background: linear-gradient(180deg, #F0EBE3 0%, #D7BA98 22%, #BC8F7E 45%, #A6796C 62%, #7C5F67 82%, #5A4A5A 100%); color: #2A1410; }
 .ev-ch.c1 .ev-tag { color: #4A2012; }
 .ev-ch.c1 .ev-tx h3 { color: #2A1410; }
 .ev-ch.c1 .ev-tx p { color: #2A1410; }
@@ -2551,8 +2551,8 @@ input, select, textarea { font-size: 16px; }
 @media (prefers-reduced-motion: reduce) { .js-rv .rv { transition: none; } .ev-btn { transition: none; } }
 
 /* ─── MATRIMONI · titolo e fedi fissi, lettera a destra, cartoline d'album ─── */
-.mt-body { --mt-ink: #2B1810; --mt-lab: #4A2012; --mt-rule: rgba(74,32,18,.38); background: #E6DBC8; }
-.mt-page { position: relative; isolation: isolate; padding-bottom: 6rem; background: linear-gradient(180deg, #E6DBC8 0%, #D9CDB4 100%); }
+.mt-body { --mt-ink: #2B1810; --mt-lab: #4A2012; --mt-rule: rgba(74,32,18,.38); background: #F0EBE3; }
+.mt-page { position: relative; isolation: isolate; padding-bottom: 6rem; background: linear-gradient(180deg, #F0EBE3 0%, #E4DFD7 100%); }
 .mt-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
 .mt-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: flex-start; padding: var(--page-top) 2rem 3rem 3.4rem; }
 .mt-stick .label, .mt-sec .label { display: block; color: var(--mt-lab); }
@@ -2646,7 +2646,7 @@ input, select, textarea { font-size: 16px; }
   .mt-split { grid-template-columns: 1fr; }
   .mt-stick { position: relative; height: auto; min-height: 0; padding: var(--page-top) 1.3rem 1rem; align-items: center; text-align: center; }
   .mt-stick .rule-gold { margin-left: auto; margin-right: auto; }
-  .mt-page { padding-bottom: 5rem; background: linear-gradient(180deg, #E6DBC8 0%, #D9CDB4 100%); }
+  .mt-page { padding-bottom: 5rem; background: linear-gradient(180deg, #F0EBE3 0%, #E4DFD7 100%); }
   .mt-title { font-size: clamp(2.2rem, 9vw, 3rem); margin-bottom: 1.4rem; }
   .mt-rings { width: min(100%, 220px); }
   .mt-main { padding: 1.6rem 1.3rem 3.6rem; max-width: none; }
@@ -2885,10 +2885,10 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
 .mt-rings svg { filter: drop-shadow(0 5px 6px rgba(80,50,10,.28)); }
 
 /* ─── RITO CIVILE · le partecipazioni (titolo fisso, cartoline che si impilano) ─── */
-.rc-body { background: #E6DBC8; }
+.rc-body { background: #F0EBE3; }
 .rc-body .footer { border-top: 0; }
 .rc-body .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.rc-page { position: relative; padding-bottom: 5rem; background: #E6DBC8; }
+.rc-page { position: relative; padding-bottom: 5rem; background: #F0EBE3; }
 .rc-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); max-width: 1240px; margin: 0 auto; }
 .rc-stick { position: sticky; top: 0; height: 100vh; min-height: 560px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; padding: var(--page-top) 2rem 3rem 3.4rem; overflow: hidden; }
 .rc-stick .label, .rc-sec .label, .rc-photo .label { display: block; color: var(--mt-lab); margin: 0; }
