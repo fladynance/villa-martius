@@ -1670,8 +1670,9 @@ a.room-cta { text-decoration: none; }
 
 /* ─── HUB 4-TILE ───────────────────────────────────────────── */
 .hub {
-  min-height: 100svh;
-  padding-top: 0;                    /* le foto salgono sotto la barra */
+  height: 100vh;
+  height: 100svh;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
 }
@@ -1706,10 +1707,9 @@ a.room-cta { text-decoration: none; }
 .hub-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 1fr 1fr;
   gap: 0;
-  flex: none;
-  width: 100%;
+  flex: 1;
   min-height: 0;
 }
 .hub-tile {
@@ -2007,7 +2007,7 @@ a.room-cta { text-decoration: none; }
    scroll. Da telefono stanno uno sopra l'altro, sempre entrambi nella
    prima schermata, 50% + 50% dell'altezza utile. Il footer resta dove
    deve stare: sotto, raggiungibile solo scorrendo. */
-.hub.hub-stack { min-height: 0; flex: 1; justify-content: center; }
+.hub.hub-stack { height: auto; min-height: 0; flex: 1; justify-content: center; }
 .page-hub2 { display: flex; flex-direction: column; min-height: 100svh; }
 .page-hub2 > .footer { margin-top: auto; }
 .hub-grid.hub-grid-2 {
