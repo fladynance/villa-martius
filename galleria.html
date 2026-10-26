@@ -11,7 +11,7 @@
 <meta property="og:description" content="La galleria di Villa Martius: matrimoni, eventi, riti civili e casa vacanza, da sfogliare come quattro cartoline.">
 <meta property="og:image" content="assets/img/galleria/gazebo-full.jpg">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#E6DBC8">
+<meta name="theme-color" content="#F0EBE3">
 <link rel="icon" type="image/png" href="assets/img/logo.png">
 <title>Galleria Villa Martius · Cartoline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,8 @@
    · Casa vacanza = schede per alloggio), in fondo le altre gallerie.
    Tema unico chiaro come il sito (color-scheme: light). Palette dal file style.css del sito. */
 :root {
-  --bg:       #E6DBC8;   /* travertino */
-  --bg-warm:  #D1C1A0;
+  --bg:       #F0EBE3;
+  --bg-warm:  #DDD5C9;
   --wall:     #DDD0B5;   /* parete della sala del rito */
   --paper:    #F2EADA;
   --mat:      #F8F2E6;   /* passe-partout */
@@ -145,15 +145,11 @@ a { color: inherit; }
 }
 /* ─── Masonry grid ─── */
 .gallery { flex: 1 1 auto; padding: 1.6rem clamp(14px, 3.2vw, 44px) 3rem; background: var(--bg); }
-/* Colonne reali (non CSS multi-column): il JS distribuisce ogni foto
-   nella colonna più corta, così il bordo inferiore resta pareggiato.
-   --ms-cols è letto dal JS per sapere quante colonne costruire. */
-.masonry { --ms-cols: 4; --ms-gap: 10px; display: flex; align-items: flex-start; gap: var(--ms-gap); max-width: 1480px; margin: 0 auto; }
-.ms-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--ms-gap); }
-@media (max-width: 1100px) { .masonry { --ms-cols: 3; } }
-@media (max-width: 720px)  { .masonry { --ms-cols: 2; --ms-gap: 6px; } }
-@media (max-width: 360px)  { .masonry { --ms-cols: 1; } }
-.ms-item { display: block; width: 100%; border: 0; padding: 0; margin: 0; background: #1a1510; border-radius: 3px; overflow: hidden; cursor: pointer; position: relative; aspect-ratio: var(--ar, 1); transition: transform .5s cubic-bezier(.2,.65,.3,1), box-shadow .4s ease; }
+/* Griglia regolare: tutte le foto alla stessa dimensione, allineate. */
+.masonry { --ms-gap: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--ms-gap); max-width: 1480px; margin: 0 auto; }
+@media (max-width: 1100px) { .masonry { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 720px)  { .masonry { grid-template-columns: repeat(2, 1fr); --ms-gap: 6px; } }
+.ms-item { display: block; width: 100%; border: 0; padding: 0; margin: 0; background: #1a1510; border-radius: 3px; overflow: hidden; cursor: pointer; position: relative; aspect-ratio: 3/2; transition: transform .5s cubic-bezier(.2,.65,.3,1), box-shadow .4s ease; }
 .ms-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.65,.3,1), filter .5s; }
 .ms-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,15,10,0) 55%, rgba(20,15,10,.55) 100%); opacity: 0; transition: opacity .4s; pointer-events: none; }
 .ms-item .ms-cap { position: absolute; left: 14px; bottom: 12px; z-index: 2; color: #F6EFDE; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: .01em; opacity: 0; transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; pointer-events: none; }
@@ -169,9 +165,9 @@ a { color: inherit; }
 .ms-item.hide { display: none; }
 /* fade-in iniziale leggero */
 .ms-item { animation: msFade .55s ease-out both; }
-.ms-col:nth-child(2) .ms-item { animation-delay: .06s; }
-.ms-col:nth-child(3) .ms-item { animation-delay: .12s; }
-.ms-col:nth-child(4) .ms-item { animation-delay: .18s; }
+.ms-item:nth-child(4n+2) { animation-delay: .06s; }
+.ms-item:nth-child(4n+3) { animation-delay: .12s; }
+.ms-item:nth-child(4n+4) { animation-delay: .18s; }
 @keyframes msFade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
 @media (prefers-reduced-motion: reduce) { .ms-item { animation: none; } }
 .doors-head { text-align: center; padding: var(--page-gap) clamp(16px, 4vw, 48px) 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
@@ -445,6 +441,7 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   <div class="gal-sep" aria-hidden="true"><span class="gal-orn"><i class="o-s"></i><i class="o-b"></i><i class="o-s"></i></span></div>
   <nav class="gal-filters" id="galFilters" aria-label="Filtra per luogo">
     <button class="gf on" data-cat="all"      type="button" aria-pressed="true">Tutto</button>
+    <button class="gf"    data-cat="wed"      type="button" aria-pressed="false">Matrimoni</button>
     <button class="gf"    data-cat="gazebo"   type="button" aria-pressed="false">Giardino</button>
     <button class="gf"    data-cat="pool"     type="button" aria-pressed="false">Piscina</button>
     <button class="gf"    data-cat="room"     type="button" aria-pressed="false">Interni</button>
@@ -610,11 +607,7 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
 
   const RITO = [
     ['gazebo-PL', 'p', "L'attesa degli ospiti", 'Green Eden'], ['terr-PC', 'p', 'Gli sposi dopo il rito', 'Terrazza'],
-    ['gazebo-full', 'l', 'Il gazebo allestito', 'Green Eden'], ['terr-TL', 'l', 'Le luci della costa', 'Terrazza'],
-    ['gazebo-TL', 'q', 'Il registro e la penna', 'Gazebo'], ['gazebo-PC', 'p', 'La lettura degli articoli', 'Gazebo'],
-    ['terr-full', 'l', 'Il saluto finale', 'Terrazza'], ['gazebo-BR', 'q', 'Le sedie sul prato', 'Green Eden'],
-    ['terr-Z', 'q', 'Lo scambio degli anelli', 'Terrazza'], ['gazebo-R', 'l', 'Il corteo', 'Green Eden'],
-    ['terr-L', 'p', 'Testimoni e famiglia', 'Terrazza'], ['gazebo-L', 'l', 'Il lancio del riso', 'Viale']
+    ['terr-TL', 'l', 'Le luci della costa', 'Terrazza']
   ].map(([k, f, t, place], i) => ({ k, f, t, place, n: i + 1, sub: place }));
 
   const UNITS = [
@@ -632,10 +625,10 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
       ph: [['room-Z', 'La camera principale'], ['room-PC', "L'area esterna"]] },
     { name: 'Appartamento Deluxe', kind: 'Appartamento', g: 3, m: 55, x: 'Terrazzo privato', page: 'appartamento-deluxe.html',
       txt: 'Soggiorno intimo con terrazzo privato: la Sicilia tirrenica si gode da qui, in totale esclusiva. Per tre ospiti che cercano la vista più bella della villa.',
-      ph: [['room-PR', 'La camera'], ['terr-TL', 'Il terrazzo privato']] },
+      ph: [['room-PR', 'La camera']] },
     { name: 'Spazi comuni', kind: 'Per tutti gli ospiti', g: null, m: null, x: 'Piscina e giardino', page: 'casa-vacanza.html',
       txt: 'La piscina, il giardino e la terrazza panoramica sono a disposizione di tutti gli ospiti della casa vacanza.',
-      ph: [['pool-full', 'La piscina'], ['gazebo-R', 'Il giardino'], ['terr-full', 'La terrazza panoramica'], ['gazebo-BR', 'Il viale'], ['pool-R', 'La piscina di sera']] }
+      ph: [] }
   ];
   const CASA_N = UNITS.reduce((a, u) => a + u.ph.length, 0);
 
@@ -667,61 +660,31 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
 
   /* ─── LIVELLO 1 · masonry editoriale con filtri ─── */
   const CATS = {
+    wed:    { name: 'Matrimoni', keys: [] },
     gazebo: { name: 'Giardino', keys: ['gazebo-full','gazebo-PC','gazebo-arco','gazebo-TL','gazebo-L','gazebo-R','gazebo-PL','gazebo-PR','gazebo-Z','gazebo-BR'] },
     pool:   { name: 'Piscina',  keys: ['pool-full','pool-tavolo','pool-PC','pool-rose','pool-R','pool-L','pool-notte','pool-PL','pool-PR','pool-ortensie','pool-Z','pool-TL','pool-BR'] },
     room:   { name: 'Interni',  keys: ['room-full','room-PC','room-L','room-R','room-PL','room-PR','room-Z','room-TL','room-BR'] },
     pad:    { name: 'Dimore',   keys: ['pad-full','pad-PC','pad-TL','pad-L','pad-R','pad-PL','pad-PR','pad-Z','pad-BR'] },
     terr:   { name: 'Terrazze', keys: ['terr-full','terr-PC','terr-L','terr-R','terr-PL','terr-PR','terr-Z','terr-TL','terr-BR'] }
   };
-  // Mescola i luoghi per una distribuzione editoriale, non "a blocchi"
-  const ORDER = ['gazebo','pool','room','pad','terr'];
+  const ORDER = ['wed','gazebo','pool','room','pad','terr'];
   const MASONRY = [];
   const LONGEST = Math.max(...ORDER.map(c => CATS[c].keys.length));
   for (let i = 0; i < LONGEST; i++) {
     ORDER.forEach(c => { const k = CATS[c].keys[i]; if (k && IMG[k]) MASONRY.push({ k, cat: c, t: CATS[c].name }); });
   }
-  // Ritmo editoriale dei formati: ogni foto ha un'altezza nota, così le
-  // colonne si possono bilanciare senza aspettare il caricamento immagini.
-  const AR = [0.8, 1, 1.4, 0.75, 1, 1.5, 0.8, 1.25, 0.75, 1.33];
-  // Le foto aggiunte dopo il ritmo iniziale tengono la loro proporzione vera:
-  // sono orizzontali 3:2 e un ritaglio in verticale le sfigurerebbe.
-  const AR_NAT = { 'gazebo-arco': 1.5, 'pool-tavolo': 1.5, 'pool-rose': 1.5, 'pool-notte': 1.5, 'pool-ortensie': 1.5 };
-  MASONRY.forEach((p, i) => { p.ar = AR_NAT[p.k] || AR[i % AR.length]; });
-
   const masonry = $('#masonry');
   let currentCat = 'all';
   function currentList() {
     return currentCat === 'all' ? MASONRY : MASONRY.filter(p => p.cat === currentCat);
   }
-  function cols() {
-    const v = parseInt(getComputedStyle(masonry).getPropertyValue('--ms-cols'), 10);
-    return Number.isFinite(v) && v > 0 ? v : 1;
-  }
-  // Distribuisce le foto visibili nella colonna di volta in volta più corta,
-  // poi riscala le proporzioni di ogni colonna perché tutte finiscano alla
-  // stessa quota: niente bordo inferiore frastagliato.
   function layout() {
     const list = currentList();
-    const n = cols();
-    const heights = new Array(n).fill(0);
-    const buckets = Array.from({ length: n }, () => []);
-    list.forEach(p => {
-      let s = 0;
-      for (let c = 1; c < n; c++) if (heights[c] < heights[s]) s = c;
-      buckets[s].push(p);
-      heights[s] += 1 / p.ar;            // altezza relativa a larghezza colonna
-    });
-    const target = Math.max(...heights, 0);
-    masonry.innerHTML = buckets.map((items, c) => {
-      const k = heights[c] > 0 ? target / heights[c] : 1;   // ≥ 1
-      return '<div class="ms-col">' + items.map(p => {
-        const ar = (p.ar / k).toFixed(4);                   // più basso = più alto
-        return '<button type="button" class="ms-item" data-k="' + p.k + '" style="--ar:' + ar + '" aria-label="Apri foto · ' + p.t + '">' +
-          '<img src="' + src(p.k) + '" alt="' + p.t + '" loading="lazy">' +
-          '<span class="ms-cap">' + p.t + '</span>' +
-        '</button>';
-      }).join('') + '</div>';
-    }).join('');
+    masonry.innerHTML = list.map(p =>
+      '<button type="button" class="ms-item" data-k="' + p.k + '" aria-label="Apri foto · ' + p.t + '">' +
+      '<img src="' + src(p.k) + '" alt="' + p.t + '" loading="lazy">' +
+      '<span class="ms-cap">' + p.t + '</span></button>'
+    ).join('');
     $$('.ms-item', masonry).forEach(btn => {
       btn.addEventListener('click', () => {
         const l = currentList();
@@ -731,13 +694,6 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
     });
   }
   layout();
-
-  // Ricostruisce solo quando cambia davvero il numero di colonne
-  let lastCols = cols(), rT;
-  window.addEventListener('resize', () => {
-    clearTimeout(rT);
-    rT = setTimeout(() => { const c = cols(); if (c !== lastCols) { lastCols = c; layout(); } }, 150);
-  });
 
   // Filtri
   const galFilters = $('#galFilters');
