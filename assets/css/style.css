@@ -1537,6 +1537,7 @@ a.room-cta { text-decoration: none; }
 .splash-bg {
   position: absolute;
   inset: 0;
+  background-image: url('../img/hero-poster.jpg');
   background-size: cover;
   background-position: center;
   transform: scale(1.08);
@@ -3031,5 +3032,5 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
    il bordo, i tavoli e il prato. */
 @media (max-width: 760px) {
   .splash-video { object-position: 31% center; }
-  .splash-bg { background-position: 31% center; }
+  .splash-bg { background-image: url('../img/hero-poster-mobile.jpg'); background-position: center; }
 }
