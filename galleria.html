@@ -175,23 +175,9 @@ a { color: inherit; }
 .doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 0; }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
 /* Divider ornamentale (identico a .mt-sep di matrimoni) */
-/* I margini orizzontali auto disattivavano lo stretch nel flex in colonna:
-   il divisore si restringeva al contenuto e i filetti restavano lunghi 64px.
-   Centrato con align-self, ora occupa la larghezza che gli spetta. */
-.gal-sep { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 560px; align-self: center; margin: 1.4rem 0 0; padding: 0 clamp(16px, 4vw, 48px); }
-.gal-sep::before { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(159,135,106,.18) 0%, rgba(159,135,106,.7) 100%); }
-.gal-sep::after  { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(159,135,106,.7) 0%, rgba(159,135,106,.18) 100%); }
-/* Fregio: tre rombi in scala al centro di due filetti che sfumano verso
-   l'esterno. Un segno, non un dato: il conteggio faceva catalogo. */
-.gal-sep::before, .gal-sep::after { opacity: 1; }
-.gal-orn { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; }
-.gal-orn i { display: block; transform: rotate(45deg); background: var(--gold); }
-.gal-orn .o-b { width: 7px; height: 7px; opacity: .85; }
-.gal-orn .o-s { width: 4px; height: 4px; opacity: .5; }
 @media (max-width: 640px) {
   .doors-head { padding: var(--page-gap) 14px 0; gap: .3rem; }
   .doors-head .doors-rule { width: 36px; margin: .2rem 0 0; }
-  .gal-sep { margin-top: 1rem; padding: 0 14px; }
 }
 .doors-grid { width: 100%; height: 100%; max-width: 900px; max-height: 760px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
@@ -438,7 +424,6 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     <h1 class="label">Galleria</h1>
     <span class="doors-rule" aria-hidden="true"></span>
   </header>
-  <div class="gal-sep" aria-hidden="true"><span class="gal-orn"><i class="o-s"></i><i class="o-b"></i><i class="o-s"></i></span></div>
   <nav class="gal-filters" id="galFilters" aria-label="Filtra per luogo">
     <button class="gf on" data-cat="all"      type="button" aria-pressed="true">Tutto</button>
     <button class="gf"    data-cat="wed"      type="button" aria-pressed="false">Matrimoni</button>
@@ -582,32 +567,31 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
   /* ─── DATI: 60 posizioni (18 + 15 + 12 + 15) ─── */
   const WED_CH = { c: 'La cerimonia', r: 'Il ricevimento', d: 'I dettagli', s: 'Gli sposi' };
   const WED = [
-    ['gazebo-full', 'c', 'Il gazebo pronto per il sì'], ['terr-PL', 's', 'Gli sposi sulla terrazza'],
-    ['gazebo-PC', 'c', "L'altare tra i drappi"], ['pad-full', 'r', 'La tavola imperiale'],
-    ['pad-TL', 'd', 'Il candelabro centrale'], ['gazebo-L', 'c', 'Il prato del Green Eden'],
-    ['pool-full', 'r', 'Aperitivo a bordo piscina'], ['terr-L', 's', 'Un momento solo per loro'],
-    ['pad-Z', 'd', 'Calici e segnaposto'], ['gazebo-R', 'c', "L'uscita tra gli ospiti"],
-    ['pool-PC', 'd', 'I fiori bianchi sui tavoli'], ['terr-Z', 's', 'Il velo sotto le palme'],
-    ['pad-R', 'r', 'Il padiglione al crepuscolo'], ['gazebo-TL', 'd', 'I vasi in pietra'],
-    ['pool-R', 'r', "Le luci sull'acqua"], ['terr-full', 's', 'La notte sulla costa'],
-    ['gazebo-BR', 'c', 'La navata sul prato'], ['pad-PL', 'r', 'Il primo brindisi']
+    ['gazebo-full', 'c', 'Il gazebo pronto per il sì'],
+    ['gazebo-arco', 'c', "L'arco di fiori"],
+    ['pad-full', 'r', 'La tavola imperiale'],
+    ['pool-full', 'r', 'Aperitivo a bordo piscina'],
+    ['pool-tavolo', 'r', 'La tavolata a bordo piscina'],
+    ['pool-rose', 'd', 'Rose rosse sulla tavola'],
+    ['pool-notte', 'r', 'La piscina di notte'],
+    ['terr-full', 's', 'La notte sulla costa'],
+    ['room-full', 'd', 'La suite degli sposi']
   ].map(([k, ch, t]) => ({ k, ch, t, sub: WED_CH[ch] }));
 
   const EVT_T = { gala: 'Cene di gala', comp: 'Compleanni', azi: 'Aziendali', ann: 'Anniversari', bat: 'Battesimi e comunioni' };
   const EVT = [
-    ['pad-L', 'gala', 'Cena di gala sotto il padiglione'], ['pool-PL', 'comp', 'Diciottesimo a bordo piscina'],
-    ['pool-Z', 'azi', 'Cocktail aziendale'], ['pad-PC', 'ann', "Tavola per le nozze d'argento"],
-    ['pool-L', 'comp', 'La piscina illuminata'], ['pad-BR', 'gala', 'Il servizio ai tavoli'],
-    ['terr-R', 'ann', 'Brindisi sulla terrazza'], ['gazebo-Z', 'bat', 'Il rinfresco in giardino'],
-    ['pool-BR', 'azi', 'Lounge serale'], ['pad-PR', 'gala', 'Luci e drappi'],
-    ['pool-TL', 'comp', 'Il centrotavola'], ['gazebo-PR', 'bat', 'Il gazebo per la festa'],
-    ['terr-BR', 'ann', 'La bouganville illuminata'], ['pool-PR', 'azi', 'Aperitivo di networking'],
-    ['terr-PR', 'gala', 'La terrazza di sera']
+    ['pad-full', 'gala', 'Cena di gala sotto il padiglione'],
+    ['pool-full', 'comp', 'La piscina illuminata'],
+    ['pool-tavolo', 'azi', 'Cocktail aziendale'],
+    ['pool-ortensie', 'comp', 'Le ortensie a bordo piscina'],
+    ['terr-full', 'ann', 'La terrazza di sera'],
+    ['gazebo-full', 'bat', 'Il rinfresco in giardino'],
+    ['pool-rose', 'gala', 'Dettagli della tavola']
   ].map(([k, ty, t]) => ({ k, ty, t, sub: EVT_T[ty] }));
 
   const RITO = [
-    ['gazebo-PL', 'p', "L'attesa degli ospiti", 'Green Eden'], ['terr-PC', 'p', 'Gli sposi dopo il rito', 'Terrazza'],
-    ['terr-TL', 'l', 'Le luci della costa', 'Terrazza']
+    ['gazebo-full', 'p', "L'attesa degli ospiti", 'Green Eden'],
+    ['terr-full', 'p', 'Gli sposi dopo il rito', 'Terrazza']
   ].map(([k, f, t, place], i) => ({ k, f, t, place, n: i + 1, sub: place }));
 
   const UNITS = [
@@ -635,7 +619,7 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
   const SECS = [
     { id: 'matrimoni', name: 'Matrimoni',    n: WED.length,  cover: 'gazebo-full', lbl: 'Il racconto del giorno', extra: '', pos: 'center 62%' },
     { id: 'eventi',    name: 'Eventi',       n: EVT.length,  cover: 'pad-full',    lbl: 'Feste, cene e ricorrenze', extra: '', pos: 'center 55%' },
-    { id: 'riti',      name: 'Riti civili',  n: RITO.length, cover: 'terr-PL',     lbl: "Sala d'esposizione", extra: '', pos: 'center 82%' },
+    { id: 'riti',      name: 'Riti civili',  n: RITO.length, cover: 'terr-full',    lbl: "Sala d'esposizione", extra: '', pos: 'center 82%' },
     { id: 'casa',      name: 'Casa vacanza', n: CASA_N,      cover: 'room-full',   lbl: 'Camere e appartamenti', extra: ' · 5 alloggi e spazi comuni', pos: 'center 45%' }
   ];
   const byId = id => SECS.find(s => s.id === id);
@@ -661,11 +645,11 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
   /* ─── LIVELLO 1 · masonry editoriale con filtri ─── */
   const CATS = {
     wed:    { name: 'Matrimoni', keys: [] },
-    gazebo: { name: 'Giardino', keys: ['gazebo-full','gazebo-PC','gazebo-arco','gazebo-TL','gazebo-L','gazebo-R','gazebo-PL','gazebo-PR','gazebo-Z','gazebo-BR'] },
-    pool:   { name: 'Piscina',  keys: ['pool-full','pool-tavolo','pool-PC','pool-rose','pool-R','pool-L','pool-notte','pool-PL','pool-PR','pool-ortensie','pool-Z','pool-TL','pool-BR'] },
-    room:   { name: 'Interni',  keys: ['room-full','room-PC','room-L','room-R','room-PL','room-PR','room-Z','room-TL','room-BR'] },
-    pad:    { name: 'Dimore',   keys: ['pad-full','pad-PC','pad-TL','pad-L','pad-R','pad-PL','pad-PR','pad-Z','pad-BR'] },
-    terr:   { name: 'Terrazze', keys: ['terr-full','terr-PC','terr-L','terr-R','terr-PL','terr-PR','terr-Z','terr-TL','terr-BR'] }
+    gazebo: { name: 'Giardino', keys: ['gazebo-full','gazebo-arco'] },
+    pool:   { name: 'Piscina',  keys: ['pool-full','pool-tavolo','pool-rose','pool-notte','pool-ortensie'] },
+    room:   { name: 'Interni',  keys: ['room-full'] },
+    pad:    { name: 'Dimore',   keys: ['pad-full'] },
+    terr:   { name: 'Terrazze', keys: ['terr-full'] }
   };
   const ORDER = ['wed','gazebo','pool','room','pad','terr'];
   const MASONRY = [];
