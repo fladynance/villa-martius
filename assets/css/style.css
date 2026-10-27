@@ -2633,8 +2633,8 @@ input, select, textarea { font-size: 16px; }
 
 .mt-end { margin-top: 3.4rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .mt-sig { align-self: flex-start; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.45rem; color: var(--mt-ink); margin-bottom: 2.2rem; }
-.mt-seal { display: inline-flex; align-items: center; justify-content: center; width: 128px; height: 128px; border-radius: 50%; text-align: center; text-decoration: none; background: #9F876A; color: #fff; font-family: var(--sans); font-weight: 400; font-size: .68rem; letter-spacing: .2em; line-height: 1.6; text-transform: uppercase; box-shadow: 0 12px 28px -12px rgba(60,40,15,.6), inset 0 0 0 6px rgba(255,255,255,.14); transition: transform .3s, background .3s; }
-.mt-seal:hover { transform: rotate(-4deg) scale(1.05); background: var(--dark); }
+.mt-seal { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 2.4rem; border-radius: 999px; text-align: center; text-decoration: none; background: transparent; border: 1.5px solid var(--gold-lt); color: var(--mt-ink); font-family: var(--sans); font-weight: 300; font-size: .76rem; letter-spacing: .24em; line-height: 1.6; text-transform: uppercase; transition: background .3s, color .3s; }
+.mt-seal:hover { background: var(--gold-lt); color: var(--dark); }
 .mt-seal:focus-visible { outline: 2px solid var(--mt-ink); outline-offset: 5px; }
 
 .js-rv .mt-page .rv { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s ease; }
@@ -2660,7 +2660,7 @@ input, select, textarea { font-size: 16px; }
   .mt-album { margin-top: 3.6rem; }
 }
 @media (max-width: 520px) {
-  .mt-album { grid-template-columns: 1fr; gap: 1.6rem; }
+  .mt-album { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
   .mt-album .mt-card { padding: 7px; }
 }
 @media (prefers-reduced-motion: reduce) { .js-rv .mt-page .rv { transition: none; } .mt-seal { transition: none; } }
@@ -2874,12 +2874,7 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
   radial-gradient(44% 20% at 92% 62%, rgba(255,226,170,.38), rgba(255,226,170,0) 70%); }
 .mt-bg::after { content: ""; position: absolute; inset: 0; opacity: .07; mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .12  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
-.mt-olive { position: absolute; width: var(--w, 200px); height: auto; opacity: var(--o, .3); transform: translate3d(0, calc(var(--sy, 0) * var(--k, -.04) * 1px), 0) rotate(var(--r, 0deg)); will-change: transform; }
-.mt-olive path.s { fill: none; stroke: #8A6A2E; stroke-width: 1.8; stroke-linecap: round; }
-.mt-olive ellipse { fill: rgba(138,106,46,.28); stroke: #8A6A2E; stroke-width: .8; }
 .mt-split { position: relative; z-index: 1; }
-@media (max-width: 900px) { .mt-olive { --o: .22; } }
-@media (prefers-reduced-motion: reduce) { .mt-olive { transform: rotate(var(--r, 0deg)); } }
 /* L'ombra resta solo sulle fedi ferme del desktop. Su .mt-fx (che viene
    trasformato a ogni frame) un drop-shadow costringe il browser a
    ricalcolare il filtro frame per frame: su telefono è la causa

@@ -82,11 +82,10 @@
       <section class="mt-sec rv">
         <span class="label">Il Nostro Approccio</span>
         <span class="rule-gold" aria-hidden="true"></span>
-        <h2 class="mt-h">La dimora,<br>e cosa contiene</h2>
+        <h2 class="mt-h">Dove tutto<br>ha inizio</h2>
         <div class="mt-letter">
-          <p>Villa Martius &egrave; Casa Comunale. Il rito civile si celebra qui, nei giardini panoramici o a bordo piscina, e l'atto ha pieno valore di legge, lo stesso di un matrimonio celebrato in Municipio.</p>
-          <p>Intorno, la tenuta che appartiene alla stessa famiglia dal Settecento: il torchio antico, gli uliveti centenari, i limoni, la piscina. All'orizzonte Stromboli, Lipari e Vulcano. Gli ospiti restano a dormire nella villa.</p>
-          <p class="mt-strong">Dimora storica, destinata ai soli matrimoni.</p>
+          <p>Una tenuta del Settecento dedicata interamente ai matrimoni: piscina panoramica, uliveti centenari, giardini affacciati su Stromboli, Lipari e Vulcano. Gli ospiti dormono nella villa.</p>
+          <p class="mt-strong">Ogni dettaglio, un ricordo.</p>
         </div>
         <figure class="mt-card mt-big mt-big-v" style="--z:1;--ox:50%;--oy:50%;--rot:-2deg"><button type="button" class="mt-open" aria-label="Ingrandisci la foto: Gli sposi guardano i fuochi d&rsquo;artificio sul giardino"><span class="mt-pic"><img src="assets/img/mt-sposi-fuochi.jpg" alt="Gli sposi guardano i fuochi d&rsquo;artificio sul giardino" width="1200" height="1600" decoding="async"></span></button></figure>
       </section>
@@ -94,10 +93,10 @@
       <div class="mt-sep" aria-hidden="true"><i></i></div>
 
       <section class="mt-sec rv">
-        <span class="label">Cosa Includiamo</span>
+        <span class="label">I Nostri Servizi</span>
         <span class="rule-gold" aria-hidden="true"></span>
-        <h2 class="mt-h">I nostri servizi</h2>
-        <p class="mt-copy">Trent'anni di matrimoni in questa casa. Villa Martius mette a disposizione la struttura, gli spazi e il coordinamento; ristorazione, fiori, musica, fotografia e spettacoli pirotecnici arrivano dai partner certificati della tenuta o dai fornitori di vostra fiducia.</p>
+        <h2 class="mt-h">Cosa includiamo</h2>
+        <p class="mt-copy">Struttura, spazi e coordinamento inclusi. Ristorazione, fiori, musica e fotografia dai nostri partner o dai fornitori di vostra fiducia.</p>
         <div class="mt-list">
         <div class="mt-row"><h3>Esclusiva della villa</h3><p>Interni, esterni, giardino e piscina sono vostri per tutta la giornata. Nessun altro evento in contemporanea.</p></div>
         <div class="mt-row"><h3>Spazi per la cerimonia</h3><p>Gazebo bianco nel giardino per la cerimonia all'aperto, sala interna in caso di pioggia. Allestimento base incluso.</p></div>
@@ -133,7 +132,7 @@
       <div class="mt-end rv">
         <div class="mt-sig">Villa Martius</div>
         <div class="mt-endslot" id="mtEndSlot" aria-hidden="true"></div>
-        <a href="contatti.html" class="mt-seal">Richiedi un<br>preventivo</a>
+        <a href="contatti.html" class="mt-seal">Richiedi un preventivo</a>
       </div>
     </div>
   </div>
@@ -309,22 +308,6 @@
     var win=lab? Math.max(240,(lab.getBoundingClientRect().top+window.pageYOffset)-window.innerHeight*.45) : 240;
     draw(cl(window.pageYOffset/win));
   }
-  /* sfondo: rami d'ulivo con leggero parallasse e lanterne che si accendono verso la sera */
-  (function(){
-    var bg=document.getElementById('mtBg'); if(!bg) return;
-    var NS='http://www.w3.org/2000/svg';
-    function branch(w,seed){
-      var s=document.createElementNS(NS,'svg'); s.setAttribute('viewBox','0 0 200 120'); s.setAttribute('class','mt-olive');
-      var P=[[4,112],[60,104],[120,70],[196,14]],i,x='<path class="s" d="M'+P[0]+' C'+P[1]+' '+P[2]+' '+P[3]+'"/>';
-      function pt(t){var u=1-t;return [u*u*u*P[0][0]+3*u*u*t*P[1][0]+3*u*t*t*P[2][0]+t*t*t*P[3][0],u*u*u*P[0][1]+3*u*u*t*P[1][1]+3*u*t*t*P[2][1]+t*t*t*P[3][1]];}
-      for(i=1;i<=11;i++){var t=i/12,a=pt(t),b=pt(t+.02),ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI,side=i%2?1:-1,len=10+((i*7+seed)%5);
-        x+='<ellipse cx="'+(a[0]+Math.cos((ang+side*58)*Math.PI/180)*len*.55).toFixed(1)+'" cy="'+(a[1]+Math.sin((ang+side*58)*Math.PI/180)*len*.55).toFixed(1)+'" rx="'+len+'" ry="3.2" transform="rotate('+(ang+side*58).toFixed(1)+' '+(a[0]+Math.cos((ang+side*58)*Math.PI/180)*len*.55).toFixed(1)+' '+(a[1]+Math.sin((ang+side*58)*Math.PI/180)*len*.55).toFixed(1)+')"/>';}
-      s.innerHTML=x; return s;
-    }
-    var spec=[['l',2,-50,340,-8,-.05],['r',14,-40,300,10,-.03],['l',38,-70,320,-14,-.06],['r',54,-40,340,6,-.04],['l',74,-60,300,-4,-.03],['r',85,-50,290,12,-.05]];
-    spec.forEach(function(d,k){var e=branch(d[3],k); e.style[d[0]==='l'?'left':'right']=d[2]+'px'; e.style.top=d[1]+'%'; e.style.setProperty('--w',d[3]+'px'); e.style.width=d[3]+'px'; e.style.setProperty('--r',(d[0]==='l'?d[4]:180-d[4])+'deg'); e.style.setProperty('--k',d[5]); if(d[0]==='r') e.style.transform='';bg.appendChild(e);});
-    window.__mtBg=bg;
-  })();
   function req(){ if(!tick){tick=true;requestAnimationFrame(upd);} }
   window.addEventListener('scroll',req,{passive:true}); window.addEventListener('resize',req); window.addEventListener('load',req);
   upd();
