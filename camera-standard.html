@@ -69,11 +69,12 @@
     <h1 class="rd-title">Camera Matrimoniale <em>Standard</em></h1>
   </header>
 
-  <form class="rd-book" onsubmit="return false" aria-label="Controlla la disponibilit&agrave;">
-    <div class="rd-field"><label for="camera-standard-in">Arrivo</label><input id="camera-standard-in" type="date"></div>
-    <div class="rd-field"><label for="camera-standard-out">Partenza</label><input id="camera-standard-out" type="date"></div>
-    <div class="rd-field"><label for="camera-standard-g">Ospiti</label><select id="camera-standard-g"><option value="1">1 ospite</option><option value="2" selected>2 ospiti</option></select></div>
-    <button type="submit" class="rd-cta">Controlla la disponibilit&agrave;</button>
+  <form class="rd-book" action="prenota.html" method="get" aria-label="Prenota">
+    <input type="hidden" name="unita" value="camera-standard">
+    <div class="rd-field"><label for="camera-standard-in">Arrivo</label><input id="camera-standard-in" name="arrivo" type="date"></div>
+    <div class="rd-field"><label for="camera-standard-out">Partenza</label><input id="camera-standard-out" name="partenza" type="date"></div>
+    <div class="rd-field"><label for="camera-standard-g">Ospiti</label><select id="camera-standard-g" name="ospiti"><option value="1">1 ospite</option><option value="2" selected>2 ospiti</option></select></div>
+    <button type="submit" class="rd-cta">Prenota</button>
   </form>
 
   <div class="rd-body">
