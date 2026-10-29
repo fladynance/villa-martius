@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Prenota · Villa Martius</title>
+<meta name="description" content="Completa la tua prenotazione a Villa Martius — San Pier Niceto (Messina). Pagamento in struttura.">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F0EBE3">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .bk { background: var(--bg); min-height: 100vh; padding: calc(var(--nav-h,64px) + 2.4rem) 0 4rem; }
+  .bk-wrap { width: calc(100% - 2.4rem); max-width: 1080px; margin: 0 auto; }
+  .bk-crumb {
+    display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans);
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+    text-decoration: none; margin-bottom: 1.6rem;
+  }
+  .bk-crumb:hover { color: var(--gold); }
+  .bk-head { margin-bottom: 2.4rem; }
+  .bk-head .label { display: block; margin-bottom: .5rem; }
+  .bk-title { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; margin: 0; color: var(--title); }
+  .bk-sub { font-family: var(--sans); font-weight: 300; color: var(--muted); margin: .7rem 0 0; max-width: 46ch; }
+
+  .bk-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
+  @media (min-width: 900px) { .bk-grid { grid-template-columns: 1fr 360px; gap: 3rem; } }
+
+  /* Card form */
+  .bk-form { display: flex; flex-direction: column; gap: 1.8rem; }
+  .bk-card {
+    background: #fff; border-radius: 16px; padding: 1.7rem 1.6rem;
+    box-shadow: 0 20px 50px -34px rgba(31,22,17,.45); border: 1px solid rgba(90,70,45,.08);
+  }
+  .bk-card h2 {
+    font-family: var(--serif); font-weight: 500; font-size: 1.35rem; color: var(--title);
+    margin: 0 0 1.2rem; display: flex; align-items: baseline; gap: .6rem;
+  }
+  .bk-card h2 .bk-step {
+    font-family: var(--sans); font-weight: 500; font-size: .7rem; letter-spacing: .1em;
+    color: #fff; background: var(--gold); border-radius: 999px; width: 1.5rem; height: 1.5rem;
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+  }
+  .bk-card .bk-opt { font-family: var(--sans); font-weight: 300; font-size: .82rem; color: var(--muted); letter-spacing: 0; text-transform: none; }
+
+  .bk-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.1rem; }
+  .bk-f { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+  .bk-f.bk-full { grid-column: 1 / -1; }
+  .bk-f label {
+    font-family: var(--sans); font-weight: 500; font-size: .7rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .bk-f label .req { color: var(--terracotta); margin-left: .15rem; }
+  .bk-f input, .bk-f select, .bk-f textarea {
+    font-family: var(--sans); font-weight: 300; font-size: 1rem; color: var(--dark);
+    background: var(--bg); border: 1px solid rgba(90,70,45,.2); border-radius: 9px;
+    padding: .7rem .8rem; width: 100%; transition: border-color .2s, box-shadow .2s;
+  }
+  .bk-f textarea { resize: vertical; min-height: 84px; }
+  .bk-f input:focus, .bk-f select:focus, .bk-f textarea:focus {
+    outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(159,135,106,.15);
+  }
+  .bk-f input:invalid:not(:placeholder-shown) { border-color: var(--terracotta); }
+
+  .bk-guest { border-top: 1px dashed rgba(90,70,45,.2); padding-top: 1.1rem; margin-top: 1.1rem; }
+  .bk-guest:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+  .bk-guest-h { font-family: var(--sans); font-weight: 500; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin: 0 0 .8rem; }
+
+  /* Pagamento in struttura */
+  .bk-pay { display: flex; gap: .9rem; align-items: flex-start; background: var(--bg); border: 1px solid rgba(90,70,45,.18); border-radius: 11px; padding: 1rem 1.1rem; }
+  .bk-pay svg { flex: none; width: 26px; height: 26px; color: var(--gold); margin-top: .1rem; }
+  .bk-pay b { font-family: var(--serif); font-size: 1.1rem; color: var(--title); font-weight: 500; }
+  .bk-pay p { font-family: var(--sans); font-weight: 300; font-size: .88rem; color: var(--muted); margin: .25rem 0 0; }
+
+  /* Consensi */
+  .bk-check { display: flex; gap: .7rem; align-items: flex-start; margin-top: .9rem; }
+  .bk-check:first-child { margin-top: 0; }
+  .bk-check input { margin-top: .2rem; width: 18px; height: 18px; flex: none; accent-color: var(--gold); }
+  .bk-check label { font-family: var(--sans); font-weight: 300; font-size: .9rem; color: var(--muted); line-height: 1.5; }
+  .bk-check a { color: var(--gold); }
+
+  /* Riepilogo */
+  .bk-summary { position: sticky; top: calc(var(--nav-h,64px) + 1.4rem); }
+  .bk-sum-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px -34px rgba(31,22,17,.45); border: 1px solid rgba(90,70,45,.08); }
+  .bk-sum-img { aspect-ratio: 16/10; background: #e9e2d8; }
+  .bk-sum-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bk-sum-body { padding: 1.3rem 1.4rem 1.5rem; }
+  .bk-sum-cat { font-family: var(--sans); font-weight: 500; font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+  .bk-sum-name { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; color: var(--title); margin: .25rem 0 1rem; line-height: 1.1; }
+  .bk-sum-row { display: flex; justify-content: space-between; gap: 1rem; padding: .55rem 0; border-top: 1px solid rgba(90,70,45,.14); font-family: var(--sans); font-size: .92rem; }
+  .bk-sum-row span:first-child { color: var(--muted); font-weight: 300; }
+  .bk-sum-row span:last-child { color: var(--dark); font-weight: 500; text-align: right; }
+  .bk-sum-note { font-family: var(--sans); font-weight: 300; font-size: .8rem; color: var(--muted); margin: 1.1rem 0 0; line-height: 1.5; }
+
+  .bk-submit {
+    border: 0; border-radius: 11px; width: 100%; min-height: 60px; cursor: pointer;
+    background: var(--gold); color: #fff; font-family: var(--sans); font-weight: 500;
+    font-size: .82rem; letter-spacing: .2em; text-transform: uppercase; margin-top: 1rem;
+    transition: background .3s;
+  }
+  .bk-submit:hover { background: var(--dark); }
+  .bk-submit:disabled { opacity: .55; cursor: not-allowed; }
+
+  .bk-msg { font-family: var(--sans); font-weight: 300; font-size: .9rem; border-radius: 10px; padding: .9rem 1.1rem; margin-top: 1rem; display: none; }
+  .bk-msg.on { display: block; }
+  .bk-msg.err { background: #fbeae5; color: #9a3412; }
+
+  /* Schermata di conferma */
+  .bk-done { display: none; background: #fff; border-radius: 16px; padding: 3rem 2rem; text-align: center; box-shadow: 0 20px 50px -34px rgba(31,22,17,.45); }
+  .bk-done.on { display: block; }
+  .bk-done .bk-done-ic { width: 64px; height: 64px; border-radius: 50%; background: rgba(159,135,106,.15); color: var(--gold); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+  .bk-done h2 { font-family: var(--serif); font-weight: 500; font-size: 2rem; color: var(--title); margin: 0 0 .6rem; }
+  .bk-done p { font-family: var(--sans); font-weight: 300; color: var(--muted); max-width: 44ch; margin: 0 auto .4rem; line-height: 1.6; }
+  .bk-done .bk-done-ref { font-family: var(--sans); font-weight: 500; color: var(--dark); letter-spacing: .05em; margin-top: 1rem; }
+  .bk-done .bk-done-cta { display: inline-block; margin-top: 1.6rem; background: var(--gold); color: #fff; text-decoration: none; padding: .9rem 2rem; border-radius: 11px; font-family: var(--sans); font-weight: 500; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; }
+
+  .bk-invalid { background: #fff7f4 !important; border-color: var(--terracotta) !important; }
+</style>
+</head>
+<body>
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+  <button class="mobile-close" id="menuClose" aria-label="Chiudi menu">✕ Chiudi</button>
+  <a href="matrimoni-eventi.html" class="menu-link">Matrimoni &amp; Riti Civili</a>
+  <a href="eventi.html"           class="menu-link">Eventi</a>
+  <a href="casa-vacanza.html"     class="menu-link active">Casa Vacanza</a>
+  <a href="galleria.html"         class="menu-link">Galleria</a>
+  <a href="esplora.html"          class="menu-link">Esplora</a>
+  <a href="virtual-tour.html"     class="menu-link">Virtual Tour</a>
+  <a href="contatti.html"         class="mobile-menu-cta">Contattaci</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav v2 nav-clear" aria-label="Navigazione principale">
+  <button class="nav-back" id="navBack" aria-label="Torna alla pagina precedente">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  </button>
+  <div class="nav-logo">
+    <a href="esplora.html" aria-label="Villa Martius — esplora">
+      <img src="assets/img/logo.png" alt="Villa Martius">
+    </a>
+  </div>
+  <div class="nav-actions">
+    <a href="contatti.html" class="nav-cta" aria-label="Contattaci">
+      <svg class="nav-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z M4 6l8 6 8-6"/></svg>
+      Contattaci
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
+      <span class="hamb-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+</nav>
+
+<main class="bk">
+  <div class="bk-wrap">
+    <a class="bk-crumb" id="bkBack" href="casa-vacanza.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Torna alla sistemazione
+    </a>
+
+    <header class="bk-head">
+      <span class="label">Prenotazione</span>
+      <h1 class="bk-title">Completa la tua richiesta</h1>
+      <p class="bk-sub">Inserisci i dati per il soggiorno. Il pagamento si effettua direttamente in struttura: nessuna carta richiesta ora.</p>
+    </header>
+
+    <div class="bk-grid" id="bkGrid">
+      <form class="bk-form" id="bookForm" novalidate>
+
+        <!-- 1. Soggiorno -->
+        <div class="bk-card">
+          <h2><span class="bk-step">1</span> Il tuo soggiorno</h2>
+          <div class="bk-fields">
+            <div class="bk-f">
+              <label for="arrivo">Arrivo<span class="req">*</span></label>
+              <input type="date" id="arrivo" name="arrivo" required>
+            </div>
+            <div class="bk-f">
+              <label for="partenza">Partenza<span class="req">*</span></label>
+              <input type="date" id="partenza" name="partenza" required>
+            </div>
+            <div class="bk-f">
+              <label for="ospiti">Ospiti<span class="req">*</span></label>
+              <select id="ospiti" name="ospiti" required></select>
+            </div>
+            <div class="bk-f">
+              <label for="arrivo_ora">Orario di arrivo stimato <span class="bk-opt">(facoltativo)</span></label>
+              <input type="time" id="arrivo_ora" name="arrivo_ora">
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Ospite principale -->
+        <div class="bk-card">
+          <h2><span class="bk-step">2</span> Ospite principale</h2>
+          <div class="bk-fields">
+            <div class="bk-f">
+              <label for="nome">Nome<span class="req">*</span></label>
+              <input type="text" id="nome" name="nome" autocomplete="given-name" placeholder=" " required>
+            </div>
+            <div class="bk-f">
+              <label for="cognome">Cognome<span class="req">*</span></label>
+              <input type="text" id="cognome" name="cognome" autocomplete="family-name" placeholder=" " required>
+            </div>
+            <div class="bk-f">
+              <label for="email">Email<span class="req">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder=" " required>
+            </div>
+            <div class="bk-f">
+              <label for="telefono">Telefono<span class="req">*</span></label>
+              <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder=" " required>
+            </div>
+            <div class="bk-f">
+              <label for="paese">Paese di residenza<span class="req">*</span></label>
+              <input type="text" id="paese" name="paese" autocomplete="country-name" placeholder=" " required>
+            </div>
+            <div class="bk-f">
+              <label for="citta">Città <span class="bk-opt">(facoltativo)</span></label>
+              <input type="text" id="citta" name="citta" autocomplete="address-level2" placeholder=" ">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Altri ospiti -->
+        <div class="bk-card" id="guestsCard">
+          <h2><span class="bk-step">3</span> Altri ospiti <span class="bk-opt">(facoltativo)</span></h2>
+          <div id="guestsWrap"></div>
+        </div>
+
+        <!-- 4. Note -->
+        <div class="bk-card">
+          <h2><span class="bk-step">4</span> Note e richieste <span class="bk-opt">(facoltativo)</span></h2>
+          <div class="bk-fields">
+            <div class="bk-f bk-full">
+              <label for="note">Richieste particolari</label>
+              <textarea id="note" name="note" placeholder="Es. arrivo in tarda serata, culla, allergie…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Pagamento -->
+        <div class="bk-card">
+          <h2><span class="bk-step">5</span> Pagamento</h2>
+          <div class="bk-pay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 10h18M3 10l1.5-5h15L21 10M4 10v9h16v-9M9 15h6"/></svg>
+            <div>
+              <b>Pagamento in struttura</b>
+              <p>Confermi ora la prenotazione senza carta. Il pagamento si effettua direttamente all'arrivo a Villa Martius.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Consensi -->
+        <div class="bk-card">
+          <div class="bk-check">
+            <input type="checkbox" id="privacy" name="privacy" required>
+            <label for="privacy">Ho letto e accetto l'informativa sulla <a href="condizioni.html" target="_blank" rel="noopener">privacy</a>.<span class="req" style="color:var(--terracotta)"> *</span></label>
+          </div>
+          <div class="bk-check">
+            <input type="checkbox" id="condizioni" name="condizioni" required>
+            <label for="condizioni">Accetto le <a href="condizioni.html" target="_blank" rel="noopener">condizioni di prenotazione</a>.<span class="req" style="color:var(--terracotta)"> *</span></label>
+          </div>
+        </div>
+
+        <button type="submit" class="bk-submit" id="bkSubmit">Conferma prenotazione</button>
+        <div class="bk-msg err" id="bkMsg" role="alert"></div>
+      </form>
+
+      <aside class="bk-summary">
+        <div class="bk-sum-card">
+          <div class="bk-sum-img"><img id="sumImg" src="assets/img/hero-garden.jpg" alt=""></div>
+          <div class="bk-sum-body">
+            <div class="bk-sum-cat" id="sumCat">Sistemazione</div>
+            <div class="bk-sum-name" id="sumName">—</div>
+            <div class="bk-sum-row"><span>Arrivo</span><span id="sumIn">—</span></div>
+            <div class="bk-sum-row"><span>Partenza</span><span id="sumOut">—</span></div>
+            <div class="bk-sum-row"><span>Notti</span><span id="sumNights">—</span></div>
+            <div class="bk-sum-row"><span>Ospiti</span><span id="sumGuests">—</span></div>
+            <p class="bk-sum-note">Riceverai un'email di riepilogo con tutti i dati. Il pagamento avviene in struttura.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Conferma -->
+    <div class="bk-done" id="bkDone">
+      <div class="bk-done-ic">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h2>Prenotazione ricevuta</h2>
+      <p id="bkDoneText">Grazie! La tua richiesta è stata registrata. Ti abbiamo inviato un'email di riepilogo e i proprietari sono stati avvisati.</p>
+      <p>Il pagamento si effettua direttamente in struttura all'arrivo.</p>
+      <div class="bk-done-ref" id="bkDoneRef"></div>
+      <a class="bk-done-cta" href="esplora.html">Torna al sito</a>
+    </div>
+
+  </div>
+</main>
+
+<script src="assets/js/main.js" defer></script>
+<script>
+(function () {
+  "use strict";
+  var UNITS = {
+    "camera-standard":      { nome: "Camera Matrimoniale Standard", cat: "Camera",       capienza: 2, img: "std-camera-letto.jpg",  page: "camera-standard.html" },
+    "camera-deluxe":        { nome: "Camera Matrimoniale Deluxe",   cat: "Camera",       capienza: 3, img: "dlx-camera.jpg",         page: "camera-deluxe.html" },
+    "appartamento-standard":{ nome: "Appartamento Standard",        cat: "Appartamento", capienza: 4, img: "apt-std-romantica.jpg",  page: "appartamento-standard.html" },
+    "appartamento-superior":{ nome: "Appartamento Superior",        cat: "Appartamento", capienza: 4, img: "sup-cucina.jpg",         page: "appartamento-superior.html" },
+    "appartamento-deluxe":  { nome: "Appartamento Deluxe",          cat: "Appartamento", capienza: 3, img: "apt-dlx-soggiorno.jpg",  page: "appartamento-deluxe.html" }
+  };
+
+  function qp(name) { return new URLSearchParams(location.search).get(name); }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function todayISO() { var d = new Date(); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function fmtIT(iso) {
+    if (!iso) return "—";
+    var p = iso.split("-"); if (p.length !== 3) return "—";
+    var mesi = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"];
+    return parseInt(p[2], 10) + " " + mesi[parseInt(p[1], 10) - 1] + " " + p[0];
+  }
+  function nights(a, b) {
+    if (!a || !b) return 0;
+    var da = new Date(a + "T00:00:00"), db = new Date(b + "T00:00:00");
+    return Math.max(0, Math.round((db - da) / 86400000));
+  }
+
+  var slug = qp("unita");
+  var unit = UNITS[slug];
+
+  // Unità non valida → torna all'elenco
+  if (!unit) {
+    document.getElementById("bkGrid").innerHTML =
+      '<div class="bk-card" style="grid-column:1/-1;text-align:center">' +
+      '<h2 style="justify-content:center">Scegli una sistemazione</h2>' +
+      '<p class="bk-sub" style="margin:0 auto 1.4rem">Seleziona la camera o l\'appartamento che desideri prenotare.</p>' +
+      '<a class="bk-done-cta" href="casa-vacanza.html">Vedi le sistemazioni</a></div>';
+    return;
+  }
+
+  var back = document.getElementById("bkBack");
+  back.setAttribute("href", unit.page);
+
+  // Riepilogo
+  document.getElementById("sumImg").src = "assets/img/" + unit.img;
+  document.getElementById("sumImg").alt = unit.nome;
+  document.getElementById("sumCat").textContent = unit.cat;
+  document.getElementById("sumName").textContent = unit.nome;
+  document.title = "Prenota " + unit.nome + " · Villa Martius";
+
+  // Date
+  var elIn = document.getElementById("arrivo"), elOut = document.getElementById("partenza");
+  var tISO = todayISO();
+  elIn.min = tISO; elOut.min = tISO;
+  var qIn = qp("arrivo"), qOut = qp("partenza");
+  if (qIn) elIn.value = qIn;
+  if (qOut) elOut.value = qOut;
+
+  // Ospiti select (1..capienza)
+  var elOsp = document.getElementById("ospiti");
+  for (var i = 1; i <= unit.capienza; i++) {
+    var o = document.createElement("option");
+    o.value = i; o.textContent = i + (i === 1 ? " ospite" : " ospiti");
+    elOsp.appendChild(o);
+  }
+  var qOsp = parseInt(qp("ospiti"), 10);
+  elOsp.value = (qOsp >= 1 && qOsp <= unit.capienza) ? qOsp : Math.min(2, unit.capienza);
+
+  // Altri ospiti: slot = capienza - 1, tutti facoltativi
+  var gw = document.getElementById("guestsWrap");
+  if (unit.capienza > 1) {
+    for (var g = 2; g <= unit.capienza; g++) {
+      var block = document.createElement("div");
+      block.className = "bk-guest";
+      block.innerHTML =
+        '<p class="bk-guest-h">Ospite ' + g + '</p>' +
+        '<div class="bk-fields">' +
+          '<div class="bk-f"><label>Nome</label><input type="text" name="g' + g + '_nome" placeholder=" "></div>' +
+          '<div class="bk-f"><label>Cognome</label><input type="text" name="g' + g + '_cognome" placeholder=" "></div>' +
+        '</div>';
+      gw.appendChild(block);
+    }
+  } else {
+    document.getElementById("guestsCard").style.display = "none";
+  }
+
+  // Aggiorna riepilogo
+  function refresh() {
+    document.getElementById("sumIn").textContent = fmtIT(elIn.value);
+    document.getElementById("sumOut").textContent = fmtIT(elOut.value);
+    var n = nights(elIn.value, elOut.value);
+    document.getElementById("sumNights").textContent = n > 0 ? (n + (n === 1 ? " notte" : " notti")) : "—";
+    document.getElementById("sumGuests").textContent = elOsp.value + (parseInt(elOsp.value, 10) === 1 ? " ospite" : " ospiti");
+    // partenza sempre dopo arrivo
+    if (elIn.value) { var min = new Date(elIn.value + "T00:00:00"); min.setDate(min.getDate() + 1); elOut.min = min.toISOString().slice(0, 10); }
+  }
+  elIn.addEventListener("change", refresh);
+  elOut.addEventListener("change", refresh);
+  elOsp.addEventListener("change", refresh);
+  refresh();
+
+  // Submit
+  var form = document.getElementById("bookForm");
+  var msg = document.getElementById("bkMsg");
+  var btn = document.getElementById("bkSubmit");
+
+  function showErr(text) { msg.textContent = text; msg.classList.add("on"); msg.scrollIntoView({ behavior: "smooth", block: "center" }); }
+  function clearErr() { msg.classList.remove("on"); }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    clearErr();
+
+    // Validazione lato client
+    var n = nights(elIn.value, elOut.value);
+    if (!elIn.value || !elOut.value) { return showErr("Inserisci le date di arrivo e partenza."); }
+    if (n < 1) { return showErr("La partenza deve essere successiva all'arrivo."); }
+    var required = ["nome", "cognome", "email", "telefono", "paese"];
+    for (var k = 0; k < required.length; k++) {
+      var el = document.getElementById(required[k]);
+      if (!el.value.trim()) { el.classList.add("bk-invalid"); el.focus(); return showErr("Compila tutti i campi obbligatori dell'ospite principale."); }
+      el.classList.remove("bk-invalid");
+    }
+    if (!document.getElementById("privacy").checked || !document.getElementById("condizioni").checked) {
+      return showErr("Per procedere devi accettare privacy e condizioni di prenotazione.");
+    }
+
+    // Costruisci payload
+    var ospiti = [];
+    for (var g = 2; g <= unit.capienza; g++) {
+      var nm = form.elements["g" + g + "_nome"], cg = form.elements["g" + g + "_cognome"];
+      if (nm && (nm.value.trim() || (cg && cg.value.trim()))) {
+        ospiti.push({ nome: nm.value.trim(), cognome: cg ? cg.value.trim() : "" });
+      }
+    }
+    var payload = {
+      unita: slug,
+      arrivo: elIn.value,
+      partenza: elOut.value,
+      ospiti_num: parseInt(elOsp.value, 10),
+      ospite_principale: {
+        nome: document.getElementById("nome").value.trim(),
+        cognome: document.getElementById("cognome").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        telefono: document.getElementById("telefono").value.trim(),
+        paese: document.getElementById("paese").value.trim(),
+        citta: document.getElementById("citta").value.trim()
+      },
+      ospiti_extra: ospiti,
+      arrivo_ora: document.getElementById("arrivo_ora").value,
+      note: document.getElementById("note").value.trim(),
+      pagamento: "in_struttura"
+    };
+
+    btn.disabled = true;
+    btn.textContent = "Invio in corso…";
+
+    fetch("/.netlify/functions/create-booking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function (r) {
+      return r.json().then(function (data) { return { ok: r.ok, status: r.status, data: data }; });
+    }).then(function (res) {
+      if (res.ok && res.data && res.data.ok) {
+        document.getElementById("bkGrid").style.display = "none";
+        var done = document.getElementById("bkDone");
+        if (res.data.reference) { document.getElementById("bkDoneRef").textContent = "Codice prenotazione: " + res.data.reference; }
+        done.classList.add("on");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        var reason = (res.data && res.data.message) ? res.data.message : "Si è verificato un problema. Riprova tra poco.";
+        if (res.data && res.data.reason === "unavailable") {
+          reason = "Spiacenti, per le date scelte questa sistemazione non è più disponibile. Prova altre date.";
+        }
+        showErr(reason);
+        btn.disabled = false; btn.textContent = "Conferma prenotazione";
+      }
+    }).catch(function () {
+      showErr("Connessione non riuscita. Controlla la rete e riprova.");
+      btn.disabled = false; btn.textContent = "Conferma prenotazione";
+    });
+  });
+})();
+</script>
+</body>
+</html>

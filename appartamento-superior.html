@@ -69,11 +69,12 @@
     <h1 class="rd-title">Appartamento <em>Superior</em></h1>
   </header>
 
-  <form class="rd-book" onsubmit="return false" aria-label="Controlla la disponibilit&agrave;">
-    <div class="rd-field"><label for="appartamento-superior-in">Arrivo</label><input id="appartamento-superior-in" type="date"></div>
-    <div class="rd-field"><label for="appartamento-superior-out">Partenza</label><input id="appartamento-superior-out" type="date"></div>
-    <div class="rd-field"><label for="appartamento-superior-g">Ospiti</label><select id="appartamento-superior-g"><option value="1">1 ospite</option><option value="2">2 ospiti</option><option value="3">3 ospiti</option><option value="4" selected>4 ospiti</option></select></div>
-    <button type="submit" class="rd-cta">Controlla la disponibilit&agrave;</button>
+  <form class="rd-book" action="prenota.html" method="get" aria-label="Prenota">
+    <input type="hidden" name="unita" value="appartamento-superior">
+    <div class="rd-field"><label for="appartamento-superior-in">Arrivo</label><input id="appartamento-superior-in" name="arrivo" type="date"></div>
+    <div class="rd-field"><label for="appartamento-superior-out">Partenza</label><input id="appartamento-superior-out" name="partenza" type="date"></div>
+    <div class="rd-field"><label for="appartamento-superior-g">Ospiti</label><select id="appartamento-superior-g" name="ospiti"><option value="1">1 ospite</option><option value="2">2 ospiti</option><option value="3">3 ospiti</option><option value="4" selected>4 ospiti</option></select></div>
+    <button type="submit" class="rd-cta">Prenota</button>
   </form>
 
   <div class="rd-body">
