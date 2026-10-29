@@ -5,7 +5,7 @@
   publish = "."
   command = ""
 
-# Le serverless Functions (per le prenotazioni) andranno qui.
-# La cartella verra creata quando svilupperemo la prenotazione.
+# Serverless Functions (motore di prenotazione).
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"

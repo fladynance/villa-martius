@@ -1,0 +1,10 @@
+{
+  "name": "villa-martius",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sito e motore di prenotazione Villa Martius",
+  "dependencies": {
+    "@netlify/database": "^2.0.1"
+  }
+}
