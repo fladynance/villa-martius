@@ -1,0 +1,11 @@
+# Netlify configuration — Villa Martius
+# Sito statico: nessuno step di build, si pubblica la root del repo.
+
+[build]
+  publish = "."
+  command = ""
+
+# Le serverless Functions (per le prenotazioni) andranno qui.
+# La cartella verra creata quando svilupperemo la prenotazione.
+[functions]
+  directory = "netlify/functions"

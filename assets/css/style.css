@@ -3034,3 +3034,9 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
   .splash-video { object-position: 31% center; }
   .splash-bg { background-image: url('../img/hero-poster-mobile.jpg'); background-position: center; }
 }
+
+/* Nasconde il badge "Powered by Netlify" iniettato sul piano gratuito. */
+#nl-badge-frame,
+#nl-badge,
+#netlify-badge,
+.netlify-badge { display: none !important; }
