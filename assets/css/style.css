@@ -1544,45 +1544,33 @@ a.room-cta { text-decoration: none; }
   animation: splashZoom 22s ease-out infinite alternate;
 }
 @keyframes splashZoom {
-  from { transform: scale(1.08); }
-  to   { transform: scale(1); }
+  from { transform: scale(1); }
+  to   { transform: scale(1.045); }
 }
 
-/* Slideshow homepage: 5 foto a dissolvenza, zoom lento, copertura piena.
-   Le immagini arrivano gia ottimizzate dalla Netlify Image CDN. */
+/* Slideshow homepage: 5 foto a dissolvenza, crop pieno con punto focale
+   per foto (object-position inline, scelto per non tagliare il soggetto).
+   Immagini ottimizzate dalla Netlify Image CDN. */
 .splash-slides {
   position: absolute;
   inset: 0;
   z-index: 0;
-  transform: scale(1.06);
-  animation: splashZoom 26s ease-out infinite alternate;
+  animation: splashZoom 28s ease-out infinite alternate;
 }
 .splash-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity .9s ease-in-out;
-  will-change: opacity;
-}
-.splash-slide.is-active { opacity: 1; }
-.ss-bg, .ss-fg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  opacity: 0;
+  transition: opacity .9s ease-in-out;
+  will-change: opacity;
 }
-/* Riempimento sfocato della stessa foto: attivo solo da mobile, dove la foto
-   e mostrata intera (contain) e la sfocatura copre le bande senza tagliare. */
-.ss-bg { display: none; transform: scale(1.2); filter: blur(28px) brightness(.55); }
-@media (max-width: 700px) {
-  .splash-slides { animation: none; transform: none; }
-  .ss-bg { display: block; }
-  .ss-fg { object-fit: contain; }
-}
+.splash-slide.is-active { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  .splash-slides { animation: none; transform: none; }
+  .splash-slides { animation: none; }
   .splash-slide { transition: opacity .4s; }
 }
 
@@ -1593,11 +1581,11 @@ a.room-cta { text-decoration: none; }
   z-index: 1;
   background:
     linear-gradient(180deg,
-      rgba(0,0,0,0.55) 0%,
-      rgba(0,0,0,0.12) 22%,
-      rgba(0,0,0,0.05) 38%,
-      rgba(0,0,0,0.45) 60%,
-      rgba(0,0,0,0.92) 100%);
+      rgba(0,0,0,0.40) 0%,
+      rgba(0,0,0,0.08) 16%,
+      rgba(0,0,0,0.00) 42%,
+      rgba(0,0,0,0.26) 64%,
+      rgba(0,0,0,0.82) 100%);
 }
 
 /* Top-left brand mark (Borgo Egnazia style) */
