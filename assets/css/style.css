@@ -1560,18 +1560,30 @@ a.room-cta { text-decoration: none; }
 .splash-slide {
   position: absolute;
   inset: 0;
+  opacity: 0;
+  transition: opacity .9s ease-in-out;
+  will-change: opacity;
+}
+.splash-slide.is-active { opacity: 1; }
+.ss-bg, .ss-fg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0;
-  transition: opacity 1.8s ease-in-out;
-  will-change: opacity;
 }
-.splash-slide.is-active { opacity: 1; }
+/* Riempimento sfocato della stessa foto: attivo solo da mobile, dove la foto
+   e mostrata intera (contain) e la sfocatura copre le bande senza tagliare. */
+.ss-bg { display: none; transform: scale(1.2); filter: blur(28px) brightness(.55); }
+@media (max-width: 700px) {
+  .splash-slides { animation: none; transform: none; }
+  .ss-bg { display: block; }
+  .ss-fg { object-fit: contain; }
+}
 @media (prefers-reduced-motion: reduce) {
   .splash-slides { animation: none; transform: none; }
-  .splash-slide { transition: opacity .5s; }
+  .splash-slide { transition: opacity .4s; }
 }
 
 /* Cinema gradient: darkened top + heavy dark bottom for legible text */
