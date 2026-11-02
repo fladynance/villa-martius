@@ -50,8 +50,15 @@ export function validateBooking(b) {
   let extra = Array.isArray(b.ospiti_extra) ? b.ospiti_extra : [];
   extra = extra
     .slice(0, Math.max(0, unit.capienza - 1))
-    .map((g) => ({ nome: s(g && g.nome, 80), cognome: s(g && g.cognome, 80) }))
-    .filter((g) => g.nome || g.cognome);
+    .map((g) => ({
+      nome: s(g && g.nome, 80),
+      cognome: s(g && g.cognome, 80),
+      email: s(g && g.email, 120),
+      telefono: s(g && g.telefono, 40),
+      paese: s(g && g.paese, 80),
+      citta: s(g && g.citta, 80)
+    }))
+    .filter((g) => g.nome || g.cognome || g.email || g.telefono || g.paese || g.citta);
 
   const arrivo_ora = s(b.arrivo_ora, 10);
   const note = s(b.note, 1000);

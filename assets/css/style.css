@@ -3040,3 +3040,16 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
 #nl-badge,
 #netlify-badge,
 .netlify-badge { display: none !important; }
+
+/* Messaggio di disponibilità sotto il modulo .rd-book delle pagine camera. */
+.rd-avail {
+  width: calc(100% - 4.4rem); max-width: calc(1240px - 4.4rem);
+  margin: .9rem auto 0; font-family: var(--sans); font-weight: 300; font-size: .95rem;
+  padding: .8rem 1.1rem; border-radius: 10px; text-align: center; display: none;
+  background: #EEF3EF; color: #335C4B;
+}
+.rd-avail.on { display: block; }
+.rd-avail.err { background: #F7ECE6; color: #8A4B2E; }
+@media (max-width: 760px) {
+  .rd-avail { width: calc(100% - 2rem); }
+}
