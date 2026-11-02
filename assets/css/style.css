@@ -2416,6 +2416,23 @@ input, select, textarea { font-size: 16px; }
   .hero-scroll { display: none; }
 }
 
+/* ─── Telefono in orizzontale: evita riquadri e foto sovradimensionati ─── */
+@media (orientation: landscape) and (max-height: 600px) and (max-width: 1023px) {
+  /* Matrimoni / Rito civile: due riquadri affiancati, non impilati ed enormi */
+  .hub-grid.hub-grid-2 { grid-template-columns: 1fr 1fr; }
+  /* Intestazioni hub più compatte */
+  .hub-head { padding: 0.6rem 1rem 0.45rem; }
+  .hub-head-title { font-size: 1.4rem; }
+  .hub-head-sub { font-size: 0.85rem; }
+  .hub-tile-title { font-size: 1.5rem; }
+  .hub-tile-sub { font-size: 0.8rem; }
+  /* Titoli hero di pagina più contenuti */
+  .rooms-hero-title, .page-hero-title { font-size: clamp(1.5rem, 5vw, 2.1rem); }
+  .rooms-hero-sub { font-size: 0.9rem; }
+  /* Mosaico foto delle sistemazioni: righe più basse */
+  .rd-mosaic { grid-auto-rows: 116px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-bg { animation: none; }
   .hero-content, .page-hero .hero-content { animation: none; }
