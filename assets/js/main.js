@@ -89,6 +89,44 @@
     });
   }
 
+  // Controllo disponibilità dal form .rd-book (pagine camera/appartamento).
+  // Se le date sono compilate, verifica prima di mandare alla pagina di prenotazione,
+  // così l'ospite vede subito se quelle date non sono libere.
+  var availForm = document.querySelector('form.rd-book');
+  if (availForm) {
+    var availMsg = document.createElement('div');
+    availMsg.className = 'rd-avail';
+    availMsg.setAttribute('role', 'status');
+    availForm.insertAdjacentElement('afterend', availMsg);
+    var showAvail = function (text, kind) { availMsg.textContent = text; availMsg.className = 'rd-avail on ' + (kind || ''); };
+    var fval = function (name) { var el = availForm.querySelector('[name="' + name + '"]'); return el ? el.value : ''; };
+    availForm.addEventListener('submit', function (e) {
+      var unita = fval('unita'), arrivo = fval('arrivo'), partenza = fval('partenza'), ospiti = fval('ospiti');
+      if (!arrivo || !partenza) return; // senza date, navigazione normale a prenota.html
+      e.preventDefault();
+      if (new Date(partenza + 'T00:00:00') <= new Date(arrivo + 'T00:00:00')) {
+        return showAvail('La partenza deve essere successiva all’arrivo.', 'err');
+      }
+      var qs = 'unita=' + encodeURIComponent(unita) + '&arrivo=' + arrivo + '&partenza=' + partenza;
+      var cta = availForm.querySelector('.rd-cta');
+      var label = cta ? cta.innerHTML : '';
+      if (cta) cta.disabled = true;
+      showAvail('Controllo disponibilità…', '');
+      fetch('/.netlify/functions/availability?' + qs)
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.ok && d.available) {
+            window.location.href = 'prenota.html?' + qs + '&ospiti=' + encodeURIComponent(ospiti || '');
+          } else {
+            if (cta) { cta.disabled = false; cta.innerHTML = label; }
+            if (d && d.ok) showAvail('Non disponibile per queste date. Prova a cambiare il periodo.', 'err');
+            else showAvail((d && d.message) || 'Controllo non riuscito. Riprova.', 'err');
+          }
+        })
+        .catch(function () { if (cta) { cta.disabled = false; cta.innerHTML = label; } showAvail('Connessione non riuscita. Riprova.', 'err'); });
+    });
+  }
+
   // Simple in-view reveal (respects reduced-motion)
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
     var els = document.querySelectorAll('[data-reveal]');
