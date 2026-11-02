@@ -2,6 +2,14 @@
 (function () {
   'use strict';
 
+  // Rimuove il badge "Powered by Netlify" iniettato da Netlify (a volte forzato
+  // visibile): lo si elimina dal DOM e si osserva se viene reinserito.
+  (function () {
+    var kill = function () { var b = document.getElementById('nl-badge-frame'); if (b) b.remove(); };
+    kill();
+    try { new MutationObserver(kill).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+  })();
+
   // Nav scroll state
   var nav = document.querySelector('.nav');
   if (nav && !nav.classList.contains('solid')) {
