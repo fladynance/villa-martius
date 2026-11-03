@@ -78,14 +78,26 @@
 
 <script>
 (function () {
+  // Crossfade senza "buco": la foto entrante sfuma SOPRA quella corrente,
+  // che resta piena sotto finché non è coperta. Ogni foto dura ~1,25 s,
+  // con la dissolvenza morbida (0,55 s, vedi .splash-slide in CSS) inclusa.
   var slides = document.querySelectorAll('.splash-slide');
-  if (slides.length < 2) return;
-  var i = 0;
+  var n = slides.length;
+  if (n < 2) return;
+  var INTERVAL = 1250;
+  var cur = 0, under = -1;
+  for (var j = 0; j < n; j++) slides[j].style.zIndex = (j === 0 ? '2' : '0');
   setInterval(function () {
-    slides[i].classList.remove('is-active');
-    i = (i + 1) % slides.length;
-    slides[i].classList.add('is-active');
-  }, 2500);
+    var next = (cur + 1) % n;
+    // la foto di due passi fa è ormai coperta: la spengo (invisibile)
+    if (under >= 0) { slides[under].classList.remove('is-active'); slides[under].style.zIndex = '0'; }
+    // la corrente scende sotto e resta piena mentre la nuova entra sopra
+    slides[cur].style.zIndex = '1';
+    under = cur;
+    slides[next].style.zIndex = '2';
+    slides[next].classList.add('is-active');
+    cur = next;
+  }, INTERVAL);
 })();
 (function(){var k=function(){var b=document.getElementById('nl-badge-frame');if(b)b.remove();};k();try{new MutationObserver(k).observe(document.documentElement,{childList:true,subtree:true});}catch(e){}})();
 </script>

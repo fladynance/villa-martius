@@ -1565,7 +1565,9 @@ a.room-cta { text-decoration: none; }
   object-fit: cover;
   object-position: center;
   opacity: 0;
-  transition: opacity .9s ease-in-out;
+  /* Dissolvenza morbida; la nuova foto sfuma SOPRA la precedente (gestita
+     dallo z-index nello script) così non compare mai lo sfondo a metà. */
+  transition: opacity .55s ease-in-out;
   will-change: opacity;
 }
 .splash-slide.is-active { opacity: 1; }
