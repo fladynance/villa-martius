@@ -2228,36 +2228,31 @@ input, select, textarea { font-size: 16px; }
   .g-h-lg, .g-h-md, .g-h-sm, .g-h-xl { height: 280px; }
 }
 
-/* Tablet/iPad in verticale: i 4 riquadri di esplora si impilano uno sotto
-   l'altro come da mobile, non in griglia 2x2. (matrimoni-eventi, hub-grid-2,
-   si impila già a <=1023px; qui copriamo anche il bordo a 1024px.) */
+/* Tablet/iPad in verticale: i 4 riquadri di esplora restano in griglia 2x2,
+   tutti visibili in una schermata (niente scroll). Qui ottimizziamo solo
+   l'inquadratura delle foto per il ritaglio quasi-quadrato delle celle. */
 @media (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
-  /* Come da mobile: hub ad altezza automatica, righe alte quanto i riquadri,
-     niente stiramento né sovrapposizioni. */
-  .hub { height: auto; min-height: 100svh; }
-  .hub-grid { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: auto; flex: none; }
-  .hub-grid .hub-tile { min-height: 0; aspect-ratio: 16 / 9; }
-  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(2) .hub-tile-bg img { object-position: center 44%; }
-  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(4) .hub-tile-bg img { object-position: center 60%; }
+  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(1) .hub-tile-bg img { object-position: center 50%; }
+  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(2) .hub-tile-bg img { object-position: 42% 55%; }
+  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(3) .hub-tile-bg img { object-position: center 45%; }
+  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(4) .hub-tile-bg img { object-position: center 55%; }
 }
 
-/* Hub mobile: 4 tile in colonna verticale */
+/* Hub mobile: 4 tile in colonna verticale, TUTTI visibili senza scroll */
 @media (max-width: 720px) {
-  /* Altezza automatica: l'hub cresce con i riquadri invece di avere
-     un'altezza fissa che stira le righe e manda i riquadri in overlap. */
-  .hub { padding-top: 0; height: auto; min-height: 100svh; }
+  /* Altezza fissa a schermo pieno: i riquadri si dividono lo spazio e si
+     vedono tutti e quattro all'apertura, senza dover scorrere. */
+  .hub { padding-top: 0; height: 100svh; }
   .hub-head { padding: 1.1rem 1.2rem 0.9rem; }
   .hub-head .rule-gold { margin: 0.5rem 0 0.7rem; }
   .hub-head-sub { font-size: 0.9rem; }
-  /* Una riga per riquadro, alta quanto il riquadro (niente stiramento,
-     niente sovrapposizioni): i 4 riquadri si impilano puliti e si scorre. */
-  .hub-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
-    grid-auto-rows: auto;
-    flex: none;
-  }
-  .hub-tile { min-height: 0; aspect-ratio: 16 / 9; }
+  /* Righe uguali che riempiono lo spazio: niente aspect-ratio (che faceva
+     i riquadri più alti della riga e li mandava in sovrapposizione). */
+  .hub-grid { grid-template-columns: 1fr; flex: 1; }
+  .hub-grid:not(.hub-grid-2) { grid-template-rows: repeat(4, 1fr); }
+  .hub-grid.hub-grid-2 { grid-template-rows: repeat(2, 1fr); }
+  .hub-tile { min-height: 0; aspect-ratio: auto; }
+  .hub-grid.hub-grid-2 .hub-tile { aspect-ratio: auto; }
   .hub-tile-content { padding: 1.2rem 1.4rem; gap: 0.35rem; }
   .hub-tile-content { padding: 1.8rem 1.4rem; gap: 0.5rem; }
   .hub-tile-title { font-size: 1.85rem; }
