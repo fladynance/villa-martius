@@ -2335,10 +2335,12 @@ input, select, textarea { font-size: 16px; }
   .info-block li { grid-template-columns: 20px 1fr; gap: 0.7rem; padding: 1rem 0; font-size: 0.98rem; }
 
   .footer { padding: 1.8rem 1.4rem 1.4rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.2rem 1.6rem; padding-bottom: 1.2rem; }
-  .footer-brand { grid-column: 1 / -1; }
+  /* I quattro blocchi del footer in griglia 2x2 (brand, Dove Siamo,
+     Seguici, Contatti): il brand non occupa più tutta la riga. */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.4rem 1.6rem; padding-bottom: 1.2rem; }
+  .footer-brand { grid-column: auto; align-self: start; }
   .footer-brand p { display: none; }
-  .footer-brand .footer-logo img { height: 40px; margin-bottom: 0; }
+  .footer-brand .footer-logo img { height: 44px; margin-bottom: 0; }
   .footer-col h4 { margin-bottom: 0.8rem; }
   .footer-col ul { gap: 0.4rem; }
   .footer-col a { font-size: 0.9rem; }
