@@ -1569,6 +1569,11 @@ a.room-cta { text-decoration: none; }
   will-change: opacity;
 }
 .splash-slide.is-active { opacity: 1; }
+/* Da mobile usiamo le foto verticali 9:16 (vedi <picture> in index.html),
+   già composte per il pieno formato: centrate, senza gli offset desktop. */
+@media (max-width: 768px) {
+  .splash-slide { object-position: center center !important; }
+}
 @media (prefers-reduced-motion: reduce) {
   .splash-slides { animation: none; }
   .splash-slide { transition: opacity .4s; }
