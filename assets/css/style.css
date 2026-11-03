@@ -1569,6 +1569,10 @@ a.room-cta { text-decoration: none; }
      dallo z-index nello script) così non compare mai lo sfondo a metà. */
   transition: opacity .55s ease-in-out;
   will-change: opacity;
+  /* Forza il compositing su GPU: su iOS Safari rende la dissolvenza fluida
+     e uguale ad Android, invece di uno switch più secco. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .splash-slide.is-active { opacity: 1; }
 /* Da mobile usiamo le foto verticali 9:16 (vedi <picture> in index.html),
@@ -1577,8 +1581,11 @@ a.room-cta { text-decoration: none; }
   .splash-slide { object-position: center center !important; }
 }
 @media (prefers-reduced-motion: reduce) {
+  /* Disattiviamo solo lo zoom lento (Ken Burns); la dissolvenza resta
+     identica a quella normale così iPhone (con "Riduci movimento") scorre
+     come Android, non più veloce. */
   .splash-slides { animation: none; }
-  .splash-slide { transition: opacity .4s; }
+  .splash-slide { transition: opacity .55s ease-in-out; }
 }
 
 /* Cinema gradient: darkened top + heavy dark bottom for legible text */
@@ -2775,13 +2782,6 @@ body.mt-lock { overflow: hidden; }
 /* sulle pagine camera, quando compare la barra di prenotazione, si alza */
 body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
 @media (prefers-reduced-motion: reduce) { .wa-fab { transition: none; } }
-/* iOS Safari: sulla homepage (splash a tutto schermo, non scrollabile) la barra
-   inferiore del browser copriva il tasto WhatsApp. Su schermi piccoli lo si alza
-   così resta sempre visibile. */
-@media (max-width: 600px) {
-  body:has(.splash) .wa-fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
-}
-
 /* CONTATTI · stessa sabbia del resto del sito, form su scheda chiara.
    Prima la sezione era un blocco marrone scuro che stonava con tutte
    le altre pagine. */
