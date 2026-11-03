@@ -2228,6 +2228,18 @@ input, select, textarea { font-size: 16px; }
   .g-h-lg, .g-h-md, .g-h-sm, .g-h-xl { height: 280px; }
 }
 
+/* Tablet/iPad in verticale: i 4 riquadri di esplora si impilano uno sotto
+   l'altro come da mobile, non in griglia 2x2. (matrimoni-eventi, hub-grid-2,
+   si impila già a <=1023px; qui copriamo anche il bordo a 1024px.) */
+@media (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
+  .hub { min-height: 100svh; }
+  .hub-grid:not(.hub-grid-2) { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .hub-grid:not(.hub-grid-2) .hub-tile { min-height: 0; aspect-ratio: 16 / 9; }
+  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(2) .hub-tile-bg img { object-position: center 44%; }
+  .hub-grid:not(.hub-grid-2) .hub-tile:nth-child(4) .hub-tile-bg img { object-position: center 60%; }
+  .hub-grid.hub-grid-2 { grid-template-columns: 1fr; }
+}
+
 /* Hub mobile: 4 tile in colonna verticale */
 @media (max-width: 720px) {
   .hub { padding-top: 0; min-height: 100svh; }
@@ -2248,7 +2260,9 @@ input, select, textarea { font-size: 16px; }
   .hub-tile-num { font-size: 0.95rem; gap: 0.6rem; }
   .hub-tile-num::after { width: 22px; }
   .hub-tile-sub { font-size: 0.9rem; }
-  .hub-tile:nth-child(2) .hub-tile-bg img { object-position: center 65%; }
+  /* Eventi (auto d'epoca): abbassata per vedere l'auto intera, con respiro
+     sopra il tetto e un po' di cortile sotto. */
+  .hub-tile:nth-child(2) .hub-tile-bg img { object-position: center 44%; }
   .hub-tile:nth-child(4) .hub-tile-bg img { object-position: center 60%; }
   .nav.v2 { padding: 0.8rem 1.2rem; }
   .nav.v2 .nav-cta {
