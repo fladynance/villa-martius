@@ -2339,7 +2339,8 @@ input, select, textarea { font-size: 16px; }
      Seguici, Contatti): il brand non occupa più tutta la riga. */
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.4rem 1.6rem; padding-bottom: 1.2rem; }
   .footer-brand { grid-column: auto; align-self: start; }
-  .footer-brand p { display: none; }
+  /* Logo con la scritta (tagline) sotto, nella cella in alto a sinistra. */
+  .footer-brand p { display: block; font-size: 0.82rem; line-height: 1.6; margin-top: 0.7rem; max-width: 28ch; }
   .footer-brand .footer-logo img { height: 44px; margin-bottom: 0; }
   .footer-col h4 { margin-bottom: 0.8rem; }
   .footer-col ul { gap: 0.4rem; }
