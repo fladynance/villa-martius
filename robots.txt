@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /prenota.html
+
+Sitemap: https://villamartius.netlify.app/sitemap.xml

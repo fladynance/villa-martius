@@ -2416,21 +2416,35 @@ input, select, textarea { font-size: 16px; }
   .hero-scroll { display: none; }
 }
 
-/* ─── Telefono in orizzontale: evita riquadri e foto sovradimensionati ─── */
+/* ─── Telefono in orizzontale: titoli, riquadri e foto non sovradimensionati ─── */
 @media (orientation: landscape) and (max-height: 600px) and (max-width: 1023px) {
   /* Matrimoni / Rito civile: due riquadri affiancati, non impilati ed enormi */
   .hub-grid.hub-grid-2 { grid-template-columns: 1fr 1fr; }
   /* Intestazioni hub più compatte */
-  .hub-head { padding: 0.6rem 1rem 0.45rem; }
-  .hub-head-title { font-size: 1.4rem; }
-  .hub-head-sub { font-size: 0.85rem; }
-  .hub-tile-title { font-size: 1.5rem; }
-  .hub-tile-sub { font-size: 0.8rem; }
-  /* Titoli hero di pagina più contenuti */
-  .rooms-hero-title, .page-hero-title { font-size: clamp(1.5rem, 5vw, 2.1rem); }
-  .rooms-hero-sub { font-size: 0.9rem; }
-  /* Mosaico foto delle sistemazioni: righe più basse */
-  .rd-mosaic { grid-auto-rows: 116px; }
+  .hub-head { padding: 0.5rem 1rem 0.4rem; }
+  .hub-head-title { font-size: 1.3rem; }
+  .hub-head-sub { font-size: 0.82rem; }
+  .hub-tile-title { font-size: 1.35rem; }
+  .hub-tile-sub { font-size: 0.78rem; }
+  .hub-tile-label { font-size: 0.68rem; }
+  /* Hero di pagina e sistemazioni */
+  .rooms-hero-title, .page-hero-title { font-size: clamp(1.35rem, 5vw, 1.9rem); }
+  .rooms-hero-sub, .page-hero-sub { font-size: 0.86rem; }
+  .rd-title { font-size: clamp(1.7rem, 6.5vw, 2.3rem); }
+  .rd-mosaic { grid-auto-rows: 110px; }
+  /* Homepage splash */
+  .splash-h1 { font-size: 1.7rem; margin-bottom: 1.1rem; }
+  .splash-eyebrow { margin-bottom: 0.7rem; }
+  .splash-content { bottom: 4vh; }
+  /* Eventi */
+  .ev-h { font-size: clamp(1.7rem, 5vw, 2.3rem); margin: .6rem 0 .9rem; }
+  .ev-tx h3 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
+  .ev-quote { font-size: clamp(1.5rem, 5vw, 2.1rem); margin-bottom: 1.4rem; }
+  .ev-copy, .ev-tx p { font-size: 1rem; line-height: 1.55; }
+  .ev-copy-strong { font-size: 1.1rem; }
+  .ev-num { font-size: 1.7rem; }
+  /* Titoli di sezione generici */
+  .section-header .display, .display { font-size: clamp(1.5rem, 4.5vw, 2.3rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2782,6 +2796,12 @@ body.mt-lock { overflow: hidden; }
 /* sulle pagine camera, quando compare la barra di prenotazione, si alza */
 body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
 @media (prefers-reduced-motion: reduce) { .wa-fab { transition: none; } }
+/* iOS Safari: sulla homepage (splash a tutto schermo, non scrollabile) la barra
+   inferiore del browser copriva il tasto WhatsApp. Su schermi piccoli lo si alza
+   così resta sempre visibile. */
+@media (max-width: 600px) {
+  body:has(.splash) .wa-fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+}
 
 /* CONTATTI · stessa sabbia del resto del sito, form su scheda chiara.
    Prima la sezione era un blocco marrone scuro che stonava con tutte
