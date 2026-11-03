@@ -2416,36 +2416,8 @@ input, select, textarea { font-size: 16px; }
   .hero-scroll { display: none; }
 }
 
-/* ─── Telefono in orizzontale: titoli, riquadri e foto non sovradimensionati ─── */
-@media (orientation: landscape) and (max-height: 600px) and (max-width: 1023px) {
-  /* Matrimoni / Rito civile: due riquadri affiancati, non impilati ed enormi */
-  .hub-grid.hub-grid-2 { grid-template-columns: 1fr 1fr; }
-  /* Intestazioni hub più compatte */
-  .hub-head { padding: 0.5rem 1rem 0.4rem; }
-  .hub-head-title { font-size: 1.3rem; }
-  .hub-head-sub { font-size: 0.82rem; }
-  .hub-tile-title { font-size: 1.35rem; }
-  .hub-tile-sub { font-size: 0.78rem; }
-  .hub-tile-label { font-size: 0.68rem; }
-  /* Hero di pagina e sistemazioni */
-  .rooms-hero-title, .page-hero-title { font-size: clamp(1.35rem, 5vw, 1.9rem); }
-  .rooms-hero-sub, .page-hero-sub { font-size: 0.86rem; }
-  .rd-title { font-size: clamp(1.7rem, 6.5vw, 2.3rem); }
-  .rd-mosaic { grid-auto-rows: 110px; }
-  /* Homepage splash */
-  .splash-h1 { font-size: 1.7rem; margin-bottom: 1.1rem; }
-  .splash-eyebrow { margin-bottom: 0.7rem; }
-  .splash-content { bottom: 4vh; }
-  /* Eventi */
-  .ev-h { font-size: clamp(1.7rem, 5vw, 2.3rem); margin: .6rem 0 .9rem; }
-  .ev-tx h3 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
-  .ev-quote { font-size: clamp(1.5rem, 5vw, 2.1rem); margin-bottom: 1.4rem; }
-  .ev-copy, .ev-tx p { font-size: 1rem; line-height: 1.55; }
-  .ev-copy-strong { font-size: 1.1rem; }
-  .ev-num { font-size: 1.7rem; }
-  /* Titoli di sezione generici */
-  .section-header .display, .display { font-size: clamp(1.5rem, 4.5vw, 2.3rem); }
-}
+/* Nota: le regole per telefono in orizzontale sono raccolte in fondo al file
+   (dopo i blocchi mobile a max-width:900px) così da avere la precedenza. */
 
 @media (prefers-reduced-motion: reduce) {
   .hero-bg { animation: none; }
@@ -3117,4 +3089,53 @@ body:has(.rd-sticky.on) .wa-fab { bottom: calc(86px + env(safe-area-inset-bottom
 .rd-avail.err { background: #F7ECE6; color: #8A4B2E; }
 @media (max-width: 760px) {
   .rd-avail { width: calc(100% - 2rem); }
+}
+
+/* ═══ Telefono in orizzontale (schermo basso) ═══
+   Collocato in fondo al file per vincere l'ordine di sorgente sui blocchi
+   mobile (@media max-width:900px). Riduce titoli/testi sovradimensionati su
+   TUTTE le pagine mantenendo la galleria come riferimento. */
+@media (orientation: landscape) and (max-height: 600px) and (max-width: 1023px) {
+  /* Hub (matrimoni-eventi / rito-civile): due riquadri affiancati, non enormi */
+  .hub-grid.hub-grid-2 { grid-template-columns: 1fr 1fr; }
+  .hub-head { padding: 0.5rem 1rem 0.4rem; }
+  .hub-head-title { font-size: 1.3rem; }
+  .hub-head-sub { font-size: 0.82rem; }
+  .hub-tile-title { font-size: 1.3rem; }
+  .hub-tile-sub { font-size: 0.78rem; }
+  .hub-tile-label { font-size: 0.68rem; }
+
+  /* Hero di pagina e sistemazioni */
+  .rooms-hero-title, .page-hero-title { font-size: clamp(1.35rem, 5vw, 1.9rem); }
+  .rooms-hero-sub, .page-hero-sub { font-size: 0.86rem; }
+  .rd-title { font-size: clamp(1.7rem, 6vw, 2.2rem); }
+  .rd-mosaic { grid-auto-rows: 110px; }
+
+  /* Homepage splash */
+  .splash-h1 { font-size: 1.7rem; margin-bottom: 1.1rem; }
+  .splash-eyebrow { margin-bottom: 0.7rem; }
+  .splash-content { bottom: 4vh; }
+
+  /* Matrimoni (mt-*) e Rito civile: hero e corpo più compatti */
+  .mt-stick { padding-top: calc(var(--page-top) - 0.4rem); padding-bottom: 1.2rem; }
+  .mt-title { font-size: clamp(1.7rem, 5.5vw, 2.3rem); margin: .5rem 0 1.1rem; }
+  .mt-rings { width: min(70%, 150px); }
+  .mt-main { padding-top: 2rem; padding-bottom: 2.4rem; }
+  .mt-h { font-size: clamp(1.5rem, 4.5vw, 2rem); margin: .8rem 0 1.1rem; }
+  .mt-letter p, .mt-copy { font-size: 1.05rem; line-height: 1.6; }
+  .mt-letter .mt-strong { font-size: 1.15rem; }
+  .mt-row h3 { font-size: 1.35rem; }
+  .mt-row p { font-size: 1rem; }
+
+  /* Eventi */
+  .ev-h { font-size: clamp(1.7rem, 5vw, 2.3rem); margin: .6rem 0 .9rem; }
+  .ev-tx h3 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
+  .ev-quote { font-size: clamp(1.5rem, 5vw, 2.1rem); margin-bottom: 1.4rem; }
+  .ev-copy, .ev-tx p { font-size: 1rem; line-height: 1.55; }
+  .ev-copy-strong { font-size: 1.1rem; }
+  .ev-num { font-size: 1.7rem; }
+
+  /* Titoli di sezione generici (casa-vacanza, contatti, ecc.) */
+  .section-header .display, .display { font-size: clamp(1.5rem, 4.5vw, 2.3rem); }
+  .section-header .sub, .section-header p { font-size: 0.9rem; }
 }
