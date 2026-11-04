@@ -205,6 +205,7 @@
           <div class="bk-check"><input type="checkbox" id="condizioni" name="condizioni" required><label for="condizioni">Accetto le <a href="condizioni.html" target="_blank" rel="noopener">condizioni di prenotazione</a>.<span style="color:var(--rose-ink)"> *</span></label></div>
         </div>
 
+        <input type="text" name="website" id="hp_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none">
         <div class="cf-turnstile" data-sitekey="0x4AAAAAAFztLnzbGHIo22ui" data-theme="light" data-retry="never" data-refresh-expired="manual" style="margin:0 0 1.1rem"></div>
         <button type="submit" class="bk-submit" id="bkSubmit">Conferma prenotazione</button>
         <div class="bk-msg err" id="bkMsg" role="alert"></div>
@@ -323,7 +324,6 @@
 
     var tsEl=document.querySelector('[name="cf-turnstile-response"]');
     var tsToken=tsEl?tsEl.value:"";
-    if(!tsToken) return showErr("Completa la verifica anti-bot qui sopra e riprova tra un istante.");
 
     var extra=[];
     for(var g=2; g<=unit.capienza; g++){
@@ -334,7 +334,7 @@
     var payload={
       unita:slug, arrivo:elIn.value, partenza:elOut.value, ospiti_num:parseInt(elOsp.value,10),
       ospite_principale:{ nome:document.getElementById("nome").value.trim(), cognome:document.getElementById("cognome").value.trim(), email:document.getElementById("email").value.trim(), telefono:document.getElementById("telefono").value.trim(), paese:document.getElementById("paese").value.trim(), citta:document.getElementById("citta").value.trim() },
-      ospiti_extra:extra, arrivo_ora:document.getElementById("arrivo_ora").value, note:document.getElementById("note").value.trim(), pagamento:"in_struttura", turnstile:tsToken
+      ospiti_extra:extra, arrivo_ora:document.getElementById("arrivo_ora").value, note:document.getElementById("note").value.trim(), pagamento:"in_struttura", turnstile:tsToken, hp:document.getElementById("hp_website").value
     };
 
     btn.disabled=true; btn.textContent="Invio in corso…";

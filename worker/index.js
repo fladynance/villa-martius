@@ -59,10 +59,18 @@ async function handleCreateBooking(req, env, ctx) {
   let body;
   try { body = await req.json(); } catch { return json({ ok: false, message: "Richiesta non valida." }, 400); }
 
-  // Anti-bot (attivo solo se TURNSTILE_SECRET è configurato).
+  // Honeypot: campo nascosto compilato solo dai bot.
+  if (body.hp && String(body.hp).trim()) {
+    return json({ ok: false, message: "Richiesta non valida." }, 400);
+  }
+  // Anti-bot Turnstile: verifica solo se è stato prodotto un token. Così, se il
+  // widget non è disponibile, un cliente vero non resta bloccato (resta attivo
+  // l'honeypot). Un token presente ma non valido viene comunque rifiutato.
   const ip = req.headers.get("CF-Connecting-IP") || "";
-  const human = await verifyTurnstile(body.turnstile, ip, env);
-  if (!human) return json({ ok: false, message: "Verifica anti-spam non superata. Ricarica la pagina e riprova." }, 400);
+  if (body.turnstile) {
+    const human = await verifyTurnstile(body.turnstile, ip, env);
+    if (!human) return json({ ok: false, message: "Verifica anti-spam non superata. Ricarica la pagina e riprova." }, 400);
+  }
 
   const v = validateBooking(body);
   if (!v.ok) return json({ ok: false, message: v.message }, 400);
