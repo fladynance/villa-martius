@@ -1,0 +1,13 @@
+.git
+node_modules
+worker
+netlify
+package.json
+package-lock.json
+wrangler.jsonc
+wrangler.toml
+netlify.toml
+.assetsignore
+.gitignore
+.nojekyll
+README.md

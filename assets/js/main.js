@@ -120,7 +120,7 @@
       var label = cta ? cta.innerHTML : '';
       if (cta) cta.disabled = true;
       showAvail('Controllo disponibilità…', '');
-      fetch('/.netlify/functions/availability?' + qs)
+      fetch('/api/availability?' + qs)
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (d && d.ok && d.available) {

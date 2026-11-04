@@ -332,7 +332,7 @@
     };
 
     btn.disabled=true; btn.textContent="Invio in corso…";
-    fetch("/.netlify/functions/create-booking",{ method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) })
+    fetch("/api/create-booking",{ method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) })
       .then(function(r){ return r.json().then(function(data){ return {ok:r.ok,data:data}; }); })
       .then(function(res){
         if(res.ok&&res.data&&res.data.ok){
