@@ -110,6 +110,7 @@
   .bk-done-cta { display:inline-block; margin-top:1.7rem; background:var(--espresso); color:#F6ECDC; text-decoration:none; padding:.9rem 2.1rem; border-radius:12px; font-family:var(--sans); font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; transition:background .3s,color .3s; }
   .bk-done-cta:hover { background:var(--gold); color:#2A211A; }
 </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <!-- Mobile menu -->
@@ -204,6 +205,7 @@
           <div class="bk-check"><input type="checkbox" id="condizioni" name="condizioni" required><label for="condizioni">Accetto le <a href="condizioni.html" target="_blank" rel="noopener">condizioni di prenotazione</a>.<span style="color:var(--rose-ink)"> *</span></label></div>
         </div>
 
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFztLnzbGHIo22ui" data-theme="light" style="margin:0 0 1.1rem"></div>
         <button type="submit" class="bk-submit" id="bkSubmit">Conferma prenotazione</button>
         <div class="bk-msg err" id="bkMsg" role="alert"></div>
       </form>
@@ -319,6 +321,10 @@
     for(var k=0;k<req.length;k++){ var el=document.getElementById(req[k]); if(!el.value.trim()){ el.classList.add("bk-invalid"); el.focus(); return showErr("Compila tutti i campi obbligatori dell'ospite principale."); } el.classList.remove("bk-invalid"); }
     if(!document.getElementById("privacy").checked||!document.getElementById("condizioni").checked) return showErr("Per procedere devi accettare privacy e condizioni di prenotazione.");
 
+    var tsEl=document.querySelector('[name="cf-turnstile-response"]');
+    var tsToken=tsEl?tsEl.value:"";
+    if(!tsToken) return showErr("Completa la verifica anti-bot qui sopra e riprova tra un istante.");
+
     var extra=[];
     for(var g=2; g<=unit.capienza; g++){
       function fv(suffix){ var el=form.elements["g"+g+"_"+suffix]; return el?el.value.trim():""; }
@@ -328,7 +334,7 @@
     var payload={
       unita:slug, arrivo:elIn.value, partenza:elOut.value, ospiti_num:parseInt(elOsp.value,10),
       ospite_principale:{ nome:document.getElementById("nome").value.trim(), cognome:document.getElementById("cognome").value.trim(), email:document.getElementById("email").value.trim(), telefono:document.getElementById("telefono").value.trim(), paese:document.getElementById("paese").value.trim(), citta:document.getElementById("citta").value.trim() },
-      ospiti_extra:extra, arrivo_ora:document.getElementById("arrivo_ora").value, note:document.getElementById("note").value.trim(), pagamento:"in_struttura"
+      ospiti_extra:extra, arrivo_ora:document.getElementById("arrivo_ora").value, note:document.getElementById("note").value.trim(), pagamento:"in_struttura", turnstile:tsToken
     };
 
     btn.disabled=true; btn.textContent="Invio in corso…";
@@ -343,10 +349,10 @@
         } else {
           var reason=(res.data&&res.data.message)?res.data.message:"Si è verificato un problema. Riprova tra poco.";
           if(res.data&&res.data.reason==="unavailable") reason="Spiacenti, per le date scelte questa sistemazione non è più disponibile. Prova altre date.";
-          showErr(reason); btn.disabled=false; btn.textContent="Conferma prenotazione";
+          showErr(reason); btn.disabled=false; btn.textContent="Conferma prenotazione"; if(window.turnstile){try{turnstile.reset();}catch(e){}}
         }
       })
-      .catch(function(){ showErr("Connessione non riuscita. Controlla la rete e riprova."); btn.disabled=false; btn.textContent="Conferma prenotazione"; });
+      .catch(function(){ showErr("Connessione non riuscita. Controlla la rete e riprova."); btn.disabled=false; btn.textContent="Conferma prenotazione"; if(window.turnstile){try{turnstile.reset();}catch(e){}} });
   });
 })();
 </script>
