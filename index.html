@@ -31,7 +31,7 @@
   <div class="splash-slides" aria-hidden="true">
     <picture>
       <source media="(max-width: 768px)" sizes="100vw" srcset="/assets/img/home-m-1.webp">
-      <img class="splash-slide is-active" alt="" decoding="async" fetchpriority="high" sizes="100vw" style="object-position:68% center" src="/assets/img/home-1.webp" srcset="/assets/img/home-1-1280.webp 1280w, /assets/img/home-1.webp 1920w">
+      <img class="splash-slide is-active" data-only="desktop" alt="" decoding="async" fetchpriority="high" sizes="100vw" style="object-position:68% center" src="/assets/img/home-1.webp" srcset="/assets/img/home-1-1280.webp 1280w, /assets/img/home-1.webp 1920w">
     </picture>
     <picture>
       <source media="(max-width: 768px)" sizes="100vw" srcset="/assets/img/home-m-2.webp">
@@ -76,7 +76,7 @@
   // che resta piena sotto finché non è coperta. Ogni foto dura ~1,25 s,
   // con la dissolvenza morbida (0,55 s, vedi .splash-slide in CSS) inclusa.
   var slides = Array.prototype.slice.call(document.querySelectorAll('.splash-slide'));
-  // Solo da mobile: la 5ª foto (data-only="desktop") è esclusa dalla rotazione.
+  // Solo da mobile: la 1ª e la 5ª foto (data-only="desktop") sono escluse dalla rotazione.
   if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
     slides = slides.filter(function (s) { return s.getAttribute('data-only') !== 'desktop'; });
   }
@@ -84,7 +84,11 @@
   if (n < 2) return;
   var INTERVAL = 1250;
   var cur = 0, under = -1;
-  for (var j = 0; j < n; j++) slides[j].style.zIndex = (j === 0 ? '2' : '0');
+  // La prima foto idonea parte subito attiva (da mobile può non essere la 1ª del markup).
+  for (var j = 0; j < n; j++) {
+    slides[j].classList.toggle('is-active', j === 0);
+    slides[j].style.zIndex = (j === 0 ? '2' : '0');
+  }
   setInterval(function () {
     var next = (cur + 1) % n;
     // la foto di due passi fa è ormai coperta: la spengo (invisibile)
