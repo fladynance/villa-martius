@@ -76,7 +76,15 @@ async function handleCreateBooking(req, env, ctx) {
   if (!v.ok) return json({ ok: false, message: v.message }, 400);
   const d = v.data;
 
-  const sql = neon(env.DATABASE_URL);
+  if (!env.DATABASE_URL) {
+    return json({ ok: false, message: "DEBUG: DATABASE_URL non impostata nel Worker." }, 500);
+  }
+  let sql;
+  try {
+    sql = neon(env.DATABASE_URL);
+  } catch (e) {
+    return json({ ok: false, message: "DEBUG connessione: " + String((e && e.message) || e) }, 500);
+  }
 
   // Inserimento atomico: il DB assegna un'unità libera della tipologia e il vincolo
   // di esclusione impedisce qualsiasi sovrapposizione (anti-overbooking garantito).
@@ -113,7 +121,7 @@ async function handleCreateBooking(req, env, ctx) {
     } catch (e) {
       if (isConflict(e)) continue; // gara concorrente o collisione codice → riprova
       console.error("[create-booking] db", e);
-      return json({ ok: false, message: "Errore durante la prenotazione. Riprova tra poco." }, 500);
+      return json({ ok: false, message: "DEBUG query: " + String((e && e.message) || e) }, 500);
     }
   }
   if (!inserted) {
