@@ -1429,6 +1429,9 @@ a.room-cta { text-decoration: none; }
   .rd-mosaic { height: clamp(360px, calc(100vh - 262px), 560px); border-radius: 12px; overflow: hidden; }
   .rd-mosaic.rd-n1,
   .rd-mosaic.rd-n2 { height: auto; grid-template-rows: clamp(360px, calc(100vh - 262px), 560px); }
+  /* Sei foto: griglia 3x2 uniforme (niente foto-eroe) così entrano tutte senza taglio. */
+  .rd-mosaic.rd-n6 { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  .rd-mosaic.rd-n6 .rd-tile:first-child { grid-column: auto; grid-row: auto; }
 
   /* titolo proporzionato alla colonna stretta */
   .rd-title { font-size: clamp(2.1rem, 2.9vw, 3.2rem); }
