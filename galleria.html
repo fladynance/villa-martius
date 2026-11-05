@@ -370,6 +370,9 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
   .nav-cta { padding: .5rem; min-width: 40px; justify-content: center; gap: 0; }
   .g-hamburger { width: 40px; height: 40px; }
   .g-hamb-icon { width: 22px; height: 14px; }
+  /* Menu a schermo intero: la CTA "Contattaci" non deve eccedere su telefoni stretti */
+  .g-menu a { font-size: 1.95rem; }
+  .g-menu-cta { padding: 1rem 1.9rem; letter-spacing: .22em; max-width: calc(100vw - 2.4rem); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

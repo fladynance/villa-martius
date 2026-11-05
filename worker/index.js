@@ -141,6 +141,11 @@ function escHtml(s) {
   });
 }
 
+// Chiave pubblica Web3Forms (access key): è pensata per stare in chiaro nel codice,
+// non è un segreto. Web3Forms spedisce da un suo dominio autenticato → arriva anche
+// nelle caselle con filtri severi come Libero. Impostala qui per attivare l'invio.
+const WEB3FORMS_KEY = "";
+
 // Notifica ai proprietari. Preferisce Brevo (300 email/giorno gratis): quando non
 // c'è un dominio proprio, Brevo sostituisce il mittente con un suo dominio già
 // autenticato, quindi l'email supera i filtri severi di Libero (SPF -all / DMARC
@@ -154,6 +159,31 @@ async function notifyContact(d, env) {
     ["Tipo evento", d.evento || "-"], ["Messaggio", d.messaggio || "-"]
   ];
 
+  // 1) Web3Forms (chiave pubblica): spedisce dal proprio dominio autenticato,
+  //    con Reply-To sul cliente. Nessun segreto da configurare su Cloudflare.
+  const w3k = env.WEB3FORMS_KEY || WEB3FORMS_KEY;
+  if (w3k) {
+    const r = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        access_key: w3k,
+        subject: "Nuova richiesta dal sito Villa Martius — " + d.nome,
+        from_name: "Villa Martius — Sito",
+        replyto: d.email,
+        Nome: d.nome, Email: d.email, Telefono: d.telefono || "-",
+        "Data evento": d.data || "-", Ospiti: d.ospiti || "-",
+        "Tipo evento": d.evento || "-", Messaggio: d.messaggio || "-"
+      })
+    });
+    if (!r.ok) {
+      const t = await r.text().catch(function () { return ""; });
+      throw new Error("web3forms " + r.status + " " + t.slice(0, 300));
+    }
+    return;
+  }
+
+  // 2) Brevo (chiave segreta su Cloudflare).
   if (env.BREVO_API_KEY) {
     const html =
       '<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto">' +
