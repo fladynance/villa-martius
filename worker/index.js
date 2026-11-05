@@ -35,7 +35,9 @@ async function handleAvailability(req, env) {
       return json({ ok: false, message: "Date mancanti o non valide." }, 400);
     }
 
-    const sql = neon(env.DATABASE_URL);
+    const dbUrl = env.DATABASE_URL || env.NETLIFY_DATABASE_URL || env.DATABASE_URL_UNPOOLED || env.NETLIFY_DATABASE_URL_UNPOOLED;
+    if (!dbUrl) return json({ ok: false, message: "Config DB mancante." }, 500);
+    const sql = neon(dbUrl);
     const rows = await sql`
       SELECT count(*)::int AS n
       FROM units
@@ -76,12 +78,13 @@ async function handleCreateBooking(req, env, ctx) {
   if (!v.ok) return json({ ok: false, message: v.message }, 400);
   const d = v.data;
 
-  if (!env.DATABASE_URL) {
-    return json({ ok: false, message: "DEBUG: DATABASE_URL non impostata nel Worker." }, 500);
+  const dbUrl = env.DATABASE_URL || env.NETLIFY_DATABASE_URL || env.DATABASE_URL_UNPOOLED || env.NETLIFY_DATABASE_URL_UNPOOLED;
+  if (!dbUrl) {
+    return json({ ok: false, message: "DEBUG: nessuna variabile database trovata nel Worker (attesa DATABASE_URL o NETLIFY_DATABASE_URL)." }, 500);
   }
   let sql;
   try {
-    sql = neon(env.DATABASE_URL);
+    sql = neon(dbUrl);
   } catch (e) {
     return json({ ok: false, message: "DEBUG connessione: " + String((e && e.message) || e) }, 500);
   }
