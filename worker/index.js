@@ -133,6 +133,63 @@ async function handleCreateBooking(req, env, ctx) {
   return json({ ok: true, reference: ref });
 }
 
+function clip(v, max) { return typeof v === "string" ? v.trim().slice(0, max) : ""; }
+
+// POST /api/contact — modulo "Contatti". Salva nel DB e notifica i proprietari
+// via FormSubmit (gratis, illimitato, nessun dominio richiesto). Nessun Resend.
+async function handleContact(req, env, ctx) {
+  let body;
+  try { body = await req.json(); } catch { return json({ ok: false, message: "Richiesta non valida." }, 400); }
+
+  // Honeypot invisibile.
+  if (body.hp && String(body.hp).trim()) return json({ ok: false, message: "Richiesta non valida." }, 400);
+
+  const nome = clip(body.nome, 120);
+  const email = clip(body.email, 160);
+  const telefono = clip(body.telefono, 60);
+  const data = clip(body.data, 20);
+  const ospiti = clip(body.ospiti, 30);
+  const evento = clip(body.evento, 60);
+  const messaggio = clip(body.messaggio, 3000);
+
+  if (!nome || !email) return json({ ok: false, message: "Inserisci almeno nome ed email." }, 400);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ ok: false, message: "Email non valida." }, 400);
+
+  // Salvataggio nel database (fonte di verità: non si perde nulla).
+  if (env.DB) {
+    try {
+      await env.DB.prepare(
+        `INSERT INTO contacts (nome, email, telefono, data_evento, ospiti, tipo_evento, messaggio)
+         VALUES (?, ?, ?, ?, ?, ?, ?)`
+      ).bind(nome, email, telefono || null, data || null, ospiti || null, evento || null, messaggio || null).run();
+    } catch (e) { console.error("[contact] db", e); }
+  }
+
+  // Notifica ai proprietari via FormSubmit (dopo la risposta: non blocca il cliente).
+  const to = env.CONTACT_TO || "francescofmarzo@libero.it";
+  ctx.waitUntil((async () => {
+    try {
+      await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(to), {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: "Nuova richiesta dal sito Villa Martius — " + nome,
+          _template: "table",
+          Nome: nome,
+          Email: email,
+          Telefono: telefono || "-",
+          "Data evento": data || "-",
+          Ospiti: ospiti || "-",
+          "Tipo evento": evento || "-",
+          Messaggio: messaggio || "-"
+        })
+      });
+    } catch (e) { console.error("[contact] notify", e); }
+  })());
+
+  return json({ ok: true });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -144,6 +201,10 @@ export default {
     if (url.pathname === "/api/create-booking") {
       if (request.method !== "POST") return json({ ok: false, message: "Metodo non consentito." }, 405);
       return handleCreateBooking(request, env, ctx);
+    }
+    if (url.pathname === "/api/contact") {
+      if (request.method !== "POST") return json({ ok: false, message: "Metodo non consentito." }, 405);
+      return handleContact(request, env, ctx);
     }
 
     // Tutto il resto: file statici del sito (binding ASSETS).

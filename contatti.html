@@ -161,7 +161,9 @@
         <textarea id="messaggio" name="messaggio" rows="3" placeholder="Raccontateci come lo immaginate..."></textarea>
       </div>
       <p class="form-privacy">Inviando questo modulo acconsenti al trattamento dei dati secondo la nostra <a href="#">privacy policy</a>. Non condividiamo i vostri dati con terzi.</p>
-      <button type="submit" class="btn btn-solid-dark" style="width:100%;">Invia Richiesta</button>
+      <input type="text" name="website" id="ct_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none">
+      <button type="submit" class="btn btn-solid-dark" style="width:100%;" id="ctSubmit">Invia Richiesta</button>
+      <div id="ctMsg" role="status" style="margin-top:1rem;font-family:var(--sans);font-weight:300;font-size:.95rem;display:none"></div>
     </form>
   </div>
 </section>
@@ -231,6 +233,45 @@
 </footer>
 
 <script src="assets/js/main.js" defer></script>
+<script>
+(function () {
+  var form = document.getElementById("contactForm");
+  if (!form) return;
+  var btn = document.getElementById("ctSubmit");
+  var msg = document.getElementById("ctMsg");
+  function show(text, ok) {
+    msg.textContent = text;
+    msg.style.display = "block";
+    msg.style.color = ok ? "#335C4B" : "#8A4B2E";
+  }
+  function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nome = val("nome"), email = val("email");
+    if (!nome || !email) return show("Inserisci almeno nome ed email.", false);
+    var payload = {
+      nome: nome, email: email, telefono: val("telefono"),
+      data: val("data"), ospiti: val("ospiti"), evento: val("evento"),
+      messaggio: val("messaggio"), hp: (document.getElementById("ct_hp") || {}).value || ""
+    };
+    var label = btn.innerHTML;
+    btn.disabled = true; btn.textContent = "Invio in corso…";
+    fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.d && res.d.ok) {
+          form.reset();
+          show("Grazie! La tua richiesta è stata inviata. Ti risponderemo al più presto.", true);
+          btn.disabled = false; btn.innerHTML = label;
+        } else {
+          show((res.d && res.d.message) || "Si è verificato un problema. Riprova tra poco.", false);
+          btn.disabled = false; btn.innerHTML = label;
+        }
+      })
+      .catch(function () { show("Connessione non riuscita. Controlla la rete e riprova.", false); btn.disabled = false; btn.innerHTML = label; });
+  });
+})();
+</script>
 
 <!-- WhatsApp -->
 <a class="wa-fab" href="https://wa.me/393315309082?text=Salve! Vi scrivo dal sito di Villa Martius. Vorrei ricevere informazioni e disponibilit%C3%A0." target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
