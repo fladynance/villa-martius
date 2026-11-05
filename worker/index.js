@@ -1,7 +1,7 @@
 // Worker Villa Martius: serve il sito statico (binding ASSETS) e il motore di
-// prenotazione su /api/*. Stessa logica delle vecchie Netlify Functions, stesso
-// database Postgres (Neon) e stesso anti-overbooking tramite vincolo di esclusione.
-import { neon } from "@neondatabase/serverless";
+// prenotazione su /api/*. Database su Cloudflare D1 (binding DB). L'anti-overbooking
+// è garantito dall'assegnazione atomica di un'unità libera (INSERT ... SELECT con
+// NOT EXISTS sulle date sovrapposte); D1 serializza le scritture, quindi niente race.
 import { UNITS } from "./lib/units.js";
 import { json } from "./lib/respond.js";
 import { validateBooking } from "./lib/validate.js";
@@ -15,10 +15,8 @@ function genRef() {
   return "VM-" + a + b;
 }
 
-function isConflict(e) {
-  const code = e?.code || e?.cause?.code;
-  return code === "23P01" || code === "23505" ||
-    /exclusion|overlap|duplicate key|23P01|23505/i.test(e?.message || "");
+function isDupRef(e) {
+  return /UNIQUE constraint|duplicate/i.test(String((e && e.message) || e));
 }
 
 // GET /api/availability?unita=...&arrivo=YYYY-MM-DD&partenza=YYYY-MM-DD
@@ -34,21 +32,21 @@ async function handleAvailability(req, env) {
     if (!re.test(arrivo || "") || !re.test(partenza || "")) {
       return json({ ok: false, message: "Date mancanti o non valide." }, 400);
     }
+    if (!env.DB) return json({ ok: false, message: "Database non configurato." }, 500);
 
-    const dbUrl = env.DATABASE_URL || env.NETLIFY_DATABASE_URL || env.DATABASE_URL_UNPOOLED || env.NETLIFY_DATABASE_URL_UNPOOLED;
-    if (!dbUrl) return json({ ok: false, message: "Config DB mancante." }, 500);
-    const sql = neon(dbUrl);
-    const rows = await sql`
-      SELECT count(*)::int AS n
-      FROM units
-      WHERE room_type = ${unita}
-        AND NOT EXISTS (
-          SELECT 1 FROM bookings b
-          WHERE b.unit_id = units.id
-            AND b.status IN ('confermata', 'in_attesa')
-            AND daterange(b.check_in, b.check_out, '[)') && daterange(${arrivo}::date, ${partenza}::date, '[)')
-        )`;
-    const n = rows[0]?.n ?? 0;
+    // Intervalli semiaperti [check_in, check_out): si sovrappongono se
+    // check_in < partenza AND check_out > arrivo.
+    const res = await env.DB.prepare(
+      `SELECT count(*) AS n FROM units
+       WHERE room_type = ?
+         AND NOT EXISTS (
+           SELECT 1 FROM bookings b
+           WHERE b.unit_id = units.id
+             AND b.status IN ('confermata','in_attesa')
+             AND b.check_in < ? AND b.check_out > ?
+         )`
+    ).bind(unita, partenza, arrivo).all();
+    const n = (res.results && res.results[0] && res.results[0].n) || 0;
     return json({ ok: true, available: n > 0, remaining: n });
   } catch (e) {
     console.error("[availability]", e);
@@ -65,9 +63,8 @@ async function handleCreateBooking(req, env, ctx) {
   if (body.hp && String(body.hp).trim()) {
     return json({ ok: false, message: "Richiesta non valida." }, 400);
   }
-  // Anti-bot Turnstile: verifica solo se è stato prodotto un token. Così, se il
-  // widget non è disponibile, un cliente vero non resta bloccato (resta attivo
-  // l'honeypot). Un token presente ma non valido viene comunque rifiutato.
+  // Anti-bot Turnstile: verifica solo se è stato prodotto un token (l'honeypot
+  // resta comunque attivo); un token presente ma non valido viene rifiutato.
   const ip = req.headers.get("CF-Connecting-IP") || "";
   if (body.turnstile) {
     const human = await verifyTurnstile(body.turnstile, ip, env);
@@ -78,51 +75,46 @@ async function handleCreateBooking(req, env, ctx) {
   if (!v.ok) return json({ ok: false, message: v.message }, 400);
   const d = v.data;
 
-  const dbUrl = env.DATABASE_URL || env.NETLIFY_DATABASE_URL || env.DATABASE_URL_UNPOOLED || env.NETLIFY_DATABASE_URL_UNPOOLED;
-  if (!dbUrl) {
-    return json({ ok: false, message: "DEBUG: nessuna variabile database trovata nel Worker (attesa DATABASE_URL o NETLIFY_DATABASE_URL)." }, 500);
-  }
-  let sql;
-  try {
-    sql = neon(dbUrl);
-  } catch (e) {
-    return json({ ok: false, message: "DEBUG connessione: " + String((e && e.message) || e) }, 500);
-  }
+  if (!env.DB) return json({ ok: false, message: "Database non configurato." }, 500);
 
-  // Inserimento atomico: il DB assegna un'unità libera della tipologia e il vincolo
-  // di esclusione impedisce qualsiasi sovrapposizione (anti-overbooking garantito).
+  // Assegnazione atomica di un'unità libera della tipologia: se nessuna è libera
+  // per quelle date, l'INSERT ... SELECT non inserisce nulla (0 righe → non disponibile).
   let inserted = null;
   for (let attempt = 0; attempt < 6 && !inserted; attempt++) {
     const reference = genRef();
     try {
-      const rows = await sql`
-        INSERT INTO bookings (
-          reference, unit_id, room_type, check_in, check_out, guests,
-          main_nome, main_cognome, main_email, main_telefono, main_paese, main_citta,
-          extra_ospiti, arrivo_ora, note
-        )
-        SELECT
-          ${reference}, u.id, ${d.unita}, ${d.arrivo}::date, ${d.partenza}::date, ${d.ospiti},
-          ${d.mp.nome}, ${d.mp.cognome}, ${d.mp.email}, ${d.mp.telefono}, ${d.mp.paese}, ${d.mp.citta || null},
-          ${JSON.stringify(d.extra)}::jsonb, ${d.arrivo_ora || null}, ${d.note || null}
-        FROM units u
-        WHERE u.room_type = ${d.unita}
-          AND NOT EXISTS (
-            SELECT 1 FROM bookings b
-            WHERE b.unit_id = u.id
-              AND b.status IN ('confermata', 'in_attesa')
-              AND daterange(b.check_in, b.check_out, '[)') && daterange(${d.arrivo}::date, ${d.partenza}::date, '[)')
-          )
-        ORDER BY u.id
-        LIMIT 1
-        RETURNING id, reference`;
+      const res = await env.DB.prepare(
+        `INSERT INTO bookings (
+           reference, unit_id, room_type, check_in, check_out, guests,
+           main_nome, main_cognome, main_email, main_telefono, main_paese, main_citta,
+           extra_ospiti, arrivo_ora, note
+         )
+         SELECT ?, u.id, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+         FROM units u
+         WHERE u.room_type = ?
+           AND NOT EXISTS (
+             SELECT 1 FROM bookings b
+             WHERE b.unit_id = u.id
+               AND b.status IN ('confermata','in_attesa')
+               AND b.check_in < ? AND b.check_out > ?
+           )
+         ORDER BY u.id
+         LIMIT 1
+         RETURNING id, reference`
+      ).bind(
+        reference, d.unita, d.arrivo, d.partenza, d.ospiti,
+        d.mp.nome, d.mp.cognome, d.mp.email, d.mp.telefono, d.mp.paese, d.mp.citta || null,
+        JSON.stringify(d.extra), d.arrivo_ora || null, d.note || null,
+        d.unita, d.partenza, d.arrivo
+      ).all();
 
+      const rows = res.results || [];
       if (rows.length === 0) {
         return json({ ok: false, reason: "unavailable", message: "Spiacenti, per le date scelte questa sistemazione non è più disponibile." }, 409);
       }
       inserted = { id: rows[0].id, reference: rows[0].reference };
     } catch (e) {
-      if (isConflict(e)) continue; // gara concorrente o collisione codice → riprova
+      if (isDupRef(e)) continue; // collisione del codice prenotazione → riprova
       console.error("[create-booking] db", e);
       return json({ ok: false, message: "DEBUG query: " + String((e && e.message) || e) }, 500);
     }

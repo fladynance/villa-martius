@@ -3,8 +3,5 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Sito e motore di prenotazione Villa Martius",
-  "dependencies": {
-    "@neondatabase/serverless": "^1.2.0"
-  }
+  "description": "Sito e motore di prenotazione Villa Martius (Cloudflare Worker + D1)"
 }
