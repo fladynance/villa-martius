@@ -47,7 +47,7 @@
     </picture>
     <picture>
       <source media="(max-width: 768px)" sizes="100vw" srcset="/assets/img/home-m-5.webp">
-      <img class="splash-slide" alt="" decoding="async" sizes="100vw" style="object-position:center" src="/assets/img/home-5-pool.webp" srcset="/assets/img/home-5-pool-1280.webp 1280w, /assets/img/home-5-pool.webp 1920w">
+      <img class="splash-slide" data-only="desktop" alt="" decoding="async" sizes="100vw" style="object-position:center" src="/assets/img/home-5-pool.webp" srcset="/assets/img/home-5-pool-1280.webp 1280w, /assets/img/home-5-pool.webp 1920w">
     </picture>
   </div>
   <div class="splash-vignette" aria-hidden="true"></div>
@@ -75,7 +75,11 @@
   // Crossfade senza "buco": la foto entrante sfuma SOPRA quella corrente,
   // che resta piena sotto finché non è coperta. Ogni foto dura ~1,25 s,
   // con la dissolvenza morbida (0,55 s, vedi .splash-slide in CSS) inclusa.
-  var slides = document.querySelectorAll('.splash-slide');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.splash-slide'));
+  // Solo da mobile: la 5ª foto (data-only="desktop") è esclusa dalla rotazione.
+  if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+    slides = slides.filter(function (s) { return s.getAttribute('data-only') !== 'desktop'; });
+  }
   var n = slides.length;
   if (n < 2) return;
   var INTERVAL = 1250;
