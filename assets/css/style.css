@@ -1583,6 +1583,8 @@ a.room-cta { text-decoration: none; }
    già composte per il pieno formato: centrate, senza gli offset desktop. */
 @media (max-width: 768px) {
   .splash-slide { object-position: center center !important; }
+  /* Da mobile la 5ª foto dello slideshow non si mostra (resta solo su desktop) */
+  .splash-slide[data-only="desktop"] { display: none !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   /* Disattiviamo solo lo zoom lento (Ken Burns); la dissolvenza resta
