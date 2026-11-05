@@ -135,8 +135,74 @@ async function handleCreateBooking(req, env, ctx) {
 
 function clip(v, max) { return typeof v === "string" ? v.trim().slice(0, max) : ""; }
 
+function escHtml(s) {
+  return String(s == null ? "" : s).replace(/[&<>]/g, function (c) {
+    return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;";
+  });
+}
+
+// Notifica ai proprietari. Preferisce Brevo (300 email/giorno gratis): quando non
+// c'è un dominio proprio, Brevo sostituisce il mittente con un suo dominio già
+// autenticato, quindi l'email supera i filtri severi di Libero (SPF -all / DMARC
+// quarantine). Senza chiave Brevo ripiega su FormSubmit (best-effort). In ogni
+// caso la richiesta resta salvata su D1, quindi non si perde mai nulla.
+async function notifyContact(d, env) {
+  const to = env.CONTACT_TO || "francescofmarzo@libero.it";
+  const rows = [
+    ["Nome", d.nome], ["Email", d.email], ["Telefono", d.telefono || "-"],
+    ["Data evento", d.data || "-"], ["Ospiti", d.ospiti || "-"],
+    ["Tipo evento", d.evento || "-"], ["Messaggio", d.messaggio || "-"]
+  ];
+
+  if (env.BREVO_API_KEY) {
+    const html =
+      '<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto">' +
+      '<h2 style="font-family:Georgia,serif;color:#5A4632;font-weight:normal">Nuova richiesta dal sito Villa Martius</h2>' +
+      '<table style="border-collapse:collapse;width:100%;font-size:14px">' +
+      rows.map(function (r) {
+        return '<tr>' +
+          '<td style="padding:8px 12px;background:#F0EBE3;font-weight:bold;white-space:nowrap;vertical-align:top">' + escHtml(r[0]) + '</td>' +
+          '<td style="padding:8px 12px;border:1px solid #eee">' + escHtml(r[1]).replace(/\n/g, "<br>") + '</td>' +
+          '</tr>';
+      }).join("") +
+      '</table>' +
+      '<p style="color:#8a8a8a;font-size:12px;margin-top:16px">Puoi rispondere direttamente a questa email per scrivere al cliente.</p>' +
+      '</div>';
+
+    const r = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: { "api-key": env.BREVO_API_KEY, "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        sender: { name: "Villa Martius — Sito", email: env.BREVO_SENDER || to },
+        to: [{ email: to }],
+        replyTo: { email: d.email, name: d.nome },
+        subject: "Nuova richiesta dal sito Villa Martius — " + d.nome,
+        htmlContent: html
+      })
+    });
+    if (!r.ok) {
+      const t = await r.text().catch(function () { return ""; });
+      throw new Error("brevo " + r.status + " " + t.slice(0, 300));
+    }
+    return;
+  }
+
+  // Fallback senza configurazione Brevo: FormSubmit.
+  await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(to), {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({
+      _subject: "Nuova richiesta dal sito Villa Martius — " + d.nome,
+      _template: "table",
+      Nome: d.nome, Email: d.email, Telefono: d.telefono || "-",
+      "Data evento": d.data || "-", Ospiti: d.ospiti || "-",
+      "Tipo evento": d.evento || "-", Messaggio: d.messaggio || "-"
+    })
+  });
+}
+
 // POST /api/contact — modulo "Contatti". Salva nel DB e notifica i proprietari
-// via FormSubmit (gratis, illimitato, nessun dominio richiesto). Nessun Resend.
+// (Brevo se configurato, altrimenti FormSubmit). Nessun Resend, nessun dominio.
 async function handleContact(req, env, ctx) {
   let body;
   try { body = await req.json(); } catch { return json({ ok: false, message: "Richiesta non valida." }, 400); }
@@ -165,26 +231,12 @@ async function handleContact(req, env, ctx) {
     } catch (e) { console.error("[contact] db", e); }
   }
 
-  // Notifica ai proprietari via FormSubmit (dopo la risposta: non blocca il cliente).
-  const to = env.CONTACT_TO || "francescofmarzo@libero.it";
+  // Notifica ai proprietari dopo la risposta: non deve rallentare né far fallire
+  // il salvataggio (la richiesta è già su D1).
+  const payload = { nome, email, telefono, data, ospiti, evento, messaggio };
   ctx.waitUntil((async () => {
-    try {
-      await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(to), {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: "Nuova richiesta dal sito Villa Martius — " + nome,
-          _template: "table",
-          Nome: nome,
-          Email: email,
-          Telefono: telefono || "-",
-          "Data evento": data || "-",
-          Ospiti: ospiti || "-",
-          "Tipo evento": evento || "-",
-          Messaggio: messaggio || "-"
-        })
-      });
-    } catch (e) { console.error("[contact] notify", e); }
+    try { await notifyContact(payload, env); }
+    catch (e) { console.error("[contact] notify", e); }
   })());
 
   return json({ ok: true });
