@@ -178,14 +178,17 @@ a { color: inherit; }
 .ms-item:nth-child(4n+4) { animation-delay: .18s; }
 @keyframes msFade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
 @media (prefers-reduced-motion: reduce) { .ms-item { animation: none; } }
-.doors-head { text-align: center; padding: var(--page-gap) clamp(16px, 4vw, 48px) 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
-.doors-head .label { color: var(--gold); margin: 0; }
-.doors-head .doors-rule { display: inline-block; width: 44px; height: 1px; background: var(--gold); opacity: .9; margin: .3rem 0 0; }
+.doors-head { text-align: center; padding: var(--page-gap) clamp(16px, 4vw, 48px) 0; display: flex; flex-direction: column; align-items: center; gap: .55rem; }
+.doors-head .gal-eyebrow { font-family: var(--sans); font-weight: 400; font-size: .7rem; letter-spacing: .34em; text-transform: uppercase; color: var(--gold); }
+.doors-head .gal-title { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1; color: var(--ink); margin: .1rem 0 0; }
+.doors-head .gal-sub { font-family: var(--serif); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.5; color: var(--muted); max-width: 46ch; margin: .2rem auto 0; }
+.doors-head .doors-rule { display: inline-block; width: 54px; height: 1px; background: var(--gold); opacity: .85; margin: .7rem 0 0; }
 .doors { min-height: 0; padding: clamp(14px, 3.2vw, 34px); display: flex; align-items: center; justify-content: center; }
 /* Divider ornamentale (identico a .mt-sep di matrimoni) */
 @media (max-width: 640px) {
-  .doors-head { padding: var(--page-gap) 14px 0; gap: .3rem; }
-  .doors-head .doors-rule { width: 36px; margin: .2rem 0 0; }
+  .doors-head { padding: var(--page-gap) 14px 0; gap: .4rem; }
+  .doors-head .gal-sub { font-size: .95rem; max-width: 34ch; }
+  .doors-head .doors-rule { width: 40px; margin: .5rem 0 0; }
 }
 .doors-grid { width: 100%; height: 100%; max-width: 900px; max-height: 760px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 24px); }
 @media (min-aspect-ratio: 5/4) and (min-width: 700px) {
@@ -432,17 +435,17 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     </div>
   </nav>
   <header class="doors-head">
-    <h1 class="label">Galleria</h1>
+    <span class="gal-eyebrow">Villa Martius · San Pier Niceto</span>
+    <h1 class="gal-title">Galleria</h1>
+    <p class="gal-sub">Matrimoni, riti civili ed eventi tra gli ulivi, con lo sguardo sulle Eolie.</p>
     <span class="doors-rule" aria-hidden="true"></span>
   </header>
   <nav class="gal-filters" id="galFilters" aria-label="Filtra per luogo">
-    <button class="gf on" data-cat="all"      type="button" aria-pressed="true">Tutto</button>
-    <button class="gf"    data-cat="wed"      type="button" aria-pressed="false">Matrimoni</button>
-    <button class="gf"    data-cat="gazebo"   type="button" aria-pressed="false">Giardino</button>
-    <button class="gf"    data-cat="pool"     type="button" aria-pressed="false">Piscina</button>
-    <button class="gf"    data-cat="room"     type="button" aria-pressed="false">Interni</button>
-    <button class="gf"    data-cat="pad"      type="button" aria-pressed="false">Dimore</button>
-    <button class="gf"    data-cat="terr"     type="button" aria-pressed="false">Terrazze</button>
+    <button class="gf on" data-cat="all"     type="button" aria-pressed="true">Tutto</button>
+    <button class="gf"    data-cat="wed"     type="button" aria-pressed="false">Matrimoni</button>
+    <button class="gf"    data-cat="riti"    type="button" aria-pressed="false">Riti Civili</button>
+    <button class="gf"    data-cat="eventi"  type="button" aria-pressed="false">Eventi</button>
+    <button class="gf"    data-cat="interni" type="button" aria-pressed="false">Spazi Interni</button>
   </nav>
   <main class="gallery">
     <div class="masonry" id="masonry"></div>
@@ -655,14 +658,12 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
 
   /* ─── LIVELLO 1 · masonry editoriale con filtri ─── */
   const CATS = {
-    wed:    { name: 'Matrimoni', keys: [] },
-    gazebo: { name: 'Giardino', keys: ['gazebo-full','gazebo-arco'] },
-    pool:   { name: 'Piscina',  keys: ['pool-full','pool-tavolo','pool-rose','pool-notte','pool-ortensie'] },
-    room:   { name: 'Interni',  keys: ['room-full'] },
-    pad:    { name: 'Dimore',   keys: ['pad-full'] },
-    terr:   { name: 'Terrazze', keys: ['terr-full'] }
+    wed:     { name: 'Matrimoni',     keys: ['gazebo-arco','terr-full','pool-ortensie'] },
+    riti:    { name: 'Riti Civili',   keys: ['gazebo-full'] },
+    eventi:  { name: 'Eventi',        keys: ['pool-full','pool-tavolo','pool-rose','pool-notte','pad-full'] },
+    interni: { name: 'Spazi Interni', keys: ['room-full'] }
   };
-  const ORDER = ['wed','gazebo','pool','room','pad','terr'];
+  const ORDER = ['wed','riti','eventi','interni'];
   const MASONRY = [];
   const LONGEST = Math.max(...ORDER.map(c => CATS[c].keys.length));
   for (let i = 0; i < LONGEST; i++) {
