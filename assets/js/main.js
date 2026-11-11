@@ -124,7 +124,15 @@
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (d && d.ok && d.available) {
-            window.location.href = 'prenota.html?' + qs + '&ospiti=' + encodeURIComponent(ospiti || '');
+            // Contatore live: se la tipologia ha piu' unita' (es. Matrimoniale
+            // Standard = 5 camere), mostra quante ne restano per quelle date.
+            var okmsg = (d.remaining > 1)
+              ? '✓ Disponibile — ancora ' + d.remaining + ' camere per queste date'
+              : '✓ Disponibile per queste date';
+            showAvail(okmsg, '');
+            setTimeout(function () {
+              window.location.href = 'prenota.html?' + qs + '&ospiti=' + encodeURIComponent(ospiti || '');
+            }, 1150);
           } else {
             if (cta) { cta.disabled = false; cta.innerHTML = label; }
             if (d && d.ok) showAvail('Non disponibile per queste date. Prova a cambiare il periodo.', 'err');
