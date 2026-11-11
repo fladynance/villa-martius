@@ -445,7 +445,7 @@ footer.foot img { height: 44px; width: auto; margin: 0 auto 1rem; filter: bright
     <button class="gf"    data-cat="wed"     type="button" aria-pressed="false">Matrimoni</button>
     <button class="gf"    data-cat="riti"    type="button" aria-pressed="false">Riti Civili</button>
     <button class="gf"    data-cat="eventi"  type="button" aria-pressed="false">Eventi</button>
-    <button class="gf"    data-cat="interni" type="button" aria-pressed="false">Spazi Interni</button>
+    <button class="gf"    data-cat="interni" type="button" aria-pressed="false">Interni ed Esterni</button>
   </nav>
   <main class="gallery">
     <div class="masonry" id="masonry"></div>
@@ -658,10 +658,10 @@ const IMG = {"gazebo-arco": "assets/img/galleria/gazebo-arco.jpg", "pool-tavolo"
 
   /* ─── LIVELLO 1 · masonry editoriale con filtri ─── */
   const CATS = {
-    wed:     { name: 'Matrimoni',     keys: ['gazebo-arco','terr-full','pool-ortensie'] },
-    riti:    { name: 'Riti Civili',   keys: ['gazebo-full'] },
-    eventi:  { name: 'Eventi',        keys: ['pool-full','pool-tavolo','pool-rose','pool-notte','pad-full'] },
-    interni: { name: 'Spazi Interni', keys: ['room-full'] }
+    wed:     { name: 'Matrimoni',          keys: ['gazebo-arco','pool-rose','pool-ortensie'] },
+    riti:    { name: 'Riti Civili',        keys: ['gazebo-full'] },
+    eventi:  { name: 'Eventi',             keys: ['pool-full','pool-tavolo','pool-notte'] },
+    interni: { name: 'Interni ed Esterni', keys: ['room-full','terr-full','pad-full'] }
   };
   const ORDER = ['wed','riti','eventi','interni'];
   const MASONRY = [];
