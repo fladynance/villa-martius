@@ -1152,14 +1152,17 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   .rooms-intro-sub { font-size: 0.95rem; }
 }
 .rooms-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;   /* l'ultima riga incompleta resta centrata */
   gap: 2.4rem;
   max-width: 1280px;
   margin: 0 auto;
 }
+.rooms-grid > .room-card { flex: 0 1 calc((100% - 4.8rem) / 3); }
 @media (max-width: 1024px) {
-  .rooms-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .rooms-grid { gap: 2rem; }
+  .rooms-grid > .room-card { flex-basis: calc((100% - 2rem) / 2); }
 }
 .room-card {
   background: #FAF4EA;
@@ -1305,7 +1308,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 
 @media (max-width: 720px) {
   .rooms-section { padding: 2rem 1.2rem 3rem; }
-  .rooms-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+  .rooms-grid { gap: 1.6rem; }
+  .rooms-grid > .room-card { flex-basis: 100%; }
 }
 /* room-cta rendered as <a> keeps the same visual as button */
 a.room-cta { text-decoration: none; }
